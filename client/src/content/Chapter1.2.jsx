@@ -11,7 +11,7 @@ import {
   Note,
   ListItem,
   NextButton,
-  Kbd,
+  Key,
 } from "../layout/UILayout";
 import { FaInfoCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -62,9 +62,9 @@ export default function DevelopersConsole() {
 
         <Description>
           Press
-          <Kbd>F12</Kbd>
+          <Key>F12</Key>
           or, if you’re on Mac, then
-          <Kbd>Cmd + Opt + J</Kbd>
+          <Key>Cmd + Opt + J</Key>
         </Description>
 
         <Description>
@@ -94,7 +94,7 @@ On the right, there is a clickable link to the source bug.html:12 with the line 
         <Description>
           Below the error message, there is a blue {">"} symbol. It marks a
           “command line” where we can type JavaScript commands. Press{" "}
-          <Kbd>Enter</Kbd>
+          <Key>Enter</Key>
           to run them.
         </Description>
 
@@ -108,23 +108,23 @@ On the right, there is a clickable link to the source bug.html:12 with the line 
           <h1 className="font-bold">Multi-line input</h1>
           <p>
             Usually, when we put a line of code into the console, and then press
-            <kbd className="kbd kbd-sm mx-2 bg-zinc-50 dark:bg-zinc-800">
+            <Key className="Key Key-sm mx-2 bg-zinc-50 dark:bg-zinc-800">
               Enter
-            </kbd>
+            </Key>
             , it executes.
           </p>
           <p>
             To insert multiple lines, press{" "}
-            <kbd className="kbd kbd-sm mx-2 bg-zinc-50 dark:bg-zinc-800">
+            <Key className="Key Key-sm mx-2 bg-zinc-50 dark:bg-zinc-800">
               Ctrl + Enter
-            </kbd>{" "}
+            </Key>{" "}
             This way one can enter long fragments of JavaScript code.
           </p>
         </div>
 
         <Title>Firefox, Edge, and others</Title>
         <Description>
-          Most other browsers use <Kbd>F12</Kbd>
+          Most other browsers use <Key>F12</Key>
           to open developer tools.
         </Description>
 
@@ -153,7 +153,7 @@ On the right, there is a clickable link to the source bug.html:12 with the line 
         />
 
         <Description>
-          Now <Kbd> Cmd + Opt + C</Kbd>
+          Now <Key> Cmd + Opt + C</Key>
           can toggle the console. Also, note that the new top menu item named
           “Develop” has appeared. It has many commands and options.
         </Description>
@@ -167,7 +167,7 @@ On the right, there is a clickable link to the source bug.html:12 with the line 
 
         <Description>
           They can be opened with F12 for most browsers on Windows. Chrome for
-          Mac needs <Kbd>Cmd + Opt + J</Kbd>, Safari: <Kbd>Cmd + Opt + J</Kbd>
+          Mac needs <Key>Cmd + Opt + J</Key>, Safari: <Key>Cmd + Opt + J</Key>
           (need to enable first).
         </Description>
 

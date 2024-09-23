@@ -22,6 +22,8 @@ import Introduction from "./content/Chapter1.1";
 import DevelopersConsole from "./content/Chapter1.2";
 import CodeEditors from "./content/Chapter1.3";
 import HelloWorld from "./content/Chapter2.1";
+import CodeStructure from "./content/Chapter2.2";
+import Variables from "./content/Chapter2.3";
 
 const router = createBrowserRouter([
   {
@@ -67,6 +69,14 @@ const router = createBrowserRouter([
                 path: "hello-world",
                 element: <HelloWorld />,
               },
+              {
+                path: "code-structure",
+                element: <CodeStructure />,
+              },
+              {
+                path: "variables",
+                element: <Variables />,
+              },
             ],
           },
         ],
@@ -77,7 +87,7 @@ const router = createBrowserRouter([
 
 export default function App() {
   return (
-    <div className="App text-zinc-900 dark:text-zinc-300 font-sans">
+    <div className="App text-zinc-900 dark:text-zinc-300 font-Inter">
       <RouterProvider router={router} />
     </div>
   );

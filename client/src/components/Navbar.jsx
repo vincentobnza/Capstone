@@ -22,7 +22,7 @@ export default function Navbar() {
         <div className="flex items-center gap-6">
           <NavLink
             to="/login"
-            className="bg-yellow-500 text-black py-2 px-4 text-sm font-semibold outline-none"
+            className="text-sm font-semibold text-black py-2 px-3 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-lg hover:opacity-80 duration-400 transition ease-in"
           >
             Login
           </NavLink>

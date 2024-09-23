@@ -25,12 +25,12 @@ export const FundamentalsData = [
   {
     id: 2,
     name: "Code Structure",
-    link: "/",
+    link: "fundamentals/code-structure",
   },
   {
     id: 3,
     name: "Variables",
-    link: "/",
+    link: "fundamentals/variables",
   },
   {
     id: 4,

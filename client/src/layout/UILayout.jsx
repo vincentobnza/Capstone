@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
 import { useState, useRef } from "react";
 import Editor from "@monaco-editor/react";
+import { Kbd } from "@nextui-org/react";
 export const Topic = ({ children }) => {
   return (
     <h1 className="text-4xl font-medium text-zinc-800 dark:text-zinc-100">
@@ -40,12 +41,12 @@ export const Code = ({ code, language, error, setError }) => {
 
   return (
     <div
-      className={`my-5 w-full p-1 relative ${
-        isDarkMode ? "bg-[#282A36] border border-zinc-800" : "bg-zinc-100"
+      className={`my-5 w-full p-[1px] relative ${
+        isDarkMode ? "bg-[#282A36] border border-zinc-600" : "bg-zinc-100"
       }`}
     >
       <SyntaxHighlighter
-        language={language}
+        language="javascript"
         style={isDarkMode ? hybrid : xcode}
       >
         {code}
@@ -115,11 +116,11 @@ export const ListItem = ({ title, text }) => {
   );
 };
 
-export const Kbd = ({ children }) => {
+export const Key = ({ children }) => {
   return (
-    <kbd className="kbd kbd-sm mx-2 bg-zinc-50 dark:bg-zinc-800">
+    <Kbd className="kbd kbd-sm mx-2 bg-zinc-50 dark:bg-zinc-700 ">
       {children}
-    </kbd>
+    </Kbd>
   );
 };
 
@@ -143,13 +144,13 @@ export const NextButton = ({ text, link }) => {
 
 export const Highlight = ({ children }) => {
   return (
-    <span className="text-zinc-500 dark:text-zinc-100 font-bold">
+    <span className="bg-zinc-100 dark:bg-zinc-700 px-2 border border-zinc-200 dark:border-zinc-600">
       {children}
     </span>
   );
 };
 
-export const Task = ({ points, task }) => {
+export const Task = ({ points, task, expectedOutput }) => {
   const [output, setOutput] = useState("");
   const [score, setScore] = useState(0);
   const editorRef = useRef(null);
@@ -175,7 +176,7 @@ export const Task = ({ points, task }) => {
       new Function(currentCode)();
       result = "Code executed successfully!";
 
-      if (currentCode.includes('alert("JavaScript is Fun")')) {
+      if (currentCode.includes(expectedOutput)) {
         setScore(points);
         result += " You earned " + points + " points!";
       } else {
@@ -195,13 +196,13 @@ export const Task = ({ points, task }) => {
         <div className="flex flex-col gap-2">
           <p className="text-xs">{formattedDate}</p>
           <h1 className="text-2xl font-semibold text-zinc-700 dark:text-zinc-200">
-            Your Task ✅
+            Your Task 👨🏻‍💻
           </h1>
           <h3>{task}</h3>
         </div>
 
         <h1 className="text-sm font-semibold">
-          Points to earn: <span className="text-yellow-600">{points} pts</span>
+          Points to earn: <span className="text-yellow-500">{points} pts</span>
         </h1>
       </div>
       <div className="w-full mt-5">
@@ -209,7 +210,7 @@ export const Task = ({ points, task }) => {
           theme={isDarkMode ? "vs-dark" : "light"}
           height="350px"
           defaultLanguage="javascript"
-          defaultValue="// HELLO DEVCIANS!"
+          defaultValue="// HELLO DEVELOPER!"
           onMount={handleEditorDidMount}
         />
 
@@ -225,7 +226,7 @@ export const Task = ({ points, task }) => {
       {output && (
         <div className="mt-4">
           <h3 className="font-bold">Output:</h3>
-          <pre className="mt-5 bg-zinc-200 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 p-5 rounded">
+          <pre className="mt-5 bg-zinc-200 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-5 rounded">
             {output}
           </pre>
         </div>

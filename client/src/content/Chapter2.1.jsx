@@ -15,7 +15,11 @@ import {
   Task,
 } from "../layout/UILayout";
 
+import { useTask } from "../context/TaskApi.jsx";
+
 export default function HelloWorld() {
+  const { tasks } = useTask();
+
   return (
     <div className="w-full max-w-screen-lg mx-auto bg-white dark:bg-zinc-900">
       <div className="flex flex-col gap-2">
@@ -217,9 +221,24 @@ That reduces traffic and makes pages faster."
           </Description>
         </div>
 
-        <Task
-          task="Create a page that shows a message  “JavaScript is Fun” using alert function."
-          points={10}
+        {tasks.map((taskObj, index) => {
+          const task = taskObj.HelloWorldTask;
+          if (task) {
+            return (
+              <Task
+                key={index}
+                task={task.task}
+                points={task.points}
+                expectedOutput={task.expectedOutput}
+              />
+            );
+          }
+          return null;
+        })}
+
+        <NextButton
+          link="/learn-js/fundamentals/code-structure"
+          text="Code Structure"
         />
       </div>
     </div>
