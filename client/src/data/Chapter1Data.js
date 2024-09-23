@@ -12,7 +12,7 @@ export const IntroductionData = [
   {
     id: 3,
     name: "Code Editors",
-    link: "/",
+    link: "code-editors",
   },
 ];
 
@@ -20,7 +20,7 @@ export const FundamentalsData = [
   {
     id: 1,
     name: "Hello World!",
-    link: "/",
+    link: "fundamentals/hello-world",
   },
   {
     id: 2,

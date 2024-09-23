@@ -11,15 +11,17 @@ import Leaderboard from "./pages/Leaderboard";
 import Learn from "./pages/Learn";
 import Developers from "./pages/Developers";
 
-// CONTENT PAGES
-
-//CHAPTER 1`
-import Introduction from "./content/Chapter1.1";
-import DevelopersConsole from "./content/Chapter1.2";
-
 //LAYOUT
 import RootLayout from "./layout/RootLayout";
 import ChaptersLayout from "./layout/ChaptersLayout";
+
+// CONTENT PAGES
+
+//CHAPTER 1
+import Introduction from "./content/Chapter1.1";
+import DevelopersConsole from "./content/Chapter1.2";
+import CodeEditors from "./content/Chapter1.3";
+import HelloWorld from "./content/Chapter2.1";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +56,19 @@ const router = createBrowserRouter([
             path: "developers-console",
             element: <DevelopersConsole />,
           },
+          {
+            path: "code-editors",
+            element: <CodeEditors />,
+          },
+          {
+            path: "fundamentals",
+            children: [
+              {
+                path: "hello-world",
+                element: <HelloWorld />,
+              },
+            ],
+          },
         ],
       },
     ],
@@ -62,7 +77,7 @@ const router = createBrowserRouter([
 
 export default function App() {
   return (
-    <div className="App text-zinc-900 dark:text-zinc-300 font-Inter">
+    <div className="App text-zinc-900 dark:text-zinc-300 font-sans">
       <RouterProvider router={router} />
     </div>
   );

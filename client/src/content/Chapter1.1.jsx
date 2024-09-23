@@ -10,6 +10,7 @@ import {
   Text,
   Note,
   ListItem,
+  NextButton,
 } from "../layout/UILayout";
 import { FaInfoCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -230,19 +231,10 @@ This limitation is, again, for the user’s safety. A page from http://anysite.c
           ]}
         />
 
-        <Link
-          to="/learn-js/developers-console"
-          className="mt-12 w-[260px] border border-zinc-200 dark:border-zinc-700 self-end text-sm flex justify-end text-right p-4 gap-4 text-zinc-900 dark:text-zinc-300 hover:border-zinc-600 duration-500"
-        >
-          <div className="flex flex-col gap-1">
-            <p>Next</p>
-            <div className="flex items-center gap-2">
-              <h1 className="text-lg font-bold text-sky-600 hover:text-sky-300">
-                Developers Console 👉
-              </h1>
-            </div>
-          </div>
-        </Link>
+        <NextButton
+          link="/learn-js/developers-console"
+          text="Developer Console"
+        />
       </div>
     </div>
   );
