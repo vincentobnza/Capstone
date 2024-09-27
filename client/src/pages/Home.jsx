@@ -33,7 +33,7 @@ const Hero = () => {
       </p>
       <Link
         to="/learn-js"
-        className="flex items-center gap-2 text-md  mt-14 py-3 px-6 rounded-full bg-gradient-to-br from-blue-600 to-sky-700 text-white font-bold z-10"
+        className="flex items-center gap-2 text-md  mt-14 py-3 px-6 rounded-full bg-gradient-to-br from-blue-600 to-sky-700 border-2 border-blue-500 text-white font-bold z-10"
       >
         Start Reading
         <IoIosTrendingUp size={20} />
