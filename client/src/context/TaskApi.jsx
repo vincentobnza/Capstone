@@ -31,14 +31,6 @@ export const TaskProvider = ({ children }) => {
     fetchTasks();
   }, []);
 
-  if (loading) {
-    return <div>Loading tasks...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
   return (
     <TaskContext.Provider value={{ tasks, loading, error }}>
       {children}

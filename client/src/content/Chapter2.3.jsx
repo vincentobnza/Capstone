@@ -551,8 +551,25 @@ alert(color); // #FF7F00`}
           Variables should be named in a way that allows us to easily understand
           what’s inside them.
         </Description>
+        {tasks.map((taskObj, index) => {
+          const task = taskObj.Variables;
+          if (task) {
+            return (
+              <Task
+                key={index}
+                task={task.task}
+                points={task.points}
+                expectedOutput={task.expectedOutput}
+              />
+            );
+          }
+          return null;
+        })}
 
-        <Task points={5} />
+        <NextButton
+          link="/learn-js/fundamentals/data-types"
+          text="Data Types"
+        />
       </div>
     </div>
   );

@@ -46,7 +46,7 @@ export default function Footer() {
             {Site.map((item, index) => (
               <div>
                 <a
-                  className="text-sm text-zinc-700 dark:text-zinc-300 hover:text-zinc-500 underline "
+                  className="text-sm text-zinc-700 dark:text-zinc-300 hover:text-zinc-500 "
                   href={item.link}
                   key={index}
                 >
@@ -60,7 +60,7 @@ export default function Footer() {
             {Navigation.map((item, index) => (
               <div>
                 <a
-                  className="text-sm  text-zinc-700 dark:text-zinc-300 hover:text-zinc-500 underline"
+                  className="text-sm  text-zinc-700 dark:text-zinc-300 hover:text-zinc-500"
                   href={item.link}
                   key={index}
                 >
@@ -73,7 +73,7 @@ export default function Footer() {
           <div className="flex flex-col justify-start items-start gap-2 p-4">
             <h1 className="text-md font-bold mb-2">Legal</h1>
             <a
-              className="text-sm  text-zinc-700 dark:text-zinc-300 hover:text-zinc-500 underline"
+              className="text-sm  text-zinc-700 dark:text-zinc-300 hover:text-zinc-500"
               href="/"
             >
               Privacy and Policy

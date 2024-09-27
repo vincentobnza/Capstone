@@ -4,7 +4,7 @@ import { xcode } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import { IoCloseCircleSharp } from "react-icons/io5";
 import { FaInfoCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useTheme } from "../context/ThemeContext";
+import { useTheme } from "next-themes";
 import { useState, useRef } from "react";
 import Editor from "@monaco-editor/react";
 import { Kbd } from "@nextui-org/react";
@@ -37,17 +37,17 @@ export const Example = ({ text }) => {
 };
 
 export const Code = ({ code, language, error, setError }) => {
-  const { isDarkMode } = useTheme();
+  const { theme } = useTheme(); // Updated to use Next Themes
 
   return (
     <div
       className={`my-5 w-full p-[1px] relative ${
-        isDarkMode ? "bg-[#282A36] border border-zinc-600" : "bg-zinc-100"
+        theme === "dark" ? "bg-[#282A36] border border-zinc-600" : "bg-zinc-100"
       }`}
     >
       <SyntaxHighlighter
         language="javascript"
-        style={isDarkMode ? hybrid : xcode}
+        style={theme === "dark" ? hybrid : xcode}
       >
         {code}
       </SyntaxHighlighter>
@@ -117,11 +117,7 @@ export const ListItem = ({ title, text }) => {
 };
 
 export const Key = ({ children }) => {
-  return (
-    <Kbd className="kbd kbd-sm mx-2 bg-zinc-50 dark:bg-zinc-700 ">
-      {children}
-    </Kbd>
-  );
+  return <Kbd className="kbd kbd-sm mx-2">{children}</Kbd>;
 };
 
 export const NextButton = ({ text, link }) => {
@@ -162,7 +158,7 @@ export const Task = ({ points, task, expectedOutput }) => {
     day: "numeric",
   });
 
-  const { isDarkMode } = useTheme();
+  const { theme } = useTheme();
 
   const handleEditorDidMount = (editor, monaco) => {
     editorRef.current = editor;
@@ -207,7 +203,7 @@ export const Task = ({ points, task, expectedOutput }) => {
       </div>
       <div className="w-full mt-5">
         <Editor
-          theme={isDarkMode ? "vs-dark" : "light"}
+          theme={theme === "dark" ? "vs-dark" : "light"}
           height="350px"
           defaultLanguage="javascript"
           defaultValue="// HELLO DEVELOPER!"
@@ -234,3 +230,5 @@ export const Task = ({ points, task, expectedOutput }) => {
     </div>
   );
 };
+
+

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { RiRoadMapLine } from "react-icons/ri";
@@ -15,6 +15,9 @@ import {
   Object,
   DataType,
 } from "../data/Chapter1Data";
+import { Search } from "lucide-react";
+import { MdKeyboardCommandKey } from "react-icons/md";
+import SearchModal from "@/components/SearchModal";
 export default function Learn() {
   return (
     <div className="w-full bg-white dark:bg-zinc-900 space-y-16  dark:text-zinc-400 pb-10">
@@ -35,6 +38,24 @@ const LearnJs = () => {
   );
 };
 const Header = () => {
+  const [open, setOpen] = React.useState(false);
+
+  // CTRL K TO OPEN MODAL
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.ctrlKey && event.key === "k") {
+        event.preventDefault();
+        setOpen(true);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   return (
     <div className="w-full max-w-screen-lg mx-auto flex justify-between gap-4 items-start">
       <div className="flex flex-col gap-4">
@@ -48,17 +69,31 @@ const Header = () => {
         </p>
 
         {/* SEARCH FOR LESSONS */}
-        <div className="mt-10 flex items-center gap-1">
-          <input
-            type="text"
-            className="w-[300px] h-10 bg-zinc-100 border border-zinc-200 dark:bg-zinc-800 dark:border-zinc-700 px-2 text-sm outline-none hover:border-zinc-300 dark:hover:border-zinc-500"
-            placeholder="Search for lessons"
-          />
-          <button className="bg-yellow-500 text-black h-10 px-4 text-sm font-semibold">
-            Search
-          </button>
+        <div className="mt-8 flex items-center gap-1">
+          <div
+            className="relative w-full max-w-md cursor-pointer"
+            onClick={() => setOpen(true)}
+          >
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <Search className="size-4 text-gray-400" />
+            </div>
+            <div className="w-full bg-zinc-50 dark:bg-zinc-800 pl-10 pr-4 py-3 bg-transparent rounded-md outline-none flex justify-start items-center border border-zinc-200 dark:border-zinc-700 hover:border-zinxc-300 dark:hover:border-zinc-600">
+              <p className="text-sm">Quick Search for Lessons</p>
+            </div>
+
+            <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none gap-2">
+              <h1 className="text-xs font-semibold">Ctrl K</h1>
+              <MdKeyboardCommandKey
+                size={17}
+                className="text-zinc-400 dark:text-zinc-500"
+              />
+            </div>
+          </div>
         </div>
       </div>
+
+      {/* search lessons */}
+      <SearchModal open={open} setOpen={setOpen} />
 
       <div className="flex">
         <button className="py-2 px-3 border border-zinc-200 dark:border-zinc-700 text-xs font-semibold rounded">

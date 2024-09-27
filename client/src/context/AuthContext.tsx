@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }: any) => {
   const [user, setUser] = useState<User>();
   const [session, setSession] = useState<Session | null>();
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     const setData = async () => {
@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }: any) => {
     return () => {
       listener?.subscription.unsubscribe();
     };
-  }, [navigate]);
+  }, []);
 
   const signInWithGoogle = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
@@ -63,12 +63,34 @@ export const AuthProvider = ({ children }: any) => {
     if (error) throw error;
   };
 
+  const signUp = async (email: string, password: string) => {
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+    });
+    if (error) {
+      alert(error.message);
+    }
+  };
+
+  const signIn = async (email: string, password: string) => {
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    if (error) {
+      alert(error.message);
+    }
+  };
+
   const value = {
     signInWithGoogle,
     signInWithGithub,
     session,
     user,
     signOut: () => supabase.auth.signOut(),
+    signUp,
+    signIn,
   };
 
   return (
