@@ -5,10 +5,15 @@ import { motion } from "framer-motion";
 
 export default function CodeEditor_LandingPage() {
   return (
-    <div className="w-full bg-white dark:bg-zinc-900 space-y-10 pb-10">
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 1.5 }}
+      className="w-full bg-white dark:bg-zinc-900 space-y-10 pb-10"
+    >
       <Hero />
       <Video />
-    </div>
+    </motion.div>
   );
 }
 
@@ -38,7 +43,7 @@ const Hero = () => {
           Start Coding
         </Link>
         <Link
-          to="/learn-js"
+          to="/learn"
           className="py-3 w-[140px] grid place-items-center bg-zinc-50 dark:bg-zinc-700 rounded-lg border-zinc-200 border-2 dark:border-zinc-600 font-bold text-sm hover:opacity-90"
         >
           Learn JavaScript

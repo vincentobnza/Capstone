@@ -8,11 +8,11 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import React, { useState, useEffect } from "react";
-import { Search, ArrowUpRight, Clock, X } from "lucide-react";
+import { Search, Clock, X, ArrowUpRight } from "lucide-react";
 import { QuickSearchData } from "./QuickSearch";
 import { Link } from "react-router-dom";
 import { Kbd } from "@nextui-org/react";
-export default function SearchModal({ isOpen, onOpen, onOpenChange }) {
+export default function NavbarQuickSearch({ isOpen, onOpen, onOpenChange }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [recentSearches, setRecentSearches] = useState([]);
@@ -75,7 +75,7 @@ export default function SearchModal({ isOpen, onOpen, onOpenChange }) {
 
   useEffect(() => {
     const handleKeyDown = (event) => {
-      if (event.ctrlKey && event.key === "k") {
+      if (event.ctrlKey && event.key === "f") {
         event.preventDefault();
 
         onOpen(true);
@@ -88,9 +88,12 @@ export default function SearchModal({ isOpen, onOpen, onOpenChange }) {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
+
   return (
     <>
       <Modal
+        backdrop="blur"
+        size="xl"
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         motionProps={{
@@ -117,10 +120,7 @@ export default function SearchModal({ isOpen, onOpen, onOpenChange }) {
         <ModalContent>
           {(onClose) => (
             <>
-              <div className="w-full max-w-lg dark:bg-gradient-to-br dark:from-zinc-900 dark:to-zinc-800 border dark:border-zinc-700 bg-zinc-50 rounded-lg flex justify-center flex-col relative">
-                <Kbd className="absolute top-2 right-2 text-xs font-bold text-zinc-500 border border-zinc-200 dark:border-zinc-600 dark:text-zinc-400">
-                  ESC
-                </Kbd>
+              <div className="w-full dark:bg-zinc-900 border dark:border-zinc-700 bg-zinc-50 rounded-lg flex justify-center flex-col relative">
                 <div className="w-full h-14 border-b border-zinc-200 dark:border-zinc-700 grid place-items-center px-2">
                   <div className="relative w-full">
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">

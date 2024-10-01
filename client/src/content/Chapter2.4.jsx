@@ -258,6 +258,254 @@ const bigInt = 1234567890123456789012345678901234567890n;`}
         <Description>
           We’ll cover strings more thoroughly in the chapter Strings.
         </Description>
+        <div className="mt-5 mb-3 w-full p-5 bg-zinc-100 border border-zinc-300 dark:bg-zinc-800 dark:border-zinc-700 relative flex flex-col gap-3">
+          <h3 className="font-bold text-zinc-700 dark:text-zinc-200">
+            👉 There is no character type.
+          </h3>
+
+          <Description>
+            In some languages, there is a special “character” type for a single
+            character. For example, in the C language and in Java it is called
+            “char”.
+          </Description>
+
+          <Description>
+            In JavaScript, there is no such type. There’s only one type:{" "}
+            <Highlight>string</Highlight>. A string may consist of zero
+            characters (be empty), one character or many of them.
+          </Description>
+        </div>
+
+        <Title>Boolean (logical type)</Title>
+
+        <Description>
+          The boolean type has only two values: <Highlight>true</Highlight> and{" "}
+          <Highlight>false</Highlight>.
+        </Description>
+
+        <Description>
+          This type is commonly used to store yes/no values:{" "}
+          <Highlight>true</Highlight> means “yes, correct”, and{" "}
+          <Highlight>false</Highlight> means “no, incorrect”.
+        </Description>
+
+        <Description>For Instance: </Description>
+
+        <Code
+          code={`let isGreater = 4 > 1;
+
+alert( isGreater ); // true (the comparison result is "yes")`}
+        />
+
+        <Description>
+          We’ll cover booleans more deeply in the chapter Logical operators.
+        </Description>
+
+        <Title>The “null” value</Title>
+
+        <Description>
+          The special <Highlight>null</Highlight> value does not belong to any
+          of the types described above.
+        </Description>
+
+        <Description>
+          It forms a separate type of its own which contains only the{" "}
+          <Highlight>null </Highlight>
+          value:
+        </Description>
+
+        <Code code={`let age = null;`} />
+
+        <Description>
+          In JavaScript, null is not a “reference to a non-existing object” or a
+          “null pointer” like in some other languages.
+        </Description>
+
+        <Description>
+          It’s just a special value which represents “nothing”, “empty” or
+          “value unknown”.
+        </Description>
+
+        <Description>The code above states that age is unknown.</Description>
+
+        <Title>The “undefined” value</Title>
+        <Description>
+          The special value <Highlight>undefined</Highlight> also stands apart.
+          It makes a type of its own, just like <Highlight>null</Highlight>.
+        </Description>
+        <Description>
+          The meaning of <Highlight>undefined</Highlight> is “value is not
+          assigned”.
+        </Description>
+        <Description>
+          If a variable is declared, but not assigned, then its value is
+          <Highlight>undefined</Highlight>.:
+        </Description>
+
+        <Code
+          code={`let age;
+
+alert(age); // shows "undefined"`}
+        />
+
+        <Description>
+          Technically, it is possible to explicitly assign undefined to a
+          variable:
+        </Description>
+
+        <Code
+          code={`let age = 100;
+
+// change the value to undefined
+age = undefined;
+
+alert(age); // "undefined"`}
+        />
+
+        <Highlight>
+          …But we don’t recommend doing that. Normally, one uses null to assign
+          an “empty” or “unknown” value to a variable, while undefined is
+          reserved as a default initial value for unassigned things.
+        </Highlight>
+
+        <Title>Objects and Symbols</Title>
+
+        <Description>
+          The <Highlight>object</Highlight> type is special.
+        </Description>
+
+        <Description>
+          All other types are called “primitive” because their values can
+          contain only a single thing (be it a string or a number or whatever).
+          In contrast, objects are used to store collections of data and more
+          complex entities.
+          <br />
+          <br />
+          Being that important, objects deserve a special treatment. We’ll deal
+          with them later in the chapter Objects, after we learn more about
+          primitives.
+          <br />
+          <br />
+          The <Highlight>symbol</Highlight> type is used to create unique
+          identifiers for objects. We have to mention it here for the sake of
+          completeness, but also postpone the details till we know objects.
+        </Description>
+
+        <Title>The typeof operator</Title>
+        <Description>
+          The <Highlight>typeof</Highlight> operator returns the type of the
+          operand. It’s useful when we want to process values of different types
+          differently or just want to do a quick check.
+        </Description>
+
+        <Description>
+          A call to <Highlight>typeof x</Highlight> returns a string with the
+          type name:
+        </Description>
+
+        <Code
+          code={`typeof undefined // "undefined"
+
+typeof 0 // "number"
+
+typeof 10n // "bigint"
+
+typeof true // "boolean"
+
+typeof "foo" // "string"
+
+typeof Symbol("id") // "symbol"
+
+typeof Math // "object"  (1)
+
+typeof null // "object"  (2)
+
+typeof alert // "function"  (3)`}
+        />
+
+        <Description>
+          The last three lines may need additional explanation:
+        </Description>
+
+        <List
+          items={[
+            `Math is a built-in object that provides mathematical operations. We will learn it in the chapter Numbers. Here, it serves just as an example of an object.`,
+            `The result of typeof null is "object". That’s an officially recognized error in typeof, coming from very early days of JavaScript and kept for compatibility. Definitely, null is not an object. It is a special value with a separate type of its own. The behavior of typeof is wrong here.`,
+            `The result of typeof alert is "function", because alert is a function. We’ll study functions in the next chapters where we’ll also see that there’s no special “function” type in JavaScript. Functions belong to the object type. But typeof treats them differently, returning "function". That also comes from the early days of JavaScript. Technically, such behavior isn’t correct, but can be convenient in practice.`,
+          ]}
+        />
+
+        <div className="mt-5 mb-3 w-full p-5 bg-zinc-100 border border-zinc-300 dark:bg-zinc-800 dark:border-zinc-700 relative flex flex-col gap-3">
+          <h3 className="font-bold text-zinc-700 dark:text-zinc-200">
+            📋 The typeof(x) syntax
+          </h3>
+
+          <Description>
+            You may also come across another syntax: typeof(x). It’s the same as
+            typeof x.
+          </Description>
+
+          <Description>
+            To put it clear: typeof is an operator, not a function. The
+            parentheses here aren’t a part of typeof. It’s the kind of
+            parentheses used for mathematical grouping.
+          </Description>
+
+          <Description>
+            Usually, such parentheses contain a mathematical expression, such as
+            (2 + 2), but here they contain only one argument (x). Syntactically,
+            they allow to avoid a space between the typeof operator and its
+            argument, and some people like it.
+          </Description>
+
+          <Description>
+            Some people prefer typeof(x), although the typeof x syntax is much
+            more common.
+          </Description>
+        </div>
+
+        <Title>Summary</Title>
+
+        <Description>There are 8 basic data types in JavaScript.</Description>
+
+        <Description>Seven primitive data types:</Description>
+
+        <List
+          items={[
+            `number for numbers of any kind: integer or floating-point, integers are limited by ±(253-1).`,
+            `bigint for integer numbers of arbitrary length.`,
+            `string for strings. A string may have zero or more characters, there’s no separate single-character type.`,
+            `boolean for true/false.`,
+            `null for unknown values – a standalone type that has a single value null.`,
+            `undefined for unassigned values – a standalone type that has a single value undefined.`,
+            `symbol for unique identifiers.`,
+          ]}
+        />
+
+        <Description>And one non-primitive data type:</Description>
+        <List items={[`object for more complex data structures.`]} />
+        <Description>
+          The typeof operator allows us to see which type is stored in a
+          variable.
+        </Description>
+
+        <List
+          items={[
+            `Usually used as typeof x, but typeof(x) is also possible.`,
+            `Returns a string with the name of the type, like "string".`,
+            `For null returns "object" – this is an error in the language, it’s not actually an object.`,
+          ]}
+        />
+
+        <Description>
+          In the next chapters, we’ll concentrate on primitive values and once
+          we’re familiar with them, we’ll move on to objects.
+        </Description>
+
+        <NextButton
+          link="/learn-js/fundamentals/operators"
+          text="Basic operators, maths"
+        />
       </div>
     </div>
   );

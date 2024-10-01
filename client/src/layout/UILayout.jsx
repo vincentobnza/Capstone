@@ -129,8 +129,8 @@ export const NextButton = ({ text, link }) => {
       <div className="flex flex-col gap-1">
         <p>Next</p>
         <div className="flex items-center gap-2">
-          <h1 className="text-lg font-bold text-emerald-600 hover:text-emerald-300">
-            {text} 👉
+          <h1 className="text-lg font-bold text-blue-600 hover:text-blue-300">
+            {text}
           </h1>
         </div>
       </div>
@@ -231,4 +231,25 @@ export const Task = ({ points, task, expectedOutput }) => {
   );
 };
 
-
+export const QuizButton = ({ text, link }) => {
+  return (
+    <Link
+      to={link}
+      className="mt-12 w-[260px] border border-zinc-200 dark:border-zinc-700 self-end text-sm flex justify-end text-right p-4 gap-4 text-zinc-900 dark:text-zinc-300 hover:border-zinc-600 duration-500 relative overflow-hidden hover:opacity-70"
+    >
+      <img
+        src="https://cdn-icons-png.flaticon.com/128/5827/5827057.png"
+        alt="quiz icon"
+        className="absolute -left-2 -bottom-2 opacity-20 size-20"
+      />
+      <div className="flex flex-col gap-1">
+        <p>Take a Quiz</p>
+        <div className="flex items-center gap-2">
+          <h1 className="text-lg font-bold text-green-600 hover:text-green-300">
+            {text}
+          </h1>
+        </div>
+      </div>
+    </Link>
+  );
+};

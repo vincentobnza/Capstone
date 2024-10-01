@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "../components/navbar";
+import Navbar from "../components/Navbar";
 import { ScrollRestoration } from "react-router-dom";
 import Footer from "../components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
@@ -8,7 +8,7 @@ import Banner from "../components/Banner";
 export default function RootLayout() {
   return (
     <ThemeProvider>
-      <div className="w-full bg-white dark:bg-zinc-900">
+      <div className="w-full bg-white dark:bg-zinc-900 relative">
         <Banner />
         <Navbar />
         <main className="mt-14">

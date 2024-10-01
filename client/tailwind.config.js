@@ -10,10 +10,17 @@ export default {
   ],
   theme: {
     extend: {
+      animation: {
+        border: "border 4s linear infinite",
+      },
+      keyframes: {
+        border: {
+          to: { "--border-angle": "360deg" },
+        },
+      },
       fontFamily: {
         Inter: ["Inter", "sans-serif"],
-        SpaceGrotesk: ["Space Grotesk", "sans-serif"],
-        Montserrat: ["Montserrat", "sans-serif"],
+        Odibee: ["Odibee Sans", "sans-serif"],
       },
     },
   },

@@ -18,11 +18,18 @@ import {
 import { Search } from "lucide-react";
 import { MdKeyboardCommandKey } from "react-icons/md";
 import SearchModal from "@/components/SearchModal";
+import { useDisclosure } from "@nextui-org/react";
+import { motion } from "framer-motion";
 export default function Learn() {
   return (
-    <div className="w-full bg-white dark:bg-zinc-900 space-y-16  dark:text-zinc-400 pb-10">
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 1.5 }}
+      className="w-full bg-white dark:bg-zinc-900 space-y-16  dark:text-zinc-400 pb-10"
+    >
       <LearnJs />
-    </div>
+    </motion.div>
   );
 }
 
@@ -30,15 +37,15 @@ const LearnJs = () => {
   return (
     <>
       <Header />
-      <div className="space-y-4">
+      <div className="space-y-8">
         <Content />
-        <Chapters />
+        <Chapter1 />
       </div>
     </>
   );
 };
 const Header = () => {
-  const [open, setOpen] = React.useState(false);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   // CTRL K TO OPEN MODAL
 
@@ -72,7 +79,7 @@ const Header = () => {
         <div className="mt-8 flex items-center gap-1">
           <div
             className="relative w-full max-w-md cursor-pointer"
-            onClick={() => setOpen(true)}
+            onClick={onOpen}
           >
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
               <Search className="size-4 text-gray-400" />
@@ -93,13 +100,17 @@ const Header = () => {
       </div>
 
       {/* search lessons */}
-      <SearchModal open={open} setOpen={setOpen} />
+      <SearchModal
+        isOpen={isOpen}
+        onOpen={onOpen}
+        onOpenChange={onOpenChange}
+      />
 
-      <div className="flex">
+      <Link to="/leaderboard" className="flex">
         <button className="py-2 px-3 border border-zinc-200 dark:border-zinc-700 text-xs font-semibold rounded">
           View Progress
         </button>
-      </div>
+      </Link>
     </div>
   );
 };
@@ -115,21 +126,15 @@ const Content = () => {
 
         <div className="w-full p-5 text-sm bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 space-y-4">
           <h1 className="text-lg font-medium dark:text-zinc-100">
-            The JavaScript curriculum is structured into two main parts:
+            The JavaScript curriculum is structured in this:
           </h1>
 
           <ul className="mt-8 flex flex-col gap-2">
             <li className="list-decimal list-inside">
               <span className="text-black dark:text-yellow-600 underline">
-                Core JavaScript
+                JavaScript
               </span>
               : Covers the fundamentals of JavaScript as a programming language.
-            </li>
-            <li className="list-decimal list-inside">
-              <span className="text-black dark:text-emerald-600 underline">
-                Browser JavaScript
-              </span>
-              : Focuses on working with JavaScript in web browsers.
             </li>
           </ul>
 
@@ -145,56 +150,9 @@ const Content = () => {
   );
 };
 
-const Chapters = () => {
-  const chapters = [
-    {
-      name: "Chapter 1",
-      description: "The JavaScript Language",
-      icon: FaNodeJs,
-    },
-    {
-      name: "Chapter 2",
-      description: "Browser: Document, Events, Interfaces",
-      icon: RiJavascriptLine,
-    },
-  ];
-  return (
-    <div className="w-full max-w-screen-lg mx-auto">
-      <h1 className="text-xl text-zinc-700 dark:text-zinc-50">Chapters</h1>
-
-      <div className="w-full mt-5 grid grid-cols-2 gap-2">
-        {chapters.map((item, idx) => (
-          <div
-            key={idx}
-            className="w-full flex  justify-start gap-6 p-5 border border-zinc-200 dark:border-zinc-700 cursor-pointer relative overflow-hidden hover:border-zinc-300 dark:hover:border-zinc-600 transition duration-700 ease-in-out group"
-          >
-            <item.icon
-              size={100}
-              className="absolute -right-2 -bottom-2 -rotate-[30deg] text-zinc-200 dark:text-zinc-800 group:hover:text-zinc-300 dark:group-hover:text-zinc-700 duration-700 ease-in-out"
-            />
-            <div className="h-full">
-              <div className="p-2 rounded bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 text-zinc-500 dark:text-zinc-300">
-                <FaCircleNodes size={16} />
-              </div>
-            </div>
-            <div className="flex flex-col gap-2">
-              <h1 className="text-xl text-zinc-700 dark:text-zinc-200 font-semibold">
-                {item.name}
-              </h1>
-              <p className="text-sm">{item.description}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <Chapter1 />
-    </div>
-  );
-};
-
 const Chapter1 = () => {
   return (
-    <div className="mt-8 flex flex-col space-y-10">
+    <div className="w-full max-w-screen-lg mx-auto flex flex-col space-y-10">
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-1">
           <div className="w-[400px] border-l-4 border-zinc-400 bg-zinc-100 dark:bg-gradient-to-r dark:from-zinc-800 dark:to-zinc-900 p-3 mb-8 ">
@@ -213,11 +171,13 @@ const Chapter1 = () => {
         </p>
       </div>
 
-      <Introduction />
-      <Fundamentals />
-      <Functions />
-      <Objects />
-      <DataTypes />
+      <div className="space-y-6">
+        <Introduction />
+        <Fundamentals />
+        <Functions />
+        <Objects />
+        <DataTypes />
+      </div>
     </div>
   );
 };
@@ -228,7 +188,7 @@ const Introduction = () => {
       <div className="flex items-center gap-2">
         <FaDiamond className="text-yellow-600 text-sm animate-pulse" />
         <h1 className="text-zinc-700 dark:text-zinc-200 font-semibold">
-          Introduction
+          Introduction to JavaScript
         </h1>
       </div>
 
@@ -263,7 +223,7 @@ const Fundamentals = () => {
       <div className="flex items-center gap-2">
         <FaDiamond className="text-green-600 text-sm animate-pulse" />
         <h1 className="text-zinc-700 dark:text-zinc-200 font-semibold">
-          Fundamentals of JavaScript
+          JavaScript Basics
         </h1>
       </div>
 
@@ -298,7 +258,7 @@ const Functions = () => {
       <div className="flex items-center gap-2">
         <FaDiamond className="text-indigo-600 text-sm animate-pulse" />
         <h1 className="text-zinc-700 dark:text-zinc-200 font-semibold">
-          Functions
+          Control Structures
         </h1>
       </div>
 
@@ -333,7 +293,7 @@ const Objects = () => {
       <div className="flex items-center gap-2">
         <FaDiamond className="text-orange-600 text-sm animate-pulse" />
         <h1 className="text-zinc-700 dark:text-zinc-200 font-semibold">
-          JavaScript Objects
+          Functions in JavaScript
         </h1>
       </div>
 

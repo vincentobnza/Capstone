@@ -1,111 +1,75 @@
 export const IntroductionData = [
   {
     id: 1,
-    name: "An Introduction to JavaScript",
+    name: "What is JavaScript",
     link: "intro",
   },
   {
     id: 2,
-    name: "Developer's Console",
-    link: "developers-console",
+    name: "Development Environment",
+    link: "development-environment",
   },
   {
     id: 3,
-    name: "Code Editors",
-    link: "code-editors",
+    name: "Adding JavaScript to a Page",
+    link: "adding-javascript-to-page",
   },
 ];
 
 export const FundamentalsData = [
   {
     id: 1,
-    name: "Hello World!",
+    name: "Variables and Data Types",
     link: "fundamentals/hello-world",
   },
   {
     id: 2,
-    name: "Code Structure",
+    name: "Operators",
     link: "fundamentals/code-structure",
   },
   {
     id: 3,
-    name: "Variables",
+    name: "Comments and Code Structure",
     link: "fundamentals/variables",
-  },
-  {
-    id: 4,
-    name: "Data Types",
-    link: "/",
-  },
-  {
-    id: 5,
-    name: 'Type Conversions"',
-    link: "/",
-  },
-  {
-    id: 6,
-    name: 'Comparisons"',
-    link: "/",
-  },
-  {
-    id: 7,
-    name: "Logical Operators",
-    link: "/",
-  },
-  {
-    id: 8,
-    name: 'Loops; while and for"',
-    link: "/",
-  },
-  {
-    id: 9,
-    name: "Functions",
-    link: "/",
   },
 ];
 
 export const Function = [
   {
     id: 1,
-    name: "Functions Expression",
+    name: "Conditionals: if, else, else if",
     link: "/",
   },
   {
     id: 2,
-    name: "Arrow functions, the basics ",
+    name: "Switch Statements",
     link: "/",
   },
   {
     id: 3,
-    name: "JavaScript Specials",
+    name: "Loops: for, while, do...while",
     link: "/",
+  },
+  {
+    id: 4,
+    name: "Break and Continue Statement",
   },
 ];
 
 export const Object = [
   {
     id: 1,
-    name: "Objects ",
+    name: "Function Declaration and Expression",
     link: "/",
   },
   {
     id: 2,
-    name: "Object methods, “this”",
+    name: "Parameters and Return Values",
     link: "/",
   },
   {
     id: 3,
-    name: "Constructor, operator “new” ",
-    link: "/",
-  },
-  {
-    id: 4,
-    name: "Optional chaining ‘?.’ ",
-    link: "/",
-  },
-  {
-    id: 5,
-    name: "Symbol type",
+    name: "Arrow Functions",
     link: "/",
   },
 ];

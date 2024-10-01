@@ -17,166 +17,72 @@ import { FaInfoCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
 
-export default function DevelopersConsole() {
+export default function DevelopmentEnvironment() {
   return (
     <div className="w-full max-w-screen-lg mx-auto bg-white dark:bg-zinc-900">
       <div className="flex flex-col gap-4">
-        <Topic>Developer console</Topic>
+        <Topic>Setting up the Development Environment</Topic>
         <Description>
-          Code is prone to errors. You will quite likely make errors… Oh, what
-          am I talking about? You are absolutely going to make errors, at least
-          if you’re a human, not a robot.
+          Here, we'll be creating a web application with JavaScript. For the
+          purpose of writing the JavaScript code, we therefore need at least two
+          tools: a browser and an editor.
         </Description>
         <Description>
-          But in the browser, users don’t see errors by default. So, if
-          something goes wrong in the script, we won’t see what’s broken and
-          can’t fix it.
+          We will utilize a single HTML web page to run our JavaScript code,
+          even though running a web application also requires a webserver. For
+          now, there is no need to install it.
+        </Description>
+        <Title>Browser</Title>
+        <Description>
+          Most likely, your computer already has a browser loaded on it. For
+          Windows, it's Microsoft Edge, and for Mac OS, it's Safari.
         </Description>
         <Description>
-          To see errors and get a lot of other useful information about scripts,
-          “developer tools” have been embedded in browsers.
+          Alternatively, you can install the browser listed below based on your
+          preferences:
         </Description>
-        <Description>
-          Most developers lean towards Chrome or Firefox for development because
-          those browsers have the best developer tools. Other browsers also
-          provide developer tools, sometimes with special features, but are
-          usually playing “catch-up” to Chrome or Firefox. So most developers
-          have a “favorite” browser and switch to others if a problem is
-          browser-specific.
-        </Description>
-
-        <Description>
-          Developer tools are potent; they have many features. To start, we’ll
-          learn how to open them, look at errors, and run JavaScript commands.
-        </Description>
-
-        <Title>Google Chrome</Title>
-        <Description>
-          Open the page <b className="text-orange-700">bug.html.</b>
-        </Description>
-
-        <Description>
-          There’s an error in the JavaScript code on it. It’s hidden from a
-          regular visitor’s eyes, so let’s open developer tools to see it.
-        </Description>
-
-        <Description>
-          Press
-          <Key>F12</Key>
-          or, if you’re on Mac, then
-          <Key>Cmd + Opt + J</Key>
-        </Description>
-
-        <Description>
-          The developer tools will open on the Console tab by default.
-        </Description>
-
-        <Description>It looks somewhat like this:</Description>
-
-        <img
-          src="https://javascript.info/article/devtools/chrome.png"
-          alt="image"
-          className="w-full my-5"
-        />
-        <Description>
-          The exact look of developer tools depends on your version of Chrome.
-          It changes from time to time but should be similar.
-        </Description>
-
         <List
           items={[
-            `Here we can see the red-colored error message. In this case, the script contains an unknown “lalala” command.
-On the right, there is a clickable link to the source bug.html:12 with the line number where the error has occurred.`,
-            `On the right, there is a clickable link to the source bug.html:12 with the line number where the error has occurred.`,
+            "Microsoft Edge",
+            "Google Chrome",
+            "Mozill Firefox",
+            "Safari",
+            "Opera",
           ]}
         />
-
+        <Title>IDEs for JavaScript Application Development</Title>
         <Description>
-          Below the error message, there is a blue {">"} symbol. It marks a
-          “command line” where we can type JavaScript commands. Press{" "}
-          <Key>Enter</Key>
-          to run them.
+          A straightforward editor such as Notepad can be used to write
+          JavaScript code. Nevertheless, you can install any licensed or
+          open-source IDE (Integrated Development Environment) to benefit from
+          the syntax error/warning highlighter and IntelliSense support for
+          JavaScript, which enable quick development.
         </Description>
-
         <Description>
-          Now we can see errors, and that’s enough for a start. We’ll come back
-          to developer tools later and cover debugging more in-depth in the
-          chapter <b className="text-orange-700">Debugging in the browser.</b>
+          The followings are some of the well-known JavaScript editors:
         </Description>
-
-        <div className="my-5 w-full flex flex-col gap-4 p-5 border border-zinc-300 bg-zinc-50 dark:bg-zinc-800 dark:border-zinc-700 ">
-          <h1 className="font-bold">Multi-line input</h1>
-          <p>
-            Usually, when we put a line of code into the console, and then press
-            <Key className="Key Key-sm mx-2 bg-zinc-50 dark:bg-zinc-800">
-              Enter
-            </Key>
-            , it executes.
-          </p>
-          <p>
-            To insert multiple lines, press{" "}
-            <Key className="Key Key-sm mx-2 bg-zinc-50 dark:bg-zinc-800">
-              Ctrl + Enter
-            </Key>{" "}
-            This way one can enter long fragments of JavaScript code.
-          </p>
-        </div>
-
-        <Title>Firefox, Edge, and others</Title>
-        <Description>
-          Most other browsers use <Key>F12</Key>
-          to open developer tools.
-        </Description>
-
-        <Description>
-          The look & feel of them is quite similar. Once you know how to use one
-          of these tools (you can start with Chrome), you can easily switch to
-          another.
-        </Description>
-
-        <Description>Safari</Description>
-
-        <Description>
-          Safari (Mac browser, not supported by Windows/Linux) is a little bit
-          special here. We need to enable the “Develop menu” first.
-        </Description>
-
-        <Description>
-          Open Preferences and go to the “Advanced” pane. There’s a checkbox at
-          the bottom:
-        </Description>
-
-        <img
-          src="https://javascript.info/article/devtools/safari.png"
-          alt="image"
-          className="w-full my-5"
+        <List
+          items={[
+            "Visual Studio Code (Free, cross-platform)",
+            "Eclipse (Free, cross-platform)",
+            "Atom (Free, cross-platform)",
+            "Notepad++ (Free, Windows)",
+            "Code Lobster (Free, cross-platform)",
+            "WebStorm (Paid, cross-platform)",
+            "Brackets",
+            "Replit",
+            "JSFiddle",
+          ]}
         />
-
+        <Title>Online Editors for JavaScript</Title>
         <Description>
-          Now <Key> Cmd + Opt + C</Key>
-          can toggle the console. Also, note that the new top menu item named
-          “Develop” has appeared. It has many commands and options.
+          To immediately run the JavaScript code without installing anything,
+          use the online editor. The free web editors are as follows:
         </Description>
-
-        <Title>Summary</Title>
-
-        <Description>
-          Developer tools allow us to see errors, run commands, examine
-          variables, and much more.
-        </Description>
-
-        <Description>
-          They can be opened with F12 for most browsers on Windows. Chrome for
-          Mac needs <Key>Cmd + Opt + J</Key>, Safari: <Key>Cmd + Opt + J</Key>
-          (need to enable first).
-        </Description>
-
-        <Description>
-          Now we have the environment ready. In the next section, we’ll get down
-          to JavaScript.
-        </Description>
-
-        <NextButton link="/learn-js/code-editors" text="Code Editors" />
+        <NextButton
+          link="/learn-js/adding-javascript-to-page"
+          text="Adding JavaScript to Page"
+        />
       </div>
     </div>
   );

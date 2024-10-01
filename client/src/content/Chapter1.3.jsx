@@ -11,173 +11,160 @@ import {
   Note,
   ListItem,
   NextButton,
+  QuizButton,
 } from "../layout/UILayout";
 import { FaInfoCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
-export default function CodeEditors() {
+export default function JavaScriptToPage() {
   return (
     <div className="w-full max-w-screen-lg mx-auto bg-white dark:bg-zinc-900">
       <div className="flex flex-col gap-2">
-        <Topic>Code editors</Topic>
-        <Description>
-          A code editor is the place where programmers spend most of their time.
-        </Description>
-        <Description>
-          There are two main types of code editors: IDEs and lightweight
-          editors. Many people use one tool of each type.
-        </Description>
-
-        <Title>IDE</Title>
+        <Topic>Adding JavaScript to Page</Topic>
 
         <Description>
-          The term IDE (Integrated Development Environment) refers to a powerful
-          editor with many features that usually operates on a “whole project.”
-          As the name suggests, it’s not just an editor, but a full-scale
-          “development environment.”
+          A web page can have JavaScript added in three different ways:
         </Description>
 
-        <Description>
-          An IDE loads the project (which can be many files), allows navigation
-          between files, provides autocompletion based on the whole project (not
-          just the open file), and integrates with a version management system
-          (like git), a testing environment, and other “project-level” stuff.
-        </Description>
-
-        <Description>
-          If you haven’t selected an IDE yet, consider the following options:
-        </Description>
-
-        <ul className="flex flex-col gap-3 py-2 px-5">
-          <li className="list-disc list-inside text-md">
-            <Link
-              to="https://code.visualstudio.com/"
-              className="text-orange-500 underline"
-            >
-              Visual Studio Code
-            </Link>{" "}
-            (cross-platform, free).
-          </li>
-          <li className="list-disc list-inside text-md">
-            <Link
-              to="https://www.jetbrains.com/webstorm/"
-              className="text-orange-500 underline"
-            >
-              Webstorm {""}
-            </Link>
-            (cross-platform, paid).
-          </li>
-        </ul>
-
-        <Description>
-          For Windows, there’s also “Visual Studio”, not to be confused with
-          “Visual Studio Code”. “Visual Studio” is a paid and mighty
-          Windows-only editor, well-suited for the .NET platform. It’s also good
-          at JavaScript. There’s also a free version{" "}
-          <Link
-            to="https://visualstudio.microsoft.com/vs/community/"
-            className="text-orange-500 underline"
-          >
-            Visual Studio Community
-          </Link>
-        </Description>
-
-        <Description>
-          Many IDEs are paid, but have a trial period. Their cost is usually
-          negligible compared to a qualified developer’s salary, so just choose
-          the best one for you.
-        </Description>
-
-        <Title>Lightweight editors</Title>
-        <Description>
-          “Lightweight editors” are not as powerful as IDEs, but they’re fast,
-          elegant and simple.
-        </Description>
-
-        <Description>
-          They are mainly used to open and edit a file instantly.
-        </Description>
-
-        <Description>
-          The main difference between a “lightweight editor” and an “IDE” is
-          that an IDE works on a project-level, so it loads much more data on
-          start, analyzes the project structure if needed and so on. A
-          lightweight editor is much faster if we need only one file.
-        </Description>
-
-        <Description>
-          In practice, lightweight editors may have a lot of plugins including
-          directory-level syntax analyzers and autocompleters, so there’s no
-          strict border between a lightweight editor and an IDE.
-        </Description>
-
-        <Description>There are many options, for instance:</Description>
-        <ul className="flex flex-col gap-3 py-2 px-5">
-          <li className="list-disc list-inside text-md">
-            <Link
-              to="https://www.sublimetext.com/"
-              className="text-orange-500 underline"
-            >
-              Sublime Text
-            </Link>{" "}
-            (cross-platform, shareware).
-          </li>
-          <li className="list-disc list-inside text-md">
-            <Link
-              to="https://notepad-plus-plus.org/"
-              className="text-orange-500 underline"
-            >
-              Notepadd ++ {""}
-            </Link>
-            (Windows, free).
-          </li>
-          <li className="list-disc list-inside text-md">
-            <Link
-              to="https://www.vim.org/"
-              className="text-orange-500 underline"
-            >
-              Vim {""}
-            </Link>
-            and {""}
-            <Link
-              to="https://www.emacs.org/"
-              className="text-orange-500 underline"
-            >
-              Emacs {""}
-            </Link>
-            (Windows, free).
-          </li>
-        </ul>
-
-        <Title>Let’s not argue</Title>
-        <Description>
-          The editors in the lists above are those that either I or my friends
-          whom I consider good developers have been using for a long time and
-          are happy with.
-        </Description>
-
-        <Description>
-          There are other great editors in our big world. Please choose the one
-          you like the most.
-        </Description>
-
-        <Description>
-          The choice of an editor, like any other tool, is individual and
-          depends on your projects, habits, and personal preferences.
-        </Description>
-
-        <Description>The author’s personal opinion:</Description>
         <List
           items={[
-            `I’d use Visual Studio Code if I develop mostly frontend.`,
-            `Otherwise, if it’s mostly another language/platform and partially frontend, then consider other editors, such as XCode (Mac), Visual Studio (Windows) or Jetbrains family (Webstorm, PHPStorm, RubyMine etc, depending on the language).`,
+            `JavaScript code is embedded in between a pair of <script> and </script> tags.`,
+            `Use the src attribute of the <script> tag to load an external JavaScript file with the.js extension inside the page.`,
+            `By putting JavaScript code within an HTML tag by utilizing the onclick, onmouseover, onkeypress, onload, and other special tag properties.`,
           ]}
         />
 
-        <NextButton
-          link="/learn-js/fundamentals/hello-world"
-          text="Fundamentals of JS"
+        <Description>
+          The following sections will describe each of these procedures in
+          detail:
+        </Description>
+
+        <Title>Embedding the JavaScript Code</Title>
+        <Description>
+          {`By sandwiching the JavaScript code between the <script> and </script> tags, you can embed it straight into your webpages. The <script> tag instructs the browser to treat the statements it contains as executable script rather than HTML. As an illustration, consider this:`}
+        </Description>
+        <Code
+          code={`<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Embedded JavaScript</title>
+  </head>
+  <body>
+    <script>
+      let greetings = "Hello Developers !";
+      document.write(greetings); //Prints Hello Developers
+    </script>
+  </body>
+</html>
+`}
+          language={"html"}
         />
+
+        <Description>
+          In the example above, the JavaScript code will only print a text
+          message to the webpage. You will learn what each of these JavaScript
+          statements signifies in following chapters.
+        </Description>
+        <div className="mt-5 mb-3 w-full p-5 bg-zinc-100 border border-zinc-300 dark:bg-zinc-800 dark:border-zinc-700 relative flex flex-col gap-3">
+          <h3 className=" text-zinc-700 dark:text-zinc-200">
+            {`Note: The type attribute for <script> tag (i.e. <script type="text/javascript">) is no longer required since HTML5. JavaScript is the default scripting language for HTML5.`}
+          </h3>
+        </div>
+
+        <Title>Calling an External JavaScript File</Title>
+        <Description>
+          {`Alternatively, you can save your JavaScript code in a different file with the.js extension and use the src property of the <script> tag in your document to call that file:`}
+        </Description>
+
+        <Code code={`<script src="src/script.js"></script>`} />
+        <Description>
+          If you wish to utilize the same scripts for several papers, this is
+          helpful. It makes your website much easier to maintain and saves you
+          from having to do the same activity repeatedly.
+        </Description>
+
+        <Description>
+          Now let's create a "script.js" JavaScript file and add the following
+          code to it:
+        </Description>
+
+        <Code
+          code={`// function to display greetings
+
+function Greetings(){
+    alert("Hello Developers");
+}
+
+//Call function onClick of the button
+document.getElementById("btn").onclick = greetings;`}
+        />
+
+        <Description>
+          {`Now, you can use the <script> tag inside a web page to call this external JavaScript file, as shown here:`}
+        </Description>
+
+        <Code
+          code={`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Including JavaScript File</title>
+</head>
+<body>
+  <script src="script.js"></script>
+</body>
+</html>
+`}
+          language={"html"}
+        />
+
+        <Title>Placing the JavaScript Code Inline</Title>
+        <Description>
+          It is also possible to inject JavaScript code inline within an HTML
+          element by using specific tag properties like onclick, onmouseover,
+          onkeypress, onload, etc.
+        </Description>
+
+        <Description>
+          But you should refrain from putting a lot of JavaScript code inline
+          since it will clog up your HTML and make it harder to manage your
+          JavaScript code. As an illustration, consider this:
+        </Description>
+
+        <Code
+          code={`
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Inlining JavaScript</title>
+</head>
+<body>
+  <button onclick="alert('Hello Developer')">Click ME</button>
+</body>
+</html>`}
+        />
+
+        <Description>
+          When you click on the button element in the example above, an alert
+          message will appear.
+        </Description>
+
+        <div className="mt-5 mb-3 w-full p-5 bg-zinc-100 border border-zinc-300 dark:bg-zinc-800 dark:border-zinc-700 relative flex flex-col gap-3">
+          <h3 className=" text-zinc-700 dark:text-zinc-200">
+            {`Note: You should always maintain a clear separation between your website's presentation (CSS), behavior (JavaScript), and content (i.e., HTML).`}
+          </h3>
+        </div>
+
+        <div className="w-full flex items-center gap-3 justify-end">
+          <QuizButton text="Lesson 1" link="/quiz/introduction" />
+          <NextButton link="" text="Variables and Data Types " />
+        </div>
       </div>
     </div>
   );

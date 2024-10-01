@@ -7,11 +7,21 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "@nextui-org/react";
-import { Play, Trash2, ChevronDown } from "lucide-react";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
+} from "@nextui-org/react";
+import { Play, Trash2, ArrowDownToLine, Share2 } from "lucide-react";
 import LeaveSitePrompt from "@/components/LeaveSitePrompt";
 
 const CodeEditor = () => {
-  const [code, setCode] = useState("// Type your code here...");
+  const [code, setCode] = useState(
+    `// Online Javascript Editor\n// Write, Edit and Run your Javascript code using our Online Editor\n\nconsole.log("Hello World");`
+  );
   const [output, setOutput] = useState("");
   const [language, setLanguage] = useState("javascript");
 
@@ -71,45 +81,46 @@ const CodeEditor = () => {
   };
 
   // Function to trigger the native "Save As" dialog using File System Access API
-  const handleSaveFile = async (e) => {
-    if (e.ctrlKey && e.key === "s") {
-      e.preventDefault();
-
-      try {
-        // Use showSaveFilePicker() to open the file picker dialog
-        const fileHandle = await window.showSaveFilePicker({
-          suggestedName: `code.${language === "javascript" ? "js" : "ts"}`,
-          types: [
-            {
-              description: `${language.toUpperCase()} Files`,
-              accept: {
-                "text/plain": [`.${language === "javascript" ? "js" : "ts"}`],
-              },
+  const handleSaveFile = async () => {
+    try {
+      const fileHandle = await window.showSaveFilePicker({
+        suggestedName: `index.${language === "javascript" ? "js" : "ts"}`,
+        types: [
+          {
+            description: `${language.toLowerCase()} Files`,
+            accept: {
+              "text/plain": [`.${language === "javascript" ? "js" : "ts"}`],
             },
-          ],
-        });
+          },
+        ],
+      });
 
-        const writableStream = await fileHandle.createWritable();
-        await writableStream.write(code);
-        await writableStream.close();
-      } catch (err) {
-        console.error("File saving failed:", err);
-      }
+      const writableStream = await fileHandle.createWritable();
+      await writableStream.write(code);
+      await writableStream.close();
+    } catch (err) {
+      console.error("File saving failed:", err);
     }
   };
 
   // Attach the keydown listener when the component mounts
   useEffect(() => {
-    window.addEventListener("keydown", handleSaveFile);
+    const handleKeyDown = (e) => {
+      if (e.ctrlKey && e.key === "s") {
+        e.preventDefault();
+        handleSaveFile();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
     return () => {
-      window.removeEventListener("keydown", handleSaveFile);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, [code, language]);
-
   return (
-    <div className="w-full h-screen flex flex-col bg-gray-100 dark:bg-zinc-900">
+    <div className="w-full h-screen flex flex-col bg-zinc-900">
       <LeaveSitePrompt />
-      <Header />
+      <Header onSaveFile={handleSaveFile} />
       <div className="flex-1 flex overflow-hidden">
         <div className="flex-1 flex flex-col">
           <ToolBar
@@ -138,37 +149,61 @@ const CodeEditor = () => {
   );
 };
 
-const Header = () => {
+const Header = ({ onSaveFile }) => {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
-    <header className="w-full max-w-screen-2xl mx-auto bg-white dark:bg-gradient-to-b from-slate-800 dark:to-[#1E1E1E] border-b border-zinc-200 dark:border-zinc-700 p-6 flex justify-between items-center">
+    <header className="w-full max-w-screen-2xl mx-auto bg-[#1E1E1E] border-b border-zinc-700 p-6 flex justify-between items-center">
       <div className="flex flex-col gap-1">
         <h1 className="text-xl font-semibold text-yellow-500 dark:text-yellow-500">
           CodeScript
         </h1>
-        <p className="text-zinc-500 dark:text-zinc-400 text-xs">
-          JavaScript Online Compiler
-        </p>
+        <p className="text-zinc-200 text-xs">JavaScript Online Compiler</p>
+      </div>
+
+      <div className="flex items-center gap-2">
+        <Button
+          className="bg-green-600 text-white text-xs font-semibold border-2 border-green-500"
+          size="sm"
+          endContent={<Share2 size={16} />}
+          radius="none"
+          onClick={onOpen}
+        >
+          Share
+        </Button>
+        <Button
+          onClick={onSaveFile}
+          className="bg-blue-600 text-white text-xs font-semibold border-2 border-blue-500"
+          size="sm"
+          endContent={<ArrowDownToLine size={16} />}
+          radius="none"
+        >
+          Save File
+        </Button>
+        <Button
+          className="bg-zinc-700 text-white text-xs font-semibold border-2 border-zinc-500"
+          size="sm"
+          radius="none"
+        >
+          Full Code Editor
+        </Button>
+
+        <ShareLinkModal isOpen={isOpen} onOpenChange={onOpenChange} />
       </div>
     </header>
   );
 };
 
 const ToolBar = ({ language, onLanguageChange, onRun }) => (
-  <div className="bg-white dark:bg-[#1E1E1E] border-b border-gray-200 dark:border-zinc-700 p-2 flex justify-between items-center space-x-2">
-    <div className="ml-6 flex items-center gap-2">
-      <p className="text-sm font-bold">Language: </p>
-      <Button
-        variant="flat"
-        className="capitalize cursor-not-allowed"
-        disabled={true}
-      >
-        {language} <ChevronDown size={16} />
-      </Button>
+  <div className="bg-[#1E1E1E] border-b border-zinc-700 p-3 flex justify-between items-center space-x-2">
+    <div className="ml-4 flex items-center gap-2">
+      <p className="text-sm font-bold text-zinc-200">Language: </p>
+      <h3 className="text-sm font-bold text-yellow-500">JavaScript</h3>
     </div>
     <Button
       onClick={onRun}
-      className="bg-yellow-500 text-black font-bold"
+      className="bg-yellow-500 border-2 border-yellow-300 text-black font-bold"
       size="sm"
+      radius="none"
     >
       <Play size={16} /> Run Code
     </Button>
@@ -176,17 +211,46 @@ const ToolBar = ({ language, onLanguageChange, onRun }) => (
 );
 
 const OutputPanel = ({ output, onClear }) => (
-  <div className="w-1/3 bg-white dark:bg-[#1E1E1E] border-l border-gray-200 dark:border-gray-700 flex flex-col">
-    <div className="p-2 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
-      <h2 className="font-semibold text-gray-800 dark:text-gray-100">Output</h2>
+  <div className="w-1/3 bg-[#1E1E1E] border-l border-zinc-700 flex flex-col">
+    <div className="p-2 border-b border-gray-700 flex justify-between items-center">
+      <h2 className="font-semibold text-gray-300">Output</h2>
       <Button onClick={onClear} variant="light" isIconOnly>
-        <Trash2 size={16} />
+        <Trash2 className="text-white" size={20} />
       </Button>
     </div>
-    <div className="flex-1 p-4 font-mono text-sm overflow-auto whitespace-pre-wrap">
+    <div className="flex-1 p-4 font-mono text-sm overflow-auto whitespace-pre-wrap text-zinc-200">
       {output}
     </div>
   </div>
 );
+
+const ShareLinkModal = ({ isOpen, onOpenChange }) => {
+  return (
+    <Modal isOpen={isOpen} onOpenChange={onOpenChange} hideCloseButton>
+      <ModalContent className="bg-zinc-900 text-zinc-100 border border-zinc-800">
+        {() => (
+          <>
+            <ModalHeader className="flex flex-col gap-1">
+              Share Your Code Link
+            </ModalHeader>
+            <ModalBody>
+              <div className="w-full p-3 bg-zinc-800 border-2 border-zinc-700">
+                <p>{window.location.href}</p>
+              </div>
+            </ModalBody>
+            <ModalFooter>
+              <Button
+                className="bg-blue-600 text-white text-xs font-semibold border-2 border-blue-500"
+                onPress={() => onOpenChange(false)}
+              >
+                Copy Link
+              </Button>
+            </ModalFooter>
+          </>
+        )}
+      </ModalContent>
+    </Modal>
+  );
+};
 
 export default CodeEditor;
