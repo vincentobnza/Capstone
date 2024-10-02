@@ -124,7 +124,7 @@ export const NextButton = ({ text, link }) => {
   return (
     <Link
       to={link}
-      className="mt-12 w-[260px] border border-zinc-200 dark:border-zinc-700 self-end text-sm flex justify-end text-right p-4 gap-4 text-zinc-900 dark:text-zinc-300 hover:border-zinc-600 duration-500"
+      className="mt-12 w-[280px] border border-zinc-200 dark:border-zinc-700 self-end text-sm flex justify-end text-right p-4 gap-4 text-zinc-900 dark:text-zinc-300 hover:border-zinc-600 duration-500"
     >
       <div className="flex flex-col gap-1">
         <p>Next</p>

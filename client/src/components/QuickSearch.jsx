@@ -5,14 +5,14 @@ export const QuickSearchData = [
     description: "Introduction to Modern JavaScript",
   },
   {
-    name: "Developers Console",
-    link: "/learn-js/developers-console",
-    description: "JavaScript Developer Console",
+    name: "Development Environment",
+    link: "/learn-js/development Environment",
+    description: "JavaScript Development Environment",
   },
   {
-    name: "Code Editors",
-    link: "/learn-js/code-editors",
-    description: "Code Editors and Text Editors",
+    name: "Adding JavaScript to Page",
+    link: "/learn-js/adding-javascript-to-page",
+    description: "How to add javascript to page",
   },
   {
     name: "Hello World",
@@ -20,18 +20,18 @@ export const QuickSearchData = [
     description: "Hello World in JavaScript",
   },
   {
-    name: "Code Structure",
-    link: "/learn-js/fundamentals/code-structure",
-    description: "Code Structure in JavaScript",
+    name: "Variables and Data Types",
+    link: "/learn-js/variables-and-data-types",
+    description: "Variables and Data Types in JavaScript",
   },
   {
-    name: "Variables",
-    link: "/learn-js/fundamentals/variables",
-    description: "How to use Variables in JavaScript",
+    name: "Operators",
+    link: "/learn-js/operators",
+    description: "JavaScript Operators",
   },
   {
-    name: "Data Types",
-    link: "/learn-js/fundamentals/data-types",
-    description: "Data Types and Examples in JavaScript",
+    name: "Comments and Code Structure",
+    link: "/learn-js/comments-and-code-structure",
+    description: "How to add comments in Javascript",
   },
 ];

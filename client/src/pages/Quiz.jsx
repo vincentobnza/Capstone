@@ -6,9 +6,20 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useTheme } from "next-themes";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
+} from "@nextui-org/react";
+import supabase from "../config/supabaseClient";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Quiz() {
   const { theme, setTheme } = useTheme();
+  const [points, setPoints] = useState(0);
 
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
@@ -18,24 +29,30 @@ export default function Quiz() {
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1.5 }}
-      className="w-full h-screen bg-white dark:bg-zinc-900 p-5 text-zinc-700 dark:text-zinc-300"
+      className="w-full h-screen bg-white dark:bg-zinc-900 p-5 text-zinc-700 dark:text-zinc-300 space-y-10"
     >
-      <div className="w-full flex max-w-screen-lg mx-auto p-5 justify-between">
+      <div className="w-full flex max-w-screen-lg mx-auto justify-between">
         <h1>CodeScript Quiz</h1>
 
-        <div
-          className="cursor-pointer duration-500 transition ease-in-out"
-          onClick={toggleTheme}
-        >
-          {theme === "dark" ? <Sun size={24} /> : <Moon size={24} />}
+        <div className="flex items-center gap-8">
+          <div className="flex items-center gap-2 text-xs ">
+            <h3>Points: </h3>
+            <h1>{points} pts</h1>
+          </div>
+          <div
+            className="cursor-pointer duration-500 transition ease-in-out"
+            onClick={toggleTheme}
+          >
+            {theme === "dark" ? <Sun size={24} /> : <Moon size={24} />}
+          </div>
         </div>
       </div>
-      <QuizCard />
+      <QuizCard points={points} />
     </motion.div>
   );
 }
 
-const QuizCard = () => {
+const QuizCard = ({ points }) => {
   const [quizData, setQuizData] = useState(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -44,6 +61,9 @@ const QuizCard = () => {
   const [score, setScore] = useState(0);
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [userAnswers, setUserAnswers] = useState([]);
+  const { user } = useAuth();
+
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const { quizType } = useParams();
 
@@ -98,6 +118,7 @@ const QuizCard = () => {
       setSelectedAnswer(null);
     } else {
       setQuizCompleted(true);
+      points = score * 10;
     }
   };
 
@@ -130,15 +151,18 @@ const QuizCard = () => {
       {
         title: "Total Question",
         value: quizData.length,
+        icon: "🚀",
       },
 
       {
         title: "Correct Answers",
         value: score,
+        icon: "👌",
       },
       {
         title: "Wrong Answers",
         value: quizData.length - score,
+        icon: "🤔",
       },
     ];
 
@@ -176,8 +200,11 @@ const QuizCard = () => {
           {quizDetails.map((details, idx) => (
             <div
               key={idx}
-              className="flex flex-col text-left gap-2 p-4 bg-zinc-50 dark:bg-zinc-800 border border-zinc-100 dark:border-zinc-700 rounded-lg"
+              className="flex flex-col text-left gap-2 p-4 bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded-lg relative overflow-hidden"
             >
+              <h1 className="absolute text-5xl opacity-20 -bottom-2 -right-2">
+                {details.icon}
+              </h1>
               <h1 className="text-xs font-semibold text-zinc-400">
                 {details.title}
               </h1>
@@ -188,22 +215,34 @@ const QuizCard = () => {
           ))}
         </div>
 
-        <div className="mt-12 flex items-center gap-2">
+        <div className="mt-8 flex items-center gap-2">
           <Button
+            onClick={onOpen}
             radius="none"
-            className="bg-yellow-600 text-white text-sm border-2 border-yellow-500"
+            className="bg-yellow-800/90 text-white text-sm border border-yellow-500"
           >
             View Accuracy
           </Button>
           <Link to="/leaderboard">
             <Button
               radius="none"
-              className="bg-zinc-600 text-white text-sm border-2 border-zinc-500"
+              className="bg-zinc-800 text-white text-sm border border-zinc-700"
             >
               Leaderboard
             </Button>
           </Link>
         </div>
+
+        <ViewAccuracyModal
+          onOpen={onOpen}
+          quizDetails={quizDetails}
+          isOpen={isOpen}
+          onOpenChange={onOpenChange}
+          score={score}
+          quizType={quizType}
+          userAnswers={userAnswers}
+          quizData={quizData}
+        />
       </motion.div>
     );
   }
@@ -245,5 +284,90 @@ const QuizCard = () => {
         Question {currentQuestionIndex + 1} of {quizData.length}
       </div>
     </div>
+  );
+};
+
+const ViewAccuracyModal = ({
+  isOpen,
+  onOpenChange,
+  quizDetails,
+  userAnswers,
+}) => {
+  return (
+    <Modal
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+      className="font-Inter"
+      scrollBehavior="inside"
+      size="xl"
+    >
+      <ModalContent>
+        {(onClose) => (
+          <>
+            <ModalHeader className="flex flex-col gap-1">
+              Quiz Accuracy Breakdown
+            </ModalHeader>
+            <ModalBody>
+              <div className="w-full grid md:grid-cols-3 gap-2">
+                {quizDetails.map((details, idx) => (
+                  <div
+                    key={idx}
+                    className="flex flex-col text-left gap-2 p-4 bg-zinc-50 dark:bg-zinc-800 border border-zinc-100 dark:border-zinc-700 rounded-lg"
+                  >
+                    <h1 className="text-xs font-semibold text-zinc-400">
+                      {details.title}
+                    </h1>
+                    <h1 className="text-lg font-semibold text-zinc-900 dark:text-white">
+                      {details.value}
+                    </h1>
+                  </div>
+                ))}
+              </div>
+
+              <h3 className="mt-4 mb-2">Question by Question Breakdown</h3>
+              {userAnswers.map((answer, index) => (
+                <div
+                  key={index}
+                  className="mb-1 p-4 bg-zinc-50 border border-zinc-200 dark:bg-zinc-800 dark:border-zinc-700 rounded-lg"
+                >
+                  <div className="w-full flex justify-between mb-3">
+                    <h4 className="font-semibold">Question {index + 1}:</h4>
+                    <span
+                      className={
+                        answer.isCorrect
+                          ? "text-green-500 px-2  bg-emerald-50 dark:bg-emerald-600 dark:text-white text-sm border rounded-lg border-emerald-200"
+                          : "text-red-500 px-2  bg-red-50 dark:bg-red-600 dark:text-white text-sm border rounded-lg border-red-200"
+                      }
+                    >
+                      {answer.isCorrect ? "Correct" : "Incorrect"}
+                    </span>
+                  </div>
+                  <p className="mb-2">{answer.question}</p>
+                  <div className="flex flex-col gap-1">
+                    <span className="text-sm">
+                      Your answer: {answer.userAnswer}
+                    </span>
+                    {!answer.isCorrect && (
+                      <span className="text-sm text-gray-600 dark:text-zinc-400">
+                        Correct answer: {answer.correctAnswer}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </ModalBody>
+            <ModalFooter>
+              <Button
+                size="sm"
+                className="bg-yellow-600 text-white text-sm"
+                onPress={onClose}
+              >
+                Close
+              </Button>
+            </ModalFooter>
+          </>
+        )}
+      </ModalContent>
+    </Modal>
   );
 };

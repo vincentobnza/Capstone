@@ -155,12 +155,6 @@ const Chapter1 = () => {
     <div className="w-full max-w-screen-lg mx-auto flex flex-col space-y-10">
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-1">
-          <div className="w-[400px] border-l-4 border-zinc-400 bg-zinc-100 dark:bg-gradient-to-r dark:from-zinc-800 dark:to-zinc-900 p-3 mb-8 ">
-            <h1 className="text-lg font-bold text-zinc-700 dark:text-zinc-100">
-              Chapter 1
-            </h1>
-          </div>
-
           <h3 className="text-md text-yellow-600 font-semibold">
             The JavaScript Language
           </h3>
