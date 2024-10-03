@@ -20,7 +20,11 @@ import LeaveSitePrompt from "@/components/LeaveSitePrompt";
 
 const CodeEditor = () => {
   const [code, setCode] = useState(
-    `// Online Javascript Editor\n// Write, Edit and Run your Javascript code using our Online Editor\n\nconsole.log("Hello World");`
+    `// Online Javascript Editor\n// Write, Edit and Run your Javascript code using our Online Editor\n\nfunction Greetings() {
+  return 'Hello Developer';
+}
+
+console.log(Greetings());`
   );
   const [output, setOutput] = useState("");
   const [language, setLanguage] = useState("javascript");
@@ -213,7 +217,7 @@ const ToolBar = ({ language, onLanguageChange, onRun }) => (
 const OutputPanel = ({ output, onClear }) => (
   <div className="w-1/3 bg-[#1E1E1E] border-l border-zinc-700 flex flex-col">
     <div className="p-2 border-b border-gray-700 flex justify-between items-center">
-      <h2 className="font-semibold text-gray-300">Output</h2>
+      <h2 className="font-semibold text-gray-300">Console</h2>
       <Button onClick={onClear} variant="light" isIconOnly>
         <Trash2 className="text-white" size={20} />
       </Button>

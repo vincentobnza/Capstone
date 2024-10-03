@@ -1,4 +1,4 @@
-export const IntroductionData = [
+export const Lesson1 = [
   {
     id: 1,
     name: "What is JavaScript",
@@ -16,103 +16,122 @@ export const IntroductionData = [
   },
 ];
 
-export const FundamentalsData = [
+export const Lesson2 = [
   {
     id: 1,
     name: "Variables and Data Types",
-    link: "fundamentals/hello-world",
+    link: "variables-data-types",
   },
   {
     id: 2,
     name: "Operators",
-    link: "fundamentals/code-structure",
+    link: "operators",
   },
   {
     id: 3,
     name: "Comments and Code Structure",
-    link: "fundamentals/variables",
+    link: "comments-code-structure",
   },
 ];
 
-export const Function = [
+export const Lesson3 = [
   {
     id: 1,
     name: "Conditionals: if, else, else if",
-    link: "/",
+    link: "conditionals",
   },
   {
     id: 2,
     name: "Switch Statements",
-    link: "/",
+    link: "switch-statements",
   },
   {
     id: 3,
     name: "Loops: for, while, do...while",
-    link: "/",
+    link: "loops",
   },
   {
     id: 4,
     name: "Break and Continue Statement",
+    link: "break-continue",
   },
 ];
 
-export const Object = [
+export const Lesson4 = [
   {
     id: 1,
     name: "Function Declaration and Expression",
-    link: "/",
+    link: "functions",
   },
   {
     id: 2,
     name: "Parameters and Return Values",
-    link: "/",
+    link: "parameters-return-values",
   },
   {
     id: 3,
     name: "Arrow Functions",
-    link: "/",
+    link: "arrow-functions",
   },
 ];
 
-export const DataType = [
+export const Lesson5 = [
   {
     id: 1,
-    name: "Methods of primitives",
-    link: "/",
+    name: "Object Properties and Methods",
+    link: "objects",
   },
   {
     id: 2,
-    name: "Numbers ",
-    link: "/",
+    name: "Arrays and Array Methods  ",
+    link: "arrays",
+  },
+];
+
+export const Lesson6 = [
+  {
+    id: 1,
+    name: "What is DOM?",
+    link: "javascript-dom",
+  },
+  {
+    id: 2,
+    name: "DOM Elements",
+    link: "dom-elements",
   },
   {
     id: 3,
-    name: "Strings",
-    link: "/",
+    name: "Event Listeners and Handling Events ",
+    link: "event-listeners",
+  },
+];
+
+export const Lesson7 = [
+  {
+    id: 1,
+    name: "Event Types?",
+    link: "event-types",
   },
   {
-    id: 4,
-    name: "Arrays",
-    link: "/",
+    id: 2,
+    name: "Event Bubbling and Capturing",
+    link: "event-bubbling-capturing",
+  },
+];
+export const Lesson8 = [
+  {
+    id: 1,
+    name: "Try, Catch, Finally",
+    link: "try-catch-finally",
   },
   {
-    id: 5,
-    name: "Array methods ",
-    link: "/",
+    id: 2,
+    name: "Throwing Errors",
+    link: "throwing-errors",
   },
   {
-    id: 6,
-    name: "Iterables ",
-    link: "/",
-  },
-  {
-    id: 7,
-    name: "Map and Set",
-    link: "/",
-  },
-  {
-    id: 8,
-    name: "Date and time",
-    link: "/",
+    id: 3,
+    name: "Custom Errors",
+    link: "custom-errors",
   },
 ];

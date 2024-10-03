@@ -19,7 +19,7 @@ import {
 
 export default function Leaderboard() {
   return (
-    <div className="bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 pb-10 space-y-2">
+    <div className="bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 pb-10">
       <Header />
 
       <ListBox />
@@ -31,8 +31,8 @@ export default function Leaderboard() {
 
 const Header = () => {
   return (
-    <div className="w-full max-w-screen-lg mx-auto p-3">
-      <div className="flex flex-col gap-2">
+    <div className="w-full max-w-screen-lg mx-auto p-3 mb-10">
+      <div className="flex flex-col gap-2 text-center items-center">
         <h1 className="text-3xl font-semibold">Leaderboard</h1>
         <p className="text-sm text-zinc-600 dark:text-zinc-400">
           View points and ranking of CodeScript Users.
@@ -45,7 +45,7 @@ const Header = () => {
 const ListBox = () => {
   const { user } = useAuth();
   return (
-    <div className="w-full max-w-screen-lg mx-auto grid md:grid-cols-3 gap-2 p-3">
+    <div className="w-full max-w-screen-md mx-auto grid md:grid-cols-2 gap-4 p-3">
       <div className="w-full p-5 rounded-lg bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 flex justify-start gap-5 relative">
         <div className="w-full flex flex-col">
           <img
@@ -121,8 +121,6 @@ const ListBox = () => {
           2800 Data points
         </Chip>
       </div>
-
-      <div className="w-full p-5 rounded-lg bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 "></div>
     </div>
   );
 };

@@ -4,14 +4,11 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Button,
-  useDisclosure,
 } from "@nextui-org/react";
 import React, { useState, useEffect } from "react";
 import { Search, Clock, X, ArrowUpRight } from "lucide-react";
 import { QuickSearchData } from "./QuickSearch";
 import { Link } from "react-router-dom";
-import { Kbd } from "@nextui-org/react";
 export default function NavbarQuickSearch({ isOpen, onOpen, onOpenChange }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -224,7 +221,9 @@ export default function NavbarQuickSearch({ isOpen, onOpen, onOpenChange }) {
                     </div>
                   ) : (
                     <div className="grid place-items-center p-8">
-                      <p>No Recent Searches</p>
+                      <p className="text-zinc-600 dark:text-zinc-400">
+                        No Recent Searches
+                      </p>
                     </div>
                   )}
                 </div>

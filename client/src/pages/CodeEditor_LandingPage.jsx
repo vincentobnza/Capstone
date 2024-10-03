@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import VideoHero from "../assets/video_hero.mp4";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 export default function CodeEditor_LandingPage() {
   return (
@@ -18,6 +19,12 @@ export default function CodeEditor_LandingPage() {
 }
 
 const Hero = () => {
+  const navigate = useNavigate();
+
+  const handleNewTab = () => {
+    const newTab = window.open();
+    newTab.location.href = "/code-editor";
+  };
   return (
     <div className="w-full max-w-screen-md mx-auto flex flex-col justify-center items-center gap-4 text-center">
       <h1 className="text-[48px] dark:bg-gradient-to-br dark:from-white dark:to-zinc-400 dark:bg-clip-text dark:text-transparent text-zinc-700 leading-snug font-semibold ">
@@ -36,12 +43,12 @@ const Hero = () => {
       </p>
 
       <div className="flex mt-16 items-center gap-3">
-        <Link
-          to="/code-editor"
+        <button
+          onClick={handleNewTab}
           className="py-3 w-[140px] grid place-items-center bg-blue-700  text-white font-bold rounded-lg border-2 border-blue-500 text-sm hover:opacity-90"
         >
           Start Coding
-        </Link>
+        </button>
         <Link
           to="/learn"
           className="py-3 w-[140px] grid place-items-center bg-zinc-50 dark:bg-zinc-700 rounded-lg border-zinc-200 border-2 dark:border-zinc-600 font-bold text-sm hover:opacity-90"

@@ -20,6 +20,7 @@ import { Search } from "lucide-react";
 import NavbarQuickSearch from "./NavbarQuickSearch";
 import { useDisclosure } from "@nextui-org/react";
 import { Swords } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const { theme, setTheme } = useTheme();

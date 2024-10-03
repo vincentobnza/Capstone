@@ -297,7 +297,6 @@ const ViewAccuracyModal = ({
     <Modal
       isOpen={isOpen}
       onOpenChange={onOpenChange}
-      className="font-Inter"
       scrollBehavior="inside"
       size="xl"
     >
