@@ -34,15 +34,13 @@ import DebugWarsLevel from "./components/DebugWarsLevel";
 
 // CONTENT PAGES
 
-// CHAPTER 1
-import Introduction from "./content/Chapter1.1";
-import DevelopmentEnvironment from "./content/Chapter1.2";
-import JavaScriptToPage from "./content/Chapter1.3";
-import HelloWorld from "./content/Chapter2.1";
-import CodeStructure from "./content/Chapter2.2";
-import Variables from "./content/Chapter2.3";
-import DataTypes from "./content/Chapter2.4";
-import Operators from "./content/Chapter2.5";
+// LESSONS
+import Lesson1_Topic1 from "./content/Lesson1/Lesson1.1";
+import Lesson1_Topic2 from "./content/Lesson1/Lesson1.2";
+import Lesson1_Topic3 from "./content/Lesson1/Lesson1.3";
+
+import Lesson2_Topic1 from "./content/Lesson2/Lesson2.1";
+import Lesson2_Topic2 from "./content/Lesson2/Lesson2.2";
 
 // PROVIDER
 import { AuthProvider } from "./context/AuthContext";
@@ -96,40 +94,23 @@ const router = createBrowserRouter([
         children: [
           {
             path: "intro",
-            element: <Introduction />,
+            element: <Lesson1_Topic1 />,
           },
           {
             path: "development-environment",
-            element: <DevelopmentEnvironment />,
+            element: <Lesson1_Topic2 />,
           },
           {
             path: "adding-javascript-to-page",
-            element: <JavaScriptToPage />,
+            element: <Lesson1_Topic3 />,
           },
           {
-            path: "fundamentals",
-            children: [
-              {
-                path: "hello-world",
-                element: <HelloWorld />,
-              },
-              {
-                path: "code-structure",
-                element: <CodeStructure />,
-              },
-              {
-                path: "variables",
-                element: <Variables />,
-              },
-              {
-                path: "data-types",
-                element: <DataTypes />,
-              },
-              {
-                path: "operators",
-                element: <Operators />,
-              },
-            ],
+            path: "variables-data-types",
+            element: <Lesson2_Topic1 />,
+          },
+          {
+            path: "operators",
+            element: <Lesson2_Topic2 />,
           },
         ],
       },
@@ -189,7 +170,7 @@ const router = createBrowserRouter([
 
 export default function App() {
   return (
-    <div className="App text-zinc-900 dark:text-zinc-300 font-sans">
+    <div className="App text-zinc-900 dark:text-zinc-300 font-Inter">
       <AuthProvider>
         <RouterProvider router={router} />
       </AuthProvider>

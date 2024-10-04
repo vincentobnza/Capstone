@@ -7,3 +7,14 @@
   initial-value: 0deg;
   syntax: "<angle>";
 }
+
+@layer utilities {
+  .glow {
+    background: radial-gradient(
+      circle at center,
+      rgba(32, 26, 202, 0.1) 0%,
+      rgba(91, 16, 230, 0.08) 25%,
+      transparent 50%
+    );
+  }
+}

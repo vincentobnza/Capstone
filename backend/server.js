@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const { Task } = require("./api/Task");
-const { IntroductionQuiz } = require("./api/Quiz");
+const { IntroductionQuiz, Lesson2 } = require("./api/Quiz");
 
 const PORT = process.env.PORT || 9000;
 
@@ -37,6 +37,7 @@ app.get("/api/quiz/:quizType", (req, res) => {
 
   const quizzes = {
     introduction: IntroductionQuiz,
+    lesson2: Lesson2,
   };
 
   const quizData = quizzes[quizType];

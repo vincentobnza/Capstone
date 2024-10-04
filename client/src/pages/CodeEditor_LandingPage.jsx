@@ -19,8 +19,6 @@ export default function CodeEditor_LandingPage() {
 }
 
 const Hero = () => {
-  const navigate = useNavigate();
-
   const handleNewTab = () => {
     const newTab = window.open();
     newTab.location.href = "/code-editor";

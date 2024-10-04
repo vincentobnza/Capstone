@@ -28,7 +28,7 @@ const Hero = () => {
         practical examples, and expert guidance.
       </p>
 
-      <div className="mt-16 w-full h-[500px] flex flex-col items-center space-y-10 max-w-screen-md rounded-lg bg-white dark:bg-gradient-to-b dark:from-[#2b2b2b] dark:to-zinc-950 border border-zinc-500 dark:border-zinc-700 relative">
+      <div className="mt-16 w-full h-[500px] flex flex-col items-center space-y-10 max-w-screen-md rounded-lg bg-white dark:bg-gradient-to-b dark:from-zinc-900 dark:to-zinc-950 border border-zinc-500 dark:border-zinc-800 relative">
         {/* BOOK  */}
         <div className="w-[160px] h-[190px] -mt-10 bg-zinc-100 dark:bg-zinc-200 rounded relative before:absolute before:content-[''] before:left-0 before:h-full before:w-[15px] before:bg-zinc-600 before:rounded-tl before:rounded-bl shadow-none dark:shadow-2xl dark:shadow-zinc-800 border border-zinc-500 dark:border-none">
           <img

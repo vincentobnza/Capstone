@@ -116,4 +116,117 @@ const IntroductionQuiz = [
   },
 ];
 
-module.exports = { IntroductionQuiz };
+const Lesson2 = [
+  {
+    id: 1,
+    question: "What is a variable in JavaScript?",
+    options: {
+      a: "A container for storing data",
+      b: "A mathematical equation",
+      c: "A programming language",
+      d: "A keyword",
+    },
+    answer: "a",
+  },
+  {
+    id: 2,
+    question: "Which keyword is used to declare a variable in JavaScript?",
+    options: {
+      a: "var",
+      b: "let",
+      c: "const",
+      d: "All of the above",
+    },
+    answer: "d",
+  },
+  {
+    id: 3,
+    question: "Which data type is used to represent text in JavaScript?   ",
+    options: {
+      a: "Number",
+      b: "Boolean",
+      c: "String",
+      d: "Object",
+    },
+    answer: "c",
+  },
+  {
+    id: 4,
+    question: 'What is the value of the following expression: 5 + "3"?',
+    options: {
+      a: "8",
+      b: '"53"',
+      c: '"8"',
+      d: "an error",
+    },
+    answer: "b",
+  },
+  {
+    id: 5,
+    question:
+      "Which operator is used to check if two values are equal in JavaScript?",
+    options: {
+      a: "==",
+      b: "===",
+      c: "=",
+      d: "!=",
+    },
+    answer: "a",
+  },
+  {
+    id: 6,
+    question: "What is the purpose of comments in JavaScript code?",
+    options: {
+      a: "To make the code run faster",
+      b: "To add decorative elements",
+      c: "To explain the code's logic",
+      d: "To define variables",
+    },
+    answer: "c",
+  },
+  {
+    id: 7,
+    question: "Which of the following is a reserved word in JavaScript?",
+    options: {
+      a: "myVariable",
+      b: "function",
+      c: "helloWorld",
+      d: "123",
+    },
+    answer: "b",
+  },
+  {
+    id: 8,
+    question: "What is the result of the following expression: 10 % 3?",
+    options: {
+      a: "3",
+      b: "1",
+      c: "0",
+      d: "10",
+    },
+    answer: "1",
+  },
+  {
+    id: 9,
+    question: "Which data type is used to represent true or false values?",
+    options: {
+      a: "Number",
+      b: "Boolean",
+      c: "String",
+      d: "Object",
+    },
+    answer: "Boolean",
+  },
+  {
+    id: 10,
+    question: "What is the difference between the let and const keywords?",
+    options: {
+      a: "let variables can be reassigned, while const variables cannot.",
+      b: "const variables can be reassigned, while let variables cannot.",
+      c: "Both let and const variables can be reassigned.",
+      d: "Neither let nor const variables can be reassigned.",
+    },
+    answer: "a",
+  },
+];
+module.exports = { IntroductionQuiz, Lesson2 };

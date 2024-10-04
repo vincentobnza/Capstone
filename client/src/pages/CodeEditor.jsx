@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import MonacoEditor from "@monaco-editor/react";
+
 import {
   Button,
   Dropdown,
@@ -17,6 +18,7 @@ import {
 } from "@nextui-org/react";
 import { Play, Trash2, ArrowDownToLine, Share2 } from "lucide-react";
 import LeaveSitePrompt from "@/components/LeaveSitePrompt";
+import { Flame } from "lucide-react";
 
 const CodeEditor = () => {
   const [code, setCode] = useState(
@@ -28,6 +30,8 @@ console.log(Greetings());`
   );
   const [output, setOutput] = useState("");
   const [language, setLanguage] = useState("javascript");
+
+  const editorRef = useRef(null);
 
   const handleEditorChange = (value) => {
     setCode(value);
@@ -65,7 +69,7 @@ console.log(Greetings());`
             mockConsole.log(result);
           }
           setOutput(
-            outputBuffer || "$ node /tmp/${randomFileName}.js\n(No output)"
+            outputBuffer || `$ node /tmp/${randomFileName}.js\n(No output)`
           );
         })
         .catch((error) => {
@@ -84,7 +88,6 @@ console.log(Greetings());`
     setOutput("");
   };
 
-  // Function to trigger the native "Save As" dialog using File System Access API
   const handleSaveFile = async () => {
     try {
       const fileHandle = await window.showSaveFilePicker({
@@ -107,7 +110,18 @@ console.log(Greetings());`
     }
   };
 
-  // Attach the keydown listener when the component mounts
+  // FORMAT CODE FUNCTION
+  const handleFormatCode = async () => {
+    if (editorRef.current) {
+      editorRef.current.getAction("editor.action.formatDocument").run();
+    }
+  };
+
+  const handleEditorDidMount = (editor, monaco) => {
+    editorRef.current = editor; // Attach the Monaco editor instance to the ref
+  };
+
+  // Attach the keydown listener for "Ctrl+S" to save file
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.ctrlKey && e.key === "s") {
@@ -121,8 +135,9 @@ console.log(Greetings());`
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [code, language]);
+
   return (
-    <div className="w-full h-screen flex flex-col bg-zinc-900">
+    <div className="w-full h-screen flex flex-col bg-zinc-900 font-Inter">
       <LeaveSitePrompt />
       <Header onSaveFile={handleSaveFile} />
       <div className="flex-1 flex overflow-hidden">
@@ -131,6 +146,7 @@ console.log(Greetings());`
             language={language}
             onLanguageChange={handleLanguageChange}
             onRun={runCode}
+            onFormat={handleFormatCode}
           />
           <MonacoEditor
             height="100%"
@@ -138,6 +154,7 @@ console.log(Greetings());`
             theme="vs-dark"
             value={code}
             onChange={handleEditorChange}
+            onMount={handleEditorDidMount}
             options={{
               minimap: { enabled: false },
               fontSize: 14,
@@ -157,11 +174,22 @@ const Header = ({ onSaveFile }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
     <header className="w-full max-w-screen-2xl mx-auto bg-[#1E1E1E] border-b border-zinc-700 p-6 flex justify-between items-center">
-      <div className="flex flex-col gap-1">
-        <h1 className="text-xl font-semibold text-yellow-500 dark:text-yellow-500">
-          CodeScript
-        </h1>
-        <p className="text-zinc-200 text-xs">JavaScript Online Compiler</p>
+      <div className="flex items-center gap-4">
+        {/* LOGO */}
+
+        <div className="size-12 border border-zinc-700 bg-zinc-800 rounded-lg grid place-items-center">
+          <h1 className="text-lg font-bold text-yellow-500 animate-pulse">
+            {"{ ; }"}
+          </h1>
+        </div>
+        <div className="flex flex-col gap-1">
+          <h1 className="text-lg font-bold text-yellow-500 dark:text-yellow-500">
+            CodeScript
+          </h1>
+          <p className="text-zinc-400 text-xs font-bold">
+            JavaScript Online Compiler
+          </p>
+        </div>
       </div>
 
       <div className="flex items-center gap-2">
@@ -197,22 +225,35 @@ const Header = ({ onSaveFile }) => {
   );
 };
 
-const ToolBar = ({ language, onLanguageChange, onRun }) => (
-  <div className="bg-[#1E1E1E] border-b border-zinc-700 p-3 flex justify-between items-center space-x-2">
-    <div className="ml-4 flex items-center gap-2">
-      <p className="text-sm font-bold text-zinc-200">Language: </p>
-      <h3 className="text-sm font-bold text-yellow-500">JavaScript</h3>
+const ToolBar = ({ language, onLanguageChange, onRun, onFormat }) => {
+  return (
+    <div className="bg-[#1E1E1E] border-b border-zinc-700 p-3 flex justify-between items-center space-x-2">
+      <div className="ml-4 flex items-center gap-2">
+        <p className="text-sm font-bold text-zinc-200">Language: </p>
+        <h3 className="text-sm font-bold text-yellow-500">JavaScript</h3>
+      </div>
+      <div className="flex items-center gap-2">
+        <Button
+          onClick={onFormat}
+          className="bg-zinc-500 border-2 border-zinc-400 text-white font-bold"
+          size="sm"
+          radius="none"
+        >
+          <Flame size={16} />
+          Format Code
+        </Button>
+        <Button
+          onClick={onRun}
+          className="bg-yellow-500 border-2 border-yellow-300 text-black font-bold"
+          size="sm"
+          radius="none"
+        >
+          <Play size={16} /> Run Code
+        </Button>
+      </div>
     </div>
-    <Button
-      onClick={onRun}
-      className="bg-yellow-500 border-2 border-yellow-300 text-black font-bold"
-      size="sm"
-      radius="none"
-    >
-      <Play size={16} /> Run Code
-    </Button>
-  </div>
-);
+  );
+};
 
 const OutputPanel = ({ output, onClear }) => (
   <div className="w-1/3 bg-[#1E1E1E] border-l border-zinc-700 flex flex-col">

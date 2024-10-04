@@ -232,9 +232,13 @@ export const Task = ({ points, task, expectedOutput }) => {
 };
 
 export const QuizButton = ({ text, link }) => {
+  const handleNewTab = () => {
+    const newTab = window.open();
+    newTab.location.href = link;
+  };
   return (
-    <Link
-      to={link}
+    <button
+      onClick={handleNewTab}
       className="mt-12 w-[260px] border border-zinc-200 dark:border-zinc-700 self-end text-sm flex justify-end text-right p-4 gap-4 text-zinc-900 dark:text-zinc-300 hover:border-zinc-600 duration-500 relative overflow-hidden hover:opacity-70"
     >
       <img
@@ -250,6 +254,6 @@ export const QuizButton = ({ text, link }) => {
           </h1>
         </div>
       </div>
-    </Link>
+    </button>
   );
 };
