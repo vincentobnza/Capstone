@@ -1,6 +1,8 @@
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { hybrid } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import { xcode } from "react-syntax-highlighter/dist/cjs/styles/hljs";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import {
+  vscDarkPlus,
+  oneLight,
+} from "react-syntax-highlighter/dist/esm/styles/prism";
 import { IoCloseCircleSharp } from "react-icons/io5";
 import { FaInfoCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -8,6 +10,7 @@ import { useTheme } from "next-themes";
 import { useState, useRef } from "react";
 import Editor from "@monaco-editor/react";
 import { Kbd } from "@nextui-org/react";
+import { ClipboardCopy, Check, MoveRight } from "lucide-react";
 export const Topic = ({ children }) => {
   return (
     <h1 className="text-4xl font-medium text-zinc-800 dark:text-zinc-100">
@@ -38,27 +41,100 @@ export const Example = ({ text }) => {
 
 export const Code = ({ code, language, error, setError }) => {
   const { theme } = useTheme(); // Updated to use Next Themes
+  const handleNewTab = () => {
+    const newTab = window.open();
+    newTab.location.href = "/code-editor";
+  };
+  return (
+    <div className="w-full space-y-1 my-4">
+      <div className="w-full flex justify-end mb-3">
+        <button
+          onClick={handleNewTab}
+          className="text-xs font-bold flex items-center gap-2 text-zinc-400 underline"
+        >
+          Try here
+          <MoveRight size={15} />
+        </button>
+      </div>
+      <div
+        className={`w-full border relative ${
+          theme === "dark"
+            ? "bg-[#1e1e1e] border border-zinc-800"
+            : "border border-zinc-200 bg-zinc-100"
+        }`}
+      >
+        <SyntaxHighlighter
+          language="javascript"
+          style={theme === "dark" ? vscDarkPlus : oneLight}
+          customStyle={{
+            padding: "20px",
+            backgroundColor: "transparent",
+            fontSize: "14px",
+          }}
+        >
+          {code}
+        </SyntaxHighlighter>
+
+        <CopyIcon code={code} />
+
+        {error && (
+          <IoCloseCircleSharp
+            size={25}
+            className="absolute -left-2 -top-2 cursor-pointer text-red-500"
+            onClick={() => setError(false)}
+          />
+        )}
+      </div>
+    </div>
+  );
+};
+
+export const Output = ({ output }) => {
+  return (
+    <div className="mt-3 w-full border border-zinc-200 dark:border-zinc-800 rounded-lg">
+      <div className="w-full h-8 bg-zinc-100 dark:bg-[#1e1e1e] rounded-tr-lg rounded-tl-lg border-b border-zinc-300 dark:border-zinc-800 flex items-center p-3">
+        <div className="w-[50px] grid grid-cols-3">
+          <div className="size-2 bg-green-500 rounded-full"></div>
+          <div className="size-2 bg-red-500 rounded-full"></div>
+          <div className="size-2 bg-yellow-500 rounded-full"></div>
+        </div>
+      </div>
+      <div className="w-full p-7 bg-zinc-100 dark:bg-[#1e1e1e]  flex items-center justify-start  text-zinc-700 dark:text-zinc-400">
+        <pre className="text-sm ">{output}</pre>
+      </div>
+    </div>
+  );
+};
+
+export const CopyIcon = ({ code }) => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
+    } catch (err) {
+      console.error("Failed to copy text: ", err);
+    }
+  };
 
   return (
-    <div
-      className={`my-5 w-full p-[1px] relative ${
-        theme === "dark" ? "bg-[#282A36] border border-zinc-600" : "bg-zinc-100"
-      }`}
-    >
-      <SyntaxHighlighter
-        language="javascript"
-        style={theme === "dark" ? hybrid : xcode}
+    <div className="absolute flex items-center gap-2 top-2 right-2 ">
+      <p className="text-xs font-medium text-zinc-400 dark:text-zinc-500 animate-pulse">
+        Copy and try
+      </p>
+      <button
+        onClick={handleCopy}
+        className="p-2 rounded-md transition-colors duration-200 bg-gray-100 hover:bg-gray-200 dark:bg-[#1e1e1e] outline-none border border-zinc-200 dark:border-zinc-800 dark:hover:bg-zinc-800"
+        aria-label={copied ? "Copied!" : "Copy code"}
       >
-        {code}
-      </SyntaxHighlighter>
-
-      {error && (
-        <IoCloseCircleSharp
-          size={25}
-          className="absolute -left-2 -top-2 cursor-pointer text-red-500"
-          onClick={() => setError(false)}
-        />
-      )}
+        {copied ? (
+          <Check className="h-4 w-4 text-green-500" />
+        ) : (
+          <ClipboardCopy className="h-4 w-4 text-gray-500 dark:text-gray-400" />
+        )}
+      </button>
     </div>
   );
 };
@@ -140,7 +216,7 @@ export const NextButton = ({ text, link }) => {
 
 export const Highlight = ({ children }) => {
   return (
-    <span className="bg-zinc-100 dark:bg-zinc-700 px-2 border border-zinc-200 dark:border-zinc-600">
+    <span className="bg-zinc-100 dark:bg-green-900/80 px-2 py-[1.5px] border border-zinc-200 dark:border-green-800 text-[12px] font-medium rounded-full text-zinc-800 dark:text-zinc-200">
       {children}
     </span>
   );

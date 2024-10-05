@@ -2,31 +2,26 @@ import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Robot from "../assets/robot.png";
 import { X } from "lucide-react";
+import { Checkbox } from "@nextui-org/react";
 
 export default function QuizStartModal({ isOpen, setIsOpen }) {
+  const [isSelected, setIsSelected] = React.useState(false);
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="bg-slate-900/20 backdrop-blur p-8 fixed inset-0 z-50 grid place-items-center overflow-y-scroll cursor-pointer font-sans"
-        >
+        <div className="bg-slate-900/20 backdrop-blur-lg p-8 fixed inset-0 z-50 grid place-items-center overflow-y-scroll cursor-pointer font-sans">
           <motion.div
             initial={{ scale: 0, rotate: "12.5deg" }}
             animate={{ scale: 1, rotate: "0deg" }}
             exit={{ scale: 0, rotate: "0deg" }}
             onClick={(e) => e.stopPropagation()}
-            className="h-[250px] p-6 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg w-full max-w-lg shadow-xl cursor-default relative overflow-hidden "
+            className="h-[280px] p-6 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg w-full max-w-lg shadow-xl cursor-default relative overflow-hidden "
           >
-            {/* CLOSE ICON */}
-
-            <X
-              onClick={() => setIsOpen(false)}
-              size={18}
-              className="absolute top-3 right-3 cursor-pointer text-zinc-400"
-            />
+            <div className="absolute w-[55px] top-2 right-1 grid grid-cols-3">
+              <div className="size-3 bg-zinc-100 dark:bg-zinc-600 border border-zinc-200 dark:border-zinc-500 rounded-full"></div>
+              <div className="size-3 bg-zinc-100 dark:bg-zinc-600 border border-zinc-200 dark:border-zinc-500 rounded-full"></div>
+              <div className="size-3 bg-zinc-100 dark:bg-zinc-600 border border-zinc-200 dark:border-zinc-500 rounded-full"></div>
+            </div>
             <img
               src={Robot}
               alt="robot"
@@ -45,10 +40,23 @@ export default function QuizStartModal({ isOpen, setIsOpen }) {
                   luck!
                 </p>
               </div>
+              <div className="mt-5">
+                <Checkbox
+                  color="secondary"
+                  isSelected={isSelected}
+                  onValueChange={setIsSelected}
+                  classNames={{
+                    label: "text-sm text-zinc-500 dark:text-zinc-400",
+                  }}
+                >
+                  I understand and agree with the quiz rules
+                </Checkbox>
+              </div>
 
               <button
+                disabled={!isSelected}
                 onClick={() => setIsOpen(false)}
-                className="self-start mt-10 py-2 px-3 bg-zinc-200 text-black text-xs font-bold rounded"
+                className="self-start mt-5 py-2 px-3 bg-zinc-200 text-black text-xs font-bold rounded disabled:bg-zinc-500 disabled:cursor-not-allowed"
               >
                 Okay, Let's Go!
               </button>
@@ -56,7 +64,7 @@ export default function QuizStartModal({ isOpen, setIsOpen }) {
 
             <div className="w-full flex flex-col gap-2 p-6"></div>
           </motion.div>
-        </motion.div>
+        </div>
       )}
     </AnimatePresence>
   );

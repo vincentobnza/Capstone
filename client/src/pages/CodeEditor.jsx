@@ -177,7 +177,7 @@ const Header = ({ onSaveFile }) => {
       <div className="flex items-center gap-4">
         {/* LOGO */}
 
-        <div className="size-12 border border-zinc-700 bg-zinc-800 rounded-lg grid place-items-center">
+        <div className="size-12 border border-zinc-600 bg-zinc-700 rounded-lg grid place-items-center">
           <h1 className="text-lg font-bold text-yellow-500 animate-pulse">
             {"{ ; }"}
           </h1>

@@ -41,7 +41,10 @@ import Lesson1_Topic3 from "./content/Lesson1/Lesson1.3";
 
 import Lesson2_Topic1 from "./content/Lesson2/Lesson2.1";
 import Lesson2_Topic2 from "./content/Lesson2/Lesson2.2";
+import Lesson2_Topic3 from "./content/Lesson2/Lesson2.3";
 
+import Lesson3_Topic1 from "./content/Lesson3/Lesson3.1";
+import Lesson3_Topic2 from "./content/Lesson3/Lesson3.2";
 // PROVIDER
 import { AuthProvider } from "./context/AuthContext";
 import { ThemeProvider } from "./components/ThemeProvider";
@@ -112,6 +115,18 @@ const router = createBrowserRouter([
             path: "operators",
             element: <Lesson2_Topic2 />,
           },
+          {
+            path: "comments-code-structure",
+            element: <Lesson2_Topic3 />,
+          },
+          {
+            path: "conditionals",
+            element: <Lesson3_Topic1 />,
+          },
+          {
+            path: "switch-statements",
+            element: <Lesson3_Topic2 />,
+          },
         ],
       },
     ],
@@ -170,7 +185,7 @@ const router = createBrowserRouter([
 
 export default function App() {
   return (
-    <div className="App text-zinc-900 dark:text-zinc-300 font-Inter">
+    <div className="App text-zinc-900 dark:text-zinc-300 font-sans">
       <AuthProvider>
         <RouterProvider router={router} />
       </AuthProvider>

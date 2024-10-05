@@ -19,7 +19,7 @@ import { useAuth } from "@/context/AuthContext";
 import { Progress } from "@nextui-org/react";
 import LeaveSitePrompt from "@/components/LeaveSitePrompt";
 import QuizStartModal from "@/components/QuizStartModal";
-
+import toast, { Toaster } from "react-hot-toast";
 export default function Quiz() {
   const { theme, setTheme } = useTheme();
   const [points, setPoints] = useState(0);
@@ -32,14 +32,16 @@ export default function Quiz() {
     <>
       <QuizStartModal isOpen={isOpen} setIsOpen={setIsOpen} />
       <LeaveSitePrompt />
+
+      <Toaster />
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 1.5 }}
-        className="w-full h-screen bg-white dark:bg-gradient-to-b dark:from-zinc-900 dark:to-zinc-950 p-5 text-zinc-700 dark:text-zinc-300 space-y-10 font-Inter"
+        className="w-full h-screen bg-white dark:bg-zinc-900 p-5 text-zinc-700 dark:text-zinc-300 space-y-10"
       >
         <div className="w-full flex max-w-screen-lg mx-auto justify-between p-2">
-          <h1 className="text-sm font-medium text-zinc-200 z-10 underline space-y-10 underline-offset-8 decoration-4 decoration-orange-500  -rotate-3">
+          <h1 className="text-xs font-medium text-zinc-800 dark:text-zinc-200 z-10 underline space-y-10 underline-offset-8 decoration-4 decoration-indigo-500">
             CodeScript Quiz 🧑🏻‍💻
           </h1>
 
@@ -56,13 +58,13 @@ export default function Quiz() {
             </div>
           </div>
         </div>
-        <QuizCard points={points} />
+        <QuizCard points={points} setPoints={setPoints} />
       </motion.div>
     </>
   );
 }
 
-const QuizCard = ({ points }) => {
+const QuizCard = ({ points, setPoints }) => {
   const [quizData, setQuizData] = useState(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -102,7 +104,7 @@ const QuizCard = ({ points }) => {
     setSelectedAnswer(answer);
   };
 
-  const handleNextQuestion = () => {
+  const handleNextQuestion = async () => {
     // Check if answer is correct and update score
     const currentQuestion = quizData[currentQuestionIndex];
     const isCorrect = Array.isArray(currentQuestion.answer)
@@ -131,12 +133,75 @@ const QuizCard = ({ points }) => {
       setSelectedAnswer(null);
     } else {
       setQuizCompleted(true);
-      points = score * 10;
+      const pointsAdded = score * 10;
+      setPoints((prevPoints) => prevPoints + pointsAdded);
+
+      // AUTHENTICATE USER
+
+      if (user) {
+        try {
+          const { data: currentData, error: fetchError } = await supabase
+            .from("users")
+            .insert("points", points)
+            .eq("id", user.id)
+            .single();
+
+          if (!currentData || currentData.length === 0) {
+            toast.error("User profile does not exist. Creating new profile.", {
+              style: {
+                background: "#333",
+                color: "#fff",
+                fontSize: "12px",
+                letterSpacing: "0.5px",
+                borderRadius: "5px",
+              },
+            });
+            const { data: insertData, error: insertError } = await supabase
+              .from("users")
+              .insert({ id: user.id, points: pointsAdded });
+
+            if (insertError) {
+              return;
+            }
+
+            toast.success(
+              "New profile created and points inserted:",
+              insertData
+            );
+            return;
+          }
+
+          if (fetchError) {
+            toast.error("Error fetching current points:", fetchError);
+            return;
+          }
+
+          // UPDATE POINTS IF USER TAKE ANOTHER QUIZ
+
+          const currentPoints = currentData[0]?.points || 0;
+          const newTotalPoints = currentPoints + pointsAdded;
+
+          const { data, error: updateError } = await supabase
+            .from("users")
+            .upsert(
+              { id: user.id, points: newTotalPoints }, // Provide a complete row for upsert
+              { onConflict: "id" } // Use onConflict to handle unique key
+            );
+
+          if (updateError) {
+            toast.error("Error updating points:", updateError);
+          } else {
+            toast.success("Points updated successfully:", data);
+          }
+        } catch (error) {
+          toast.error(error);
+        }
+      }
     }
   };
 
   const getProgressColor = () => {
-    if (lastAnswerCorrect === null) return "warning";
+    if (lastAnswerCorrect === null) return "default";
     return lastAnswerCorrect ? "success" : "danger";
   };
 
@@ -277,7 +342,7 @@ const QuizCard = ({ points }) => {
           size="sm"
           aria-label="Quiz progress"
           value={currentProgress}
-          className="mb-2 text-zinc-400 font-bold"
+          className="mb-2 text-zinc-900 dark:text-zinc-400 font-bold"
           color={getProgressColor()}
           showValueLabel={true}
           formatOptions={{ style: "unit", unit: "percent" }}

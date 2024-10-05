@@ -11,6 +11,7 @@ import {
   Note,
   ListItem,
   NextButton,
+  Output,
 } from "../../layout/UILayout";
 import { FaInfoCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -125,8 +126,8 @@ console.log(“Value of lastName= ” + firstname);
 `}
               />
               <Description>Output:</Description>
-              <Code
-                code={`Value of firstName= aezil
+              <Output
+                output={`Value of firstName= aezil
 Value of lastName= sison
 `}
               />
@@ -148,8 +149,8 @@ console.log(“Value of y= ” + y);
 `}
               />
               <Description>Output:</Description>
-              <Code
-                code={`Value of x= 21
+              <Output
+                output={`Value of x= 21
 Value of y= 2024
 
 `}
@@ -172,8 +173,8 @@ console.log(“Value of bigNum= ” + bigNum);
 `}
               />
               <Description>Output:</Description>
-              <Code
-                code={`Value of bigNum= 202444444444444444444
+              <Output
+                output={`Value of bigNum= 202444444444444444444
 
 `}
               />
@@ -198,8 +199,8 @@ if (isNicole) {
 `}
               />
               <Description>Output:</Description>
-              <Code
-                code={`It's a nice day
+              <Output
+                output={`It's a nice day
 
 `}
               />
@@ -231,7 +232,7 @@ if (x === undefined) {
 `}
               />
               <Description>Output:</Description>
-              <Code code={`x is empty`} />
+              <Output output={`x is empty`} />
 
               <Description>
                 In this example, it checks if the variable x is empty (meaning
@@ -253,12 +254,6 @@ console.log(salary)
 
 
 `}
-              />
-              <Description>Output:</Description>
-              <Code
-                code={`
-                
-                `}
               />
 
               <Description>
@@ -282,8 +277,7 @@ console.log(salary)
               <Description>Example:</Description>
 
               <Code
-                code={`const person = { firstName: “John”, lastName: “Doe”, 
-	age: “21”, address: “Philippines” };
+                code={`const person = { firstName: "John", lastName: "Doe", age: "21", address: "Philippines" };
 `}
               />
             </div>

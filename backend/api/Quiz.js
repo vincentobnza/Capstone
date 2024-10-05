@@ -215,7 +215,7 @@ const Lesson2 = [
       c: "String",
       d: "Object",
     },
-    answer: "Boolean",
+    answer: "b",
   },
   {
     id: 10,

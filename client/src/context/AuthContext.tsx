@@ -1,7 +1,6 @@
 import { Session, User } from "@supabase/supabase-js";
 import React, { useContext, useState, useEffect, createContext } from "react";
 import supabase from "../config/supabaseClient";
-import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext<{
   session: Session | null | undefined;
@@ -13,7 +12,6 @@ export const AuthProvider = ({ children }: any) => {
   const [user, setUser] = useState<User>();
   const [session, setSession] = useState<Session | null>();
   const [loading, setLoading] = useState(true);
-  // const navigate = useNavigate();
 
   useEffect(() => {
     const setData = async () => {
@@ -24,10 +22,6 @@ export const AuthProvider = ({ children }: any) => {
       if (error) throw error;
       setSession(session);
       setUser(session?.user);
-
-      if (session?.user) {
-        // navigate("/setup-profile");
-      }
       setLoading(false);
     };
 
@@ -35,9 +29,6 @@ export const AuthProvider = ({ children }: any) => {
       (_event, session) => {
         setSession(session);
         setUser(session?.user);
-        if (session?.user) {
-          // navigate("/setup-profile");
-        }
         setLoading(false);
       }
     );
@@ -63,10 +54,15 @@ export const AuthProvider = ({ children }: any) => {
     if (error) throw error;
   };
 
-  const signUp = async (email: string, password: string) => {
+  const signUp = async (username: string, email: string, password: string) => {
     const { error } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        data: {
+          username,
+        },
+      },
     });
     if (error) {
       alert(error.message);

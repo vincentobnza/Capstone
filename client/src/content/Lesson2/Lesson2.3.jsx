@@ -1,0 +1,166 @@
+import React from "react";
+import {
+  Topic,
+  Description,
+  Title,
+  Code,
+  Example,
+  Image,
+  List,
+  Text,
+  Note,
+  ListItem,
+  NextButton,
+  QuizButton,
+} from "../../layout/UILayout";
+import { FaInfoCircle } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { BsArrowRight } from "react-icons/bs";
+import {
+  Table,
+  TableHeader,
+  TableColumn,
+  TableBody,
+  TableRow,
+  TableCell,
+} from "@nextui-org/react";
+
+export default function Lesson2_Topic3() {
+  const reservedWords = [
+    "break",
+    "do",
+    "instanceOf",
+    "typeOf",
+    "case",
+    "else",
+    "new",
+    "var",
+    "catch",
+    "finally",
+    "return",
+    "void",
+    "continue",
+    "for",
+    "switch",
+    "while",
+    "debugger",
+    "default",
+    "if",
+    "throw",
+    "delete",
+    "in",
+    "try",
+    "class",
+    "enum",
+    "extends",
+    "super",
+    "const",
+    "export",
+    "import",
+    "implements",
+    "let",
+    "private",
+    "public",
+    "yield",
+    "function",
+    "with",
+    "as",
+    "function",
+    "this",
+    "with",
+    "interface",
+    "package",
+    "protected",
+  ];
+  return (
+    <div className="w-full max-w-screen-lg mx-auto bg-white dark:bg-zinc-900">
+      <div className="flex flex-col gap-2">
+        <Topic>Comments and Code Structure</Topic>
+        <Title>Comment</Title>
+        <Description>
+          Annotations in JavaScript code that are fully disregarded by the
+          compiler are called comments. It is essential for improving code
+          readability and maintainability. They provide explanations,
+          documentation, and context, making it easier for us to understand the
+          purpose and functionality of the code.
+        </Description>
+        <Description>
+          There are two types of comments in JavaScript:
+        </Description>
+        <ul className="text-zinc-400">
+          <li className="list-decimal list-inside">
+            {`Single-line Comments ( // ), used for short comments or explanations on a single line.`}
+          </li>
+          <Code
+            code={`// this is a single-line comment
+let str1 = "Hello" ;   // this is a single-line comment
+`}
+          />
+          <li className="list-decimal list-inside">
+            {`Multi-line Comments ( /* */ ),
+Multi-line comments in JavaScript let you add comments that are longer than one line. They begin with /* and close with */.
+`}
+          </li>
+
+          <Code
+            code={`/* this is 
+a multi-line comment */
+	            
+let str1 = "Hello" ;   /* this is a multi-line comment */
+`}
+          />
+        </ul>
+        <Title>Code Structure</Title>
+        <Description>
+          Syntax constructions and commands that carry out operations are called
+          statements. Our code can contain any number of statements. A semicolon
+          can be used to divide statements.
+        </Description>
+        <h1>Example</h1>
+        <Code code={`let num = 10 ;  let str = "Hello" ;`} />
+        <Description>or we can write the code on separate lines,</Description>
+        <Code
+          code={`let num = 10 ;  
+let str = "Hello" ;
+`}
+        />
+
+        <Description>
+          In JavaScript,{" "}
+          <b className="text-zinc-800 dark:text-zinc-200">whitespace</b> is
+          defined as spaces, tabs, and newlines (keyboard Enter). JavaScript
+          ignores excessive whitespace outside of strings as well as spaces
+          between operators and other symbol.
+        </Description>
+
+        <Description>
+          JavaScript is case sensitive. A variable named something is different
+          from Something . The same goes for any identifier.
+        </Description>
+
+        <Title>Reserve words</Title>
+
+        <Description>
+          These following words are can’t use as identifiers because they are
+          reserved by the language.
+        </Description>
+
+        <ul className="mt-5 w-full grid grid-cols-3 md:grid-cols-6 gap-1 p-5 md:p-0">
+          {reservedWords.map((item, idx) => (
+            <li
+              key={idx}
+              className="p-2 text-sm border border-zinc-200 dark:border-zinc-700"
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
+
+        <div className="w-full flex items-center gap-3 justify-end">
+          <QuizButton text="Operators" link="/quiz/lesson2" />
+          <NextButton link="/learn-js/conditionals" text="Conditionals" />
+        </div>
+      </div>
+    </div>
+  );
+}
