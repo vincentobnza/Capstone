@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   const Site = [
@@ -27,60 +28,40 @@ export default function Footer() {
     },
   ];
   return (
-    <div className="w-full bg-zinc-100 dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800 h-[300px] flex flex-col gap-2 justify-center text-zinc-700 dark:text-zinc-200 relative">
-      <div className="w-full max-w-screen-xl mx-auto p-5 flex justify-between ">
-        <div className="flex flex-col justify-start p-4 gap-6 basis-1/3">
-          <h1 className="text-2xl">{`{ CodeScript }`}</h1>
-          <p className="text-sm  text-zinc-700 dark:text-zinc-200">
-            Resources used in this project are sourced from various online
-            platforms and are subject to their respective licenses.
-          </p>
-          <p className="text-zinc-700 dark:text-zinc-200 text-xs">
-            @Copyright 2024. All Rights Reserved
-          </p>
+    <div className="w-full grid place-items-center bg-zinc-100 dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800 f gap-2 text-zinc-700 dark:text-zinc-200 relative p-4">
+      <footer>
+        <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+          <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
+            © 2023{" "}
+            <Link to="/" class="hover:underline">
+              CodeScript™
+            </Link>
+            . All Rights Reserved.
+          </span>
+          <ul class="ml-8 flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+            <li>
+              <a href="#" class="hover:underline me-4 md:me-6">
+                About
+              </a>
+            </li>
+            <li>
+              <a href="#" class="hover:underline me-4 md:me-6">
+                Privacy Policy
+              </a>
+            </li>
+            <li>
+              <a href="#" class="hover:underline me-4 md:me-6">
+                Developers
+              </a>
+            </li>
+            <li>
+              <a href="#" class="hover:underline">
+                Contact
+              </a>
+            </li>
+          </ul>
         </div>
-
-        <div className="basis-1/2 z-10 grid grid-cols-3 gap-2">
-          <div className="flex flex-col justify-start items-start gap-2 p-4">
-            <h1 className="text-md font-bold mb-2">Site</h1>
-            {Site.map((item, index) => (
-              <div>
-                <a
-                  className="text-sm text-zinc-700 dark:text-zinc-300 hover:text-zinc-500 "
-                  href={item.link}
-                  key={index}
-                >
-                  {item.item}
-                </a>
-              </div>
-            ))}
-          </div>
-          <div className="flex flex-col justify-start items-start gap-2 p-4">
-            <h1 className="text-md font-bold mb-2">Navigation</h1>
-            {Navigation.map((item, index) => (
-              <div>
-                <a
-                  className="text-sm  text-zinc-700 dark:text-zinc-300 hover:text-zinc-500"
-                  href={item.link}
-                  key={index}
-                >
-                  {item.item}
-                </a>
-              </div>
-            ))}
-          </div>
-
-          <div className="flex flex-col justify-start items-start gap-2 p-4">
-            <h1 className="text-md font-bold mb-2">Legal</h1>
-            <a
-              className="text-sm  text-zinc-700 dark:text-zinc-300 hover:text-zinc-500"
-              href="/"
-            >
-              Privacy and Policy
-            </a>
-          </div>
-        </div>
-      </div>
+      </footer>
     </div>
   );
 }

@@ -39,12 +39,13 @@ export default function Lesson1_Topic3() {
           detail:
         </Description>
 
-        <Title>Embedding the JavaScript Code</Title>
-        <Description>
-          {`By sandwiching the JavaScript code between the <script> and </script> tags, you can embed it straight into your webpages. The <script> tag instructs the browser to treat the statements it contains as executable script rather than HTML. As an illustration, consider this:`}
-        </Description>
-        <Code
-          code={`<!DOCTYPE html>
+        <section id="section1">
+          <Title>Embedding the JavaScript Code</Title>
+          <Description>
+            {`By sandwiching the JavaScript code between the <script> and </script> tags, you can embed it straight into your webpages. The <script> tag instructs the browser to treat the statements it contains as executable script rather than HTML. As an illustration, consider this:`}
+          </Description>
+          <Code
+            code={`<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -58,39 +59,40 @@ export default function Lesson1_Topic3() {
   </body>
 </html>
 `}
-          language={"html"}
-        />
+            language={"html"}
+          />
 
-        <Description>
-          In the example above, the JavaScript code will only print a text
-          message to the webpage. You will learn what each of these JavaScript
-          statements signifies in following chapters.
-        </Description>
-        <div className="mt-5 mb-3 w-full p-5 bg-zinc-100 border border-zinc-300 dark:bg-zinc-800 dark:border-zinc-700 relative flex flex-col gap-3">
-          <h3 className=" text-zinc-700 dark:text-zinc-200">
-            {`Note: The type attribute for <script> tag (i.e. <script type="text/javascript">) is no longer required since HTML5. JavaScript is the default scripting language for HTML5.`}
-          </h3>
-        </div>
+          <Description>
+            In the example above, the JavaScript code will only print a text
+            message to the webpage. You will learn what each of these JavaScript
+            statements signifies in following chapters.
+          </Description>
+          <div className="mt-5 mb-3 w-full p-5 bg-zinc-100 border border-zinc-300 dark:bg-zinc-800 dark:border-zinc-700 relative flex flex-col gap-3">
+            <h3 className=" text-zinc-700 dark:text-zinc-200">
+              {`Note: The type attribute for <script> tag (i.e. <script type="text/javascript">) is no longer required since HTML5. JavaScript is the default scripting language for HTML5.`}
+            </h3>
+          </div>
+        </section>
+        <section id="section2">
+          <Title>Calling an External JavaScript File</Title>
+          <Description>
+            {`Alternatively, you can save your JavaScript code in a different file with the.js extension and use the src property of the <script> tag in your document to call that file:`}
+          </Description>
 
-        <Title>Calling an External JavaScript File</Title>
-        <Description>
-          {`Alternatively, you can save your JavaScript code in a different file with the.js extension and use the src property of the <script> tag in your document to call that file:`}
-        </Description>
+          <Code code={`<script src="src/script.js"></script>`} />
+          <Description>
+            If you wish to utilize the same scripts for several papers, this is
+            helpful. It makes your website much easier to maintain and saves you
+            from having to do the same activity repeatedly.
+          </Description>
 
-        <Code code={`<script src="src/script.js"></script>`} />
-        <Description>
-          If you wish to utilize the same scripts for several papers, this is
-          helpful. It makes your website much easier to maintain and saves you
-          from having to do the same activity repeatedly.
-        </Description>
+          <Description>
+            Now let's create a "script.js" JavaScript file and add the following
+            code to it:
+          </Description>
 
-        <Description>
-          Now let's create a "script.js" JavaScript file and add the following
-          code to it:
-        </Description>
-
-        <Code
-          code={`// function to display greetings
+          <Code
+            code={`// function to display greetings
 
 function Greetings(){
     alert("Hello Developers");
@@ -98,14 +100,14 @@ function Greetings(){
 
 //Call function onClick of the button
 document.getElementById("btn").onclick = greetings;`}
-        />
+          />
 
-        <Description>
-          {`Now, you can use the <script> tag inside a web page to call this external JavaScript file, as shown here:`}
-        </Description>
+          <Description>
+            {`Now, you can use the <script> tag inside a web page to call this external JavaScript file, as shown here:`}
+          </Description>
 
-        <Code
-          code={`<!DOCTYPE html>
+          <Code
+            code={`<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -118,24 +120,26 @@ document.getElementById("btn").onclick = greetings;`}
 </body>
 </html>
 `}
-          language={"html"}
-        />
+            language={"html"}
+          />
+        </section>
 
-        <Title>Placing the JavaScript Code Inline</Title>
-        <Description>
-          It is also possible to inject JavaScript code inline within an HTML
-          element by using specific tag properties like onclick, onmouseover,
-          onkeypress, onload, etc.
-        </Description>
+        <section id="section3">
+          <Title>Placing the JavaScript Code Inline</Title>
+          <Description>
+            It is also possible to inject JavaScript code inline within an HTML
+            element by using specific tag properties like onclick, onmouseover,
+            onkeypress, onload, etc.
+          </Description>
 
-        <Description>
-          But you should refrain from putting a lot of JavaScript code inline
-          since it will clog up your HTML and make it harder to manage your
-          JavaScript code. As an illustration, consider this:
-        </Description>
+          <Description>
+            But you should refrain from putting a lot of JavaScript code inline
+            since it will clog up your HTML and make it harder to manage your
+            JavaScript code. As an illustration, consider this:
+          </Description>
 
-        <Code
-          code={`<!DOCTYPE html>
+          <Code
+            code={`<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -147,18 +151,19 @@ document.getElementById("btn").onclick = greetings;`}
   <button onclick="alert('Hello Developer')">Click ME</button>
 </body>
 </html>`}
-        />
+          />
 
-        <Description>
-          When you click on the button element in the example above, an alert
-          message will appear.
-        </Description>
+          <Description>
+            When you click on the button element in the example above, an alert
+            message will appear.
+          </Description>
 
-        <div className="mt-5 mb-3 w-full p-5 bg-zinc-100 border border-zinc-300 dark:bg-zinc-800 dark:border-zinc-700 relative flex flex-col gap-3">
-          <h3 className=" text-zinc-700 dark:text-zinc-200">
-            {`Note: You should always maintain a clear separation between your website's presentation (CSS), behavior (JavaScript), and content (i.e., HTML).`}
-          </h3>
-        </div>
+          <div className="mt-5 mb-3 w-full p-5 bg-zinc-100 border border-zinc-300 dark:bg-zinc-800 dark:border-zinc-700 relative flex flex-col gap-3">
+            <h3 className=" text-zinc-700 dark:text-zinc-200">
+              {`Note: You should always maintain a clear separation between your website's presentation (CSS), behavior (JavaScript), and content (i.e., HTML).`}
+            </h3>
+          </div>
+        </section>
 
         <div className="w-full flex items-center gap-3 justify-end">
           <QuizButton text="Lesson 1" link="/quiz/introduction" />

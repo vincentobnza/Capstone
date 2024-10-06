@@ -1,14 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import MonacoEditor from "@monaco-editor/react";
-
 import {
   Button,
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
-} from "@nextui-org/react";
-import {
   Modal,
   ModalContent,
   ModalHeader,
@@ -16,9 +9,8 @@ import {
   ModalFooter,
   useDisclosure,
 } from "@nextui-org/react";
-import { Play, Trash2, ArrowDownToLine, Share2 } from "lucide-react";
+import { Play, Trash2, ArrowDownToLine, Share2, Flame } from "lucide-react";
 import LeaveSitePrompt from "@/components/LeaveSitePrompt";
-import { Flame } from "lucide-react";
 
 const CodeEditor = () => {
   const [code, setCode] = useState(
@@ -110,7 +102,6 @@ console.log(Greetings());`
     }
   };
 
-  // FORMAT CODE FUNCTION
   const handleFormatCode = async () => {
     if (editorRef.current) {
       editorRef.current.getAction("editor.action.formatDocument").run();
@@ -118,10 +109,9 @@ console.log(Greetings());`
   };
 
   const handleEditorDidMount = (editor, monaco) => {
-    editorRef.current = editor; // Attach the Monaco editor instance to the ref
+    editorRef.current = editor;
   };
 
-  // Attach the keydown listener for "Ctrl+S" to save file
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.ctrlKey && e.key === "s") {
@@ -140,7 +130,7 @@ console.log(Greetings());`
     <div className="w-full h-screen flex flex-col bg-zinc-900 font-Inter">
       <LeaveSitePrompt />
       <Header onSaveFile={handleSaveFile} />
-      <div className="flex-1 flex overflow-hidden">
+      <div className="flex-1 flex">
         <div className="flex-1 flex flex-col">
           <ToolBar
             language={language}
@@ -148,21 +138,23 @@ console.log(Greetings());`
             onRun={runCode}
             onFormat={handleFormatCode}
           />
-          <MonacoEditor
-            height="100%"
-            language={language}
-            theme="vs-dark"
-            value={code}
-            onChange={handleEditorChange}
-            onMount={handleEditorDidMount}
-            options={{
-              minimap: { enabled: false },
-              fontSize: 14,
-              lineNumbers: "on",
-              scrollBeyondLastLine: false,
-              automaticLayout: true,
-            }}
-          />
+          <div className="flex-1">
+            <MonacoEditor
+              className="w-full h-full"
+              language={language}
+              theme="vs-dark"
+              value={code}
+              onChange={handleEditorChange}
+              onMount={handleEditorDidMount}
+              options={{
+                minimap: { enabled: false },
+                fontSize: 14,
+                lineNumbers: "on",
+                scrollBeyondLastLine: false,
+                automaticLayout: true,
+              }}
+            />
+          </div>
         </div>
         <OutputPanel output={output} onClear={clearOutput} />
       </div>
@@ -175,8 +167,6 @@ const Header = ({ onSaveFile }) => {
   return (
     <header className="w-full max-w-screen-2xl mx-auto bg-[#1E1E1E] border-b border-zinc-700 p-6 flex justify-between items-center">
       <div className="flex items-center gap-4">
-        {/* LOGO */}
-
         <div className="size-12 border border-zinc-600 bg-zinc-700 rounded-lg grid place-items-center">
           <h1 className="text-lg font-bold text-yellow-500 animate-pulse">
             {"{ ; }"}
@@ -273,7 +263,7 @@ const ShareLinkModal = ({ isOpen, onOpenChange }) => {
   return (
     <Modal isOpen={isOpen} onOpenChange={onOpenChange} hideCloseButton>
       <ModalContent className="bg-zinc-900 text-zinc-100 border border-zinc-800">
-        {() => (
+        {(onClose) => (
           <>
             <ModalHeader className="flex flex-col gap-1">
               Share Your Code Link
@@ -286,7 +276,7 @@ const ShareLinkModal = ({ isOpen, onOpenChange }) => {
             <ModalFooter>
               <Button
                 className="bg-blue-600 text-white text-xs font-semibold border-2 border-blue-500"
-                onPress={() => onOpenChange(false)}
+                onPress={onClose}
               >
                 Copy Link
               </Button>

@@ -9,7 +9,7 @@ export default function RootLayout() {
   return (
     <ThemeProvider>
       <div className="w-full bg-white dark:bg-zinc-900 relative">
-        <Banner />
+        {/* <Banner /> */}
         <Navbar />
         <main className="mt-14">
           <Outlet />

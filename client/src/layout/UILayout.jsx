@@ -10,7 +10,9 @@ import { useTheme } from "next-themes";
 import { useState, useRef } from "react";
 import Editor from "@monaco-editor/react";
 import { Kbd } from "@nextui-org/react";
-import { ClipboardCopy, Check, MoveRight } from "lucide-react";
+import { Copy, Check, MoveRight } from "lucide-react";
+import toast, { Toaster } from "react-hot-toast";
+import { motion, AnimatePresence } from "framer-motion";
 export const Topic = ({ children }) => {
   return (
     <h1 className="text-4xl font-medium text-zinc-800 dark:text-zinc-100">
@@ -41,6 +43,7 @@ export const Example = ({ text }) => {
 
 export const Code = ({ code, language, error, setError }) => {
   const { theme } = useTheme(); // Updated to use Next Themes
+
   const handleNewTab = () => {
     const newTab = window.open();
     newTab.location.href = "/code-editor";
@@ -112,30 +115,60 @@ export const CopyIcon = ({ code }) => {
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(code);
+      toast.custom(
+        (t) => (
+          <AnimatePresence>
+            {t.visible && (
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 50, transition: { duration: 0.2 } }}
+                className="w-[130px] bg-white dark:bg-zinc-800 flex justify-center items-center gap-3 p-2 rounded border border-zinc-200 dark:border-zinc-700"
+              >
+                <h1 className="text-sm font-bold">Text Copied ✅</h1>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        ),
+        {
+          duration: 2000,
+        }
+      );
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
+      setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       console.error("Failed to copy text: ", err);
     }
   };
 
   return (
-    <div className="absolute flex items-center gap-2 top-2 right-2 ">
-      <p className="text-xs font-medium text-zinc-400 dark:text-zinc-500 animate-pulse">
-        Copy and try
-      </p>
+    <>
+      <Toaster
+        position="bottom-right"
+        toastOptions={{
+          className: "",
+          style: {
+            background: "transparent",
+            boxShadow: "none",
+          },
+        }}
+        containerStyle={{
+          padding: "0",
+          margin: "0",
+        }}
+      />
       <button
         onClick={handleCopy}
-        className="p-2 rounded-md transition-colors duration-200 bg-gray-100 hover:bg-gray-200 dark:bg-[#1e1e1e] outline-none border border-zinc-200 dark:border-zinc-800 dark:hover:bg-zinc-800"
+        className="absolute top-0 right-0 p-2 transition-colors duration-200 bg-gray-100 hover:bg-gray-200 dark:bg-[#2c2c2c] outline-none border border-zinc-200 dark:border-zinc-800 dark:hover:bg-zinc-800 px-4"
         aria-label={copied ? "Copied!" : "Copy code"}
       >
         {copied ? (
           <Check className="h-4 w-4 text-green-500" />
         ) : (
-          <ClipboardCopy className="h-4 w-4 text-gray-500 dark:text-gray-400" />
+          <Copy className="h-4 w-4 text-gray-500 dark:text-gray-400" />
         )}
       </button>
-    </div>
+    </>
   );
 };
 export const Image = ({ image, height }) => {
