@@ -1,6 +1,4 @@
-import React from "react";
 import { Outlet, Link } from "react-router-dom";
-import { FaArrowLeft } from "react-icons/fa";
 import { IoReturnDownBackSharp } from "react-icons/io5";
 import DynamicSidebar from "@/components/DynamicSidebar";
 export default function ChaptersLayout() {

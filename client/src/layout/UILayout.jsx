@@ -10,7 +10,7 @@ import { useTheme } from "next-themes";
 import { useState, useRef } from "react";
 import Editor from "@monaco-editor/react";
 import { Kbd } from "@nextui-org/react";
-import { Copy, Check, MoveRight } from "lucide-react";
+import { Copy, Check, MoveRight, CircleCheck } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import { motion, AnimatePresence } from "framer-motion";
 export const Topic = ({ children }) => {
@@ -123,9 +123,17 @@ export const CopyIcon = ({ code }) => {
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 50, transition: { duration: 0.2 } }}
-                className="w-[130px] bg-white dark:bg-zinc-800 flex justify-center items-center gap-3 p-2 rounded border border-zinc-200 dark:border-zinc-700"
+                className=" bg-white dark:bg-zinc-800 flex justify-start items-center gap-3 p-2 border-l-4 border-green-500"
               >
-                <h1 className="text-sm font-bold">Text Copied ✅</h1>
+                <div className="size-9 bg-zinc-50 dark:bg-zinc-700 rounded grid place-items-center">
+                  <CircleCheck className="text-green-500" />
+                </div>
+                <div className="flex flex-col gap-1 justify-center text-left">
+                  <h1 className="text-sm font-bold">Text Copied</h1>
+                  <p className="text-xs text-zinc-600 dark:text-zinc-400">
+                    Code is successfully copied to clipboard
+                  </p>
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
@@ -233,12 +241,12 @@ export const NextButton = ({ text, link }) => {
   return (
     <Link
       to={link}
-      className="mt-12 w-[280px] border border-zinc-200 dark:border-zinc-700 self-end text-sm flex justify-end text-right p-4 gap-4 text-zinc-900 dark:text-zinc-300 hover:border-zinc-600 duration-500"
+      className="mt-12 w-[300px] border border-zinc-200 dark:border-zinc-700 self-end text-sm flex justify-end text-right p-4 gap-4 text-zinc-900 dark:text-zinc-300 hover:border-zinc-600 duration-500"
     >
       <div className="flex flex-col gap-1">
         <p>Next</p>
         <div className="flex items-center gap-2">
-          <h1 className="text-lg font-bold text-blue-600 hover:text-blue-300">
+          <h1 className="text-lg font-bold  text-green-700 dark:text-green-500">
             {text}
           </h1>
         </div>
@@ -348,17 +356,17 @@ export const QuizButton = ({ text, link }) => {
   return (
     <button
       onClick={handleNewTab}
-      className="mt-12 w-[260px] border border-zinc-200 dark:border-zinc-700 self-end text-sm flex justify-end text-right p-4 gap-4 text-zinc-900 dark:text-zinc-300 hover:border-zinc-600 duration-500 relative overflow-hidden hover:opacity-70"
+      className="mt-12 w-[260px] bg-green-800 border border-green-600 self-end text-sm flex justify-end text-right p-4 gap-4 text-white hover:border-zinc-600 duration-500 relative overflow-hidden hover:opacity-80"
     >
       <img
         src="https://cdn-icons-png.flaticon.com/128/5827/5827057.png"
         alt="quiz icon"
-        className="absolute -left-2 -bottom-2 opacity-20 size-20"
+        className="absolute -left-4 -bottom-2 opacity-70 size-20"
       />
       <div className="flex flex-col gap-1">
         <p>Take a Quiz</p>
         <div className="flex items-center gap-2">
-          <h1 className="text-lg font-bold text-green-600 hover:text-green-300">
+          <h1 className="text-lg font-bold text-yellow-200 animate-pulse">
             {text}
           </h1>
         </div>

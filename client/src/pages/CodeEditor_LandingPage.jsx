@@ -43,7 +43,7 @@ const Hero = () => {
       <div className="flex mt-16 items-center gap-3">
         <button
           onClick={handleNewTab}
-          className="py-3 w-[140px] grid place-items-center bg-blue-700  text-white font-bold rounded-lg border-2 border-blue-500 text-sm hover:opacity-90"
+          className="py-3 w-[140px] grid place-items-center bg-green-800  text-white font-bold rounded-lg border-2 border-green-500 text-sm hover:opacity-90"
         >
           Start Coding
         </button>

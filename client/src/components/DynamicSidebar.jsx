@@ -38,7 +38,7 @@ const DynamicSidebar = () => {
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
     if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
+      section.scrollIntoView();
     }
   };
 
@@ -51,9 +51,14 @@ const DynamicSidebar = () => {
         <div className="space-y-2 text-zinc-600 dark:text-zinc-400">
           {currentRoute && (
             <div>
-              <h2 className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
-                {currentRoute.title}
-              </h2>
+              <div className="flex flex-col gap-2">
+                <p className="text-xs font-semibold text-zinc-700 dark:text-zinc-500">
+                  {currentRoute.lesson}
+                </p>
+                <h2 className="text-sm font-medium text-zinc-600 dark:text-zinc-300">
+                  {currentRoute.title}
+                </h2>
+              </div>
               <ul className="mt-8">
                 {currentRoute.sections.map((section) => (
                   <li key={section.id} className="mb-3">

@@ -1,6 +1,7 @@
 export const routes = [
   {
     path: "/learn-js/intro",
+    lesson: "Lesson 1",
     title: "JavaScript Introduction",
     sections: [
       { id: "section1", title: "JavaScript" },
@@ -9,6 +10,7 @@ export const routes = [
   },
   {
     path: "/learn-js/development-environment",
+    lesson: "Lesson 1",
     title: "Environment",
     sections: [
       { id: "section1", title: "Browser" },
@@ -17,6 +19,7 @@ export const routes = [
   },
   {
     path: "/learn-js/adding-javascript-to-page",
+    lesson: "Lesson 1",
     title: "Embed JavaScript",
     sections: [
       { id: "section1", title: "Embedding the JavaScript Code" },
@@ -26,6 +29,7 @@ export const routes = [
   },
   {
     path: "/learn-js/variables-data-types",
+    lesson: "Lesson 2",
     title: "Variables and Data Types",
     sections: [
       { id: "section1", title: "Variables" },
@@ -34,6 +38,7 @@ export const routes = [
   },
   {
     path: "/learn-js/operators",
+    lesson: "Lesson 2",
     title: "Operators",
     sections: [
       { id: "section1", title: "Arithmetic Operators" },
@@ -46,6 +51,7 @@ export const routes = [
 
   {
     path: "/learn-js/comments-code-structure",
+    lesson: "Lesson 2",
     title: "Comments and Code Structure",
     sections: [
       { id: "section1", title: "Comment" },
@@ -56,6 +62,7 @@ export const routes = [
 
   {
     path: "/learn-js/conditionals",
+    lesson: "Lesson 3",
     title: "Conditionals: if, else, else if",
     sections: [
       { id: "section1", title: "if statement" },

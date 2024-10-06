@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import HeroImage from "../assets/hero_image.png";
-import HeroImage_Light from "../assets/hero_image_light.png";
+import HeroImage from "../assets/hero_dark.png";
+import HeroImage_Light from "../assets/hero_light.png";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 
@@ -18,12 +18,12 @@ export default function Home() {
     >
       <Hero />
 
-      <div className="mt-2 w-full mx-auto h-[400px] grid place-items-center">
+      <div className="mt-2 w-full mx-auto h-[550px] grid place-items-center">
         <motion.div
           initial={{ filter: "blur(10px)" }}
           whileInView={{ filter: "blur(0px)" }}
           transition={{ duration: 1 }}
-          className="w-full max-w-screen-lg [background:linear-gradient(45deg,#172033,theme(colors.slate.800)_50%,#172033)_padding-box,conic-gradient(from_var(--border-angle),theme(colors.slate.600/.48)_80%,_theme(colors.indigo.500)_86%,_theme(colors.indigo.300)_90%,_theme(colors.indigo.500)_94%,_theme(colors.slate.600/.48))_border-box] rounded-[50px] border border-transparent animate-border"
+          className="w-full max-w-screen-lg [background:linear-gradient(45deg,#172033,theme(colors.green.800)_50%,#172033)_padding-box,conic-gradient(from_var(--border-angle),theme(colors.green.600/.48)_80%,_theme(colors.green.500)_86%,_theme(colors.green.300)_90%,_theme(colors.green.500)_94%,_theme(colors.green.600/.48))_border-box] rounded-[50px] border border-transparent animate-border"
         >
           <img
             src={theme === "dark" ? HeroImage : HeroImage_Light}
@@ -51,7 +51,7 @@ const Hero = () => {
       </p>
       <Link
         to="/learn"
-        className="flex items-center gap-2 text-md  mt-10 py-3 px-6 rounded-full bg-gradient-to-br from-blue-600 to-sky-700 border-2 border-blue-500 text-white font-medium z-10"
+        className="flex items-center gap-2 text-md  mt-10 py-3 px-6 rounded-full bg-green-800 border-2 border-green-500 text-white font-medium z-10 animate-pulse"
       >
         Start Learning
         <IoIosTrendingUp size={20} />

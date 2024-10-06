@@ -55,10 +55,10 @@ export default function Navbar() {
 
         <div className="flex items-center gap-6">
           {/* COINS */}
-          <div className="py-[6px] px-2 rounded-full border border-zinc-200 dark:border-zinc-700 flex items-center gap-1 text-xs">
+          {/* <div className="py-[6px] px-2 rounded-full border border-zinc-200 dark:border-zinc-700 flex items-center gap-1 text-xs">
             <h1>Credits: 100</h1>
             <h1>🪙 </h1>
-          </div>
+          </div> */}
           <div onClick={onOpen} className="relative w-[220px] cursor-pointer">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
               <Search className="size-4 text-gray-400" />
@@ -76,7 +76,7 @@ export default function Navbar() {
             </div>
           </div>
           {user ? (
-            <Dropdown placement="bottom-end" className="text-xs">
+            <Dropdown placement="bottom-end" className="text-xs font-Inter">
               <DropdownTrigger>
                 <div className="flex items-center gap-4">
                   <div className="size-8 grid place-items-center cursor-pointe rounded-full overflow-hidden cursor-pointer">
@@ -91,15 +91,6 @@ export default function Navbar() {
                 </div>
               </DropdownTrigger>
               <DropdownMenu aria-label="Profile Actions" variant="flat">
-                <DropdownItem key="profile" className="h-14 gap-4">
-                  <p className="font-semibold">Signed in as</p>
-                  <p className="font-semibold">{user.user_metadata.name}</p>
-                </DropdownItem>
-                <DropdownItem href="/settings" key="settings">
-                  My Settings
-                </DropdownItem>
-                <DropdownItem key="feedback">Send Feedback</DropdownItem>
-
                 <DropdownItem key="signout" onClick={handleSignOut}>
                   Signout
                 </DropdownItem>
@@ -108,7 +99,7 @@ export default function Navbar() {
           ) : (
             <NavLink
               to="/login"
-              className="text-sm font-semibold text-white py-2 px-3 bg-blue-600 rounded-lg hover:opacity-80 duration-400 transition ease-in"
+              className="text-sm font-semibold text-white py-[6px] rounded px-3 border border-green-600 bg-green-600 dark:bg-green-800 hover:opacity-80 duration-400 transition ease-in"
             >
               Login
             </NavLink>

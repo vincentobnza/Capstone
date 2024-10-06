@@ -3,8 +3,6 @@ import Navbar from "../components/Navbar";
 import { ScrollRestoration } from "react-router-dom";
 import Footer from "../components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import { Link } from "react-router-dom";
-import Banner from "../components/Banner";
 export default function RootLayout() {
   return (
     <ThemeProvider>

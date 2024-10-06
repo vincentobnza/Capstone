@@ -64,7 +64,7 @@ const GamesCard = () => {
         </div>
       </div>
 
-      <div className="w-full flex flex-col items-center text-center gap-6 p-8 h-[270px] rounded-lg bg-gradient-to-br from-green-600 to-emerald-600 border-2 border-green-500 relative overflow-hidden text-white">
+      <div className="w-full flex flex-col items-center text-center gap-6 p-8 h-[270px] rounded-lg bg-gradient-to-br from-green-600 to-green-600 border-2 border-green-500 relative overflow-hidden text-white">
         <img
           src="https://cdn-icons-png.flaticon.com/128/5815/5815576.png"
           alt="quiz"

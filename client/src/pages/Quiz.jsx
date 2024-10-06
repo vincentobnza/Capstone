@@ -368,7 +368,7 @@ const QuizCard = ({ points, setPoints }) => {
               <AnimatePresence>
                 {selectedAnswer === key && (
                   <motion.div
-                    className="absolute inset-0 bg-orange-500 rounded"
+                    className="absolute inset-0 bg-green-500 rounded"
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.8 }}
@@ -379,7 +379,7 @@ const QuizCard = ({ points, setPoints }) => {
               <span
                 className={`z-10 mr-4 size-6 grid place-items-center rounded-md ${
                   selectedAnswer === key
-                    ? "bg-white text-orange-500 border-2 border-orange-200"
+                    ? "bg-white text-green-500 border-2 border-green-200"
                     : "bg-white border border-zinc-200 dark:border-zinc-600 dark:bg-zinc-700 font-bold"
                 }`}
               >
@@ -394,7 +394,7 @@ const QuizCard = ({ points, setPoints }) => {
       {selectedAnswer && (
         <Button
           onClick={handleNextQuestion}
-          className="mt-8 px-6 py-3 bg-orange-500 text-white rounded-lg hover:bg-orange-600"
+          className="mt-8 px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600"
         >
           {currentQuestionIndex === quizData.length - 1
             ? "Finish Quiz"
