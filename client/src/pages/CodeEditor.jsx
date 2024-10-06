@@ -167,13 +167,11 @@ const Header = ({ onSaveFile }) => {
   return (
     <header className="w-full max-w-screen-2xl mx-auto bg-[#1E1E1E] border-b border-zinc-700 p-6 flex justify-between items-center">
       <div className="flex items-center gap-4">
-        <div className="size-12 border border-zinc-600 bg-zinc-700 rounded-lg grid place-items-center">
-          <h1 className="text-lg font-bold text-yellow-500 animate-pulse">
-            {"{ ; }"}
-          </h1>
+        <div className="size-12 bg-gradient-to-br from-zinc-300 to-zinc-600 rounded-lg grid place-items-center border border-zinc-400">
+          <h1 className="text-lg font-bold text-black">{"{ ; }"}</h1>
         </div>
         <div className="flex flex-col gap-1">
-          <h1 className="text-lg font-bold text-yellow-500 dark:text-yellow-500">
+          <h1 className="text-lg font-bold text-green-600 dark:text-green-600">
             CodeScript
           </h1>
           <p className="text-zinc-400 text-xs font-bold">
@@ -184,7 +182,7 @@ const Header = ({ onSaveFile }) => {
 
       <div className="flex items-center gap-2">
         <Button
-          className="bg-green-600 text-white text-xs font-semibold border-2 border-green-500"
+          className="bg-green-600 text-white text-xs font-semibold border border-green-500"
           size="sm"
           endContent={<Share2 size={16} />}
           radius="none"
@@ -194,7 +192,7 @@ const Header = ({ onSaveFile }) => {
         </Button>
         <Button
           onClick={onSaveFile}
-          className="bg-blue-600 text-white text-xs font-semibold border-2 border-blue-500"
+          className="bg-white text-black text-xs font-semibold"
           size="sm"
           endContent={<ArrowDownToLine size={16} />}
           radius="none"
@@ -220,12 +218,12 @@ const ToolBar = ({ language, onLanguageChange, onRun, onFormat }) => {
     <div className="bg-[#1E1E1E] border-b border-zinc-700 p-3 flex justify-between items-center space-x-2">
       <div className="ml-4 flex items-center gap-2">
         <p className="text-sm font-bold text-zinc-200">Language: </p>
-        <h3 className="text-sm font-bold text-yellow-500">JavaScript</h3>
+        <h3 className="text-sm font-bold text-green-500">JavaScript</h3>
       </div>
       <div className="flex items-center gap-2">
         <Button
           onClick={onFormat}
-          className="bg-zinc-500 border-2 border-zinc-400 text-white font-bold"
+          className="bg-zinc-500 border border-zinc-400 text-white font-bold"
           size="sm"
           radius="none"
         >
@@ -234,7 +232,7 @@ const ToolBar = ({ language, onLanguageChange, onRun, onFormat }) => {
         </Button>
         <Button
           onClick={onRun}
-          className="bg-yellow-500 border-2 border-yellow-300 text-black font-bold"
+          className="bg-green-600 border border-green-500 text-white font-bold"
           size="sm"
           radius="none"
         >

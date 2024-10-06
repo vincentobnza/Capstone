@@ -246,7 +246,7 @@ export const NextButton = ({ text, link }) => {
       <div className="flex flex-col gap-1">
         <p>Next</p>
         <div className="flex items-center gap-2">
-          <h1 className="text-lg font-bold  text-green-700 dark:text-green-500">
+          <h1 className="text-lg font-bold  text-green-700 dark:text-green-500 underline">
             {text}
           </h1>
         </div>

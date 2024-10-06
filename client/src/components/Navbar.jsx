@@ -59,7 +59,7 @@ export default function Navbar() {
             <h1>Credits: 100</h1>
             <h1>🪙 </h1>
           </div> */}
-          <div onClick={onOpen} className="relative w-[220px] cursor-pointer">
+          <div onClick={onOpen} className="relative w-[260px] cursor-pointer">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
               <Search className="size-4 text-gray-400" />
             </div>

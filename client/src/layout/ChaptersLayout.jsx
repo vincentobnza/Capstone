@@ -1,6 +1,7 @@
 import { Outlet, Link } from "react-router-dom";
 import { IoReturnDownBackSharp } from "react-icons/io5";
 import DynamicSidebar from "@/components/DynamicSidebar";
+
 export default function ChaptersLayout() {
   return (
     <div className="flex mb-10">
@@ -9,10 +10,10 @@ export default function ChaptersLayout() {
         <header className="max-w-5xl mx-auto ">
           <div>
             <Link
-              to="/learn-js"
+              to="/content-map"
               className="flex items-center gap-2 text-md text-zinc-700 dark:text-zinc-400 text-sm"
             >
-              <IoReturnDownBackSharp size={20} /> Timeline
+              <IoReturnDownBackSharp size={20} /> Content Map
             </Link>
           </div>
         </header>

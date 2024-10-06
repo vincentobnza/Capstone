@@ -52,7 +52,7 @@ const DynamicSidebar = () => {
           {currentRoute && (
             <div>
               <div className="flex flex-col gap-2">
-                <p className="text-xs font-semibold text-zinc-700 dark:text-zinc-500">
+                <p className="text-xs font-semibold text-zinc-700 dark:text-green-500">
                   {currentRoute.lesson}
                 </p>
                 <h2 className="text-sm font-medium text-zinc-600 dark:text-zinc-300">
@@ -70,7 +70,7 @@ const DynamicSidebar = () => {
                       }}
                       className={`cursor-pointer text-sm ${
                         activeSection === section.id
-                          ? "text-orange-500 font-semibold"
+                          ? "text-green-500 underline"
                           : "text-zinc-500 dark:text-zinc-400"
                       }`}
                     >

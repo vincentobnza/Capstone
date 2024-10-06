@@ -17,6 +17,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Learn_LandingPage from "./pages/Learn_LandingPage";
 import Games from "./pages/Games";
 import Quiz from "./pages/Quiz";
+import ContentMap from "./pages/ContentMap";
 
 // LAYOUT
 import RootLayout from "./layout/RootLayout";
@@ -181,11 +182,16 @@ const router = createBrowserRouter([
     path: "debug-wars/select-level",
     element: <DebugWarsLevel />,
   },
+
+  {
+    path: "content-map",
+    element: <ContentMap />,
+  },
 ]);
 
 export default function App() {
   return (
-    <div className="App text-zinc-900 dark:text-zinc-300 font-Inter">
+    <div className="App text-zinc-900 dark:text-zinc-300 font-sans">
       <AuthProvider>
         <RouterProvider router={router} />
       </AuthProvider>
