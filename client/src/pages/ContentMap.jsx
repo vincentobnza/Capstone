@@ -59,7 +59,7 @@ const ContentList = () => {
                 className="list-decimal list-inside text-zinc-700 dark:text-zinc-400"
               >
                 <Link
-                  to={lesson.link}
+                  to={`/learn-js/${lesson.link}`}
                   className="underline hover:text-green-600"
                 >
                   {lesson.name}

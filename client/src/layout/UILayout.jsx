@@ -30,7 +30,7 @@ export const Title = ({ children }) => {
 };
 
 export const Description = ({ children }) => {
-  return <p className="text-md text-zinc-700 dark:text-zinc-400">{children}</p>;
+  return <p className="text-sm text-zinc-700 dark:text-zinc-400">{children}</p>;
 };
 
 export const Example = ({ text }) => {
@@ -104,7 +104,7 @@ export const Code = ({
 
 export const Output = ({ output }) => {
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 mb-4">
       <h1 className="text-sm font-bold text-zinc-600 dark:text-zinc-500">
         Console Output
       </h1>
@@ -138,10 +138,10 @@ export const CopyIcon = ({ code }) => {
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 50, transition: { duration: 0.2 } }}
-                className=" bg-white dark:bg-zinc-800 flex justify-start items-center gap-3 p-2 border-l-4 border-green-500"
+                className=" bg-white dark:bg-zinc-800 flex justify-start items-center gap-3 p-2 border-l-4 border-green-400"
               >
                 <div className="size-9 bg-zinc-50 dark:bg-zinc-700 rounded grid place-items-center">
-                  <CircleCheck className="text-green-500" />
+                  <CircleCheck className="text-green-400" />
                 </div>
                 <div className="flex flex-col gap-1 justify-center text-left">
                   <h1 className="text-sm font-bold">Text Copied</h1>
@@ -201,11 +201,11 @@ export const List = ({ title, items }) => {
   return (
     <div className="flex flex-col gap-2 text-zinc-700 dark:text-zinc-300">
       <h1 className="text-lg">{title}</h1>
-      <ul className="flex flex-col gap-3 py-2 px-5">
+      <ul className="flex flex-col gap-3 py-2 px-8">
         {items.map((item, index) => (
           <li
             key={index}
-            className="list-disc list-inside text-md"
+            className="list-disc list-inside text-sm"
             style={{
               textIndent: "-22px",
             }}
@@ -256,7 +256,7 @@ export const NextButton = ({ text, link }) => {
   return (
     <Link
       to={link}
-      className="mt-12 w-[300px] border border-zinc-200 dark:border-zinc-700 self-end text-sm flex justify-end text-right p-4 gap-4 text-zinc-900 dark:text-zinc-300 hover:border-zinc-600 duration-500"
+      className="mt-12 w-[340px] border border-zinc-200 dark:border-zinc-700 self-end text-sm flex justify-end text-right p-4 gap-4 text-zinc-900 dark:text-zinc-300 hover:border-zinc-600 duration-500"
     >
       <div className="flex flex-col gap-1">
         <p>Next</p>

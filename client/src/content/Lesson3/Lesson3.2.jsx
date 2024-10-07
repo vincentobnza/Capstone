@@ -3,27 +3,11 @@ import {
   Description,
   Title,
   Code,
-  Example,
-  Image,
-  List,
-  Text,
-  Note,
-  ListItem,
   NextButton,
   QuizButton,
   Highlight,
+  Output,
 } from "../../layout/UILayout";
-import { FaInfoCircle } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { BsArrowRight } from "react-icons/bs";
-import {
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableRow,
-  TableCell,
-} from "@nextui-org/react";
 
 export default function Lesson3_Topic2() {
   return (
@@ -168,6 +152,8 @@ switch (day) {
 // The 'break' statement ensures that only the matched case is executed.
 `}
           />
+
+          <Output output={`Wednesday`} />
 
           <Title>Explanation</Title>
           <ul className="mt-4 mb-8 space-y-1">

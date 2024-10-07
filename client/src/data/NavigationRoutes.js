@@ -97,4 +97,19 @@ export const routes = [
     title: "JavaScript Break Statements",
     sections: [{ id: "section1", title: "break statement" }],
   },
+  {
+    path: "/learn-js/functions",
+    lesson: "Lesson 4",
+    title: "Function Declaration and Expression",
+    sections: [
+      { id: "section1", title: "Function Declaration" },
+      { id: "section2", title: "Function Expression" },
+    ],
+  },
+  {
+    path: "/learn-js/parameters-return-values",
+    lesson: "Lesson 4",
+    title: "Parameters and Return Values",
+    sections: [{ id: "section1", title: "Parameters and Return Values" }],
+  },
 ];

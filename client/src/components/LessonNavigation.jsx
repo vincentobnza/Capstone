@@ -31,14 +31,19 @@ export default function LessonNavigation() {
   return (
     <nav className="hidden md:flex bg-white dark:bg-zinc-900 p-4 w-64 h-screen overflow-y-auto fixed right-0 top-0 border-l border-zinc-200 dark:border-zinc-800 z-10">
       <div className="p-5 mt-[5.6rem] space-y-6">
-        <h1 className="text-lg font-semibold text-zinc-700 dark:text-zinc-200">
-          Lesson Navigation
-        </h1>
+        <div className="flex flex-col gap-1">
+          <p className="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
+            Map
+          </p>
+          <h1 className="text-lg font-semibold text-zinc-700 dark:text-zinc-200">
+            Course Map
+          </h1>
+        </div>
         <div className="space-y-3 text-zinc-600 dark:text-zinc-400">
           {lessons.map((lesson) => (
             <div key={lesson.id}>
               <button
-                className={`text-sm flex items-center justify-between outline-none w-full hover:underline ${
+                className={`text-sm text-left flex items-center justify-between outline-none w-full hover:underline ${
                   openSectionId === lesson.id
                     ? "text-green-600 underline"
                     : "text-zinc-800 dark:text-zinc-400"
@@ -51,7 +56,7 @@ export default function LessonNavigation() {
                 <div
                   className={`overflow-hidden transition-all duration-300 ease-in-out ${
                     openSectionId === lesson.id
-                      ? "max-h-40 opacity-100"
+                      ? "max-h-60 opacity-100"
                       : "max-h-0 opacity-0"
                   }`}
                 >

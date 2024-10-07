@@ -21,6 +21,7 @@ export default {
       fontFamily: {
         Inter: ["Inter", "sans-serif"],
         Odibee: ["Odibee Sans", "sans-serif"],
+        NotoSans: ["Noto Sans", "sans-serif"],
       },
     },
   },

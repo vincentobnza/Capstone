@@ -70,7 +70,10 @@ break[label];`}
           </Description>
         </section>
 
-        <NextButton link="/learn-js/loops" text="JavaScript Break Statements" />
+        <NextButton
+          link="/learn-js/functions"
+          text="Function Declaration and Expression"
+        />
       </div>
     </div>
   );

@@ -127,7 +127,7 @@ console.log(Greetings());`
   }, [code, language]);
 
   return (
-    <div className="w-full h-screen flex flex-col bg-zinc-900 font-Inter">
+    <div className="w-full h-screen flex flex-col bg-zinc-900 font-NotoSans">
       <LeaveSitePrompt />
       <Header onSaveFile={handleSaveFile} />
       <div className="flex-1 flex">

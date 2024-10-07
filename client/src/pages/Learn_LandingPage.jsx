@@ -62,7 +62,7 @@ const Hero = () => {
 
           <Link
             to="/learn-js"
-            className="mt-10 flex items-center gap-4 text-md font-medium text-white dark:text-black py-3 px-6 bg-zinc-900 dark:bg-white self-center"
+            className="mt-10 flex items-center gap-4 text-sm font-bold text-white dark:text-black py-3 px-6 bg-zinc-900 dark:bg-white self-center"
           >
             Learn Now
             <MoveRight size={20} />

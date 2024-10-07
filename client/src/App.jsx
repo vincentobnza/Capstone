@@ -49,6 +49,9 @@ import Lesson3_Topic1 from "./content/Lesson3/Lesson3.1";
 import Lesson3_Topic2 from "./content/Lesson3/Lesson3.2";
 import Lesson3_Topic3 from "./content/Lesson3/Lesson3.3";
 import Lesson3_Topic4 from "./content/Lesson3/Lesson3.4";
+
+import Lesson4_Topic1 from "./content/Lesson4/Lesson4.1";
+import Lesson4_Topic2 from "./content/Lesson4/Lesson4.2";
 // PROVIDER
 import { AuthProvider } from "./context/AuthContext";
 import { ThemeProvider } from "./components/ThemeProvider";
@@ -139,6 +142,14 @@ const router = createBrowserRouter([
             path: "break-statements",
             element: <Lesson3_Topic4 />,
           },
+          {
+            path: "functions",
+            element: <Lesson4_Topic1 />,
+          },
+          {
+            path: "parameters-return-values",
+            element: <Lesson4_Topic2 />,
+          },
         ],
       },
     ],
@@ -206,7 +217,7 @@ const router = createBrowserRouter([
 
 export default function App() {
   return (
-    <div className="App text-zinc-900 dark:text-zinc-300 font-sans">
+    <div className="App text-zinc-900 dark:text-zinc-300 font-NotoSans">
       <AuthProvider>
         <RouterProvider router={router} />
       </AuthProvider>
