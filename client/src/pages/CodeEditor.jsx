@@ -199,13 +199,13 @@ const Header = ({ onSaveFile }) => {
         >
           Save File
         </Button>
-        <Button
+        {/* <Button
           className="bg-zinc-700 text-white text-xs font-semibold border-2 border-zinc-500"
           size="sm"
           radius="none"
         >
           Full Code Editor
-        </Button>
+        </Button> */}
 
         <ShareLinkModal isOpen={isOpen} onOpenChange={onOpenChange} />
       </div>

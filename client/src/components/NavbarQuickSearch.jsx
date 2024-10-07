@@ -89,7 +89,6 @@ export default function NavbarQuickSearch({ isOpen, onOpen, onOpenChange }) {
   return (
     <>
       <Modal
-        className="font-Inter"
         backdrop="blur"
         size="xl"
         isOpen={isOpen}

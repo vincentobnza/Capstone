@@ -91,7 +91,6 @@ export default function SearchModal({ isOpen, onOpen, onOpenChange }) {
   return (
     <>
       <Modal
-        className="font-Inter"
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         motionProps={{

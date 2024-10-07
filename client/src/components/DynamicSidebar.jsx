@@ -43,10 +43,10 @@ const DynamicSidebar = () => {
   };
 
   return (
-    <nav className="hidden md:flex bg-white dark:bg-zinc-900 p-4 w-64 h-screen overflow-y-auto fixed left-0 top-0 border-r border-zinc-2 dark:border-zinc-800">
+    <nav className="hidden md:flex bg-white dark:bg-zinc-900 p-4 w-64 h-screen overflow-y-auto fixed left-0 top-0 border-r border-zinc-2 dark:border-zinc-800 z-10">
       <div className="p-5 mt-[5.6rem] space-y-6">
         <h1 className="text-lg font-semibold text-zinc-700 dark:text-zinc-200">
-          Navigation Guides
+          On this topic
         </h1>
         <div className="space-y-2 text-zinc-600 dark:text-zinc-400">
           {currentRoute && (

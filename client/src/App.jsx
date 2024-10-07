@@ -18,6 +18,7 @@ import Learn_LandingPage from "./pages/Learn_LandingPage";
 import Games from "./pages/Games";
 import Quiz from "./pages/Quiz";
 import ContentMap from "./pages/ContentMap";
+import DebugChallenges from "./pages/DebugChallenges";
 
 // LAYOUT
 import RootLayout from "./layout/RootLayout";
@@ -46,6 +47,8 @@ import Lesson2_Topic3 from "./content/Lesson2/Lesson2.3";
 
 import Lesson3_Topic1 from "./content/Lesson3/Lesson3.1";
 import Lesson3_Topic2 from "./content/Lesson3/Lesson3.2";
+import Lesson3_Topic3 from "./content/Lesson3/Lesson3.3";
+import Lesson3_Topic4 from "./content/Lesson3/Lesson3.4";
 // PROVIDER
 import { AuthProvider } from "./context/AuthContext";
 import { ThemeProvider } from "./components/ThemeProvider";
@@ -128,6 +131,14 @@ const router = createBrowserRouter([
             path: "switch-statements",
             element: <Lesson3_Topic2 />,
           },
+          {
+            path: "loops",
+            element: <Lesson3_Topic3 />,
+          },
+          {
+            path: "break-statements",
+            element: <Lesson3_Topic4 />,
+          },
         ],
       },
     ],
@@ -176,6 +187,10 @@ const router = createBrowserRouter([
         <Quiz />
       </ThemeProvider>
     ),
+  },
+  {
+    path: "/challenges/:challenge",
+    element: <DebugChallenges />,
   },
   // GAMES
   {

@@ -6,6 +6,7 @@ dotenv.config();
 
 const { Task } = require("./api/Task");
 const { IntroductionQuiz, Lesson2 } = require("./api/Quiz");
+const { operator_debug } = require("./api/DebugChallenge");
 
 const PORT = process.env.PORT || 9000;
 
@@ -31,6 +32,23 @@ app.get("/api/tasks", (req, res) => {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
   }
+});
+
+app.get("/api/challenges/:challenge", (req, res) => {
+  const { challenge } = req.params;
+
+  const challenges = {
+    operators: operator_debug,
+    // Add other challenges here if necessary
+  };
+
+  const challengeData = challenges[challenge];
+
+  if (!challengeData) {
+    return res.status(404).json({ error: "Challenge not found" });
+  }
+
+  res.json({ code: challengeData.code });
 });
 app.get("/api/quiz/:quizType", (req, res) => {
   const { quizType } = req.params;

@@ -15,7 +15,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { motion, AnimatePresence } from "framer-motion";
 export const Topic = ({ children }) => {
   return (
-    <h1 className="text-4xl font-medium text-zinc-800 dark:text-zinc-100">
+    <h1 className="text-4xl font-medium text-zinc-800 dark:text-zinc-100 mb-5 ">
       {children}
     </h1>
   );
@@ -41,21 +41,30 @@ export const Example = ({ text }) => {
   );
 };
 
-export const Code = ({ code, language, error, setError }) => {
+export const Code = ({
+  code,
+  language,
+  error,
+  setError,
+  visibleButton = true,
+}) => {
   const { theme } = useTheme(); // Updated to use Next Themes
 
   const handleNewTab = () => {
     const newTab = window.open();
     newTab.location.href = "/code-editor";
   };
+
   return (
     <div className="w-full space-y-1 my-4">
       <div className="w-full flex justify-end mb-3">
         <button
           onClick={handleNewTab}
-          className="text-xs font-bold flex items-center gap-2 text-zinc-400 underline"
+          className={`text-xs font-bold flex items-center gap-2 text-zinc-400 underline ${
+            visibleButton ? "flex" : "hidden"
+          }`}
         >
-          Try here
+          Open Compiler
           <MoveRight size={15} />
         </button>
       </div>
@@ -63,16 +72,17 @@ export const Code = ({ code, language, error, setError }) => {
         className={`w-full border relative ${
           theme === "dark"
             ? "bg-[#1e1e1e] border border-zinc-800"
-            : "border border-zinc-200 bg-zinc-100"
+            : "border border-zinc-200 bg-[#FAFAFA]"
         }`}
       >
         <SyntaxHighlighter
           language="javascript"
           style={theme === "dark" ? vscDarkPlus : oneLight}
           customStyle={{
-            padding: "20px",
+            padding: "15px",
             backgroundColor: "transparent",
-            fontSize: "14px",
+            fontSize: "16px",
+            fontFamily: '"Jetbrains Mono", monospace',
           }}
         >
           {code}
@@ -94,16 +104,21 @@ export const Code = ({ code, language, error, setError }) => {
 
 export const Output = ({ output }) => {
   return (
-    <div className="mt-3 w-full border border-zinc-200 dark:border-zinc-800 rounded-lg">
-      <div className="w-full h-8 bg-zinc-100 dark:bg-[#1e1e1e] rounded-tr-lg rounded-tl-lg border-b border-zinc-300 dark:border-zinc-800 flex items-center p-3">
-        <div className="w-[50px] grid grid-cols-3">
-          <div className="size-2 bg-green-500 rounded-full"></div>
-          <div className="size-2 bg-red-500 rounded-full"></div>
-          <div className="size-2 bg-yellow-500 rounded-full"></div>
+    <div className="space-y-3">
+      <h1 className="text-sm font-bold text-zinc-600 dark:text-zinc-500">
+        Console Output
+      </h1>
+      <div className="mt-3 w-full border border-zinc-200 dark:border-zinc-800 rounded-lg">
+        <div className="w-full h-8 bg-zinc-100 dark:bg-[#1e1e1e] rounded-tr-lg rounded-tl-lg border-b border-zinc-300 dark:border-zinc-800 flex items-center p-3">
+          <div className="w-[50px] grid grid-cols-3">
+            <div className="size-2 bg-green-500 rounded-full"></div>
+            <div className="size-2 bg-red-500 rounded-full"></div>
+            <div className="size-2 bg-yellow-500 rounded-full"></div>
+          </div>
         </div>
-      </div>
-      <div className="w-full p-7 bg-zinc-100 dark:bg-[#1e1e1e]  flex items-center justify-start  text-zinc-700 dark:text-zinc-400">
-        <pre className="text-sm ">{output}</pre>
+        <div className="w-full p-5 bg-zinc-100 dark:bg-[#1e1e1e]  flex items-center justify-start  text-zinc-700 dark:text-zinc-400">
+          <pre className="text-sm ">{output}</pre>
+        </div>
       </div>
     </div>
   );
@@ -257,7 +272,7 @@ export const NextButton = ({ text, link }) => {
 
 export const Highlight = ({ children }) => {
   return (
-    <span className="bg-zinc-100 dark:bg-green-900/80 px-2 py-[1.5px] border border-zinc-200 dark:border-green-800 text-[12px] font-medium rounded-full text-zinc-800 dark:text-zinc-200">
+    <span className="font-medium rounded-full text-black dark:text-white">
       {children}
     </span>
   );
@@ -365,6 +380,33 @@ export const QuizButton = ({ text, link }) => {
       />
       <div className="flex flex-col gap-1">
         <p>Take a Quiz</p>
+        <div className="flex items-center gap-2">
+          <h1 className="text-lg font-bold text-yellow-200 animate-pulse">
+            {text}
+          </h1>
+        </div>
+      </div>
+    </button>
+  );
+};
+
+export const ChallengeButton = ({ text, link }) => {
+  const handleNewTab = () => {
+    const newTab = window.open();
+    newTab.location.href = link;
+  };
+  return (
+    <button
+      onClick={handleNewTab}
+      className="mt-12 w-[260px] bg-green-800 border border-green-600 self-end text-sm flex justify-end text-right p-4 gap-4 text-white hover:border-zinc-600 duration-500 relative overflow-hidden hover:opacity-80"
+    >
+      <img
+        src="https://cdn-icons-png.flaticon.com/128/5827/5827057.png"
+        alt="quiz icon"
+        className="absolute -left-4 -bottom-2 opacity-70 size-20"
+      />
+      <div className="flex flex-col gap-1">
+        <p>Debug Challenge</p>
         <div className="flex items-center gap-2">
           <h1 className="text-lg font-bold text-yellow-200 animate-pulse">
             {text}

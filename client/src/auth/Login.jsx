@@ -76,7 +76,7 @@ export default function Login() {
   };
 
   return (
-    <div className="w-full h-screen bg-zinc-900 grid place-items-center text-zinc-400 font-Inter">
+    <div className="w-full h-screen bg-zinc-900 grid place-items-center text-zinc-400">
       <Toaster />
       <div className="w-full max-w-md flex flex-col gap-4 justify-center items-center text-center p-10">
         <h1 className="text-4xl font-medium tracking-wide text-white">
@@ -88,27 +88,32 @@ export default function Login() {
           onSubmit={handleSignIn}
           className="mt-5 w-full flex flex-col text-left justify-start gap-1"
         >
+          <label htmlFor="email" className="text-xs font-medium">
+            Email Address
+          </label>
           <input
             type="email"
             id="email"
             placeholder="Enter your email"
-            className="w-full h-11 px-3 bg-zinc-800 border border-zinc-700 text-xs placeholder:text-zinc-400 mb-3 rounded-md"
+            className="w-full h-11 px-3 bg-zinc-800 border border-zinc-700 text-xs placeholder:text-zinc-400 mb-3 rounded-md outline-none hover:border-zinc-600"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-
+          <label htmlFor="email" className="text-xs font-medium">
+            Password
+          </label>
           <input
             type="password"
             id="password"
             placeholder="Enter your password"
-            className="w-full h-11 px-3 bg-zinc-800 border border-zinc-700 text-xs placeholder:text-zinc-400 mb-3 rounded-md"
+            className="w-full h-11 px-3 bg-zinc-800 border border-zinc-700 text-xs placeholder:text-zinc-400 mb-3 rounded-md outline-none hover:border-zinc-600"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
 
           <button
             type="submit"
-            className="w-full text-sm h-11 rounded-md bg-blue-600 hover:bg-blue-500 text-white font-bold disabled:bg-blue-300"
+            className="w-full text-sm h-11 rounded-md bg-green-600 hover:bg-green-500 text-white font-bold disabled:bg-blue-300"
             disabled={loading}
           >
             Sign In
@@ -125,7 +130,10 @@ export default function Login() {
 
         <p className="mt-10 self-center text-sm font-semibold">
           Don't have an account?{" "}
-          <Link to="/signup" className="ml-2 text-blue-600 hover:text-blue-300">
+          <Link
+            to="/signup"
+            className="ml-2 text-green-600 underline hover:text-green-300"
+          >
             Sign up
           </Link>
         </p>

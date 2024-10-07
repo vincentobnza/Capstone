@@ -53,7 +53,7 @@ export const Lesson3 = [
   {
     id: 4,
     name: "Break and Continue Statement",
-    link: "break-continue",
+    link: "break-statements",
   },
 ];
 

@@ -129,7 +129,6 @@ console.log(“Value of firstName= ” + firstname);
 console.log(“Value of lastName= ” + firstname);
 `}
                 />
-                <Description>Output:</Description>
                 <Output
                   output={`Value of firstName= aezil
 Value of lastName= sison
@@ -152,7 +151,6 @@ console.log(“Value of y= ” + y);
 
 `}
                 />
-                <Description>Output:</Description>
                 <Output
                   output={`Value of x= 21
 Value of y= 2024
@@ -176,7 +174,6 @@ console.log(“Value of bigNum= ” + bigNum);
 
 `}
                 />
-                <Description>Output:</Description>
                 <Output
                   output={`Value of bigNum= 202444444444444444444
 
@@ -202,7 +199,6 @@ if (isNicole) {
 
 `}
                 />
-                <Description>Output:</Description>
                 <Output
                   output={`It's a nice day
 
@@ -235,7 +231,6 @@ if (x === undefined) {
 
 `}
                 />
-                <Description>Output:</Description>
                 <Output output={`x is empty`} />
 
                 <Description>

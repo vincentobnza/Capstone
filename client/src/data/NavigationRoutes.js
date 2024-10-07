@@ -70,4 +70,31 @@ export const routes = [
       { id: "section3", title: "else if statement" },
     ],
   },
+  {
+    path: "/learn-js/switch-statements",
+    lesson: "Lesson 3",
+    title: "Switch Statements",
+    sections: [
+      { id: "section1", title: "syntax" },
+      { id: "section2", title: "expression" },
+      { id: "section3", title: "Breaking and fall-through" },
+    ],
+  },
+  {
+    path: "/learn-js/loops",
+    lesson: "Lesson 3",
+    title: "JavaScript Loops",
+    sections: [
+      { id: "section1", title: "What are loops?" },
+      { id: "section2", title: "for loop" },
+      { id: "section3", title: "while loop" },
+      { id: "section4", title: "do while loop" },
+    ],
+  },
+  {
+    path: "/learn-js/break-statements",
+    lesson: "Lesson 3",
+    title: "JavaScript Break Statements",
+    sections: [{ id: "section1", title: "break statement" }],
+  },
 ];

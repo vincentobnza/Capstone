@@ -42,7 +42,7 @@ export default function QuizStartModal({ isOpen, setIsOpen }) {
               </div>
               <div className="mt-5">
                 <Checkbox
-                  color="secondary"
+                  color="success"
                   isSelected={isSelected}
                   onValueChange={setIsSelected}
                   classNames={{

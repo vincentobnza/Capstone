@@ -86,7 +86,7 @@ export default function Login() {
             type="text"
             id="username"
             placeholder="Enter your username"
-            className="w-full h-11 px-3 bg-zinc-800 border border-zinc-700 text-xs placeholder:text-zinc-400 mb-3 rounded-md"
+            className="w-full h-11 px-3 bg-zinc-800 border border-zinc-700 text-xs placeholder:text-zinc-400 mb-3 rounded-md outli"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
@@ -98,7 +98,7 @@ export default function Login() {
             type="email"
             id="email"
             placeholder="Enter your email"
-            className="w-full h-11 px-3 bg-zinc-800 border border-zinc-700 text-xs placeholder:text-zinc-400 mb-3 rounded-md"
+            className="w-full h-11 px-3 bg-zinc-800 border border-zinc-700 text-xs placeholder:text-zinc-400 mb-3 rounded-md outli"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -110,14 +110,14 @@ export default function Login() {
             type="password"
             id="password"
             placeholder="Enter your password"
-            className="w-full h-11 px-3 bg-zinc-800 border border-zinc-700 text-xs placeholder:text-zinc-400 mb-3 rounded-md"
+            className="w-full h-11 px-3 bg-zinc-800 border border-zinc-700 text-xs placeholder:text-zinc-400 mb-3 rounded-md outli"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
 
           <button
             type="submit"
-            className="w-full text-sm h-11 rounded-md bg-blue-600 hover:bg-blue-500 text-white disabled:bg-blue-300"
+            className="w-full text-sm h-11 rounded-md bg-green-600 hover:bg-green-500 text-white disabled:bg-blue-300"
             disabled={loading}
           >
             {loading ? "Creating Account..." : "Create Account"}
@@ -126,7 +126,10 @@ export default function Login() {
 
         <p className="mt-10 self-center text-sm font-semibold">
           Already have an account?{" "}
-          <Link to="/login" className="ml-2 text-blue-600 hover:text-blue-300">
+          <Link
+            to="/login"
+            className="ml-2 text-green-600 underline hover:text-green-300"
+          >
             Log in
           </Link>
         </p>

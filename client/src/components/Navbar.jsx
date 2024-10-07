@@ -36,7 +36,7 @@ export default function Navbar() {
   }
 
   return (
-    <div className="sticky top-0 w-full bg-white/20 dark:bg-zinc-900/40 backdrop-blur-md text-zinc-900 dark:text-zinc-300 grid place-items-center z-50">
+    <div className="sticky top-0 w-full bg-white/20 dark:bg-zinc-900/40 backdrop-blur-md text-zinc-900 dark:text-zinc-300 grid place-items-center z-50 border-b border-zinc-100 dark:border-zinc-800">
       <NavbarQuickSearch
         isOpen={isOpen}
         onOpen={onOpen}

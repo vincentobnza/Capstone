@@ -12,6 +12,7 @@ import {
   ListItem,
   NextButton,
   QuizButton,
+  ChallengeButton,
 } from "../../layout/UILayout";
 import { FaInfoCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -290,7 +291,7 @@ console.log( typeof bool);   // output will be:   Boolean
           />
         </section>
         <div className="w-full flex items-center gap-3 justify-end">
-          <QuizButton text="Operators" link="/quiz/lesson2" />
+          <ChallengeButton text="Operators" link="/challenges/operators" />
           <NextButton
             link="/learn-js/comments-code-structure"
             text="Comments & Code Structure"

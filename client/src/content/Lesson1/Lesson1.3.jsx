@@ -45,6 +45,7 @@ export default function Lesson1_Topic3() {
             {`By sandwiching the JavaScript code between the <script> and </script> tags, you can embed it straight into your webpages. The <script> tag instructs the browser to treat the statements it contains as executable script rather than HTML. As an illustration, consider this:`}
           </Description>
           <Code
+            visibleButton={false}
             code={`<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -79,7 +80,10 @@ export default function Lesson1_Topic3() {
             {`Alternatively, you can save your JavaScript code in a different file with the.js extension and use the src property of the <script> tag in your document to call that file:`}
           </Description>
 
-          <Code code={`<script src="src/script.js"></script>`} />
+          <Code
+            visibleButton={false}
+            code={`<script src="src/script.js"></script>`}
+          />
           <Description>
             If you wish to utilize the same scripts for several papers, this is
             helpful. It makes your website much easier to maintain and saves you
@@ -92,6 +96,7 @@ export default function Lesson1_Topic3() {
           </Description>
 
           <Code
+            visibleButton={false}
             code={`// function to display greetings
 
 function Greetings(){
@@ -107,6 +112,7 @@ document.getElementById("btn").onclick = greetings;`}
           </Description>
 
           <Code
+            visibleButton={false}
             code={`<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -139,6 +145,7 @@ document.getElementById("btn").onclick = greetings;`}
           </Description>
 
           <Code
+            visibleButton={false}
             code={`<!DOCTYPE html>
 <html lang="en">
 <head>
