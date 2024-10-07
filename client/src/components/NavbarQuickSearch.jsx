@@ -90,6 +90,7 @@ export default function NavbarQuickSearch({ isOpen, onOpen, onOpenChange }) {
     <>
       <Modal
         backdrop="blur"
+        radius="none"
         size="xl"
         isOpen={isOpen}
         onOpenChange={onOpenChange}
@@ -117,7 +118,7 @@ export default function NavbarQuickSearch({ isOpen, onOpen, onOpenChange }) {
         <ModalContent>
           {(onClose) => (
             <>
-              <div className="w-full dark:bg-zinc-900 border dark:border-zinc-700 bg-zinc-50 rounded-lg flex justify-center flex-col relative">
+              <div className="w-full dark:bg-zinc-900 border dark:border-zinc-700 bg-zinc-50 flex justify-center flex-col relative">
                 <div className="w-full h-14 border-b border-zinc-200 dark:border-zinc-700 grid place-items-center px-2">
                   <div className="relative w-full">
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">

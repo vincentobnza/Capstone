@@ -63,7 +63,7 @@ export default function Navbar() {
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
               <Search className="size-4 text-gray-400" />
             </div>
-            <div className="w-full bg-zinc-50 dark:bg-zinc-800 pl-10 pr-4 py-2 bg-transparent rounded-lg outline-none flex justify-start items-center border border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-600">
+            <div className="w-full bg-zinc-50 dark:bg-zinc-800 pl-10 pr-4 py-2 bg-transparent outline-none flex justify-start items-center border border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-600">
               <p className="text-xs">Quick Search...</p>
             </div>
 

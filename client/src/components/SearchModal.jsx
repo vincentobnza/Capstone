@@ -92,6 +92,7 @@ export default function SearchModal({ isOpen, onOpen, onOpenChange }) {
     <>
       <Modal
         isOpen={isOpen}
+        radius="none"
         onOpenChange={onOpenChange}
         motionProps={{
           variants: {
@@ -117,7 +118,7 @@ export default function SearchModal({ isOpen, onOpen, onOpenChange }) {
         <ModalContent>
           {(onClose) => (
             <>
-              <div className="w-full max-w-lg dark:bg-gradient-to-br dark:from-zinc-900 dark:to-zinc-800 border dark:border-zinc-700 bg-zinc-50 rounded-lg flex justify-center flex-col relative">
+              <div className="w-full max-w-lg dark:bg-gradient-to-br dark:from-zinc-900 dark:to-zinc-800 border dark:border-zinc-700 bg-zinc-50 flex justify-center flex-col relative">
                 <Kbd className="absolute top-2 right-2 text-xs font-bold text-zinc-500 border border-zinc-200 dark:border-zinc-600 dark:text-zinc-400">
                   ESC
                 </Kbd>

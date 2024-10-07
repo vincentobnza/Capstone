@@ -30,7 +30,7 @@ const Hero = () => {
 
       <div className="mt-16 w-full h-[500px] flex flex-col items-center space-y-10 max-w-screen-md rounded-lg bg-white dark:bg-gradient-to-b dark:from-zinc-900 dark:to-zinc-950 border border-zinc-3 00 dark:border-zinc-800 relative">
         {/* BOOK  */}
-        <div className="w-[160px] h-[190px] -mt-10 bg-zinc-100 dark:bg-zinc-200 rounded relative before:absolute before:content-[''] before:left-0 before:h-full before:w-[15px] before:bg-zinc-600 before:rounded-tl before:rounded-bl shadow-none dark:shadow-2xl dark:shadow-zinc-800 border border-zinc-300 dark:border-none">
+        <div className="w-[160px] h-[190px] -mt-10 bg-zinc-100 dark:bg-white rounded relative before:absolute before:content-[''] before:left-0 before:h-full before:w-[15px] before:bg-zinc-600 before:rounded-tl before:rounded-bl shadow-none dark:shadow-2xl dark:shadow-zinc-800 border border-zinc-300 dark:border-none">
           <img
             src="https://cdn-icons-png.flaticon.com/128/11166/11166597.png"
             alt="award"
@@ -62,7 +62,7 @@ const Hero = () => {
 
           <Link
             to="/learn-js"
-            className="mt-10 flex items-center gap-4 text-md font-medium text-white dark:text-black py-3 px-6 bg-zinc-900 dark:bg-white self-center rounded-lg"
+            className="mt-10 flex items-center gap-4 text-md font-medium text-white dark:text-black py-3 px-6 bg-zinc-900 dark:bg-white self-center"
           >
             Learn Now
             <MoveRight size={20} />

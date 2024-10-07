@@ -15,7 +15,7 @@ export default function QuizStartModal({ isOpen, setIsOpen }) {
             animate={{ scale: 1, rotate: "0deg" }}
             exit={{ scale: 0, rotate: "0deg" }}
             onClick={(e) => e.stopPropagation()}
-            className="h-[280px] p-6 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg w-full max-w-lg shadow-xl cursor-default relative overflow-hidden "
+            className="h-[280px] p-6 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 w-full max-w-lg shadow-xl cursor-default relative overflow-hidden "
           >
             <div className="absolute w-[55px] top-2 right-1 grid grid-cols-3">
               <div className="size-3 bg-zinc-100 dark:bg-zinc-600 border border-zinc-200 dark:border-zinc-500 rounded-full"></div>

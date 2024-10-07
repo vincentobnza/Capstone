@@ -7,7 +7,7 @@ export default function ChaptersLayout() {
     <div className="flex mb-10">
       <DynamicSidebar />
       <div className="flex-1 ml-0 md:mx-64 space-y-8">
-        <header className="px-10 max-w-5xl mx-auto ">
+        <header className="px-8 max-w-5xl mx-auto ">
           <div>
             <Link
               to="/content-map"
@@ -17,7 +17,7 @@ export default function ChaptersLayout() {
             </Link>
           </div>
         </header>
-        <main className="px-10 max-w-5xl mx-auto">
+        <main className="px-8 max-w-5xl mx-auto">
           <Outlet />
         </main>
       </div>
