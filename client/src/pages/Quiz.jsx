@@ -20,6 +20,7 @@ import { Progress } from "@nextui-org/react";
 import LeaveSitePrompt from "@/components/LeaveSitePrompt";
 import QuizStartModal from "@/components/QuizStartModal";
 import toast, { Toaster } from "react-hot-toast";
+import BatteryStatus from "@/components/BatteryStatus";
 export default function Quiz() {
   const { theme, setTheme } = useTheme();
   const [points, setPoints] = useState(0);
@@ -38,12 +39,18 @@ export default function Quiz() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 1.5 }}
-        className="w-full h-screen bg-white dark:bg-zinc-900 p-5 text-zinc-700 dark:text-zinc-300 space-y-10"
+        className="w-full h-screen bg-white dark:bg-zinc-900 p-5 text-zinc-700 dark:text-zinc-300 space-y-10 relative"
       >
         <div className="w-full flex max-w-screen-lg mx-auto justify-between p-2">
-          <h1 className="text-xs font-medium text-zinc-800 dark:text-zinc-200 z-10 underline space-y-10 underline-offset-8 decoration-4 decoration-indigo-500">
-            CodeScript Quiz 🧑🏻‍💻
-          </h1>
+          <div className="ml-2 relative flex flex-col gap-2">
+            <h1 className="font-bold text-zinc-200 text-lg">{"CODESCRIPT"}</h1>
+
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/14034/14034774.png"
+              alt="crown"
+              className="w-8 absolute -top-5 -left-4 -rotate-12 grayscale"
+            />
+          </div>
 
           <div className="flex items-center gap-8">
             <div className="flex items-center gap-2 text-xs ">
@@ -56,6 +63,7 @@ export default function Quiz() {
             >
               {theme === "dark" ? <Sun size={24} /> : <Moon size={24} />}
             </div>
+            <BatteryStatus />
           </div>
         </div>
         <QuizCard points={points} setPoints={setPoints} />
@@ -305,7 +313,7 @@ const QuizCard = ({ points, setPoints }) => {
           <Button
             onClick={onOpen}
             radius="none"
-            className="bg-yellow-800/90 text-white text-sm border border-yellow-500"
+            className="bg-green-800/90 text-white text-sm border border-green-500"
           >
             View Accuracy
           </Button>
@@ -416,13 +424,17 @@ const ViewAccuracyModal = ({
       isOpen={isOpen}
       onOpenChange={onOpenChange}
       scrollBehavior="inside"
-      size="xl"
+      className="font-NotoSans"
+      size="2xl"
     >
       <ModalContent>
         {(onClose) => (
           <>
-            <ModalHeader className="flex flex-col gap-1">
-              Quiz Accuracy Breakdown
+            <ModalHeader className="flex flex-col gap-2">
+              <h1>Quiz Accurary Breakdown</h1>
+              <p className="text-zinc-600 dark:text-zinc-400 text-xs">
+                Detailed Analysis of Your Quiz Performance
+              </p>
             </ModalHeader>
             <ModalBody>
               <div className="w-full grid md:grid-cols-3 gap-2">
@@ -445,16 +457,17 @@ const ViewAccuracyModal = ({
               {userAnswers.map((answer, index) => (
                 <div
                   key={index}
-                  className="mb-1 p-4 bg-zinc-50 border border-zinc-200 dark:bg-zinc-800 dark:border-zinc-700 rounded-lg"
+                  className="mb-1 p-4 bg-zinc-50 border border-zinc-200 dark:bg-zinc-800 dark:border-zinc-700 rounded-lg relative"
                 >
                   <div className="w-full flex justify-between mb-3">
                     <h4 className="font-semibold">Question {index + 1}:</h4>
                     <span
-                      className={
-                        answer.isCorrect
-                          ? "text-green-500 px-2  bg-emerald-50 dark:bg-emerald-600 dark:text-white text-sm border rounded-lg border-emerald-200"
-                          : "text-red-500 px-2  bg-red-50 dark:bg-red-600 dark:text-white text-sm border rounded-lg border-red-200"
-                      }
+                      className={`absolute top-0 right-0
+                        ${
+                          answer.isCorrect
+                            ? "text-green-500 px-4 py-3 rounded-tr-lg bg-red-50 dark:bg-zinc-700 dark:text-white text-sm"
+                            : "text-red-500 px-4 py-3 rounded-tr-lg bg-red-50 dark:bg-zinc-700 dark:text-white text-sm"
+                        }`}
                     >
                       {answer.isCorrect ? "Correct" : "Incorrect"}
                     </span>
@@ -475,8 +488,9 @@ const ViewAccuracyModal = ({
             </ModalBody>
             <ModalFooter>
               <Button
-                size="sm"
-                className="bg-yellow-600 text-white text-sm"
+                size="md"
+                radius="none"
+                className="bg-green-600 text-white text-sm mr-2"
                 onPress={onClose}
               >
                 Close

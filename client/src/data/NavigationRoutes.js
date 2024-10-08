@@ -112,4 +112,41 @@ export const routes = [
     title: "Parameters and Return Values",
     sections: [{ id: "section1", title: "Parameters and Return Values" }],
   },
+  {
+    path: "/learn-js/arrow-functions",
+    lesson: "Lesson 4",
+    title: "Arrow Functions",
+    sections: [
+      { id: "section1", title: "Basic Syntax" },
+      { id: "section2", title: "Parameters in Arrow Functions" },
+      { id: "section3", title: "Return Values" },
+      { id: "section4", title: "The this context" },
+      { id: "section5", title: "Arrow Functions and Callbacks" },
+    ],
+  },
+  {
+    path: "/learn-js/objects-properties-methods",
+    lesson: "Lesson 5",
+    title: "Object Properties and Methods",
+    sections: [
+      { id: "section1", title: "What are objects in JavaScript" },
+      { id: "section2", title: "Dot Notation" },
+      { id: "section3", title: "Objects as Object Properties" },
+      { id: "section4", title: "Bracket Notation" },
+      { id: "section5", title: "this keyword" },
+      { id: "section6", title: "Object Constructors in JavaScript" },
+      { id: "section7", title: "Object Copies in JavaScript" },
+      { id: "section8", title: "Spread Operator" },
+      { id: "section9", title: "Conclusion" },
+    ],
+  },
+  {
+    path: "/learn-js/array-array-methods",
+    lesson: "Lesson 5",
+    title: "Array and Array Methods",
+    sections: [
+      { id: "section1", title: "JavaScript Arrays" },
+      { id: "section2", title: "Creating an Array" },
+    ],
+  },
 ];

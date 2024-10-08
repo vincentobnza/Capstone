@@ -79,12 +79,12 @@ export const Lesson5 = [
   {
     id: 1,
     name: "Object Properties and Methods",
-    link: "objects",
+    link: "objects-properties-methods",
   },
   {
     id: 2,
     name: "Arrays and Array Methods  ",
-    link: "arrays",
+    link: "array-array-methods",
   },
 ];
 

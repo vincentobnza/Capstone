@@ -92,6 +92,7 @@ export default function SearchModal({ isOpen, onOpen, onOpenChange }) {
     <>
       <Modal
         isOpen={isOpen}
+        className="font-NotoSans"
         radius="none"
         onOpenChange={onOpenChange}
         motionProps={{

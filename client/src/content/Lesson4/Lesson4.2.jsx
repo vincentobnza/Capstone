@@ -72,17 +72,17 @@ console.log(sum);`}
 
           <Title>Explanation</Title>
           <Description>
-            In this example, <Highlight>`a`</Highlight> and{" "}
-            <Highlight>`b`</Highlight> are the parameters of the{" "}
-            <Highlight>`addNumbers`</Highlight> function, representing the
-            values that the function will process. When the function is called
-            with <Highlight>`addNumbers(5, 3)`</Highlight>, the numbers 5 and 3
-            are passed as arguments to the function. Inside the function, the
-            values of <Highlight>`a`</Highlight> and <Highlight>`b`</Highlight>
+            In this example, <Highlight>a</Highlight> and{" "}
+            <Highlight>b</Highlight> are the parameters of the{" "}
+            <Highlight>addNumbers</Highlight> function, representing the values
+            that the function will process. When the function is called with{" "}
+            <Highlight>addNumbers(5, 3)</Highlight>, the numbers 5 and 3 are
+            passed as arguments to the function. Inside the function, the values
+            of <Highlight>a</Highlight> and <Highlight>b</Highlight>
             are added together, and the result is returned. In this case, the
             sum of 5 and 3 is 8. This returned value is stored in the variable
-            <Highlight> `sum`</Highlight>, and it is printed to the console
-            using <Highlight>`console.log()`</Highlight>.
+            <Highlight> sum</Highlight>, and it is printed to the console using{" "}
+            <Highlight>console.log()</Highlight>.
           </Description>
         </section>
 

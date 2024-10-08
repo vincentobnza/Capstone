@@ -20,6 +20,10 @@ const CodeEditor = () => {
 
 console.log(Greetings());`
   );
+
+  useEffect(() => {
+    document.title = "CodeScript - Online Editor";
+  }, []);
   const [output, setOutput] = useState("");
   const [language, setLanguage] = useState("javascript");
 
@@ -166,18 +170,18 @@ const Header = ({ onSaveFile }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
     <header className="w-full max-w-screen-2xl mx-auto bg-[#1E1E1E] border-b border-zinc-700 p-6 flex justify-between items-center">
-      <div className="flex items-center gap-4">
-        <div className="size-12 bg-gradient-to-br from-zinc-300 to-zinc-600 rounded-lg grid place-items-center border border-zinc-400">
-          <h1 className="text-lg font-bold text-black">{"{ ; }"}</h1>
-        </div>
-        <div className="flex flex-col gap-1">
-          <h1 className="text-lg font-bold text-green-600 dark:text-green-600">
-            CodeScript
-          </h1>
-          <p className="text-zinc-400 text-xs font-bold">
-            JavaScript Online Compiler
-          </p>
-        </div>
+      <div className="ml-2 relative flex flex-col gap-2">
+        <h1 className="font-bold text-zinc-200 text-lg">{"CODESCRIPT"}</h1>
+
+        <img
+          src="https://cdn-icons-png.flaticon.com/128/14034/14034774.png"
+          alt="crown"
+          className="w-8 absolute -top-5 -left-4 -rotate-12 grayscale"
+        />
+
+        <p className="text-zinc-400 text-xs font-bold">
+          JavaScript Online Code Editor
+        </p>
       </div>
 
       <div className="flex items-center gap-2">

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Library, Map } from "lucide-react";
 import { routes } from "@/data/NavigationRoutes";
+import { motion } from "framer-motion";
 
 const DynamicSidebar = () => {
   const location = useLocation();
@@ -43,7 +44,12 @@ const DynamicSidebar = () => {
   };
 
   return (
-    <nav className="hidden md:flex bg-white dark:bg-zinc-900 p-4 w-64 h-screen overflow-y-auto fixed left-0 top-0 border-r border-zinc-2 dark:border-zinc-800 z-10">
+    <motion.nav
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.7 }}
+      className="hidden md:flex bg-white dark:bg-zinc-900 p-4 w-64 h-screen overflow-y-auto fixed left-0 top-0 border-r border-zinc-2 dark:border-zinc-800 z-10"
+    >
       <div className="p-5 mt-[5.6rem] space-y-6">
         <div className="flex flex-col gap-1">
           <p className="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
@@ -88,7 +94,7 @@ const DynamicSidebar = () => {
           )}
         </div>
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 

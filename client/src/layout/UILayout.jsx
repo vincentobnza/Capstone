@@ -48,7 +48,7 @@ export const Code = ({
   setError,
   visibleButton = true,
 }) => {
-  const { theme } = useTheme(); // Updated to use Next Themes
+  const { theme } = useTheme();
 
   const handleNewTab = () => {
     const newTab = window.open();
@@ -60,7 +60,7 @@ export const Code = ({
       <div className="w-full flex justify-end mb-3">
         <button
           onClick={handleNewTab}
-          className={`text-xs font-bold flex items-center gap-2 text-zinc-400 underline ${
+          className={`text-xs font-bold flex items-center gap-2 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 underline transition-colors ${
             visibleButton ? "flex" : "hidden"
           }`}
         >
@@ -69,31 +69,34 @@ export const Code = ({
         </button>
       </div>
       <div
-        className={`w-full border relative ${
+        className={`w-full relative rounded-md overflow-hidden ${
           theme === "dark"
             ? "bg-[#1e1e1e] border border-zinc-800"
             : "border border-zinc-200 bg-[#FAFAFA]"
         }`}
       >
-        <SyntaxHighlighter
-          language="javascript"
-          style={theme === "dark" ? vscDarkPlus : oneLight}
-          customStyle={{
-            padding: "15px",
-            backgroundColor: "transparent",
-            fontSize: "16px",
-            fontFamily: '"Jetbrains Mono", monospace',
-          }}
-        >
-          {code}
-        </SyntaxHighlighter>
+        <div className="overflow-x-auto">
+          <SyntaxHighlighter
+            language={language || "javascript"}
+            style={theme === "dark" ? vscDarkPlus : oneLight}
+            customStyle={{
+              padding: "15px",
+              backgroundColor: "transparent",
+              fontSize: "14px",
+              fontFamily: '"JetBrains Mono", monospace',
+              margin: 0,
+            }}
+          >
+            {code}
+          </SyntaxHighlighter>
+        </div>
 
         <CopyIcon code={code} />
 
         {error && (
           <IoCloseCircleSharp
             size={25}
-            className="absolute -left-2 -top-2 cursor-pointer text-red-500"
+            className="absolute -left-2 -top-2 cursor-pointer text-red-500 hover:text-red-600 transition-colors"
             onClick={() => setError(false)}
           />
         )}

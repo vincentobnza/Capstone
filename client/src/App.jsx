@@ -52,6 +52,10 @@ import Lesson3_Topic4 from "./content/Lesson3/Lesson3.4";
 
 import Lesson4_Topic1 from "./content/Lesson4/Lesson4.1";
 import Lesson4_Topic2 from "./content/Lesson4/Lesson4.2";
+import Lesson4_Topic3 from "./content/Lesson4/Lesson4.3";
+
+import Lesson5_Topic1 from "./content/Lesson5/Lesson5.1";
+import Lesson5_Topic2 from "./content/Lesson5/Lesson5.2";
 // PROVIDER
 import { AuthProvider } from "./context/AuthContext";
 import { ThemeProvider } from "./components/ThemeProvider";
@@ -149,6 +153,18 @@ const router = createBrowserRouter([
           {
             path: "parameters-return-values",
             element: <Lesson4_Topic2 />,
+          },
+          {
+            path: "arrow-functions",
+            element: <Lesson4_Topic3 />,
+          },
+          {
+            path: "objects-properties-methods",
+            element: <Lesson5_Topic1 />,
+          },
+          {
+            path: "array-array-methods",
+            element: <Lesson5_Topic2 />,
           },
         ],
       },

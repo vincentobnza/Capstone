@@ -44,12 +44,20 @@ export default function Navbar() {
       />
       <div className="w-full max-w-screen-xl mx-auto p-5 flex justify-between items-center">
         <div className="flex items-center">
-          <Link
-            to="/"
-            className="font-bold text-zinc-600 dark:text-zinc-200 text-lg"
-          >
-            {"CODESCRIPT"}
-          </Link>
+          <div className="relative">
+            <Link
+              to="/"
+              className="font-bold text-zinc-600 dark:text-zinc-200 text-lg"
+            >
+              {"CODESCRIPT"}
+            </Link>
+
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/14034/14034774.png"
+              alt="crown"
+              className="w-8 absolute -top-5 -left-4 -rotate-12 grayscale animate-pulse"
+            />
+          </div>
           <Navs />
         </div>
 
@@ -76,7 +84,10 @@ export default function Navbar() {
             </div>
           </div>
           {user ? (
-            <Dropdown placement="bottom-end" className="text-xs font-Inter">
+            <Dropdown
+              placement="bottom-end"
+              className="text-xs font-NotoSans text-sm"
+            >
               <DropdownTrigger>
                 <div className="flex items-center gap-4">
                   <div className="size-8 grid place-items-center cursor-pointe rounded-full overflow-hidden cursor-pointer">
@@ -91,6 +102,9 @@ export default function Navbar() {
                 </div>
               </DropdownTrigger>
               <DropdownMenu aria-label="Profile Actions" variant="flat">
+                <DropdownItem key="signout" onClick={handleSignOut}>
+                  Settings
+                </DropdownItem>
                 <DropdownItem key="signout" onClick={handleSignOut}>
                   Signout
                 </DropdownItem>

@@ -20,6 +20,7 @@ import SearchModal from "@/components/SearchModal";
 import { useDisclosure } from "@nextui-org/react";
 import { motion } from "framer-motion";
 import { RiJavascriptLine } from "react-icons/ri";
+import ScrollUp from "@/components/ScrollUp";
 export default function Learn() {
   return (
     <motion.div
@@ -28,6 +29,7 @@ export default function Learn() {
       transition={{ duration: 1.5 }}
       className="w-full bg-white dark:bg-zinc-900 space-y-16  dark:text-zinc-400 pb-24"
     >
+      <ScrollUp />
       <LearnJs />
     </motion.div>
   );

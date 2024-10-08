@@ -9,6 +9,7 @@ import {
   Lesson7,
   Lesson8,
 } from "../data/Chapter1Data";
+import { motion } from "framer-motion";
 
 const lessons = [
   { id: 1, title: "Introduction to JavaScript", topics: Lesson1 },
@@ -29,7 +30,12 @@ export default function LessonNavigation() {
   };
 
   return (
-    <nav className="hidden md:flex bg-white dark:bg-zinc-900 p-4 w-64 h-screen overflow-y-auto fixed right-0 top-0 border-l border-zinc-200 dark:border-zinc-800 z-10">
+    <motion.nav
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.7 }}
+      className="hidden md:flex bg-white dark:bg-zinc-900 p-4 w-64 h-screen overflow-y-auto fixed right-0 top-0 border-l border-zinc-200 dark:border-zinc-800 z-10"
+    >
       <div className="p-5 mt-[5.6rem] space-y-6">
         <div className="flex flex-col gap-1">
           <p className="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
@@ -76,6 +82,6 @@ export default function LessonNavigation() {
           ))}
         </div>
       </div>
-    </nav>
+    </motion.nav>
   );
 }

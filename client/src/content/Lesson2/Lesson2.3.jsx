@@ -154,7 +154,7 @@ let str = "Hello" ;
             {reservedWords.map((item, idx) => (
               <li
                 key={idx}
-                className="p-2 text-sm border border-zinc-200 dark:border-zinc-700"
+                className="p-2 text-sm border border-zinc-200 dark:border-zinc-800"
               >
                 {item}
               </li>

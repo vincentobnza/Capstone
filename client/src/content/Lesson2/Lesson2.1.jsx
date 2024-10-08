@@ -46,9 +46,9 @@ export default function Lesson2_Topic1() {
           <Description>In Example: </Description>
           <Code code={`let y = 20;`} />
           <Description>
-            In this example, we defined the variable with the keyword “let”.
-            Variables can be declared in ways using the keyword “let”, “var”,
-            and “const”.
+            In this example, we defined the variable with the keyword “let".
+            Variables can be declared in ways using the keyword “let", “var",
+            and “const".
           </Description>
 
           <Table
@@ -88,7 +88,7 @@ export default function Lesson2_Topic1() {
           <List
             items={[
               `Names must begin with a letter.`,
-              `Can contain letters, digits, underscores “ _ “ , and dollar signs “ $ ”.`,
+              `Can contain letters, digits, underscores “ _ “ , and dollar signs “ $ ".`,
               `Names are case sensitive.`,
               `Reserved words like JavaScript keywords cannot be used as names.`,
             ]}
@@ -122,11 +122,11 @@ export default function Lesson2_Topic1() {
                 <Description>Example:</Description>
 
                 <Code
-                  code={`let firstName = “aezil”;
-let lastName = “sison”;
+                  code={`let firstName = "aezil";
+let lastName = "sison";
 
-console.log(“Value of firstName= ” + firstname);
-console.log(“Value of lastName= ” + firstname);
+console.log("Value of firstName =" + firstname);
+console.log("Value of lastName =" + firstname);
 `}
                 />
                 <Output
@@ -146,8 +146,8 @@ Value of lastName= sison
                   code={`let x = 21 ;
 let y = 2024 ;
 
-console.log(“Value of x= ” + x);
-console.log(“Value of y= ” + y);
+console.log("Value of x= " + x);
+console.log("Value of y= " + y);
 
 `}
                 />
@@ -169,7 +169,7 @@ Value of y= 2024
                 <Code
                   code={`let bigNum = 202444444444444444444;
 
-console.log(“Value of bigNum= ” + bigNum);
+console.log("Value of bigNum= " + bigNum);
 
 
 `}
@@ -192,9 +192,9 @@ console.log(“Value of bigNum= ” + bigNum);
 let isAezil = false;
 
 if (isNicole) {
-     console.log(“ It’s a nice day!”);
+     console.log("It’s a nice day!");
 } else {
-     console.log(“ It’s not a nice day!”); 
+     console.log("It’s not a nice day!"); 
 }
 
 `}
@@ -207,8 +207,8 @@ if (isNicole) {
 
                 <Description>
                   In this example, it checks if the variable isNicole is true.
-                  If it is, it prints “It’s a nice day” and if it’s not, it
-                  prints “It’s not a nice day!”
+                  If it is, it prints “It’s a nice day" and if it’s not, it
+                  prints “It’s not a nice day!"
                 </Description>
               </div>
             </li>
@@ -235,8 +235,8 @@ if (x === undefined) {
 
                 <Description>
                   In this example, it checks if the variable x is empty (meaning
-                  it has no value). If it is, it prints “x is empty”. If it has
-                  a value, it prints “x has a value”.
+                  it has no value). If it is, it prints “x is empty". If it has
+                  a value, it prints “x has a value".
                 </Description>
               </div>
             </li>
@@ -276,8 +276,12 @@ console.log(salary)
                 <Description>Example:</Description>
 
                 <Code
-                  code={`const person = { firstName: "John", lastName: "Doe", age: "21", address: "Philippines" };
-`}
+                  code={`const person = {
+  firstName: "John",
+  lastName: "Doe",
+  age: "21",
+  address: "Philippines"
+};`}
                 />
               </div>
             </li>
