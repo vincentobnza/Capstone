@@ -70,7 +70,7 @@ const DynamicSidebar = () => {
                   {currentRoute.title}
                 </h2>
               </div>
-              <ul className="mt-8">
+              <ul className="mt-8 mb-5 ">
                 {currentRoute.sections.map((section) => (
                   <li key={section.id} className="mb-3">
                     <a

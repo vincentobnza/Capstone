@@ -1,7 +1,7 @@
 export const routes = [
   {
     path: "/learn-js/intro",
-    lesson: "Lesson 1",
+    lesson: "Lesson 1.1",
     title: "JavaScript Introduction",
     sections: [
       { id: "section1", title: "JavaScript" },
@@ -10,7 +10,7 @@ export const routes = [
   },
   {
     path: "/learn-js/development-environment",
-    lesson: "Lesson 1",
+    lesson: "Lesson 1.2",
     title: "Environment",
     sections: [
       { id: "section1", title: "Browser" },
@@ -19,7 +19,7 @@ export const routes = [
   },
   {
     path: "/learn-js/adding-javascript-to-page",
-    lesson: "Lesson 1",
+    lesson: "Lesson 1.3",
     title: "Embed JavaScript",
     sections: [
       { id: "section1", title: "Embedding the JavaScript Code" },
@@ -29,7 +29,7 @@ export const routes = [
   },
   {
     path: "/learn-js/variables-data-types",
-    lesson: "Lesson 2",
+    lesson: "Lesson 2.1",
     title: "Variables and Data Types",
     sections: [
       { id: "section1", title: "Variables" },
@@ -38,7 +38,7 @@ export const routes = [
   },
   {
     path: "/learn-js/operators",
-    lesson: "Lesson 2",
+    lesson: "Lesson 2.2",
     title: "Operators",
     sections: [
       { id: "section1", title: "Arithmetic Operators" },
@@ -51,7 +51,7 @@ export const routes = [
 
   {
     path: "/learn-js/comments-code-structure",
-    lesson: "Lesson 2",
+    lesson: "Lesson 2.3",
     title: "Comments and Code Structure",
     sections: [
       { id: "section1", title: "Comment" },
@@ -62,7 +62,7 @@ export const routes = [
 
   {
     path: "/learn-js/conditionals",
-    lesson: "Lesson 3",
+    lesson: "Lesson 3.1",
     title: "Conditionals: if, else, else if",
     sections: [
       { id: "section1", title: "if statement" },
@@ -72,7 +72,7 @@ export const routes = [
   },
   {
     path: "/learn-js/switch-statements",
-    lesson: "Lesson 3",
+    lesson: "Lesson 3.2",
     title: "Switch Statements",
     sections: [
       { id: "section1", title: "syntax" },
@@ -82,7 +82,7 @@ export const routes = [
   },
   {
     path: "/learn-js/loops",
-    lesson: "Lesson 3",
+    lesson: "Lesson 3.3",
     title: "JavaScript Loops",
     sections: [
       { id: "section1", title: "What are loops?" },
@@ -93,13 +93,17 @@ export const routes = [
   },
   {
     path: "/learn-js/break-statements",
-    lesson: "Lesson 3",
+    lesson: "Lesson 3.4",
     title: "JavaScript Break Statements",
-    sections: [{ id: "section1", title: "break statement" }],
+    sections: [
+      { id: "section1", title: "break statement" },
+      { id: "section2", title: "continue statement" },
+      { id: "section3", title: "continue with Nested Loops" },
+    ],
   },
   {
     path: "/learn-js/functions",
-    lesson: "Lesson 4",
+    lesson: "Lesson 4.1",
     title: "Function Declaration and Expression",
     sections: [
       { id: "section1", title: "Function Declaration" },
@@ -108,13 +112,13 @@ export const routes = [
   },
   {
     path: "/learn-js/parameters-return-values",
-    lesson: "Lesson 4",
+    lesson: "Lesson 4.2",
     title: "Parameters and Return Values",
     sections: [{ id: "section1", title: "Parameters and Return Values" }],
   },
   {
     path: "/learn-js/arrow-functions",
-    lesson: "Lesson 4",
+    lesson: "Lesson 4.3",
     title: "Arrow Functions",
     sections: [
       { id: "section1", title: "Basic Syntax" },
@@ -126,7 +130,7 @@ export const routes = [
   },
   {
     path: "/learn-js/objects-properties-methods",
-    lesson: "Lesson 5",
+    lesson: "Lesson 5.1",
     title: "Object Properties and Methods",
     sections: [
       { id: "section1", title: "What are objects in JavaScript" },
@@ -142,7 +146,7 @@ export const routes = [
   },
   {
     path: "/learn-js/array-array-methods",
-    lesson: "Lesson 5",
+    lesson: "Lesson 5.2",
     title: "Array and Array Methods",
     sections: [
       { id: "section1", title: "JavaScript Arrays" },

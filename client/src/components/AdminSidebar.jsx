@@ -4,7 +4,7 @@ import { Home, Users, Settings, TramFront, Trophy, Loader } from "lucide-react";
 
 export default function AdminSidebar() {
   return (
-    <aside className="fixed top-0 left-0 bg-gradient-to-b from-zinc-800 to-gray-950 text-white w-64 min-h-screen z-10">
+    <aside className="fixed top-0 left-0 bg-zinc-900 text-white w-64 min-h-screen z-10">
       <div className="w-full flex p-5 ">
         <div className="flex items-center gap-2 text-zinc-400">
           <TramFront size={20} />

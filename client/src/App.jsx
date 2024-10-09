@@ -60,6 +60,8 @@ import Lesson5_Topic2 from "./content/Lesson5/Lesson5.2";
 import { AuthProvider } from "./context/AuthContext";
 import { ThemeProvider } from "./components/ThemeProvider";
 
+import LivePreview from "./pages/LivePreview";
+
 // Combine routes
 const router = createBrowserRouter([
   {
@@ -228,6 +230,10 @@ const router = createBrowserRouter([
   {
     path: "content-map",
     element: <ContentMap />,
+  },
+  {
+    path: "/code-editor/live-preview",
+    element: <LivePreview />,
   },
 ]);
 
