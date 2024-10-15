@@ -8,6 +8,7 @@ import {
   TableRow,
   TableCell,
 } from "@nextui-org/react";
+import { useUser } from "@/context/UserContext";
 
 export default function Dashboard() {
   return (
@@ -39,37 +40,42 @@ const Header = () => {
 };
 
 const DataStats = () => {
+  const { users } = useUser();
+
+  const totalUsers = users.length;
+  const activeUsers = users.filter((user) => user.is_active).length;
+
   const data = [
     {
       name: "Total Users",
-      value: 0,
+      value: totalUsers,
       icon: UserCheck,
       updateAt: "All time",
     },
-
     {
-      name: "Active Now",
-      value: 0,
+      name: "Active Users",
+      value: activeUsers,
       icon: ShieldCheck,
-      updateAt: "Since last month",
+      updateAt: "Currently",
     },
   ];
+
   return (
     <div className="w-full grid grid-cols-4 gap-2">
-      {data.map((data, idx) => {
-        const Icon = data.icon;
+      {data.map((item, idx) => {
+        const Icon = item.icon;
         return (
           <div
             key={idx}
             className="flex flex-col gap-2 p-4 border border-zinc-200 rounded-lg shadow-md shadow-zinc-100"
           >
             <div className="w-full flex justify-between">
-              <h1 className="text-sm font-semibold">{data.name}</h1>
+              <h1 className="text-sm font-semibold">{item.name}</h1>
               <Icon size={20} />
             </div>
-            <h1 className="text-3xl font-bold">+ {data.value}</h1>
+            <h1 className="text-3xl font-bold">{item.value}</h1>
             <p className="text-[12px] font-medium text-zinc-500">
-              {data.updateAt}
+              {item.updateAt}
             </p>
           </div>
         );
@@ -79,15 +85,23 @@ const DataStats = () => {
 };
 
 const RecentlySignedIn = () => {
+  const { users } = useUser();
+
+  const sortedUsers = [...users].sort(
+    (a, b) => new Date(b.last_sign_in_at) - new Date(a.last_sign_in_at)
+  );
+
+  const recentUsers = sortedUsers.slice(0, 5);
+
   return (
     <div className="w-full flex flex-col gap-2">
-      <div className="flex flex-col gap-1  mb-3">
+      <div className="flex flex-col gap-1 mb-3">
         <h1 className="font-semibold">Recently Signed Ins</h1>
         <p className="text-xs text-zinc-500">This day</p>
       </div>
 
       <div className="w-full">
-        <Table aria-label="Example empty table" className="bg-white">
+        <Table aria-label="Recently signed in users" className="bg-white">
           <TableHeader>
             <TableColumn>Name</TableColumn>
             <TableColumn>Last Signed In</TableColumn>
@@ -101,7 +115,15 @@ const RecentlySignedIn = () => {
               </div>
             }
           >
-            {[]}
+            {recentUsers.map((user) => (
+              <TableRow key={user.id}>
+                <TableCell>{user.full_name || user.email}</TableCell>
+                <TableCell>
+                  {new Date(user.last_sign_in_at).toLocaleString()}
+                </TableCell>
+                <TableCell>{user.is_active ? "Active" : "Inactive"}</TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </div>

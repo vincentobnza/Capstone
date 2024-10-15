@@ -92,7 +92,7 @@ export default function NavbarQuickSearch({ isOpen, onOpen, onOpenChange }) {
         backdrop="blur"
         radius="none"
         className="font-NotoSans"
-        size="xl"
+        size="2xl"
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         motionProps={{

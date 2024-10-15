@@ -8,6 +8,8 @@ import {
   TableRow,
   TableCell,
 } from "@nextui-org/react";
+
+import { useUser } from "@/context/UserContext";
 export default function User_Management() {
   return (
     <div className="space-y-6">

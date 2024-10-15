@@ -19,15 +19,71 @@ import {
   Flame,
   Globe,
 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import LeaveSitePrompt from "@/components/LeaveSitePrompt";
 
 const CodeEditor = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("javascript");
   const [code, setCode] = useState({
-    html: "<button>Click me</button>",
-    css: "button { font-size: 20px; color: blue; }",
-    javascript: `console.log("Hello World")`,
+    html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>CodeScript Live Preview</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>
+            CodeScript Online Compiler
+        </h1>
+        <p>
+            Thank you for your patience while using our online compiler. Please note that it may not be fully optimized
+            for all integrations. We appreciate your understanding.
+        </p>
+        <button id="btn">Click me</button>
+    </div>
+</body>
+
+</html>`,
+    css: `body{
+    font-family: 'Consolas';
+    color: rgb(27, 27, 27);
+    padding: 50px;
+}
+
+
+.container{
+    max-width: 800px;
+    margin-top: 80px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    gap: 5px;
+}
+h1{
+    color: #050505;
+}
+
+button{
+    margin-top: 30px;
+    padding: 10px 20px;
+    background-color: rgb(31, 160, 80);
+    color: #fff;
+    outline: none;
+    border: none;
+}`,
+    javascript: `document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("btn").addEventListener("click", () => {
+        alert('Hello Dev!');
+    });
+});`,
   });
   const [output, setOutput] = useState("");
 
@@ -220,6 +276,13 @@ const CodeEditor = () => {
                 lineNumbers: "on",
                 scrollBeyondLastLine: false,
                 automaticLayout: true,
+                style: {
+                  vertical: "visible",
+                  horizontal: "visible",
+                  useShadows: false,
+                  verticalScrollbarSize: 10,
+                  horizontalScrollbarSize: 10,
+                },
               }}
             />
           </div>
@@ -242,12 +305,9 @@ const Header = ({ onSaveFile }) => {
   return (
     <header className="w-full max-w-screen-2xl mx-auto bg-[#1E1E1E] border-b border-zinc-700 p-6 flex justify-between items-center">
       <div className="ml-2 relative flex flex-col gap-2">
-        <h1 className="font-bold text-zinc-200 text-lg">{"CODESCRIPT"}</h1>
-        <img
-          src="https://cdn-icons-png.flaticon.com/128/14034/14034774.png"
-          alt="crown"
-          className="w-8 absolute -top-5 -left-4 -rotate-12 grayscale"
-        />
+        <h1 className="bg-gradient-to-br from-green-500 to-green-600 dark:to-green-800 bg-clip-text text-transparent font-black text-lg font-Orbitron">
+          CodeScript
+        </h1>
         <p className="text-zinc-400 text-xs font-bold">Online Code Editor</p>
       </div>
       <div className="flex items-center gap-2">
@@ -286,6 +346,7 @@ const PreviewButton = ({ onClick, isOpen }) => {
 
   return (
     <Tooltip
+      showArrow={true}
       content={isOpen ? "Preview window is open" : "Opens in a new tab"}
       radius="none"
     >
@@ -312,21 +373,37 @@ const PreviewButton = ({ onClick, isOpen }) => {
   );
 };
 const ToolBar = ({ activeTab, setActiveTab, onRun, onFormat }) => {
+  const tabs = ["html", "css", "javascript"];
+
   return (
     <div className="bg-[#1E1E1E] border-b border-zinc-700 p-3 flex justify-between items-center space-x-2">
       <div className="ml-5 flex items-center gap-2">
-        <ul className="w-[300px] h-10 border border-zinc-700 grid grid-cols-3">
-          {["html", "css", "javascript"].map((tab) => (
+        <ul className="w-[300px] h-10 border border-zinc-700 grid grid-cols-3 relative">
+          {tabs.map((tab) => (
             <li
               key={tab}
-              className={`w-full h-full border-r border-zinc-800 cursor-pointer grid place-items-center text-xs font-bold ${
-                activeTab === tab ? "bg-zinc-800 text-white" : "text-zinc-300"
+              className={`w-full h-full cursor-pointer grid place-items-center text-xs font-bold relative z-10 transition-colors duration-200 ${
+                activeTab === tab
+                  ? "text-green-400 bg-green-900/10"
+                  : "text-zinc-300 hover:text-zinc-100"
               }`}
               onClick={() => setActiveTab(tab)}
             >
               {tab.toUpperCase()}
             </li>
           ))}
+          <motion.div
+            className="absolute top-0 left-0 w-1/3 h-full bg-zinc-800 z-0"
+            initial={false}
+            animate={{
+              x: tabs.indexOf(activeTab) * 100 + "%",
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 400,
+              damping: 20,
+            }}
+          />
         </ul>
       </div>
       <div className="flex items-center gap-2">
@@ -336,7 +413,7 @@ const ToolBar = ({ activeTab, setActiveTab, onRun, onFormat }) => {
           size="sm"
           radius="none"
         >
-          <Flame size={16} />
+          <Flame size={16} className="mr-2" />
           Format Code
         </Button>
         <Button
@@ -345,7 +422,7 @@ const ToolBar = ({ activeTab, setActiveTab, onRun, onFormat }) => {
           size="sm"
           radius="none"
         >
-          <Play size={16} /> Run Code
+          <Play size={16} className="mr-2" /> Run Code
         </Button>
       </div>
     </div>
@@ -355,7 +432,7 @@ const ToolBar = ({ activeTab, setActiveTab, onRun, onFormat }) => {
 const OutputPanel = ({ output, onClear, onOpenPreview, isPreviewOpen }) => (
   <div className="w-1/3 bg-[#1E1E1E] border-l border-zinc-700 flex flex-col">
     <div className="p-2 border-b border-gray-700 flex justify-between items-center">
-      <h2 className="font-semibold text-gray-300">Console</h2>
+      <h2 className="font-semibold text-gray-300 text-sm ml-4">Console</h2>
       <div className="flex items-center gap-3">
         <PreviewButton onClick={onOpenPreview} isOpen={isPreviewOpen} />
         <Button onClick={onClear} variant="light" isIconOnly>

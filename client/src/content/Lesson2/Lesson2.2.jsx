@@ -291,7 +291,7 @@ console.log( typeof bool);   // output will be:   Boolean
           />
         </section>
         <div className="w-full flex items-center gap-3 justify-end">
-          <ChallengeButton text="Operators" link="/challenges/operators" />
+          <QuizButton text="Operators" link="/quiz/lesson2" />
           <NextButton
             link="/learn-js/comments-code-structure"
             text="Comments & Code Structure"

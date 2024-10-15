@@ -43,7 +43,7 @@ const LivePreview = () => {
   }, [searchParams]);
 
   return (
-    <div className="w-full bg-white h-screen flex flex-col">
+    <div className="bg-white flex flex-col">
       <div className="flex-1 p-4">
         <div className="w-full ">
           <iframe

@@ -57,7 +57,7 @@ const Hero = () => {
             Learn JavaScript
           </h1>
           <p className="text-sm text-zinc-600 dark:text-zinc-400">
-            Explore 50+ Topics on Modern JavaScript Mastery
+            Explore Topics on JavaScript Mastery
           </p>
 
           <Link

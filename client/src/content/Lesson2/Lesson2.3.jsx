@@ -162,7 +162,7 @@ let str = "Hello" ;
           </ul>
         </section>
         <div className="w-full flex items-center gap-3 justify-end">
-          <QuizButton text="Operators" link="/quiz/lesson2" />
+          <QuizButton text="Lesson 2" link="/quiz/lesson2" />
           <NextButton link="/learn-js/conditionals" text="Conditionals" />
         </div>
       </div>

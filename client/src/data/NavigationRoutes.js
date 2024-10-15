@@ -151,6 +151,37 @@ export const routes = [
     sections: [
       { id: "section1", title: "JavaScript Arrays" },
       { id: "section2", title: "Creating an Array" },
+      { id: "section3", title: "The new keyword" },
+      { id: "section4", title: "Getting to know Array Elements" },
+      { id: "section5", title: "JavaScript Array Methods" },
+    ],
+  },
+  {
+    path: "/learn-js/dom",
+    lesson: "Lesson 6.2",
+    title: "What is DOM?",
+    sections: [
+      { id: "section1", title: "What is DOM?" },
+      { id: "section2", title: "Selecting Elements" },
+      { id: "section3", title: "Changing Content" },
+      { id: "section4", title: "Creating and Appending Elements" },
+      { id: "section5", title: "Removing Elements" },
+      { id: "section6", title: "Handling Events" },
+      { id: "section7", title: "Changing CSS Styles" },
+    ],
+  },
+  {
+    path: "/learn-js/dom-elements",
+    lesson: "Lesson 6.2",
+    title: "DOM Elements",
+    sections: [{ id: "section1", title: "Finding HTML Elements" }],
+  },
+  {
+    path: "/learn-js/event-listeners-handling-events",
+    lesson: "Lesson 6.2",
+    title: "Event Listeners and Handling Events",
+    sections: [
+      { id: "section1", title: "What Are DOM Events and Why Are They Useful?" },
     ],
   },
 ];

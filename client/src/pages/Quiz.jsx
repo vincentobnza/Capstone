@@ -145,64 +145,57 @@ const QuizCard = ({ points, setPoints }) => {
       setPoints((prevPoints) => prevPoints + pointsAdded);
 
       // AUTHENTICATE USER
-
       if (user) {
         try {
+          // First, try to fetch the existing profile
           const { data: currentData, error: fetchError } = await supabase
-            .from("users")
-            .insert("points", points)
+            .from("profiles")
+            .select("current_points")
             .eq("id", user.id)
             .single();
 
-          if (!currentData || currentData.length === 0) {
-            toast.error("User profile does not exist. Creating new profile.", {
+          if (fetchError) {
+            if (fetchError.code === "PGRST116") {
+              // Profile doesn't exist, create a new one
+              const { data: insertData, error: insertError } = await supabase
+                .from("profiles")
+                .insert({ id: user.id, current_points: pointsAdded });
+
+              if (insertError) {
+                throw insertError;
+              }
+
+              toast.success("New profile created and points inserted");
+            } else {
+              throw fetchError;
+            }
+          } else {
+            // Profile exists, update the points
+            const currentPoints = currentData.current_points || 0;
+            const newTotalPoints = currentPoints + pointsAdded;
+
+            const { data, error: updateError } = await supabase
+              .from("profiles")
+              .update({ current_points: newTotalPoints })
+              .eq("id", user.id);
+
+            if (updateError) {
+              throw updateError;
+            }
+
+            toast.success("Points updated successfully", {
               style: {
+                borderRadius: "5px",
                 background: "#333",
                 color: "#fff",
                 fontSize: "12px",
                 letterSpacing: "0.5px",
-                borderRadius: "5px",
               },
             });
-            const { data: insertData, error: insertError } = await supabase
-              .from("users")
-              .insert({ id: user.id, points: pointsAdded });
-
-            if (insertError) {
-              return;
-            }
-
-            toast.success(
-              "New profile created and points inserted:",
-              insertData
-            );
-            return;
-          }
-
-          if (fetchError) {
-            toast.error("Error fetching current points:", fetchError);
-            return;
-          }
-
-          // UPDATE POINTS IF USER TAKE ANOTHER QUIZ
-
-          const currentPoints = currentData[0]?.points || 0;
-          const newTotalPoints = currentPoints + pointsAdded;
-
-          const { data, error: updateError } = await supabase
-            .from("users")
-            .upsert(
-              { id: user.id, points: newTotalPoints }, // Provide a complete row for upsert
-              { onConflict: "id" } // Use onConflict to handle unique key
-            );
-
-          if (updateError) {
-            toast.error("Error updating points:", updateError);
-          } else {
-            toast.success("Points updated successfully:", data);
           }
         } catch (error) {
-          toast.error(error);
+          console.error("Error updating points:", error);
+          toast.error("Failed to update points. Please try again later.");
         }
       }
     }

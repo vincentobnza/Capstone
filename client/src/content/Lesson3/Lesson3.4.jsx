@@ -288,11 +288,13 @@ i = 2, j = 1
             ]}
           />
         </section>
-
-        <NextButton
-          link="/learn-js/functions"
-          text="Function Declaration and Expression"
-        />
+        <div className="w-full flex items-center gap-3 justify-end">
+          <QuizButton text="Lesson 3" link="/quiz/lesson3" />
+          <NextButton
+            link="/learn-js/functions"
+            text="Function Declaration and Expression"
+          />
+        </div>
       </div>
     </div>
   );

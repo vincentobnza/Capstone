@@ -14,13 +14,12 @@ import {
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
-  DropdownSection,
+  Tooltip,
 } from "@nextui-org/react";
-import { Search } from "lucide-react";
+import { Search, User } from "lucide-react";
 import NavbarQuickSearch from "./NavbarQuickSearch";
 import { useDisclosure } from "@nextui-org/react";
 import { Swords } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const { theme, setTheme } = useTheme();
@@ -30,10 +29,6 @@ export default function Navbar() {
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
-
-  async function handleSignOut() {
-    await signOut();
-  }
 
   return (
     <div className="sticky top-0 w-full bg-white/20 dark:bg-zinc-900/40 backdrop-blur-md text-zinc-900 dark:text-zinc-300 grid place-items-center z-50 border-b border-zinc-100 dark:border-zinc-800">
@@ -47,26 +42,15 @@ export default function Navbar() {
           <div className="relative">
             <Link
               to="/"
-              className="font-bold text-zinc-600 dark:text-zinc-200 text-lg"
+              className="bg-gradient-to-br from-green-500 to-green-600 dark:to-green-800 bg-clip-text text-transparent font-black text-lg font-Orbitron"
             >
-              {"CODESCRIPT"}
+              CodeScript
             </Link>
-
-            <img
-              src="https://cdn-icons-png.flaticon.com/128/14034/14034774.png"
-              alt="crown"
-              className="w-8 absolute -top-5 -left-4 -rotate-12 grayscale animate-pulse"
-            />
           </div>
           <Navs />
         </div>
 
         <div className="flex items-center gap-6">
-          {/* COINS */}
-          {/* <div className="py-[6px] px-2 rounded-full border border-zinc-200 dark:border-zinc-700 flex items-center gap-1 text-xs">
-            <h1>Credits: 100</h1>
-            <h1>🪙 </h1>
-          </div> */}
           <div onClick={onOpen} className="relative w-[260px] cursor-pointer">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
               <Search className="size-4 text-gray-400" />
@@ -83,11 +67,9 @@ export default function Navbar() {
               />
             </div>
           </div>
+
           {user ? (
-            <Dropdown
-              placement="bottom-end"
-              className="text-xs font-NotoSans text-sm"
-            >
+            <Dropdown placement="bottom-end" className="text-xs font-NotoSans">
               <DropdownTrigger>
                 <div className="flex items-center gap-4">
                   <div className="size-8 grid place-items-center cursor-pointe rounded-full overflow-hidden cursor-pointer">
@@ -102,21 +84,18 @@ export default function Navbar() {
                 </div>
               </DropdownTrigger>
               <DropdownMenu aria-label="Profile Actions" variant="flat">
-                <DropdownItem key="signout" onClick={handleSignOut}>
-                  Settings
-                </DropdownItem>
-                <DropdownItem key="signout" onClick={handleSignOut}>
+                <DropdownItem key="settings">Settings</DropdownItem>
+                <DropdownItem key="signout" onClick={() => signOut()}>
                   Signout
                 </DropdownItem>
               </DropdownMenu>
             </Dropdown>
           ) : (
-            <NavLink
-              to="/login"
-              className="text-sm font-semibold text-white py-[6px] rounded px-3 border border-green-600 bg-green-600 dark:bg-green-800 hover:opacity-80 duration-400 transition ease-in"
-            >
-              Login
-            </NavLink>
+            <Tooltip content="Login" radius="none" className="font-NotoSans">
+              <NavLink to="/login">
+                <User size={24} className="text-zinc-600 dark:text-zinc-400" />
+              </NavLink>
+            </Tooltip>
           )}
 
           <div
@@ -137,16 +116,16 @@ export default function Navbar() {
 
 const Navs = () => {
   return (
-    <nav className="ml-20 hidden md:flex items-center space-x-8">
+    <nav className="ml-24 hidden md:flex items-center space-x-8">
       <NavLink
         to="learn"
-        className="text-[12px] hover:text-yellow-500 duration-300"
+        className="text-[12px] hover:text-green-500 duration-300"
       >
         Learn JS
       </NavLink>
       <NavLink
         to="leaderboard"
-        className="relative gap-2 text-[12px] hover:text-yellow-500 duration-300"
+        className="relative gap-2 text-[12px] hover:text-green-500 duration-300"
       >
         Leaderboards
         <MdOutlineLeaderboard
@@ -156,20 +135,20 @@ const Navs = () => {
       </NavLink>
       <NavLink
         to="codescript-editor"
-        className="text-[12px] hover:text-yellow-500 duration-300"
+        className="text-[12px] hover:text-green-500 duration-300"
       >
         Code Editor
       </NavLink>
       <NavLink
         to="/games"
-        className="relative text-[12px] hover:text-yellow-500 duration-300"
+        className="relative text-[12px] hover:text-green-500 duration-300"
       >
         Games
         <Swords size={12} className="absolute top-0 -right-5" />
       </NavLink>
       <NavLink
         to="privacy-policy"
-        className="text-[12px] hover:text-yellow-500 duration-300"
+        className="text-[12px] hover:text-green-500 duration-300"
       >
         Privacy Policy
       </NavLink>

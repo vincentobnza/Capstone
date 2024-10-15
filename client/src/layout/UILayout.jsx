@@ -259,12 +259,12 @@ export const NextButton = ({ text, link }) => {
   return (
     <Link
       to={link}
-      className="mt-12 w-[340px] border border-zinc-200 dark:border-zinc-700 self-end text-sm flex justify-end text-right p-4 gap-4 text-zinc-900 dark:text-zinc-300 hover:border-zinc-600 duration-500"
+      className="mt-12 w-[340px] h-[90px] border border-zinc-200 dark:border-zinc-700 self-end text-sm flex justify-end text-right p-4 gap-4 text-zinc-900 dark:text-zinc-300 hover:border-zinc-600 duration-500"
     >
       <div className="flex flex-col gap-1">
         <p>Next</p>
         <div className="flex items-center gap-2">
-          <h1 className="text-lg font-bold  text-green-700 dark:text-green-500 underline">
+          <h1 className="text-md font-bold  text-green-700 dark:text-green-500 underline">
             {text}
           </h1>
         </div>
@@ -374,7 +374,7 @@ export const QuizButton = ({ text, link }) => {
   return (
     <button
       onClick={handleNewTab}
-      className="mt-12 w-[260px] bg-green-800 border border-green-600 self-end text-sm flex justify-end text-right p-4 gap-4 text-white hover:border-zinc-600 duration-500 relative overflow-hidden hover:opacity-80"
+      className="mt-12 w-[260px] h-[90px] bg-green-800 border border-green-600 self-end text-sm flex justify-end text-right p-4 gap-4 text-white hover:border-zinc-600 duration-500 relative overflow-hidden hover:opacity-80 outline-none"
     >
       <img
         src="https://cdn-icons-png.flaticon.com/128/5827/5827057.png"
@@ -382,9 +382,9 @@ export const QuizButton = ({ text, link }) => {
         className="absolute -left-4 -bottom-2 opacity-70 size-20"
       />
       <div className="flex flex-col gap-1">
-        <p>Take a Quiz</p>
+        <p className="text-sm">Take a Quiz</p>
         <div className="flex items-center gap-2">
-          <h1 className="text-lg font-bold text-yellow-200 animate-pulse">
+          <h1 className="text-md font-bold text-yellow-200 animate-pulse">
             {text}
           </h1>
         </div>
@@ -401,7 +401,7 @@ export const ChallengeButton = ({ text, link }) => {
   return (
     <button
       onClick={handleNewTab}
-      className="mt-12 w-[260px] bg-green-800 border border-green-600 self-end text-sm flex justify-end text-right p-4 gap-4 text-white hover:border-zinc-600 duration-500 relative overflow-hidden hover:opacity-80"
+      className="mt-12 w-[260px] bg-green-800 border border-green-600 self-end text-sm flex justify-end text-right p-4 gap-4 text-white hover:border-zinc-600 duration-500 relative overflow-hidden hover:opacity-80 outline-none"
     >
       <img
         src="https://cdn-icons-png.flaticon.com/128/5827/5827057.png"

@@ -56,11 +56,17 @@ import Lesson4_Topic3 from "./content/Lesson4/Lesson4.3";
 
 import Lesson5_Topic1 from "./content/Lesson5/Lesson5.1";
 import Lesson5_Topic2 from "./content/Lesson5/Lesson5.2";
+
+import Lesson6_Topic1 from "./content/Lesson6/Lesson6.1";
+import Lesson6_Topic2 from "./content/Lesson6/Lesson6.2";
+import Lesson6_Topic3 from "./content/Lesson6/Lesson6.3";
 // PROVIDER
 import { AuthProvider } from "./context/AuthContext";
 import { ThemeProvider } from "./components/ThemeProvider";
+import { UserProvider } from "./context/UserContext";
 
 import LivePreview from "./pages/LivePreview";
+import CreateProfile from "./pages/CreateProfile";
 
 // Combine routes
 const router = createBrowserRouter([
@@ -168,6 +174,18 @@ const router = createBrowserRouter([
             path: "array-array-methods",
             element: <Lesson5_Topic2 />,
           },
+          {
+            path: "dom",
+            element: <Lesson6_Topic1 />,
+          },
+          {
+            path: "dom-elements",
+            element: <Lesson6_Topic2 />,
+          },
+          {
+            path: "event-listeners-handling-events",
+            element: <Lesson6_Topic3 />,
+          },
         ],
       },
     ],
@@ -176,7 +194,10 @@ const router = createBrowserRouter([
     path: "code-editor",
     element: <CodeEditor />,
   },
-
+  {
+    path: "create-profile",
+    element: <CreateProfile />,
+  },
   {
     path: "/login",
     element: <Login />,
@@ -213,7 +234,9 @@ const router = createBrowserRouter([
     path: "/quiz/:quizType",
     element: (
       <ThemeProvider>
-        <Quiz />
+        <ProtectedRoute>
+          <Quiz />
+        </ProtectedRoute>
       </ThemeProvider>
     ),
   },
@@ -241,7 +264,9 @@ export default function App() {
   return (
     <div className="App text-zinc-900 dark:text-zinc-300 font-NotoSans">
       <AuthProvider>
-        <RouterProvider router={router} />
+        <UserProvider>
+          <RouterProvider router={router} />
+        </UserProvider>
       </AuthProvider>
     </div>
   );

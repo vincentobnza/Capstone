@@ -92,7 +92,7 @@ export const Lesson6 = [
   {
     id: 1,
     name: "What is DOM?",
-    link: "javascript-dom",
+    link: "dom",
   },
   {
     id: 2,

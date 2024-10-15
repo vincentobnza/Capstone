@@ -5,7 +5,15 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const { Task } = require("./api/Task");
-const { IntroductionQuiz, Lesson2 } = require("./api/Quiz");
+const {
+  IntroductionQuiz,
+  Lesson2,
+  Lesson3,
+  Lesson4,
+  Lesson5,
+  Lesson6,
+  Lesson8,
+} = require("./api/Quiz");
 const { operator_debug } = require("./api/DebugChallenge");
 
 const PORT = process.env.PORT || 9000;
@@ -56,6 +64,11 @@ app.get("/api/quiz/:quizType", (req, res) => {
   const quizzes = {
     introduction: IntroductionQuiz,
     lesson2: Lesson2,
+    lesson3: Lesson3,
+    lesson4: Lesson4,
+    lesson5: Lesson5,
+    lesson6: Lesson6,
+    lesson8: Lesson8,
   };
 
   const quizData = quizzes[quizType];

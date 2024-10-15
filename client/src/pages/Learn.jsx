@@ -70,12 +70,9 @@ const Header = () => {
       <div className="flex flex-col gap-4">
         <h3 className="font-semibold">{"#JavaScript | #Learn"}</h3>
         <h1 className="text-4xl font-semibold text-zinc-700 dark:text-zinc-50">
-          Learn the Modern JavaScript
+          Learn the Fundamentals of JavaScript
         </h1>
-        <p>
-          From the basics to advanced topics with simple, but detailed
-          explanations.
-        </p>
+        <p>Master the core concepts of JavaScript for web development.</p>
 
         {/* SEARCH FOR LESSONS */}
         <div className="mt-8 flex items-center gap-1">
@@ -86,7 +83,7 @@ const Header = () => {
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
               <Search className="size-4 text-gray-400" />
             </div>
-            <div className="w-full bg-zinc-50 dark:bg-zinc-800 pl-10 pr-4 py-3 bg-transparent rounded-md outline-none flex justify-start items-center border border-zinc-200 dark:border-zinc-700 hover:border-zinxc-300 dark:hover:border-zinc-600">
+            <div className="w-full bg-zinc-50 dark:bg-zinc-800 pl-10 pr-4 py-3 bg-transparent outline-none flex justify-start items-center border border-zinc-200 dark:border-zinc-700 hover:border-zinxc-300 dark:hover:border-zinc-600">
               <p className="text-sm">Quick Search for Lessons</p>
             </div>
 

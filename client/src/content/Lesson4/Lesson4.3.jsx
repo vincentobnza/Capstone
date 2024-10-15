@@ -196,11 +196,13 @@ console.log(doubledArrow);`}
             arrow function version is much shorter and easier to read.
           </Description>
         </section>
-
-        <NextButton
-          link="/learn-js/objects-properties-methods"
-          text="Object Properties and Methods"
-        />
+        <div className="w-full flex items-center gap-3 justify-end">
+          <QuizButton text="Lesson 4" link="/quiz/lesson4" />
+          <NextButton
+            link="/learn-js/objects-properties-methods"
+            text="Object Properties and Methods"
+          />
+        </div>
       </div>
     </div>
   );
