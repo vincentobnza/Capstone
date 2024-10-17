@@ -1,0 +1,164 @@
+import React, { useState, useCallback, useRef } from "react";
+import { useAuth } from "@/context/AuthContext";
+import { motion } from "framer-motion";
+import { toPng } from "html-to-image";
+import { Button, Card, Progress } from "@nextui-org/react";
+import { Download } from "lucide-react";
+import CertificateOfCompletion from "../assets/CertificateOfCompletion.png";
+import CertificateOfExcellence from "../assets/CertificateOfExcellence.png";
+
+export default function Certificate() {
+  const { user } = useAuth();
+  const [activeTab, setActiveTab] = useState("completion");
+  const [isDownloading, setIsDownloading] = useState(false);
+  const certificateRef = useRef(null);
+
+  // Simulated progress values (replace with actual progress from your app's state)
+  const [courseProgress, setCourseProgress] = useState(50);
+  const [excellencePoints, setExcellencePoints] = useState(500);
+
+  const today = new Date();
+  const formattedDate = today.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+  const onDownload = useCallback(() => {
+    if (certificateRef.current === null) {
+      return;
+    }
+
+    setIsDownloading(true);
+
+    setTimeout(() => {
+      toPng(certificateRef.current, {
+        cacheBust: true,
+        width: 1000,
+        height: 700,
+      })
+        .then((dataUrl) => {
+          const link = document.createElement("a");
+          link.download = `${activeTab}-certificate.png`;
+          link.href = dataUrl;
+          link.click();
+        })
+        .catch((err) => {
+          console.error(err);
+        })
+        .finally(() => {
+          setIsDownloading(false);
+        });
+    }, 100);
+  }, [certificateRef, activeTab]);
+
+  const isProgressComplete =
+    activeTab === "completion"
+      ? courseProgress === 100
+      : excellencePoints >= 1000;
+
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen p-4 pb-10">
+      <h1 className="mb-8 text-4xl font-bold text-gray-800 dark:text-zinc-200">
+        Your Certificates
+      </h1>
+      <div className="flex mb-6 space-x-2">
+        <Button
+          radius="none"
+          auto
+          color={activeTab === "completion" ? "success" : "default"}
+          onClick={() => setActiveTab("completion")}
+          className="font-semibold"
+        >
+          Certificate of Completion
+        </Button>
+        <Button
+          radius="none"
+          auto
+          color={activeTab === "excellence" ? "warning" : "default"}
+          onClick={() => setActiveTab("excellence")}
+          className="font-semibold"
+        >
+          Certificate of Excellence
+        </Button>
+      </div>
+      <Card className="w-full max-w-3xl overflow-hidden" radius="none">
+        <div className="relative">
+          <motion.div
+            ref={certificateRef}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="relative w-full aspect-[1.414/1]"
+          >
+            <img
+              src={
+                activeTab === "completion"
+                  ? CertificateOfCompletion
+                  : CertificateOfExcellence
+              }
+              alt={`Certificate of ${
+                activeTab === "completion" ? "Completion" : "Excellence"
+              }`}
+              className="object-cover w-full h-full"
+            />
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
+              <p className="text-xl font-bold text-gray-900 mb-7 font-Ubuntu">
+                {user.user_metadata.name}
+              </p>
+              <div className="absolute left-0 w-full top-[380px]">
+                <p className="text-xs font-semibold text-gray-600">
+                  Awarded on {formattedDate}
+                </p>
+              </div>
+            </div>
+          </motion.div>
+          <div
+            className={
+              isProgressComplete
+                ? "hidden"
+                : "absolute inset-0 flex items-center justify-center bg-black bg-zinc-900/50 backdrop-blur"
+            }
+          >
+            <div className="w-3/4 p-10 bg-white shadow-lg">
+              <h3 className="mb-4 text-xl font-semibold text-center text-gray-800">
+                {activeTab === "completion"
+                  ? "Course Progress"
+                  : "Excellence Points"}
+              </h3>
+              <Progress
+                value={
+                  activeTab === "completion"
+                    ? courseProgress
+                    : excellencePoints / 10
+                }
+                color={activeTab === "completion" ? "success" : "warning"}
+                className="mb-4"
+              />
+              <p className="text-sm font-bold text-center text-zinc-900">
+                {activeTab === "completion"
+                  ? `${courseProgress}% completed`
+                  : `${excellencePoints} / 1000 points`}
+              </p>
+            </div>
+          </div>
+        </div>
+      </Card>
+      <Button
+        auto
+        onClick={onDownload}
+        disabled={isDownloading || !isProgressComplete}
+        className={`flex items-center gap-3 mt-8 font-bold text-black bg-white rounded ${
+          isProgressComplete ? "cursor-pointer" : "cursor-not-allowed"
+        }`}
+      >
+        {isDownloading
+          ? "Generating file..."
+          : isProgressComplete
+          ? "Download Certificate"
+          : "Complete progress to download"}
+        <Download size={16} />
+      </Button>
+    </div>
+  );
+}

@@ -43,13 +43,9 @@ export default function Quiz() {
       >
         <div className="w-full flex max-w-screen-lg mx-auto justify-between p-2">
           <div className="ml-2 relative flex flex-col gap-2">
-            <h1 className="font-bold text-zinc-200 text-lg">{"CODESCRIPT"}</h1>
-
-            <img
-              src="https://cdn-icons-png.flaticon.com/128/14034/14034774.png"
-              alt="crown"
-              className="w-8 absolute -top-5 -left-4 -rotate-12 grayscale"
-            />
+            <h1 className="bg-gradient-to-br from-green-500 to-green-600 dark:to-green-800 bg-clip-text text-transparent font-black text-lg font-Orbitron">
+              CodeScript
+            </h1>
           </div>
 
           <div className="flex items-center gap-8">

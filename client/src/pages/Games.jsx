@@ -56,7 +56,7 @@ const GamesCard = () => {
 
         <div className="flex items-center">
           <Link
-            to="/quiz"
+            to="/quiz-game"
             className="py-3 w-[140px] grid place-items-center bg-orange-700  text-white font-medium rounded-lg border-2 border-orange-500 text-sm hover:opacity-90"
           >
             Play Now

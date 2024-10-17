@@ -22,6 +22,8 @@ export default {
         Odibee: ["Odibee Sans", "sans-serif"],
         NotoSans: ["Noto Sans", "sans-serif"],
         Orbitron: ["Orbitron", "sans-serif"],
+        DancingScript: ["Dancing Script", "cursive"],
+        Ubuntu: ["Ubuntu", "sans-serif"],
       },
     },
   },

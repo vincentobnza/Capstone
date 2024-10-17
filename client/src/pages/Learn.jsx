@@ -27,7 +27,7 @@ export default function Learn() {
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1.5 }}
-      className="w-full bg-white dark:bg-zinc-900 space-y-16  dark:text-zinc-400 pb-24"
+      className="w-full pb-24 space-y-16 bg-white dark:bg-zinc-900 dark:text-zinc-400"
     >
       <ScrollUp />
       <LearnJs />
@@ -66,7 +66,7 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="w-full max-w-screen-lg mx-auto flex justify-between gap-4 items-start">
+    <div className="flex items-start justify-between w-full max-w-screen-lg gap-4 mx-auto">
       <div className="flex flex-col gap-4">
         <h3 className="font-semibold">{"#JavaScript | #Learn"}</h3>
         <h1 className="text-4xl font-semibold text-zinc-700 dark:text-zinc-50">
@@ -75,19 +75,19 @@ const Header = () => {
         <p>Master the core concepts of JavaScript for web development.</p>
 
         {/* SEARCH FOR LESSONS */}
-        <div className="mt-8 flex items-center gap-1">
+        <div className="flex items-center gap-1 mt-8">
           <div
             className="relative w-full max-w-md cursor-pointer"
             onClick={onOpen}
           >
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-              <Search className="size-4 text-gray-400" />
+              <Search className="text-gray-400 size-4" />
             </div>
-            <div className="w-full bg-zinc-50 dark:bg-zinc-800 pl-10 pr-4 py-3 bg-transparent outline-none flex justify-start items-center border border-zinc-200 dark:border-zinc-700 hover:border-zinxc-300 dark:hover:border-zinc-600">
+            <div className="flex items-center justify-start w-full py-3 pl-10 pr-4 bg-transparent border outline-none bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 hover:border-zinxc-300 dark:hover:border-zinc-600">
               <p className="text-sm">Quick Search for Lessons</p>
             </div>
 
-            <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none gap-2">
+            <div className="absolute inset-y-0 right-0 flex items-center gap-2 pr-3 pointer-events-none">
               <h1 className="text-xs font-semibold">Ctrl K</h1>
               <MdKeyboardCommandKey
                 size={17}
@@ -105,32 +105,39 @@ const Header = () => {
         onOpenChange={onOpenChange}
       />
 
-      <Link to="/leaderboard" className="flex">
-        <button className="py-2 px-3 border border-zinc-200 dark:border-zinc-700 text-xs font-semibold rounded">
-          View Progress
-        </button>
-      </Link>
+      <div className="flex items-center gap-2">
+        <Link to="/certificate" className="flex">
+          <button className="px-3 py-2 text-xs font-semibold border rounded border-zinc-200 dark:border-zinc-700">
+            My Certificate
+          </button>
+        </Link>
+        <Link to="/leaderboard" className="flex">
+          <button className="px-3 py-2 text-xs font-semibold border rounded border-zinc-200 dark:border-zinc-700">
+            View Progress
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };
 
 const Content = () => {
   return (
-    <div className="w-full max-w-screen-lg mx-auto flex flex-col gap-4">
+    <div className="flex flex-col w-full max-w-screen-lg gap-4 mx-auto">
       <div className="flex flex-col gap-3">
         <div className="flex items-center gap-4">
           <h1 className="text-xl text-zinc-700 dark:text-zinc-50">Roadmaps</h1>
           <RiRoadMapLine size={20} />
         </div>
 
-        <div className="w-full p-5 text-sm bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 space-y-4">
+        <div className="w-full p-5 space-y-4 text-sm border bg-zinc-100 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700">
           <h1 className="text-lg font-medium dark:text-zinc-100">
             The JavaScript curriculum is structured in this:
           </h1>
 
-          <ul className="mt-8 flex flex-col gap-2">
+          <ul className="flex flex-col gap-2 mt-8">
             <li className="list-decimal list-inside">
-              <span className="text-black dark:text-yellow-600 underline">
+              <span className="text-black underline dark:text-yellow-600">
                 JavaScript
               </span>
               : Covers the fundamentals of JavaScript as a programming language.
@@ -151,10 +158,10 @@ const Content = () => {
 
 const Lessons = () => {
   return (
-    <div className="w-full max-w-screen-lg mx-auto flex flex-col space-y-10">
+    <div className="flex flex-col w-full max-w-screen-lg mx-auto space-y-10">
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-1">
-          <h3 className="text-md text-yellow-600 font-semibold">
+          <h3 className="font-semibold text-yellow-600 text-md">
             The JavaScript Language
           </h3>
         </div>
@@ -182,29 +189,29 @@ const Lesson1Data = () => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-6">
-        <FaDiamond className="text-yellow-600 text-sm animate-pulse" />
+        <FaDiamond className="text-sm text-yellow-600 animate-pulse" />
         <div className="flex flex-col gap-1">
           <p className="text-xs font-semibold">Lesson 1</p>
-          <h1 className="text-zinc-700 dark:text-zinc-200 font-semibold">
+          <h1 className="font-semibold text-zinc-700 dark:text-zinc-200">
             Introduction to JavaScript
           </h1>
         </div>
       </div>
 
-      <ul className="grid grid-cols-2 md:grid-cols-4 gap-2 p-2">
+      <ul className="grid grid-cols-2 gap-2 p-2 md:grid-cols-4">
         {Lesson1.map((item, idx) => (
           <Link
             preventScrollReset={false}
             to={item.link}
             key={idx}
-            className="flex flex-col gap-3 text-zinc-700 dark:text-zinc-200 p-3 h-16  border dark:border-zinc-700 border-zinc-200 relative overflow-hidden group bg-zinc-50 dark:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-500 transition duration-300 ease-in-out group"
+            className="relative flex flex-col h-16 gap-3 p-3 overflow-hidden transition duration-300 ease-in-out border text-zinc-700 dark:text-zinc-200 dark:border-zinc-700 border-zinc-200 group bg-zinc-50 dark:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-500"
           >
             <RiJavascriptLine
               size={50}
-              className="absolute -bottom-3 -right-3 dark:text-zinc-700 text-zinc-200 group:hover:text-zinc-300 dark:group-hover:text-zinc-500 duration-300 ease-in-out"
+              className="absolute duration-300 ease-in-out -bottom-3 -right-3 dark:text-zinc-700 text-zinc-200 group:hover:text-zinc-300 dark:group-hover:text-zinc-500"
             />
-            <div className="w-full flex justify-between">
-              <h1 className="flex items-center text-sm text-zinc-700 dark:text-zinc-300 duration underline-offset-2 dark:group:hover:text-yellow-200 z-10 font-semibold">
+            <div className="flex justify-between w-full">
+              <h1 className="z-10 flex items-center text-sm font-semibold text-zinc-700 dark:text-zinc-300 duration underline-offset-2 dark:group:hover:text-yellow-200">
                 {item.name}
               </h1>
               <GoArrowRight className=" text-zinc-400 group:hover:text-zinc-300 dark:group-hover:text-zinc-200" />
@@ -220,29 +227,29 @@ const Lesson2Data = () => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-6">
-        <FaDiamond className="text-green-600 text-sm animate-pulse" />
+        <FaDiamond className="text-sm text-green-600 animate-pulse" />
         <div className="flex flex-col gap-1">
           <p className="text-xs font-semibold">Lesson 2</p>
-          <h1 className="text-zinc-700 dark:text-zinc-200 font-semibold">
+          <h1 className="font-semibold text-zinc-700 dark:text-zinc-200">
             JavaScript Basics
           </h1>
         </div>
       </div>
 
-      <ul className="grid grid-cols-2 md:grid-cols-4 gap-2 p-2">
+      <ul className="grid grid-cols-2 gap-2 p-2 md:grid-cols-4">
         {Lesson2.map((item, idx) => (
           <Link
             to={item.link}
             key={idx}
-            className="flex flex-col gap-3 text-zinc-700 dark:text-zinc-200 p-3 h-16 border dark:border-zinc-700 border-zinc-200 relative overflow-hidden group bg-zinc-50 dark:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-500 transition duration-300 ease-in-out group"
+            className="relative flex flex-col h-16 gap-3 p-3 overflow-hidden transition duration-300 ease-in-out border text-zinc-700 dark:text-zinc-200 dark:border-zinc-700 border-zinc-200 group bg-zinc-50 dark:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-500"
           >
             <RiJavascriptLine
               size={50}
-              className="absolute -bottom-3 -right-3 dark:text-zinc-700 text-zinc-200 group:hover:text-zinc-300 dark:group-hover:text-zinc-500 duration-300 ease-in-out"
+              className="absolute duration-300 ease-in-out -bottom-3 -right-3 dark:text-zinc-700 text-zinc-200 group:hover:text-zinc-300 dark:group-hover:text-zinc-500"
             />
 
-            <div className="w-full flex justify-between">
-              <h1 className="flex items-center text-sm text-zinc-700 dark:text-zinc-300 duration underline-offset-2 dark:group:hover:text-yellow-200 z-10 font-semibold">
+            <div className="flex justify-between w-full">
+              <h1 className="z-10 flex items-center text-sm font-semibold text-zinc-700 dark:text-zinc-300 duration underline-offset-2 dark:group:hover:text-yellow-200">
                 {item.name}
               </h1>
               <GoArrowRight className=" text-zinc-400 group:hover:text-zinc-300 dark:group-hover:text-zinc-200" />
@@ -258,29 +265,29 @@ const Lesson3Data = () => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-6">
-        <FaDiamond className="text-indigo-600 text-sm animate-pulse" />
+        <FaDiamond className="text-sm text-indigo-600 animate-pulse" />
         <div className="flex flex-col gap-1">
           <p className="text-xs font-semibold">Lesson 3</p>
-          <h1 className="text-zinc-700 dark:text-zinc-200 font-semibold">
+          <h1 className="font-semibold text-zinc-700 dark:text-zinc-200">
             Control Structure
           </h1>
         </div>
       </div>
 
-      <ul className="grid grid-cols-2 md:grid-cols-4 gap-2 p-2">
+      <ul className="grid grid-cols-2 gap-2 p-2 md:grid-cols-4">
         {Lesson3.map((item, idx) => (
           <Link
             to={item.link}
             key={idx}
-            className="flex flex-col gap-3 text-zinc-700 dark:text-zinc-200 p-3 h-16 border dark:border-zinc-700 border-zinc-200 relative overflow-hidden group bg-zinc-50 dark:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-500 transition duration-300 ease-in-out group"
+            className="relative flex flex-col h-16 gap-3 p-3 overflow-hidden transition duration-300 ease-in-out border text-zinc-700 dark:text-zinc-200 dark:border-zinc-700 border-zinc-200 group bg-zinc-50 dark:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-500"
           >
             <RiJavascriptLine
               size={50}
-              className="absolute -bottom-3 -right-3 dark:text-zinc-700 text-zinc-200 group:hover:text-zinc-300 dark:group-hover:text-zinc-500 duration-300 ease-in-out"
+              className="absolute duration-300 ease-in-out -bottom-3 -right-3 dark:text-zinc-700 text-zinc-200 group:hover:text-zinc-300 dark:group-hover:text-zinc-500"
             />
 
-            <div className="w-full flex justify-between">
-              <h1 className="flex items-center text-sm text-zinc-700 dark:text-zinc-300 duration underline-offset-2 dark:group:hover:text-yellow-200 z-10 font-semibold">
+            <div className="flex justify-between w-full">
+              <h1 className="z-10 flex items-center text-sm font-semibold text-zinc-700 dark:text-zinc-300 duration underline-offset-2 dark:group:hover:text-yellow-200">
                 {item.name}
               </h1>
               <GoArrowRight className=" text-zinc-400 group:hover:text-zinc-300 dark:group-hover:text-zinc-200" />
@@ -296,29 +303,29 @@ const Lesson4Data = () => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-6">
-        <FaDiamond className="text-orange-600 text-sm animate-pulse" />
+        <FaDiamond className="text-sm text-orange-600 animate-pulse" />
         <div className="flex flex-col gap-1">
           <p className="text-xs font-semibold">Lesson 4</p>
-          <h1 className="text-zinc-700 dark:text-zinc-200 font-semibold">
+          <h1 className="font-semibold text-zinc-700 dark:text-zinc-200">
             Functions in JavaScript
           </h1>
         </div>
       </div>
 
-      <ul className="grid grid-cols-2 md:grid-cols-4 gap-2 p-2">
+      <ul className="grid grid-cols-2 gap-2 p-2 md:grid-cols-4">
         {Lesson4.map((item, idx) => (
           <Link
             to={item.link}
             key={idx}
-            className="flex flex-col gap-3 text-zinc-700 dark:text-zinc-200 p-3 h-16 border dark:border-zinc-700 border-zinc-200 relative overflow-hidden group bg-zinc-50 dark:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-500 transition duration-300 ease-in-out group"
+            className="relative flex flex-col h-16 gap-3 p-3 overflow-hidden transition duration-300 ease-in-out border text-zinc-700 dark:text-zinc-200 dark:border-zinc-700 border-zinc-200 group bg-zinc-50 dark:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-500"
           >
             <RiJavascriptLine
               size={50}
-              className="absolute -bottom-3 -right-3 dark:text-zinc-700 text-zinc-200 group:hover:text-zinc-300 dark:group-hover:text-zinc-500 duration-300 ease-in-out"
+              className="absolute duration-300 ease-in-out -bottom-3 -right-3 dark:text-zinc-700 text-zinc-200 group:hover:text-zinc-300 dark:group-hover:text-zinc-500"
             />
 
-            <div className="w-full flex justify-between">
-              <h1 className="flex items-center text-sm text-zinc-700 dark:text-zinc-300 duration underline-offset-2 dark:group:hover:text-yellow-200 z-10 font-semibold">
+            <div className="flex justify-between w-full">
+              <h1 className="z-10 flex items-center text-sm font-semibold text-zinc-700 dark:text-zinc-300 duration underline-offset-2 dark:group:hover:text-yellow-200">
                 {item.name}
               </h1>
               <GoArrowRight className=" text-zinc-400 group:hover:text-zinc-300 dark:group-hover:text-zinc-200" />
@@ -334,29 +341,29 @@ const Lesson5Data = () => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-6">
-        <FaDiamond className="text-sky-600 text-sm animate-pulse" />
+        <FaDiamond className="text-sm text-sky-600 animate-pulse" />
         <div className="flex flex-col gap-1">
           <p className="text-xs font-semibold">Lesson 5</p>
-          <h1 className="text-zinc-700 dark:text-zinc-200 font-semibold">
+          <h1 className="font-semibold text-zinc-700 dark:text-zinc-200">
             JavaScript Objects and Arrays
           </h1>
         </div>
       </div>
 
-      <ul className="grid grid-cols-2 md:grid-cols-4 gap-2 p-2">
+      <ul className="grid grid-cols-2 gap-2 p-2 md:grid-cols-4">
         {Lesson5.map((item, idx) => (
           <Link
             to={item.link}
             key={idx}
-            className="flex flex-col gap-3 text-zinc-700 dark:text-zinc-200 p-3 h-16 border dark:border-zinc-700 border-zinc-200 relative overflow-hidden group bg-zinc-50 dark:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-500 transition duration-300 ease-in-out group"
+            className="relative flex flex-col h-16 gap-3 p-3 overflow-hidden transition duration-300 ease-in-out border text-zinc-700 dark:text-zinc-200 dark:border-zinc-700 border-zinc-200 group bg-zinc-50 dark:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-500"
           >
             <RiJavascriptLine
               size={50}
-              className="absolute -bottom-3 -right-3 dark:text-zinc-700 text-zinc-200 group:hover:text-zinc-300 dark:group-hover:text-zinc-500 duration-300 ease-in-out"
+              className="absolute duration-300 ease-in-out -bottom-3 -right-3 dark:text-zinc-700 text-zinc-200 group:hover:text-zinc-300 dark:group-hover:text-zinc-500"
             />
 
-            <div className="w-full flex justify-between">
-              <h1 className="flex items-center text-sm text-zinc-700 dark:text-zinc-300 duration underline-offset-2 dark:group:hover:text-yellow-200 z-10 font-semibold">
+            <div className="flex justify-between w-full">
+              <h1 className="z-10 flex items-center text-sm font-semibold text-zinc-700 dark:text-zinc-300 duration underline-offset-2 dark:group:hover:text-yellow-200">
                 {item.name}
               </h1>
               <GoArrowRight className=" text-zinc-400 group:hover:text-zinc-300 dark:group-hover:text-zinc-200" />
@@ -371,29 +378,29 @@ const Lesson6Data = () => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-6">
-        <FaDiamond className="text-purple-600 text-sm animate-pulse" />
+        <FaDiamond className="text-sm text-purple-600 animate-pulse" />
         <div className="flex flex-col gap-1">
           <p className="text-xs font-semibold">Lesson 6</p>
-          <h1 className="text-zinc-700 dark:text-zinc-200 font-semibold">
+          <h1 className="font-semibold text-zinc-700 dark:text-zinc-200">
             DOM Manipulation
           </h1>
         </div>
       </div>
 
-      <ul className="grid grid-cols-2 md:grid-cols-4 gap-2 p-2">
+      <ul className="grid grid-cols-2 gap-2 p-2 md:grid-cols-4">
         {Lesson6.map((item, idx) => (
           <Link
             to={item.link}
             key={idx}
-            className="flex flex-col gap-3 text-zinc-700 dark:text-zinc-200 p-3 h-16 border dark:border-zinc-700 border-zinc-200 relative overflow-hidden group bg-zinc-50 dark:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-500 transition duration-300 ease-in-out group"
+            className="relative flex flex-col h-16 gap-3 p-3 overflow-hidden transition duration-300 ease-in-out border text-zinc-700 dark:text-zinc-200 dark:border-zinc-700 border-zinc-200 group bg-zinc-50 dark:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-500"
           >
             <RiJavascriptLine
               size={50}
-              className="absolute -bottom-3 -right-3 dark:text-zinc-700 text-zinc-200 group:hover:text-zinc-300 dark:group-hover:text-zinc-500 duration-300 ease-in-out"
+              className="absolute duration-300 ease-in-out -bottom-3 -right-3 dark:text-zinc-700 text-zinc-200 group:hover:text-zinc-300 dark:group-hover:text-zinc-500"
             />
 
-            <div className="w-full flex justify-between">
-              <h1 className="flex items-center text-sm text-zinc-700 dark:text-zinc-300 duration underline-offset-2 dark:group:hover:text-yellow-200 z-10 font-semibold">
+            <div className="flex justify-between w-full">
+              <h1 className="z-10 flex items-center text-sm font-semibold text-zinc-700 dark:text-zinc-300 duration underline-offset-2 dark:group:hover:text-yellow-200">
                 {item.name}
               </h1>
               <GoArrowRight className=" text-zinc-400 group:hover:text-zinc-300 dark:group-hover:text-zinc-200" />
@@ -409,29 +416,29 @@ const Lesson7Data = () => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-6">
-        <FaDiamond className="text-zinc-600 text-sm animate-pulse" />
+        <FaDiamond className="text-sm text-zinc-600 animate-pulse" />
         <div className="flex flex-col gap-1">
           <p className="text-xs font-semibold">Lesson 7</p>
-          <h1 className="text-zinc-700 dark:text-zinc-200 font-semibold">
+          <h1 className="font-semibold text-zinc-700 dark:text-zinc-200">
             JavaScript Events
           </h1>
         </div>
       </div>
 
-      <ul className="grid grid-cols-2 md:grid-cols-4 gap-2 p-2">
+      <ul className="grid grid-cols-2 gap-2 p-2 md:grid-cols-4">
         {Lesson7.map((item, idx) => (
           <Link
             to={item.link}
             key={idx}
-            className="flex flex-col gap-3 text-zinc-700 dark:text-zinc-200 p-3 h-16 border dark:border-zinc-700 border-zinc-200 relative overflow-hidden group bg-zinc-50 dark:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-500 transition duration-300 ease-in-out group"
+            className="relative flex flex-col h-16 gap-3 p-3 overflow-hidden transition duration-300 ease-in-out border text-zinc-700 dark:text-zinc-200 dark:border-zinc-700 border-zinc-200 group bg-zinc-50 dark:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-500"
           >
             <RiJavascriptLine
               size={50}
-              className="absolute -bottom-3 -right-3 dark:text-zinc-700 text-zinc-200 group:hover:text-zinc-300 dark:group-hover:text-zinc-500 duration-300 ease-in-out"
+              className="absolute duration-300 ease-in-out -bottom-3 -right-3 dark:text-zinc-700 text-zinc-200 group:hover:text-zinc-300 dark:group-hover:text-zinc-500"
             />
 
-            <div className="w-full flex justify-between">
-              <h1 className="flex items-center text-sm text-zinc-700 dark:text-zinc-300 duration underline-offset-2 dark:group:hover:text-yellow-200 z-10 font-semibold">
+            <div className="flex justify-between w-full">
+              <h1 className="z-10 flex items-center text-sm font-semibold text-zinc-700 dark:text-zinc-300 duration underline-offset-2 dark:group:hover:text-yellow-200">
                 {item.name}
               </h1>
               <GoArrowRight className=" text-zinc-400 group:hover:text-zinc-300 dark:group-hover:text-zinc-200" />
@@ -447,29 +454,29 @@ const Lesson8Data = () => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-6">
-        <FaDiamond className="text-cyan-600 text-sm animate-pulse" />
+        <FaDiamond className="text-sm text-cyan-600 animate-pulse" />
         <div className="flex flex-col gap-1">
           <p className="text-xs font-semibold">Lesson 8</p>
-          <h1 className="text-zinc-700 dark:text-zinc-200 font-semibold">
+          <h1 className="font-semibold text-zinc-700 dark:text-zinc-200">
             Error Handling
           </h1>
         </div>
       </div>
 
-      <ul className="grid grid-cols-2 md:grid-cols-4 gap-2 p-2">
+      <ul className="grid grid-cols-2 gap-2 p-2 md:grid-cols-4">
         {Lesson8.map((item, idx) => (
           <Link
             to={item.link}
             key={idx}
-            className="flex flex-col gap-3 text-zinc-700 dark:text-zinc-200 p-3 h-16 border dark:border-zinc-700 border-zinc-200 relative overflow-hidden group bg-zinc-50 dark:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-500 transition duration-300 ease-in-out group"
+            className="relative flex flex-col h-16 gap-3 p-3 overflow-hidden transition duration-300 ease-in-out border text-zinc-700 dark:text-zinc-200 dark:border-zinc-700 border-zinc-200 group bg-zinc-50 dark:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-500"
           >
             <RiJavascriptLine
               size={50}
-              className="absolute -bottom-3 -right-3 dark:text-zinc-700 text-zinc-200 group:hover:text-zinc-300 dark:group-hover:text-zinc-500 duration-300 ease-in-out"
+              className="absolute duration-300 ease-in-out -bottom-3 -right-3 dark:text-zinc-700 text-zinc-200 group:hover:text-zinc-300 dark:group-hover:text-zinc-500"
             />
 
-            <div className="w-full flex justify-between">
-              <h1 className="flex items-center text-sm text-zinc-700 dark:text-zinc-300 duration underline-offset-2 dark:group:hover:text-yellow-200 z-10 font-semibold">
+            <div className="flex justify-between w-full">
+              <h1 className="z-10 flex items-center text-sm font-semibold text-zinc-700 dark:text-zinc-300 duration underline-offset-2 dark:group:hover:text-yellow-200">
                 {item.name}
               </h1>
               <GoArrowRight className=" text-zinc-400 group:hover:text-zinc-300 dark:group-hover:text-zinc-200" />

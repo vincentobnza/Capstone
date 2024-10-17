@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import supabase from "@/config/supabaseClient";
-// Initialize Supabase client
 
 const UserContext = createContext(null);
 
@@ -11,7 +10,43 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     fetchUsers();
     fetchCurrentUser();
+
+    // Set up real-time subscription
+    const usersSubscription = supabase
+      .channel("public:profiles")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "profiles" },
+        handleUserChange
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(usersSubscription);
+    };
   }, []);
+
+  const handleUserChange = (payload) => {
+    if (payload.eventType === "INSERT") {
+      setUsers((prevUsers) => [...prevUsers, payload.new]);
+    } else if (payload.eventType === "UPDATE") {
+      setUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user.id === payload.new.id ? payload.new : user
+        )
+      );
+      if (currentUser && currentUser.id === payload.new.id) {
+        setCurrentUser(payload.new);
+      }
+    } else if (payload.eventType === "DELETE") {
+      setUsers((prevUsers) =>
+        prevUsers.filter((user) => user.id !== payload.old.id)
+      );
+      if (currentUser && currentUser.id === payload.old.id) {
+        setCurrentUser(null);
+      }
+    }
+  };
 
   const fetchUsers = async () => {
     const { data, error } = await supabase
@@ -67,9 +102,6 @@ export const UserProvider = ({ children }) => {
 
     if (error) {
       console.error("Error inserting score:", error);
-    } else {
-      fetchUsers();
-      fetchCurrentUser();
     }
   };
 
@@ -81,9 +113,6 @@ export const UserProvider = ({ children }) => {
 
     if (error) {
       console.error("Error updating score:", error);
-    } else {
-      fetchUsers();
-      fetchCurrentUser();
     }
   };
 
@@ -95,8 +124,6 @@ export const UserProvider = ({ children }) => {
 
     if (error) {
       console.error("Error updating progress:", error);
-    } else {
-      fetchCurrentUser();
     }
   };
 
@@ -105,11 +132,6 @@ export const UserProvider = ({ children }) => {
 
     if (error) {
       console.error("Error deleting user:", error);
-    } else {
-      fetchUsers();
-      if (currentUser && currentUser.id === userId) {
-        setCurrentUser(null);
-      }
     }
   };
 

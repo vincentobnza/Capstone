@@ -19,6 +19,8 @@ import Games from "./pages/Games";
 import Quiz from "./pages/Quiz";
 import ContentMap from "./pages/ContentMap";
 import DebugChallenges from "./pages/DebugChallenges";
+import Settings from "./pages/Settings";
+import Certificate from "./pages/Certificate";
 
 // LAYOUT
 import RootLayout from "./layout/RootLayout";
@@ -68,6 +70,8 @@ import { UserProvider } from "./context/UserContext";
 import LivePreview from "./pages/LivePreview";
 import CreateProfile from "./pages/CreateProfile";
 
+import QuizGame from "./pages/QuizGame";
+
 // Combine routes
 const router = createBrowserRouter([
   {
@@ -105,6 +109,18 @@ const router = createBrowserRouter([
       {
         path: "privacy-policy",
         element: <PrivacyPolicy />,
+      },
+      {
+        path: "settings",
+        element: <Settings />,
+      },
+      {
+        path: "certificate",
+        element: (
+          <ProtectedRoute>
+            <Certificate />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "learn-js",
@@ -257,6 +273,15 @@ const router = createBrowserRouter([
   {
     path: "/code-editor/live-preview",
     element: <LivePreview />,
+  },
+
+  {
+    path: "/quiz-game",
+    element: (
+      <ProtectedRoute>
+        <QuizGame />
+      </ProtectedRoute>
+    ),
   },
 ]);
 

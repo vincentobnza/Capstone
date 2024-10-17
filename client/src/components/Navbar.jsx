@@ -31,18 +31,18 @@ export default function Navbar() {
   };
 
   return (
-    <div className="sticky top-0 w-full bg-white/20 dark:bg-zinc-900/40 backdrop-blur-md text-zinc-900 dark:text-zinc-300 grid place-items-center z-50 border-b border-zinc-100 dark:border-zinc-800">
+    <div className="sticky top-0 z-50 grid w-full border-b bg-white/20 dark:bg-zinc-900/40 backdrop-blur-md text-zinc-900 dark:text-zinc-300 place-items-center border-zinc-100 dark:border-zinc-800">
       <NavbarQuickSearch
         isOpen={isOpen}
         onOpen={onOpen}
         onOpenChange={onOpenChange}
       />
-      <div className="w-full max-w-screen-xl mx-auto p-5 flex justify-between items-center">
+      <div className="flex items-center justify-between w-full max-w-screen-xl p-5 mx-auto">
         <div className="flex items-center">
           <div className="relative">
             <Link
               to="/"
-              className="bg-gradient-to-br from-green-500 to-green-600 dark:to-green-800 bg-clip-text text-transparent font-black text-lg font-Orbitron"
+              className="text-lg font-black text-transparent bg-gradient-to-br from-green-500 to-green-600 dark:to-green-800 bg-clip-text font-Orbitron"
             >
               CodeScript
             </Link>
@@ -53,13 +53,13 @@ export default function Navbar() {
         <div className="flex items-center gap-6">
           <div onClick={onOpen} className="relative w-[260px] cursor-pointer">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-              <Search className="size-4 text-gray-400" />
+              <Search className="text-gray-400 size-4" />
             </div>
-            <div className="w-full bg-zinc-50 dark:bg-zinc-800 pl-10 pr-4 py-2 bg-transparent outline-none flex justify-start items-center border border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-600">
+            <div className="flex items-center justify-start w-full py-2 pl-10 pr-4 bg-transparent border outline-none bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-600">
               <p className="text-xs">Quick Search...</p>
             </div>
 
-            <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none gap-2">
+            <div className="absolute inset-y-0 right-0 flex items-center gap-2 pr-3 pointer-events-none">
               <h1 className="text-xs font-semibold">Ctrl F</h1>
               <MdKeyboardCommandKey
                 size={17}
@@ -72,7 +72,7 @@ export default function Navbar() {
             <Dropdown placement="bottom-end" className="text-xs font-NotoSans">
               <DropdownTrigger>
                 <div className="flex items-center gap-4">
-                  <div className="size-8 grid place-items-center cursor-pointe rounded-full overflow-hidden cursor-pointer">
+                  <div className="grid overflow-hidden rounded-full cursor-pointer size-8 place-items-center cursor-pointe">
                     <img
                       src={
                         user.user_metadata.avatar_url || "default_profile_url"
@@ -84,7 +84,9 @@ export default function Navbar() {
                 </div>
               </DropdownTrigger>
               <DropdownMenu aria-label="Profile Actions" variant="flat">
-                <DropdownItem key="settings">Settings</DropdownItem>
+                <DropdownItem key="settings" href="/settings">
+                  Settings
+                </DropdownItem>
                 <DropdownItem key="signout" onClick={() => signOut()}>
                   Signout
                 </DropdownItem>
@@ -99,7 +101,7 @@ export default function Navbar() {
           )}
 
           <div
-            className="cursor-pointer duration-500 transition ease-in-out"
+            className="transition duration-500 ease-in-out cursor-pointer"
             onClick={toggleTheme}
           >
             {theme === "dark" ? (
@@ -116,7 +118,7 @@ export default function Navbar() {
 
 const Navs = () => {
   return (
-    <nav className="ml-24 hidden md:flex items-center space-x-8">
+    <nav className="items-center hidden ml-24 space-x-8 md:flex">
       <NavLink
         to="learn"
         className="text-[12px] hover:text-green-500 duration-300"

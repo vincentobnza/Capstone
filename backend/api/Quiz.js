@@ -204,7 +204,7 @@ const Lesson2 = [
       c: "0",
       d: "10",
     },
-    answer: "1",
+    answer: "b",
   },
   {
     id: 9,

@@ -9,6 +9,8 @@ import {
   TableCell,
 } from "@nextui-org/react";
 import { useUser } from "@/context/UserContext";
+import supabase from "../config/supabaseClient";
+import { useState, useEffect } from "react";
 
 export default function Dashboard() {
   return (
@@ -85,13 +87,31 @@ const DataStats = () => {
 };
 
 const RecentlySignedIn = () => {
-  const { users } = useUser();
+  const [recentUsers, setRecentUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const sortedUsers = [...users].sort(
-    (a, b) => new Date(b.last_sign_in_at) - new Date(a.last_sign_in_at)
-  );
+  useEffect(() => {
+    const fetchRecentUsers = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("auth.users")
+          .select("id, email, full_name, last_sign_in_at, is_active")
+          .order("last_sign_in_at", { ascending: false })
+          .limit(5);
 
-  const recentUsers = sortedUsers.slice(0, 5);
+        if (error) throw error;
+        setRecentUsers(data);
+
+        console.log(data);
+      } catch (error) {
+        console.error("Error fetching recent users:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRecentUsers();
+  }, []);
 
   return (
     <div className="w-full flex flex-col gap-2">
@@ -109,18 +129,20 @@ const RecentlySignedIn = () => {
           </TableHeader>
           <TableBody
             emptyContent={
-              <div className="flex flex-col gap-2">
-                <Frown className="self-center" />
-                <h1 className="tex-sm">No rows to display</h1>
-              </div>
+              loading ? (
+                <div>Loading...</div>
+              ) : (
+                <div className="flex flex-col gap-2">
+                  <Frown className="self-center" />
+                  <h1 className="text-sm">No rows to display</h1>
+                </div>
+              )
             }
           >
             {recentUsers.map((user) => (
               <TableRow key={user.id}>
-                <TableCell>{user.full_name || user.email}</TableCell>
-                <TableCell>
-                  {new Date(user.last_sign_in_at).toLocaleString()}
-                </TableCell>
+                <TableCell>{user.display_name || user.email}</TableCell>
+                <TableCell>{user.last_sign_in_at}</TableCell>
                 <TableCell>{user.is_active ? "Active" : "Inactive"}</TableCell>
               </TableRow>
             ))}
