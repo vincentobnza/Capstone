@@ -72,6 +72,8 @@ import CreateProfile from "./pages/CreateProfile";
 
 import QuizGame from "./pages/QuizGame";
 
+import { Toaster } from "react-hot-toast";
+
 // Combine routes
 const router = createBrowserRouter([
   {
@@ -288,6 +290,20 @@ const router = createBrowserRouter([
 export default function App() {
   return (
     <div className="App text-zinc-900 dark:text-zinc-300 font-NotoSans">
+      <Toaster
+        position="bottom-right"
+        toastOptions={{
+          className: "",
+          style: {
+            background: "transparent",
+            boxShadow: "none",
+          },
+        }}
+        containerStyle={{
+          padding: "0",
+          margin: "0",
+        }}
+      />
       <AuthProvider>
         <UserProvider>
           <RouterProvider router={router} />

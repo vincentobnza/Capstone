@@ -8,9 +8,7 @@ export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    fetchUsers();
     fetchCurrentUser();
-
     // Set up real-time subscription
     const usersSubscription = supabase
       .channel("public:profiles")
@@ -48,19 +46,6 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const fetchUsers = async () => {
-    const { data, error } = await supabase
-      .from("profiles")
-      .select("*")
-      .order("current_points", { ascending: false });
-
-    if (error) {
-      console.error("Error fetching users:", error);
-    } else {
-      setUsers(data);
-    }
-  };
-
   const fetchCurrentUser = async () => {
     const {
       data: { user },
@@ -95,13 +80,16 @@ export const UserProvider = ({ children }) => {
     return rank;
   };
 
-  const insertScore = async (userId, score) => {
+  const updatePoints = async (userId, points) => {
     const { error } = await supabase
       .from("profiles")
-      .upsert({ id: userId, score }, { onConflict: "id" });
+      .update({ current_points: points }) // Update the current_points column
+      .eq("id", userId); // Find the user by id
 
     if (error) {
-      console.error("Error inserting score:", error);
+      console.error("Error updating points:", error);
+    } else {
+      console.log("Points updated successfully!");
     }
   };
 
@@ -138,9 +126,8 @@ export const UserProvider = ({ children }) => {
   const value = {
     users,
     currentUser,
-    fetchUsers,
     fetchUserRank,
-    insertScore,
+    updatePoints,
     updateScore,
     updateProgress,
     deleteUser,

@@ -68,7 +68,7 @@ export default function Lesson1_Topic3() {
             message to the webpage. You will learn what each of these JavaScript
             statements signifies in following chapters.
           </Description>
-          <div className="mt-5 mb-3 w-full p-5 bg-zinc-100 border border-zinc-300 dark:bg-zinc-800 dark:border-zinc-700 relative flex flex-col gap-3">
+          <div className="relative flex flex-col w-full gap-3 p-5 mt-5 mb-3 border bg-zinc-100 border-zinc-300 dark:bg-zinc-800 dark:border-zinc-700">
             <h3 className=" text-zinc-700 dark:text-zinc-200">
               {`Note: The type attribute for <script> tag (i.e. <script type="text/javascript">) is no longer required since HTML5. JavaScript is the default scripting language for HTML5.`}
             </h3>
@@ -165,15 +165,15 @@ document.getElementById("btn").onclick = greetings;`}
             message will appear.
           </Description>
 
-          <div className="mt-5 mb-3 w-full p-5 bg-zinc-100 border border-zinc-300 dark:bg-zinc-800 dark:border-zinc-700 relative flex flex-col gap-3">
+          <div className="relative flex flex-col w-full gap-3 p-5 mt-5 mb-3 border bg-zinc-100 border-zinc-300 dark:bg-zinc-800 dark:border-zinc-700">
             <h3 className=" text-zinc-700 dark:text-zinc-200">
               {`Note: You should always maintain a clear separation between your website's presentation (CSS), behavior (JavaScript), and content (i.e., HTML).`}
             </h3>
           </div>
         </section>
 
-        <div className="w-full flex items-center gap-3 justify-end">
-          <QuizButton text="Lesson 1" link="/quiz/introduction" />
+        <div className="flex items-center justify-end w-full gap-3">
+          <QuizButton text="Lesson 1" link="/quiz/lesson1" />
           <NextButton
             link="/learn-js/variables-data-types"
             text="Variables and Data Types "

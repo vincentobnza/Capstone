@@ -31,7 +31,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="sticky top-0 z-50 grid w-full border-b bg-white/20 dark:bg-zinc-900/40 backdrop-blur-md text-zinc-900 dark:text-zinc-300 place-items-center border-zinc-100 dark:border-zinc-800">
+    <div className="sticky top-0 z-50 grid w-full border-b bg-white/20 dark:bg-zinc-900/70 backdrop-blur-md text-zinc-900 dark:text-zinc-300 place-items-center border-zinc-100 dark:border-zinc-800">
       <NavbarQuickSearch
         isOpen={isOpen}
         onOpen={onOpen}
@@ -121,13 +121,13 @@ const Navs = () => {
     <nav className="items-center hidden ml-24 space-x-8 md:flex">
       <NavLink
         to="learn"
-        className="text-[12px] hover:text-green-500 duration-300"
+        className="text-[12px] hover:text-green-500 duration-300 font-semibold"
       >
         Learn JS
       </NavLink>
       <NavLink
         to="leaderboard"
-        className="relative gap-2 text-[12px] hover:text-green-500 duration-300"
+        className="relative gap-2 text-[12px] hover:text-green-500 duration-300 font-semibold"
       >
         Leaderboards
         <MdOutlineLeaderboard
@@ -137,20 +137,20 @@ const Navs = () => {
       </NavLink>
       <NavLink
         to="codescript-editor"
-        className="text-[12px] hover:text-green-500 duration-300"
+        className="text-[12px] hover:text-green-500 duration-300 font-semibold"
       >
         Code Editor
       </NavLink>
       <NavLink
         to="/games"
-        className="relative text-[12px] hover:text-green-500 duration-300"
+        className="relative text-[12px] hover:text-green-500 duration-300 font-semibold"
       >
         Games
         <Swords size={12} className="absolute top-0 -right-5" />
       </NavLink>
       <NavLink
         to="privacy-policy"
-        className="text-[12px] hover:text-green-500 duration-300"
+        className="text-[12px] hover:text-green-500 duration-300 font-semibold"
       >
         Privacy Policy
       </NavLink>

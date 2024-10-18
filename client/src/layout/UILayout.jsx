@@ -15,7 +15,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { motion, AnimatePresence } from "framer-motion";
 export const Topic = ({ children }) => {
   return (
-    <h1 className="text-4xl font-medium text-zinc-800 dark:text-zinc-100 mb-5 ">
+    <h1 className="mb-5 text-4xl font-medium text-zinc-800 dark:text-zinc-100 ">
       {children}
     </h1>
   );
@@ -35,7 +35,7 @@ export const Description = ({ children }) => {
 
 export const Example = ({ text }) => {
   return (
-    <div className="w-full p-5 bg-zinc-100 border border-zinc-200 dark:bg-zinc-800 dark:border-zinc-700 flex items-center justify-start  text-zinc-700 dark:text-zinc-300">
+    <div className="flex items-center justify-start w-full p-5 border bg-zinc-100 border-zinc-200 dark:bg-zinc-800 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300">
       <h1 className="text-sm font-medium">{text}</h1>
     </div>
   );
@@ -56,8 +56,8 @@ export const Code = ({
   };
 
   return (
-    <div className="w-full space-y-1 my-4">
-      <div className="w-full flex justify-end mb-3">
+    <div className="w-full my-4 space-y-1">
+      <div className="flex justify-end w-full mb-3">
         <button
           onClick={handleNewTab}
           className={`text-xs font-bold flex items-center gap-2 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 underline transition-colors ${
@@ -96,7 +96,7 @@ export const Code = ({
         {error && (
           <IoCloseCircleSharp
             size={25}
-            className="absolute -left-2 -top-2 cursor-pointer text-red-500 hover:text-red-600 transition-colors"
+            className="absolute text-red-500 transition-colors cursor-pointer -left-2 -top-2 hover:text-red-600"
             onClick={() => setError(false)}
           />
         )}
@@ -107,16 +107,16 @@ export const Code = ({
 
 export const Output = ({ output }) => {
   return (
-    <div className="space-y-3 mb-4">
+    <div className="mb-4 space-y-3">
       <h1 className="text-sm font-bold text-zinc-600 dark:text-zinc-500">
         Console Output
       </h1>
-      <div className="mt-3 w-full border border-zinc-200 dark:border-zinc-800 rounded-lg">
+      <div className="w-full mt-3 border rounded-lg border-zinc-200 dark:border-zinc-800">
         <div className="w-full h-8 bg-zinc-100 dark:bg-[#1e1e1e] rounded-tr-lg rounded-tl-lg border-b border-zinc-300 dark:border-zinc-800 flex items-center p-3">
           <div className="w-[50px] grid grid-cols-3">
-            <div className="size-2 bg-green-500 rounded-full"></div>
-            <div className="size-2 bg-red-500 rounded-full"></div>
-            <div className="size-2 bg-yellow-500 rounded-full"></div>
+            <div className="bg-green-500 rounded-full size-2"></div>
+            <div className="bg-red-500 rounded-full size-2"></div>
+            <div className="bg-yellow-500 rounded-full size-2"></div>
           </div>
         </div>
         <div className="w-full p-5 bg-zinc-100 dark:bg-[#1e1e1e]  flex items-center justify-start  text-zinc-700 dark:text-zinc-400">
@@ -141,12 +141,12 @@ export const CopyIcon = ({ code }) => {
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 50, transition: { duration: 0.2 } }}
-                className=" bg-white dark:bg-zinc-800 flex justify-start items-center gap-3 p-2 border-l-4 border-green-400"
+                className="flex items-center justify-start gap-3 p-2 bg-white border-l-4 border-green-400 dark:bg-zinc-800"
               >
-                <div className="size-9 bg-zinc-50 dark:bg-zinc-700 rounded grid place-items-center">
+                <div className="grid rounded size-9 bg-zinc-50 dark:bg-zinc-700 place-items-center">
                   <CircleCheck className="text-green-400" />
                 </div>
-                <div className="flex flex-col gap-1 justify-center text-left">
+                <div className="flex flex-col justify-center gap-1 text-left">
                   <h1 className="text-sm font-bold">Text Copied</h1>
                   <p className="text-xs text-zinc-600 dark:text-zinc-400">
                     Code is successfully copied to clipboard
@@ -169,29 +169,15 @@ export const CopyIcon = ({ code }) => {
 
   return (
     <>
-      <Toaster
-        position="bottom-right"
-        toastOptions={{
-          className: "",
-          style: {
-            background: "transparent",
-            boxShadow: "none",
-          },
-        }}
-        containerStyle={{
-          padding: "0",
-          margin: "0",
-        }}
-      />
       <button
         onClick={handleCopy}
         className="absolute top-0 right-0 p-2 transition-colors duration-200 bg-gray-100 hover:bg-gray-200 dark:bg-[#2c2c2c] outline-none border border-zinc-200 dark:border-zinc-800 dark:hover:bg-zinc-800 px-4"
         aria-label={copied ? "Copied!" : "Copy code"}
       >
         {copied ? (
-          <Check className="h-4 w-4 text-green-500" />
+          <Check className="w-4 h-4 text-green-500" />
         ) : (
-          <Copy className="h-4 w-4 text-gray-500 dark:text-gray-400" />
+          <Copy className="w-4 h-4 text-gray-500 dark:text-gray-400" />
         )}
       </button>
     </>
@@ -204,11 +190,11 @@ export const List = ({ title, items }) => {
   return (
     <div className="flex flex-col gap-2 text-zinc-700 dark:text-zinc-300">
       <h1 className="text-lg">{title}</h1>
-      <ul className="flex flex-col gap-3 py-2 px-8">
+      <ul className="flex flex-col gap-3 px-8 py-2">
         {items.map((item, index) => (
           <li
             key={index}
-            className="list-disc list-inside text-sm"
+            className="text-sm list-disc list-inside"
             style={{
               textIndent: "-22px",
             }}
@@ -231,20 +217,20 @@ export const Text = ({ children }) => {
 
 export const Note = ({ noteTitle, description }) => {
   return (
-    <div className="mt-5 mb-3 w-full p-5 bg-zinc-100 border border-zinc-300 dark:bg-zinc-800 dark:border-zinc-700 relative  text-zinc-700 dark:text-zinc-300 flex flex-col gap-3">
+    <div className="relative flex flex-col w-full gap-3 p-5 mt-5 mb-3 border bg-zinc-100 border-zinc-300 dark:bg-zinc-800 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300">
       <div className="flex items-center gap-2">
-        <h1 className="font-semibold text-lg text-zinc-800 dark:text-zinc-200">
+        <h1 className="text-lg font-semibold text-zinc-800 dark:text-zinc-200">
           ✍🏻 {noteTitle}
         </h1>
       </div>
-      <p className="text-sm ml-6">{description}</p>
+      <p className="ml-6 text-sm">{description}</p>
     </div>
   );
 };
 
 export const ListItem = ({ title, text }) => {
   return (
-    <div className="w-full flex flex-col gap-2 text-md font-medium text-zinc-700 dark:text-zinc-300">
+    <div className="flex flex-col w-full gap-2 font-medium text-md text-zinc-700 dark:text-zinc-300">
       <h1>{title}</h1>
       <p className="ml-5">{text}</p>
     </div>
@@ -252,7 +238,7 @@ export const ListItem = ({ title, text }) => {
 };
 
 export const Key = ({ children }) => {
-  return <Kbd className="kbd kbd-sm mx-2">{children}</Kbd>;
+  return <Kbd className="mx-2 kbd kbd-sm">{children}</Kbd>;
 };
 
 export const NextButton = ({ text, link }) => {
@@ -264,7 +250,7 @@ export const NextButton = ({ text, link }) => {
       <div className="flex flex-col gap-1">
         <p>Next</p>
         <div className="flex items-center gap-2">
-          <h1 className="text-md font-bold  text-green-700 dark:text-green-500 underline">
+          <h1 className="font-bold text-green-700 underline text-md dark:text-green-500">
             {text}
           </h1>
         </div>
@@ -275,7 +261,7 @@ export const NextButton = ({ text, link }) => {
 
 export const Highlight = ({ children }) => {
   return (
-    <span className="font-medium rounded-full text-black dark:text-white">
+    <span className="font-medium text-black rounded-full dark:text-white">
       {children}
     </span>
   );
@@ -322,8 +308,8 @@ export const Task = ({ points, task, expectedOutput }) => {
   };
 
   return (
-    <div className="mt-5 mb-3 w-full p-5 bg-zinc-100 border border-zinc-300 dark:bg-zinc-800 dark:border-zinc-700 relative text-zinc-700 dark:text-zinc-400 flex flex-col gap-3">
-      <div className="w-full flex justify-between">
+    <div className="relative flex flex-col w-full gap-3 p-5 mt-5 mb-3 border bg-zinc-100 border-zinc-300 dark:bg-zinc-800 dark:border-zinc-700 text-zinc-700 dark:text-zinc-400">
+      <div className="flex justify-between w-full">
         <div className="flex flex-col gap-2">
           <p className="text-xs">{formattedDate}</p>
           <h1 className="text-2xl font-semibold text-zinc-700 dark:text-zinc-200">
@@ -345,10 +331,10 @@ export const Task = ({ points, task, expectedOutput }) => {
           onMount={handleEditorDidMount}
         />
 
-        <div className="w-full flex justify-end">
+        <div className="flex justify-end w-full">
           <button
             onClick={runCode}
-            className="mt-5 text-sm font-semibold text-black py-2 px-3 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-lg hover:opacity-80 duration-400 transition ease-in"
+            className="px-3 py-2 mt-5 text-sm font-semibold text-black transition ease-in rounded-lg bg-gradient-to-br from-yellow-500 to-orange-500 hover:opacity-80 duration-400"
           >
             Run Code
           </button>
@@ -357,7 +343,7 @@ export const Task = ({ points, task, expectedOutput }) => {
       {output && (
         <div className="mt-4">
           <h3 className="font-bold">Output:</h3>
-          <pre className="mt-5 bg-zinc-200 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-5 rounded">
+          <pre className="p-5 mt-5 border rounded bg-zinc-200 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800">
             {output}
           </pre>
         </div>
@@ -384,7 +370,7 @@ export const QuizButton = ({ text, link }) => {
       <div className="flex flex-col gap-1">
         <p className="text-sm">Take a Quiz</p>
         <div className="flex items-center gap-2">
-          <h1 className="text-md font-bold text-yellow-200 animate-pulse">
+          <h1 className="font-bold text-yellow-200 text-md animate-pulse">
             {text}
           </h1>
         </div>

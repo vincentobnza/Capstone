@@ -10,7 +10,7 @@ export default function CodeEditor_LandingPage() {
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1.5 }}
-      className="w-full bg-white dark:bg-zinc-900 space-y-10 pb-10"
+      className="w-full pb-10 space-y-10 bg-white dark:bg-zinc-900"
     >
       <Hero />
       <Video />
@@ -24,8 +24,8 @@ const Hero = () => {
     newTab.location.href = "/code-editor";
   };
   return (
-    <div className="w-full max-w-screen-md mx-auto flex flex-col justify-center items-center gap-4 text-center">
-      <h1 className="text-[48px] dark:bg-gradient-to-br dark:from-white dark:to-zinc-400 dark:bg-clip-text dark:text-transparent text-zinc-700 leading-snug font-semibold ">
+    <div className="flex flex-col items-center justify-center w-full max-w-screen-md gap-4 mx-auto text-center">
+      <h1 className="text-[48px] dark:bg-gradient-to-br dark:from-white dark:to-zinc-400 dark:bg-clip-text dark:text-transparent text-zinc-700 leading-snug font-bold ">
         CodeScript Online Editor
       </h1>
 
@@ -40,7 +40,7 @@ const Hero = () => {
         and run JavaScript code online effortlessly.
       </p>
 
-      <div className="flex mt-16 items-center gap-3">
+      <div className="flex items-center gap-3 mt-16">
         <button
           onClick={handleNewTab}
           className="py-3 w-[140px] grid place-items-center bg-green-800  text-white font-bold  border-2 border-green-500 text-sm hover:opacity-90"
@@ -61,11 +61,11 @@ const Hero = () => {
 const Video = () => {
   return (
     <div className="w-full max-w-screen-lg mx-auto h-[580px] bg-zinc-100 dark:bg-[#252525] border border-zinxc-200 dark:border-zinc-700 rounded-2xl overflow-hidden">
-      <div className="w-full h-10 border-b border-zinc-700 p-4 flex justify-between items-center">
+      <div className="flex items-center justify-between w-full h-10 p-4 border-b border-zinc-700">
         <div className="w-[80px] grid grid-cols-3 gap-1">
-          <div className="size-4 rounded-full bg-red-500"></div>
-          <div className="size-4 rounded-full bg-yellow-500"></div>
-          <div className="size-4 rounded-full bg-green-500"></div>
+          <div className="bg-red-500 rounded-full size-4"></div>
+          <div className="bg-yellow-500 rounded-full size-4"></div>
+          <div className="bg-green-500 rounded-full size-4"></div>
         </div>
       </div>
       {/* Video element */}

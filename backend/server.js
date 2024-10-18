@@ -6,7 +6,7 @@ dotenv.config();
 
 const { Task } = require("./api/Task");
 const {
-  IntroductionQuiz,
+  Lesson1,
   Lesson2,
   Lesson3,
   Lesson4,
@@ -62,7 +62,7 @@ app.get("/api/quiz/:quizType", (req, res) => {
   const { quizType } = req.params;
 
   const quizzes = {
-    introduction: IntroductionQuiz,
+    lesson1: Lesson1,
     lesson2: Lesson2,
     lesson3: Lesson3,
     lesson4: Lesson4,

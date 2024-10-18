@@ -1,5 +1,5 @@
 import { Moon, Sun } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { Button } from "@nextui-org/react";
 import axios from "axios";
@@ -20,62 +20,167 @@ import { Progress } from "@nextui-org/react";
 import LeaveSitePrompt from "@/components/LeaveSitePrompt";
 import QuizStartModal from "@/components/QuizStartModal";
 import toast, { Toaster } from "react-hot-toast";
-import BatteryStatus from "@/components/BatteryStatus";
+import { NextRoute } from "../data/NextRoute";
+import { MoveRight } from "lucide-react";
+import confetti from "canvas-confetti";
+import { useCallback } from "react";
+import Trophy from "../assets/trophy.png";
+import { Tooltip } from "@nextui-org/react";
 export default function Quiz() {
   const { theme, setTheme } = useTheme();
   const [points, setPoints] = useState(0);
   const [isOpen, setIsOpen] = useState(true);
+  const [quizCompleted, setQuizCompleted] = useState(false);
 
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
+
+  const triggerConfetti = useCallback(() => {
+    var duration = 15 * 1000;
+    var animationEnd = Date.now() + duration;
+    var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+    function randomInRange(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    var interval = setInterval(function () {
+      var timeLeft = animationEnd - Date.now();
+
+      if (timeLeft <= 0) {
+        return clearInterval(interval);
+      }
+
+      var particleCount = 50 * (timeLeft / duration);
+      confetti({
+        ...defaults,
+        particleCount,
+        origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+      });
+      confetti({
+        ...defaults,
+        particleCount,
+        origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+      });
+    }, 250);
+  }, []);
+
+  var count = 200;
+  var defaults = {
+    origin: { y: 0.7 },
+  };
+
+  function fire(particleRatio, opts) {
+    confetti({
+      ...defaults,
+      ...opts,
+      particleCount: Math.floor(count * particleRatio),
+    });
+  }
+
+  if (quizCompleted) {
+    fire(0.25, {
+      spread: 70,
+      startVelocity: 55,
+    });
+    fire(0.2, {
+      spread: 80,
+    });
+    fire(0.35, {
+      spread: 100,
+      decay: 0.91,
+      scalar: 0.8,
+    });
+    fire(0.1, {
+      spread: 120,
+      startVelocity: 25,
+      decay: 0.92,
+      scalar: 1.2,
+    });
+    fire(0.1, {
+      spread: 120,
+      startVelocity: 45,
+    });
+  }
+
   return (
     <>
       <QuizStartModal isOpen={isOpen} setIsOpen={setIsOpen} />
       <LeaveSitePrompt />
 
-      <Toaster />
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 1.5 }}
-        className="w-full h-screen bg-white dark:bg-zinc-900 p-5 text-zinc-700 dark:text-zinc-300 space-y-10 relative"
+        className="relative w-full h-screen p-5 space-y-4 bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300"
       >
-        <div className="w-full flex max-w-screen-lg mx-auto justify-between p-2">
-          <div className="ml-2 relative flex flex-col gap-2">
-            <h1 className="bg-gradient-to-br from-green-500 to-green-600 dark:to-green-800 bg-clip-text text-transparent font-black text-lg font-Orbitron">
+        <div className="flex justify-between w-full max-w-screen-lg p-2 mx-auto">
+          <div className="relative flex flex-col gap-2 ml-2">
+            <h1 className="text-lg font-extrabold text-transparent bg-gradient-to-br from-green-500 to-green-600 dark:to-green-800 bg-clip-text font-Orbitron">
               CodeScript
             </h1>
           </div>
 
           <div className="flex items-center gap-8">
-            <div className="flex items-center gap-2 text-xs ">
+            {quizCompleted && (
+              <Tooltip
+                offset={15}
+                radius="none"
+                showArrow={true}
+                placement="bottom"
+                content={
+                  <div className="w-[200px] p-3 font-NotoSans">
+                    <h1 className="mb-3 text-xs font-semibold">
+                      Fantastic Score 🥳
+                    </h1>
+                    <div className="leading-snug text-tiny text-zinc-500 dark:text-zinc-400">
+                      Celebrate your success with a burst of confetti!
+                    </div>
+                  </div>
+                }
+              >
+                <button
+                  onClick={triggerConfetti}
+                  className="px-2 py-1 text-xs font-semibold bg-transparent border rounded-full outline-none text-zinc-600 dark:text-zinc-200 border-zinc-200 dark:border-zinc-700"
+                >
+                  Make a Celebration 🎉
+                </button>
+              </Tooltip>
+            )}
+            <div className="flex items-center gap-2 text-xs font-bold">
               <h3>Points: </h3>
-              <h1>{points} pts</h1>
+              <h1 className="px-2 py-[1px] text-white rounded-full bg-orange-700 border border-amber-400">
+                {points} pts
+              </h1>
             </div>
             <div
-              className="cursor-pointer duration-500 transition ease-in-out"
+              className="transition duration-500 ease-in-out cursor-pointer"
               onClick={toggleTheme}
             >
               {theme === "dark" ? <Sun size={24} /> : <Moon size={24} />}
             </div>
-            <BatteryStatus />
           </div>
         </div>
-        <QuizCard points={points} setPoints={setPoints} />
+        <QuizCard
+          points={points}
+          setPoints={setPoints}
+          onComplete={triggerConfetti}
+          quizCompleted={quizCompleted}
+          setQuizCompleted={setQuizCompleted}
+        />
       </motion.div>
     </>
   );
 }
 
-const QuizCard = ({ points, setPoints }) => {
+const QuizCard = ({ points, setPoints, quizCompleted, setQuizCompleted }) => {
   const [quizData, setQuizData] = useState(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [score, setScore] = useState(0);
-  const [quizCompleted, setQuizCompleted] = useState(false);
   const [userAnswers, setUserAnswers] = useState([]);
   const { user } = useAuth();
 
@@ -104,6 +209,10 @@ const QuizCard = ({ points, setPoints }) => {
     fetchQuiz();
   }, [quizType]);
 
+  useEffect(() => {
+    document.title = `CodeScript - Quiz`;
+  }, []);
+
   const handleAnswerSelection = (answer) => {
     setSelectedAnswer(answer);
   };
@@ -114,7 +223,6 @@ const QuizCard = ({ points, setPoints }) => {
     const isCorrect = Array.isArray(currentQuestion.answer)
       ? currentQuestion.answer.includes(selectedAnswer)
       : currentQuestion.answer === selectedAnswer;
-
     setLastAnswerCorrect(isCorrect);
 
     if (isCorrect) {
@@ -180,6 +288,7 @@ const QuizCard = ({ points, setPoints }) => {
             }
 
             toast.success("Points updated successfully", {
+              position: "top-center",
               style: {
                 borderRadius: "5px",
                 background: "#333",
@@ -204,7 +313,7 @@ const QuizCard = ({ points, setPoints }) => {
 
   if (isLoading) {
     return (
-      <div className="w-full flex justify-center items-center max-w-screen-lg mx-auto p-5">
+      <div className="flex items-center justify-center w-full max-w-screen-lg p-5 mx-auto">
         <p>Loading quiz...</p>
       </div>
     );
@@ -212,7 +321,7 @@ const QuizCard = ({ points, setPoints }) => {
 
   if (error) {
     return (
-      <div className="w-full flex justify-center items-center max-w-screen-lg mx-auto p-5">
+      <div className="flex items-center justify-center w-full max-w-screen-lg p-5 mx-auto">
         <p className="text-red-500">{error}</p>
       </div>
     );
@@ -220,7 +329,7 @@ const QuizCard = ({ points, setPoints }) => {
 
   if (!quizData || quizData.length === 0) {
     return (
-      <div className="w-full flex justify-center items-center max-w-screen-lg mx-auto p-5">
+      <div className="flex items-center justify-center w-full max-w-screen-lg p-5 mx-auto">
         <p>No quiz questions available.</p>
       </div>
     );
@@ -249,29 +358,36 @@ const QuizCard = ({ points, setPoints }) => {
       },
     ];
 
+    const location = useLocation();
+    function getNextRouteInfo(currentPath) {
+      const currentRoute = NextRoute.find(
+        (route) => route.route === currentPath
+      );
+      return currentRoute
+        ? { nextRoute: currentRoute.nextRoute, title: currentRoute.title }
+        : { nextRoute: "/", title: "Home" };
+    }
+    const { nextRoute, title } = getNextRouteInfo(location.pathname);
+
     return (
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.7 }}
-        className="w-full flex flex-col justify-center items-center max-w-screen-lg mx-auto p-5 gap-6 text-center"
+        className="flex flex-col items-center justify-center w-full max-w-screen-lg gap-4 p-5 mx-auto text-center"
       >
         <motion.div
           initial={{ filter: "blur(10px)" }}
           whileInView={{ filter: "blur(0px)" }}
           transition={{ duration: 1 }}
         >
-          <img
-            src="https://static.vecteezy.com/system/resources/previews/013/391/041/original/trophy-3d-illustration-free-png.png"
-            alt="trophy"
-            className="w-28 md:w-[120px]"
-          />
+          <img src={Trophy} alt="trophy" className="w-28 md:w-[80px] mb-4" />
         </motion.div>
 
-        <h1 className="text-2xl md:text-4xl text-zinc-800 dark:text-zinc-100">
+        <h1 className="text-2xl font-bold md:text-4xl text-zinc-800 dark:text-zinc-100">
           Quiz Completed
         </h1>
-        <h2 className="text-zinc-700 dark:text-zinc-500 text-sm md:text-lg font-medium">
+        <h2 className="text-sm font-semibold text-zinc-700 dark:text-zinc-300 md:text-md">
           You've scored:{" "}
           <span className={score <= 4 ? "text-red-500" : "text-green-500"}>
             {score}
@@ -279,16 +395,16 @@ const QuizCard = ({ points, setPoints }) => {
           out of {quizData.length}
         </h2>
 
-        <div className="grid w-full max-w-lg md:grid-cols-3 gap-2">
+        <div className="grid w-full max-w-lg gap-2 mt-5 md:grid-cols-3">
           {quizDetails.map((details, idx) => (
             <div
               key={idx}
-              className="flex flex-col text-left gap-2 p-4 bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded-lg relative overflow-hidden"
+              className="relative flex flex-col gap-2 p-6 overflow-hidden text-left border rounded bg-zinc-100 dark:bg-zinc-800 border-zinc-300 dark:border-zinc-700"
             >
-              <h1 className="absolute text-5xl opacity-20 -bottom-2 -right-2">
+              <h1 className="absolute text-5xl opacity-40 -bottom-2 -right-2">
                 {details.icon}
               </h1>
-              <h1 className="text-xs font-semibold text-zinc-400">
+              <h1 className="text-xs font-semibold text-zinc-700 dark:text-zinc-300">
                 {details.title}
               </h1>
               <h1 className="text-lg font-semibold text-zinc-900 dark:text-white">
@@ -298,21 +414,30 @@ const QuizCard = ({ points, setPoints }) => {
           ))}
         </div>
 
-        <div className="mt-8 flex items-center gap-2">
+        <div className="flex items-center gap-2 mt-5">
           <Button
             onClick={onOpen}
             radius="none"
-            className="bg-green-800/90 text-white text-sm border border-green-500"
+            className="text-xs font-semibold text-white border border-green-600 bg-green-800/70"
           >
             View Accuracy
           </Button>
           <Link to="/leaderboard">
             <Button
               radius="none"
-              className="bg-zinc-800 text-white text-sm border border-zinc-700"
+              className="text-xs font-semibold text-white border bg-zinc-800 border-zinc-700"
             >
               Leaderboard
             </Button>
+          </Link>
+        </div>
+
+        <div className="mt-10 text-sm font-bold">
+          <Link to={nextRoute} className="flex items-center gap-3">
+            Next:{" "}
+            <span className="flex items-center gap-3 text-green-500 animate-pulse">
+              {title} <MoveRight size={20} />
+            </span>
           </Link>
         </div>
 
@@ -333,19 +458,21 @@ const QuizCard = ({ points, setPoints }) => {
   const currentQuestion = quizData[currentQuestionIndex];
 
   return (
-    <div className="w-full flex flex-col justify-start items-start max-w-screen-md mx-auto p-5 space-y-6 text-left">
-      <div className="w-full flex flex-col gap-2 max-w-lg">
+    <div className="flex flex-col items-start justify-start w-full max-w-screen-md p-5 mx-auto space-y-6 text-left">
+      <div className="flex flex-col w-full max-w-lg gap-2">
         <Progress
           size="sm"
           aria-label="Quiz progress"
           value={currentProgress}
-          className="mb-2 text-zinc-900 dark:text-zinc-400 font-bold"
+          className="mb-2 font-bold text-zinc-900 dark:text-zinc-400"
           color={getProgressColor()}
           showValueLabel={true}
           formatOptions={{ style: "unit", unit: "percent" }}
         />
       </div>
-      <h1 className="text-3xl mb-8">{currentQuestion.question}</h1>
+      <h1 className="mb-8 text-2xl font-semibold">
+        {currentQuestion.question}
+      </h1>
 
       <div className="w-full space-y-2">
         {Object.entries(currentQuestion.options).map(([key, value], index) => {
@@ -354,7 +481,7 @@ const QuizCard = ({ points, setPoints }) => {
             <motion.button
               key={key}
               onClick={() => handleAnswerSelection(key)}
-              className={`w-full p-3 rounded-lg text-left text-[13px] flex items-center relative ${
+              className={`w-full p-3 rounded-lg text-left font-semibold text-[13px] flex items-center relative ${
                 selectedAnswer === key
                   ? "text-white"
                   : "bg-zinc-50 dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-700 border border-zinc-200 dark:border-zinc-800"
@@ -391,7 +518,7 @@ const QuizCard = ({ points, setPoints }) => {
       {selectedAnswer && (
         <Button
           onClick={handleNextQuestion}
-          className="mt-8 px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600"
+          className="px-4 py-3 mt-8 text-sm font-bold text-black bg-white rounded "
         >
           {currentQuestionIndex === quizData.length - 1
             ? "Finish Quiz"
@@ -421,16 +548,16 @@ const ViewAccuracyModal = ({
           <>
             <ModalHeader className="flex flex-col gap-2">
               <h1>Quiz Accurary Breakdown</h1>
-              <p className="text-zinc-600 dark:text-zinc-400 text-xs">
+              <p className="text-xs text-zinc-600 dark:text-zinc-400">
                 Detailed Analysis of Your Quiz Performance
               </p>
             </ModalHeader>
             <ModalBody>
-              <div className="w-full grid md:grid-cols-3 gap-2">
+              <div className="grid w-full gap-2 md:grid-cols-3">
                 {quizDetails.map((details, idx) => (
                   <div
                     key={idx}
-                    className="flex flex-col text-left gap-2 p-4 bg-zinc-50 dark:bg-zinc-800 border border-zinc-100 dark:border-zinc-700 rounded-lg"
+                    className="flex flex-col gap-2 p-4 text-left border rounded-lg bg-zinc-50 dark:bg-zinc-800 border-zinc-100 dark:border-zinc-700"
                   >
                     <h1 className="text-xs font-semibold text-zinc-400">
                       {details.title}
@@ -446,9 +573,9 @@ const ViewAccuracyModal = ({
               {userAnswers.map((answer, index) => (
                 <div
                   key={index}
-                  className="mb-1 p-4 bg-zinc-50 border border-zinc-200 dark:bg-zinc-800 dark:border-zinc-700 rounded-lg relative"
+                  className="relative p-4 mb-1 border rounded-lg bg-zinc-50 border-zinc-200 dark:bg-zinc-800 dark:border-zinc-700"
                 >
-                  <div className="w-full flex justify-between mb-3">
+                  <div className="flex justify-between w-full mb-3">
                     <h4 className="font-semibold">Question {index + 1}:</h4>
                     <span
                       className={`absolute top-0 right-0
@@ -479,7 +606,7 @@ const ViewAccuracyModal = ({
               <Button
                 size="md"
                 radius="none"
-                className="bg-green-600 text-white text-sm mr-2"
+                className="mr-2 text-sm text-white bg-green-600"
                 onPress={onClose}
               >
                 Close

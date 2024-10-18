@@ -14,7 +14,7 @@ export default function Home() {
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1.5 }}
-      className="w-full bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-400 relative overflow-hidden"
+      className="relative w-full overflow-hidden bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-400"
     >
       <Hero />
 
@@ -38,10 +38,10 @@ export default function Home() {
 
 const Hero = () => {
   return (
-    <div className="w-full max-w-screen-lg mx-auto flex flex-col justify-center items-center gap-6 text-center p-5 md:p-8">
-      <h1 className="text-[48px] dark:bg-gradient-to-br dark:from-white dark:to-zinc-600 dark:bg-clip-text dark:text-transparent text-zinc-700 leading-snug font-semibold">
+    <div className="flex flex-col items-center justify-center w-full max-w-screen-lg gap-6 p-5 mx-auto text-center md:p-8">
+      <h1 className="text-[48px] dark:bg-gradient-to-br dark:from-white dark:to-zinc-600 dark:bg-clip-text dark:text-transparent text-zinc-700 leading-snug font-bold">
         Learn, Build, and Excel in{" "}
-        <span className="bg-gradient-to-br from-yellow-400 to-orange-600 bg-clip-text text-transparent">
+        <span className="text-transparent bg-gradient-to-br from-yellow-400 to-orange-600 bg-clip-text">
           JavaScript
         </span>{" "}
         Programming
@@ -51,7 +51,7 @@ const Hero = () => {
       </p>
       <Link
         to="/learn"
-        className="flex items-center gap-2 text-md  mt-10 py-3 px-6 rounded-full bg-green-800 border-2 border-green-500 text-white font-medium z-10 animate-pulse"
+        className="z-10 flex items-center gap-2 px-6 py-3 mt-10 font-medium text-white bg-green-800 border-2 border-green-500 rounded-full text-md animate-pulse"
       >
         Start Learning
         <IoIosTrendingUp size={20} />

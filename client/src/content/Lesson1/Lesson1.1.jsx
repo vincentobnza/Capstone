@@ -1,24 +1,38 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import {
   Topic,
   Description,
   Title,
-  Code,
-  Example,
-  Image,
   List,
-  Text,
-  Note,
-  ListItem,
   NextButton,
 } from "../../layout/UILayout";
 import { FaInfoCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
+
 export default function Lesson1_Topic1() {
+  const textRef = useRef(null);
+  const [speaking, setSpeaking] = useState(false);
+
+  const handleSpeak = () => {
+    if (textRef.current) {
+      const utterance = new SpeechSynthesisUtterance(
+        textRef.current.textContent
+      );
+      window.speechSynthesis.speak(utterance);
+      setSpeaking(true);
+    }
+  };
+
   return (
     <div className="w-full max-w-screen-lg mx-auto bg-white dark:bg-zinc-900">
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2" ref={textRef}>
+        <button
+          onClick={handleSpeak}
+          className="self-end px-4 py-2 text-xs font-bold text-black bg-white"
+        >
+          {speaking ? "Enable TTS" : "Stop TTS"}
+        </button>
         <section id="section1">
           <Topic>What is JavaScript</Topic>
 
@@ -68,7 +82,7 @@ export default function Lesson1_Topic1() {
         </section>
 
         <section id="section2">
-          <div className="mt-5 mb-3 w-full p-5 bg-zinc-100 border border-zinc-300 dark:bg-zinc-800 dark:border-zinc-700 relative flex flex-col gap-3">
+          <div className="relative flex flex-col w-full gap-3 p-5 mt-5 mb-3 border bg-zinc-100 border-zinc-300 dark:bg-zinc-800 dark:border-zinc-700">
             <h3 className="text-zinc-700 dark:text-zinc-200">{`Summary`}</h3>
 
             <List
