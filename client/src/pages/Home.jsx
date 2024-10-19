@@ -18,7 +18,7 @@ export default function Home() {
     >
       <Hero />
 
-      <div className="mt-2 w-full mx-auto h-[550px] grid place-items-center">
+      <div className="mt-2 w-full mx-auto h-[350px] md:h-[550px] grid place-items-center">
         <motion.div
           initial={{ filter: "blur(10px)" }}
           whileInView={{ filter: "blur(0px)" }}
@@ -38,25 +38,25 @@ export default function Home() {
 
 const Hero = () => {
   return (
-    <div className="flex flex-col items-center justify-center w-full max-w-screen-lg gap-6 p-5 mx-auto text-center md:p-8">
-      <h1 className="text-[48px] dark:bg-gradient-to-br dark:from-white dark:to-zinc-600 dark:bg-clip-text dark:text-transparent text-zinc-700 leading-snug font-bold">
+    <div className="flex flex-col items-center justify-center w-full max-w-screen-lg gap-6 p-6 mx-auto text-center md:p-8 lg:p-8">
+      <h1 className="text-4xl md:text-[48px] dark:bg-gradient-to-br dark:from-white dark:to-zinc-600 dark:bg-clip-text dark:text-transparent text-zinc-700 leading-snug font-bold">
         Learn, Build, and Excel in{" "}
         <span className="text-transparent bg-gradient-to-br from-yellow-400 to-orange-600 bg-clip-text">
           JavaScript
         </span>{" "}
         Programming
       </h1>
-      <p className="text-md">
+      <p className="text-xs md:text-[15px] lg:text-md">
         Interactive lessons designed to sharpen your JavaScript skills 🚀
       </p>
       <Link
         to="/learn"
-        className="z-10 flex items-center gap-2 px-6 py-3 mt-10 font-medium text-white bg-green-800 border-2 border-green-500 rounded-full text-md animate-pulse"
+        className="z-10 flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 mt-10 font-medium text-white bg-green-800 border-2 border-green-500 rounded-full text-xs md:text-[16px] animate-pulse"
       >
         Start Learning
         <IoIosTrendingUp size={20} />
       </Link>
-      <p className="text-sm">From Zero to Hero 🦸🏻</p>
+      <p className="text-xs md:text-sm">From Zero to Hero 🦸🏻</p>
     </div>
   );
 };

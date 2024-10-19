@@ -111,20 +111,6 @@ export default function PointsCoin() {
           }, 2000);
         }
         setIsLoading(true);
-        <Toaster
-          position="bottom-right"
-          toastOptions={{
-            className: "",
-            style: {
-              background: "transparent",
-              boxShadow: "none",
-            },
-          }}
-          containerStyle={{
-            padding: "0",
-            margin: "0",
-          }}
-        />;
         return 0;
       }
       return prevPoints;
@@ -176,6 +162,7 @@ export default function PointsCoin() {
           <p>{currentUser?.current_points} ✨</p>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 }

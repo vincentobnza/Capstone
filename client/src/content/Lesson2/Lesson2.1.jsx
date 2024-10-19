@@ -14,7 +14,6 @@ import {
   Output,
 } from "../../layout/UILayout";
 import { FaInfoCircle } from "react-icons/fa";
-import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
 import {
   Table,
@@ -24,11 +23,26 @@ import {
   TableRow,
   TableCell,
 } from "@nextui-org/react";
+import { Link } from "react-router-dom";
+import { IoReturnDownBackSharp } from "react-icons/io5";
+import { useSpeech } from "@/context/TextToSpeech";
+import TextToSpeechModal from "@/components/TextToSpeechModal";
 
 export default function Lesson2_Topic1() {
+  const { textRef } = useSpeech();
   return (
     <div className="w-full max-w-screen-lg mx-auto bg-white dark:bg-zinc-900">
-      <div className="flex flex-col gap-2">
+      <header className="flex justify-between w-full mx-auto mb-6">
+        <Link
+          to="/content-map"
+          className="flex items-center gap-2 text-sm font-semibold text-zinc-700 dark:text-zinc-400"
+        >
+          <IoReturnDownBackSharp size={20} /> Content Map
+        </Link>
+
+        <TextToSpeechModal />
+      </header>
+      <div className="flex flex-col gap-2" ref={textRef}>
         <section id="section1">
           <Topic>Variables and Data Types</Topic>
           <Description>
@@ -114,7 +128,7 @@ export default function Lesson2_Topic1() {
             There are eight basic data types in JavaScript.
           </Description>
 
-          <ul className="mt-5 flex flex-col gap-4">
+          <ul className="flex flex-col gap-4 mt-5">
             <li className="list-decimal list-inside text-zinc-700 dark:text-zinc-400">
               <b className="text-zinc-800 dark:text-green-500">String</b> – It
               is a textual data surrounded by single or double quotes.

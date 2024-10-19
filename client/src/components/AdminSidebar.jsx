@@ -1,63 +1,49 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Home, Users, Settings, TramFront, Trophy, Loader } from "lucide-react";
+import {
+  LayoutDashboard,
+  Users,
+  Settings,
+  TramFront,
+  Trophy,
+  Loader,
+} from "lucide-react";
+import { NavLink } from "react-router-dom";
 
 export default function AdminSidebar() {
   return (
-    <aside className="fixed top-0 left-0 bg-zinc-900 text-white w-64 min-h-screen z-10">
-      <div className="w-full flex p-5 ">
-        <div className="flex items-center gap-2 text-zinc-400">
-          <TramFront size={20} />
-          <h1 className="text-sm font-bold">CodeScript Admin</h1>
-        </div>
+    <aside className="fixed top-0 left-0 z-10 w-64 min-h-screen bg-white border-r text-zinc-700 border-zinc-200">
+      <div className="flex justify-center w-full p-5 text-center">
+        <Link
+          to="/admin"
+          className="text-sm font-black text-center text-transparent bg-gradient-to-br from-green-500 to-green-600 dark:to-green-800 bg-clip-text font-Orbitron"
+        >
+          CodeScript Admin
+        </Link>
       </div>
-      <nav className="mt-10 p-4">
-        <ul className="space-y-4">
-          <li>
-            <Link
-              to="/admin"
-              className="flex items-center space-x-5 p-2 rounded hover:bg-zinc-800 text-sm hover:text-orange-400"
-            >
-              <Home size={20} />
-              <span>Dashboard</span>
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="manage-users"
-              className="flex items-center space-x-5 p-2 rounded hover:bg-zinc-800 text-sm hover:text-orange-400"
-            >
-              <Users size={20} />
-              <span>Users</span>
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="users-leaderboard"
-              className="flex items-center space-x-5 p-2 rounded hover:bg-zinc-800 text-sm hover:text-orange-400"
-            >
-              <Trophy size={20} />
-              <span>Leaderboard</span>
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="users-progress"
-              className="flex items-center space-x-5 p-2 rounded hover:bg-zinc-800 text-sm hover:text-orange-400"
-            >
-              <Loader size={20} />
-              <span>Track Progress</span>
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/admin/settings"
-              className="flex items-center space-x-5 p-2 rounded hover:bg-zinc-800 text-sm hover:text-orange-400"
-            >
-              <Settings size={20} />
-              <span>Settings</span>
-            </Link>
-          </li>
+      <nav className="w-full p-5 mt-4">
+        <ul className="flex flex-col items-center justify-center p-1 space-y-1">
+          <NavLink
+            to="/admin"
+            className="flex flex-col items-center justify-center w-3/4 gap-4 p-4 text-xs font-semibold transition-colors duration-300 rounded-lg hover:text-indigo-300 hover:bg-indigo-900/30"
+          >
+            <LayoutDashboard size={20} />
+            Dashboard
+          </NavLink>
+          <NavLink
+            to="manage-users"
+            className="flex flex-col items-center justify-center w-3/4 gap-4 p-4 text-xs font-semibold transition-colors duration-300 rounded-lg hover:text-green-300 hover:bg-green-900/30"
+          >
+            <Users size={20} />
+            Profiles
+          </NavLink>
+          <NavLink
+            to="leaderboards"
+            className="flex flex-col items-center justify-center w-3/4 gap-4 p-4 text-xs font-semibold transition-colors duration-300 rounded-lg hover:text-amber-300 hover:bg-amber-900/30"
+          >
+            <Trophy size={20} />
+            Leaderboard
+          </NavLink>
         </ul>
       </nav>
     </aside>

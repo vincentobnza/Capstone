@@ -32,7 +32,9 @@ export default function CreateProfile() {
         if (error) throw error;
 
         localStorage.setItem("hasProfile", "true");
-        resolve("Profile created successfully!");
+        resolve("Profile created successfully!", {
+          position: "top-center",
+        });
 
         setTimeout(() => {
           const from = location.state?.from?.pathname || "/";
@@ -49,6 +51,7 @@ export default function CreateProfile() {
       createProfilePromise,
       {
         loading: "Creating profile...",
+
         success: (message) => message,
         error: (err) => `Error: ${err}`,
       },

@@ -77,7 +77,7 @@ export default function Certificate() {
       })
         .then((dataUrl) => {
           const link = document.createElement("a");
-          link.download = `${activeTab}-certificate.png`;
+          link.download = `${user?.user_metadata.name}-certificate.png`;
           link.href = dataUrl;
           link.click();
         })

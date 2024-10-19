@@ -16,20 +16,25 @@ import {
 } from "../../layout/UILayout";
 import { FaInfoCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { BsArrowRight } from "react-icons/bs";
-import {
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableRow,
-  TableCell,
-} from "@nextui-org/react";
+import { IoReturnDownBackSharp } from "react-icons/io5";
+import { useSpeech } from "@/context/TextToSpeech";
+import TextToSpeechModal from "@/components/TextToSpeechModal";
 
 export default function Lesson3_Topic1() {
+  const { textRef } = useSpeech();
   return (
     <div className="w-full max-w-screen-lg mx-auto bg-white dark:bg-zinc-900">
-      <div className="flex flex-col gap-2">
+      <header className="flex justify-between w-full mx-auto mb-6">
+        <Link
+          to="/content-map"
+          className="flex items-center gap-2 text-sm font-semibold text-zinc-700 dark:text-zinc-400"
+        >
+          <IoReturnDownBackSharp size={20} /> Content Map
+        </Link>
+
+        <TextToSpeechModal />
+      </header>
+      <div className="flex flex-col gap-2" ref={textRef}>
         <section id="section1">
           <Topic>Conditionals: if, else, else if</Topic>
 

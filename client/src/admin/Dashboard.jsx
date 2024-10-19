@@ -14,11 +14,11 @@ import { useState, useEffect } from "react";
 
 export default function Dashboard() {
   return (
-    <div className="w-full flex flex-col gap-2 space-y-6">
+    <div className="flex flex-col w-full gap-2 space-y-6">
       <Header />
       <DataStats />
 
-      <div className="w-full grid grid-cols-2 gap-2">
+      <div className="grid w-full grid-cols-2 gap-2">
         <RecentlySignedIn />
       </div>
     </div>
@@ -26,7 +26,6 @@ export default function Dashboard() {
 }
 
 const Header = () => {
-  // DATE NOW
   const today = new Date();
   const formattedDate = today.toLocaleDateString("en-US", {
     year: "numeric",
@@ -63,15 +62,15 @@ const DataStats = () => {
   ];
 
   return (
-    <div className="w-full grid grid-cols-4 gap-2">
+    <div className="grid w-full grid-cols-4 gap-2">
       {data.map((item, idx) => {
         const Icon = item.icon;
         return (
           <div
             key={idx}
-            className="flex flex-col gap-2 p-4 border border-zinc-200 rounded-lg shadow-md shadow-zinc-100"
+            className="flex flex-col gap-2 p-4 border rounded-lg shadow-md border-zinc-200 shadow-zinc-100"
           >
-            <div className="w-full flex justify-between">
+            <div className="flex justify-between w-full">
               <h1 className="text-sm font-semibold">{item.name}</h1>
               <Icon size={20} />
             </div>
@@ -114,7 +113,7 @@ const RecentlySignedIn = () => {
   }, []);
 
   return (
-    <div className="w-full flex flex-col gap-2">
+    <div className="flex flex-col w-full gap-2">
       <div className="flex flex-col gap-1 mb-3">
         <h1 className="font-semibold">Recently Signed Ins</h1>
         <p className="text-xs text-zinc-500">This day</p>

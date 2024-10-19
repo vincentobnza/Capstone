@@ -13,14 +13,27 @@ import {
   NextButton,
   Key,
 } from "../../layout/UILayout";
-import { FaInfoCircle } from "react-icons/fa";
+
+import { useSpeech } from "@/context/TextToSpeech";
 import { Link } from "react-router-dom";
-import { BsArrowRight } from "react-icons/bs";
+import { IoReturnDownBackSharp } from "react-icons/io5";
+import TextToSpeechModal from "@/components/TextToSpeechModal";
 
 export default function Lesson1_Topic2() {
+  const { textRef } = useSpeech();
   return (
     <div className="w-full max-w-screen-lg mx-auto bg-white dark:bg-zinc-900">
-      <div className="flex flex-col gap-4">
+      <header className="flex justify-between w-full mx-auto mb-6">
+        <Link
+          to="/content-map"
+          className="flex items-center gap-2 text-sm font-semibold text-zinc-700 dark:text-zinc-400"
+        >
+          <IoReturnDownBackSharp size={20} /> Content Map
+        </Link>
+
+        <TextToSpeechModal />
+      </header>
+      <div className="flex flex-col gap-4" ref={textRef}>
         <section id="section1">
           <Topic>Setting up the Development Environment</Topic>
           <Description>

@@ -158,6 +158,7 @@ export const CopyIcon = ({ code }) => {
         ),
         {
           duration: 2000,
+          position: "bottom-right",
         }
       );
       setCopied(true);

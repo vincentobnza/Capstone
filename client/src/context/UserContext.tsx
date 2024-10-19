@@ -1,6 +1,14 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+} from "react";
 import supabase from "@/config/supabaseClient";
 
+// UserContext
 const UserContext = createContext(null);
 
 export const UserProvider = ({ children }) => {
@@ -9,42 +17,35 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     fetchCurrentUser();
-    // Set up real-time subscription
-    const usersSubscription = supabase
-      .channel("public:profiles")
+    const channel = supabase
+      .channel("user-changes")
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "profiles" },
-        handleUserChange
+        (payload) => {
+          console.log("Change received!", payload);
+
+          if (payload.eventType === "INSERT") {
+            setUsers((prevUsers) => [...prevUsers, payload.new]);
+          } else if (payload.eventType === "UPDATE") {
+            setUsers((prevUsers) =>
+              prevUsers.map((user) =>
+                user.id === payload.new.id ? payload.new : user
+              )
+            );
+          } else if (payload.eventType === "DELETE") {
+            setUsers((prevUsers) =>
+              prevUsers.filter((user) => user.id !== payload.old.id)
+            );
+          }
+        }
       )
       .subscribe();
 
     return () => {
-      supabase.removeChannel(usersSubscription);
+      supabase.removeChannel(channel);
     };
   }, []);
-
-  const handleUserChange = (payload) => {
-    if (payload.eventType === "INSERT") {
-      setUsers((prevUsers) => [...prevUsers, payload.new]);
-    } else if (payload.eventType === "UPDATE") {
-      setUsers((prevUsers) =>
-        prevUsers.map((user) =>
-          user.id === payload.new.id ? payload.new : user
-        )
-      );
-      if (currentUser && currentUser.id === payload.new.id) {
-        setCurrentUser(payload.new);
-      }
-    } else if (payload.eventType === "DELETE") {
-      setUsers((prevUsers) =>
-        prevUsers.filter((user) => user.id !== payload.old.id)
-      );
-      if (currentUser && currentUser.id === payload.old.id) {
-        setCurrentUser(null);
-      }
-    }
-  };
 
   const fetchCurrentUser = async () => {
     const {
@@ -65,26 +66,11 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const fetchUserRank = async (userId) => {
-    const { data, error } = await supabase
-      .from("profiles")
-      .select("id")
-      .order("score", { ascending: false });
-
-    if (error) {
-      console.error("Error fetching user rank:", error);
-      return -1;
-    }
-
-    const rank = data.findIndex((user) => user.id === userId) + 1;
-    return rank;
-  };
-
   const updatePoints = async (userId, points) => {
     const { error } = await supabase
       .from("profiles")
-      .update({ current_points: points }) // Update the current_points column
-      .eq("id", userId); // Find the user by id
+      .update({ current_points: points })
+      .eq("id", userId);
 
     if (error) {
       console.error("Error updating points:", error);
@@ -93,44 +79,10 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const updateScore = async (userId, score) => {
-    const { error } = await supabase
-      .from("profiles")
-      .update({ score })
-      .eq("id", userId);
-
-    if (error) {
-      console.error("Error updating score:", error);
-    }
-  };
-
-  const updateProgress = async (userId, progress) => {
-    const { error } = await supabase
-      .from("profiles")
-      .update({ progress })
-      .eq("id", userId);
-
-    if (error) {
-      console.error("Error updating progress:", error);
-    }
-  };
-
-  const deleteUser = async (userId) => {
-    const { error } = await supabase.from("profiles").delete().eq("id", userId);
-
-    if (error) {
-      console.error("Error deleting user:", error);
-    }
-  };
-
   const value = {
     users,
     currentUser,
-    fetchUserRank,
     updatePoints,
-    updateScore,
-    updateProgress,
-    deleteUser,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

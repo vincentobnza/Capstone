@@ -1,162 +1,76 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useCallback, useRef } from "react";
 import MonacoEditor from "@monaco-editor/react";
 import {
   Button,
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  useDisclosure,
-  Tooltip,
+  Card,
+  CardBody,
+  CardFooter,
+  Progress,
 } from "@nextui-org/react";
-import {
-  Play,
-  Trash2,
-  ArrowDownToLine,
-  Share2,
-  Flame,
-  Globe,
-} from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import LeaveSitePrompt from "@/components/LeaveSitePrompt";
+import { Play, Trash2, ArrowDownToLine, Flame } from "lucide-react";
 
-const CodeEditor = () => {
-  const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState("javascript");
-  const [code, setCode] = useState({
-    html: `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <title>CodeScript Live Preview</title>
-</head>
+const assessments = [
+  {
+    id: 1,
+    title: "Assessment 1",
+    description:
+      "Print 'Hello, World!' to the console. Output should be: 'Hello, World!'.",
+    initialCode: "// Your code here\n",
+    expectedOutput: "Hello, World!",
+    points: 10,
+  },
+  {
+    id: 2,
+    title: "Assessment 2",
+    description:
+      "Calculate the sum of numbers from 1 to 10. Output should be: 55.",
+    initialCode: "// Your code here\n",
+    expectedOutput: "55",
+    points: 20,
+  },
+  {
+    id: 3,
+    title: "Assessment 3",
+    description: "Calculate the factorial of 5. Output should be: 120.",
+    initialCode: "// Your code here\n",
+    expectedOutput: "120",
+    points: 25,
+  },
+  {
+    id: 4,
+    title: "Assessment 4",
+    description:
+      "Reverse the string 'JavaScript'. Output should be: 'tpircSavaJ'.",
+    initialCode: "// Your code here\n",
+    expectedOutput: "tpircSavaJ",
+    points: 15,
+  },
+  {
+    id: 5,
+    title: "Assessment 5",
+    description:
+      "Check if the number 121 is a palindrome. Output should be: true.",
+    initialCode: "// Your code here\n",
+    expectedOutput: "true",
+    points: 20,
+  },
+];
 
-<body>
-    <div class="container">
-        <h1>
-            CodeScript Online Compiler
-        </h1>
-        <p>
-            Thank you for your patience while using our online compiler. Please note that it may not be fully optimized
-            for all integrations. We appreciate your understanding.
-        </p>
-        <button id="btn">Click me</button>
-    </div>
-</body>
-
-</html>`,
-    css: `body{
-    font-family: 'Consolas';
-    color: rgb(27, 27, 27);
-    padding: 50px;
-}
-
-
-.container{
-    max-width: 800px;
-    margin-top: 80px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    flex-direction: column;
-    gap: 5px;
-}
-h1{
-    color: #050505;
-}
-
-button{
-    margin-top: 30px;
-    padding: 10px 20px;
-    background-color: rgb(31, 160, 80);
-    color: #fff;
-    outline: none;
-    border: none;
-}`,
-    javascript: `document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("btn").addEventListener("click", () => {
-        alert('Hello Dev!');
-    });
-});`,
-  });
+export default function CodeScript() {
+  const [code, setCode] = useState(assessments[0].initialCode);
   const [output, setOutput] = useState("");
-
-  const previewWindow = useRef(null);
-
-  useEffect(() => {
-    document.title = "CodeScript - Online Editor";
-  }, []);
-
+  const [currentAssessment, setCurrentAssessment] = useState(assessments[0]);
+  const [completedAssessments, setCompletedAssessments] = useState([]);
   const editorRef = useRef(null);
 
-  // Generate a complete HTML document with injected HTML, CSS, and JavaScript
-  const generateFullHtml = () => {
-    return `
-      <!DOCTYPE html>
-      <html lang="en">
-      <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <style>
-          ${code.css}
-        </style>
-      </head>
-      <body>
-        ${code.html}
-        <script>
-          ${code.javascript}
-        </script>
-      </body>
-      </html>
-    `;
-  };
-
-  const handleEditorChange = useCallback(
-    (value) => {
-      if (value !== undefined) {
-        setCode((prevCode) => ({
-          ...prevCode,
-          [activeTab]: value,
-        }));
-      }
-    },
-    [activeTab]
-  );
-
-  const handleOpenLivePreview = useCallback(() => {
-    const fullHtml = generateFullHtml();
-
-    // Open new window or focus existing one with the updated content
-    if (!previewWindow.current || previewWindow.current.closed) {
-      previewWindow.current = window.open("", "CodePreview");
-    } else {
-      previewWindow.current.focus();
+  const handleEditorChange = useCallback((value) => {
+    if (value !== undefined) {
+      setCode(value);
     }
-
-    // Inject the generated HTML content into the new window
-    previewWindow.current.document.open();
-    previewWindow.current.document.write(fullHtml);
-    previewWindow.current.document.close();
-  }, [code]);
-
-  useEffect(() => {
-    return () => {
-      if (previewWindow.current) {
-        previewWindow.current.close();
-      }
-    };
   }, []);
 
   const runCode = useCallback(() => {
-    const randomFileName = Math.random().toString(36).substring(7);
-    let outputBuffer = `$ node /tmp/${randomFileName}.js\n`;
-
+    let outputBuffer = "";
     const mockConsole = {
       log: (...args) => {
         outputBuffer += args.join(" ") + "\n";
@@ -168,37 +82,25 @@ button{
 
     try {
       const sandbox = { console: mockConsole };
-      const wrappedCode = `(async () => { ${code.javascript} })()`;
-
       const runnable = new Function(
         ...Object.keys(sandbox),
-        `return (${wrappedCode}).catch(error => console.error(error));`
+        `${code}\n//# sourceURL=user-code.js`
       );
+      runnable.call(null, ...Object.values(sandbox));
+      setOutput(outputBuffer.trim());
 
-      runnable(...Object.values(sandbox))
-        .then((result) => {
-          if (result !== undefined) {
-            mockConsole.log(result);
-          }
-          setOutput(
-            outputBuffer || `$ node /tmp/${randomFileName}.js\n(No output)`
-          );
-
-          if (previewWindow.current && !previewWindow.current.closed) {
-            handleOpenLivePreview();
-          }
-        })
-        .catch((error) => {
-          setOutput(
-            `$ node /tmp/${randomFileName}.js\nUncaught error: ${error.message}`
-          );
-        });
+      if (outputBuffer.trim() === currentAssessment.expectedOutput) {
+        if (!completedAssessments.includes(currentAssessment.id)) {
+          setCompletedAssessments([
+            ...completedAssessments,
+            currentAssessment.id,
+          ]);
+        }
+      }
     } catch (error) {
-      setOutput(
-        `$ node /tmp/${randomFileName}.js\nSyntax error: ${error.message}`
-      );
+      setOutput(`Error: ${error.message}`);
     }
-  }, [code, handleOpenLivePreview]);
+  }, [code, currentAssessment, completedAssessments]);
 
   const clearOutput = useCallback(() => {
     setOutput("");
@@ -207,26 +109,25 @@ button{
   const handleSaveFile = useCallback(async () => {
     try {
       const fileHandle = await window.showSaveFilePicker({
-        suggestedName: `index.${activeTab === "javascript" ? "js" : activeTab}`,
+        suggestedName: `assessment_${currentAssessment.id}.js`,
         types: [
           {
-            description: `${activeTab.toLowerCase()} Files`,
+            description: "JavaScript Files",
             accept: {
-              "text/plain": [`.${activeTab}`],
+              "text/javascript": [".js"],
             },
           },
         ],
       });
-
       const writableStream = await fileHandle.createWritable();
-      await writableStream.write(code[activeTab]);
+      await writableStream.write(code);
       await writableStream.close();
     } catch (err) {
       console.error("File saving failed:", err);
     }
-  }, [activeTab, code]);
+  }, [currentAssessment, code]);
 
-  const handleFormatCode = useCallback(async () => {
+  const handleFormatCode = useCallback(() => {
     if (editorRef.current) {
       editorRef.current.getAction("editor.action.formatDocument").run();
     }
@@ -236,250 +137,169 @@ button{
     editorRef.current = editor;
   };
 
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.ctrlKey && e.key === "s") {
-        e.preventDefault();
-        handleSaveFile();
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [handleSaveFile]);
-
-  return (
-    <div className="w-full h-screen flex flex-col bg-zinc-900 font-NotoSans">
-      <LeaveSitePrompt />
-      <Header onSaveFile={handleSaveFile} />
-      <div className="flex-1 flex">
-        <div className="flex-1 flex flex-col">
-          <ToolBar
-            activeTab={activeTab}
-            setActiveTab={setActiveTab}
-            onRun={runCode}
-            onFormat={handleFormatCode}
-          />
-          <div className="flex-1">
-            <MonacoEditor
-              className="w-full h-full"
-              language={activeTab}
-              theme="vs-dark"
-              value={code[activeTab]}
-              onChange={handleEditorChange}
-              onMount={handleEditorDidMount}
-              options={{
-                minimap: { enabled: false },
-                fontSize: 14,
-                lineNumbers: "on",
-                scrollBeyondLastLine: false,
-                automaticLayout: true,
-                style: {
-                  vertical: "visible",
-                  horizontal: "visible",
-                  useShadows: false,
-                  verticalScrollbarSize: 10,
-                  horizontalScrollbarSize: 10,
-                },
-              }}
-            />
-          </div>
-        </div>
-        <OutputPanel
-          output={output}
-          onClear={clearOutput}
-          onOpenPreview={handleOpenLivePreview}
-          isPreviewOpen={
-            !!previewWindow.current && !previewWindow.current.closed
-          }
-        />
-      </div>
-    </div>
-  );
-};
-
-const Header = ({ onSaveFile }) => {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  return (
-    <header className="w-full max-w-screen-2xl mx-auto bg-[#1E1E1E] border-b border-zinc-700 p-6 flex justify-between items-center">
-      <div className="ml-2 relative flex flex-col gap-2">
-        <h1 className="bg-gradient-to-br from-green-500 to-green-600 dark:to-green-800 bg-clip-text text-transparent font-black text-lg font-Orbitron">
-          CodeScript
-        </h1>
-        <p className="text-zinc-400 text-xs font-bold">Online Code Editor</p>
-      </div>
-      <div className="flex items-center gap-2">
-        <Button
-          className="bg-green-600 text-white text-xs font-semibold border border-green-500"
-          size="sm"
-          endContent={<Share2 size={16} />}
-          radius="none"
-          onClick={onOpen}
-        >
-          Share
-        </Button>
-        <Button
-          onClick={onSaveFile}
-          className="bg-white text-black text-xs font-semibold"
-          size="sm"
-          endContent={<ArrowDownToLine size={16} />}
-          radius="none"
-        >
-          Save File
-        </Button>
-        <ShareLinkModal isOpen={isOpen} onOpenChange={onOpenChange} />
-      </div>
-    </header>
-  );
-};
-
-const PreviewButton = ({ onClick, isOpen }) => {
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleClick = async () => {
-    setIsLoading(true);
-    onClick();
-    setTimeout(() => setIsLoading(false), 1000);
+  const handleAssessmentChange = (assessmentId) => {
+    const newAssessment = assessments.find((a) => a.id === assessmentId);
+    setCurrentAssessment(newAssessment);
+    setCode(`// ${newAssessment.description}\n\n${newAssessment.initialCode}`);
+    clearOutput();
   };
 
   return (
-    <Tooltip
-      showArrow={true}
-      content={isOpen ? "Preview window is open" : "Opens in a new tab"}
+    <div className="flex w-full h-screen font-NotoSans bg-zinc-900">
+      <AssessmentSidePanel
+        assessments={assessments}
+        currentAssessment={currentAssessment}
+        completedAssessments={completedAssessments}
+        onAssessmentChange={handleAssessmentChange}
+      />
+      <div className="flex flex-col flex-1">
+        <Header onSaveFile={handleSaveFile} />
+        <div className="flex flex-1">
+          <div className="flex flex-col flex-1">
+            <ToolBar onRun={runCode} onFormat={handleFormatCode} />
+            <div className="flex-1">
+              <MonacoEditor
+                className="h-[80vh]"
+                language="javascript"
+                theme="vs-dark"
+                value={code}
+                onChange={handleEditorChange}
+                onMount={handleEditorDidMount}
+                options={{
+                  minimap: { enabled: false },
+                  fontSize: 14,
+                  lineNumbers: "on",
+                  scrollBeyondLastLine: false,
+                  automaticLayout: true,
+                }}
+              />
+            </div>
+          </div>
+          <OutputPanel output={output} onClear={clearOutput} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const Header = ({ onSaveFile }) => (
+  <header className="flex items-center justify-between w-full p-4 border-b bg-[#1E1E1E] border-zinc-800">
+    <div className="flex flex-col gap-1">
+      <h1 className="text-lg font-black text-transparent bg-gradient-to-br from-green-500 to-green-600 dark:to-green-800 bg-clip-text font-Orbitron">
+        CodeScript
+      </h1>
+      <p className="text-xs text-zinc-400">JavaScript Assessment Platform</p>
+    </div>
+    <Button
+      size="sm"
       radius="none"
+      onClick={onSaveFile}
+      className="text-white bg-zinc-700"
+      endContent={<ArrowDownToLine size={16} />}
     >
-      <button
-        className={`flex items-center justify-center gap-2 text-xs font-bold ${
-          isLoading ? "text-gray-400" : "text-green-500 underline"
-        }`}
-        onClick={handleClick}
-        disabled={isLoading}
+      Save File
+    </Button>
+  </header>
+);
+
+const ToolBar = ({ onRun, onFormat }) => (
+  <div className="flex items-center justify-end p-2 border-b bg-[#1E1E1E] border-zinc-800">
+    <div className="flex gap-1">
+      <Button
+        radius="none"
+        size="sm"
+        onClick={onFormat}
+        className="font-semibold text-white bg-zinc-700"
       >
-        {isLoading ? (
-          <>
-            Opening Preview...
-            <span className="animate-spin">⟳</span>
-          </>
-        ) : (
-          <>
-            {isOpen ? "Update Live Preview" : "Open Live Preview"}
-            <Globe size={15} />
-          </>
-        )}
-      </button>
-    </Tooltip>
-  );
-};
-const ToolBar = ({ activeTab, setActiveTab, onRun, onFormat }) => {
-  const tabs = ["html", "css", "javascript"];
-
-  return (
-    <div className="bg-[#1E1E1E] border-b border-zinc-700 p-3 flex justify-between items-center space-x-2">
-      <div className="ml-5 flex items-center gap-2">
-        <ul className="w-[300px] h-10 border border-zinc-700 grid grid-cols-3 relative">
-          {tabs.map((tab) => (
-            <li
-              key={tab}
-              className={`w-full h-full cursor-pointer grid place-items-center text-xs font-bold relative z-10 transition-colors duration-200 ${
-                activeTab === tab
-                  ? "text-green-400 bg-green-900/10"
-                  : "text-zinc-300 hover:text-zinc-100"
-              }`}
-              onClick={() => setActiveTab(tab)}
-            >
-              {tab.toUpperCase()}
-            </li>
-          ))}
-          <motion.div
-            className="absolute top-0 left-0 w-1/3 h-full bg-zinc-800 z-0"
-            initial={false}
-            animate={{
-              x: tabs.indexOf(activeTab) * 100 + "%",
-            }}
-            transition={{
-              type: "spring",
-              stiffness: 400,
-              damping: 20,
-            }}
-          />
-        </ul>
-      </div>
-      <div className="flex items-center gap-2">
-        <Button
-          onClick={onFormat}
-          className="bg-zinc-500 border border-zinc-400 text-white font-bold"
-          size="sm"
-          radius="none"
-        >
-          <Flame size={16} className="mr-2" />
-          Format Code
-        </Button>
-        <Button
-          onClick={onRun}
-          className="bg-green-600 border border-green-500 text-white font-bold"
-          size="sm"
-          radius="none"
-        >
-          <Play size={16} className="mr-2" /> Run Code
-        </Button>
-      </div>
+        <Flame size={16} className="mr-2" />
+        Format Code
+      </Button>
+      <Button
+        radius="none"
+        size="sm"
+        onClick={onRun}
+        className="font-semibold text-white bg-green-600"
+      >
+        <Play size={16} className="mr-2" /> Run Code
+      </Button>
     </div>
-  );
-};
+  </div>
+);
 
-const OutputPanel = ({ output, onClear, onOpenPreview, isPreviewOpen }) => (
-  <div className="w-1/3 bg-[#1E1E1E] border-l border-zinc-700 flex flex-col">
-    <div className="p-2 border-b border-gray-700 flex justify-between items-center">
-      <h2 className="font-semibold text-gray-300 text-sm ml-4">Console</h2>
-      <div className="flex items-center gap-3">
-        <PreviewButton onClick={onOpenPreview} isOpen={isPreviewOpen} />
-        <Button onClick={onClear} variant="light" isIconOnly>
-          <Trash2 className="text-white" size={20} />
-        </Button>
-      </div>
+const OutputPanel = ({ output, onClear }) => (
+  <div className="h-full flex flex-col w-1/3 border-l bg-[#1E1E1E] border-zinc-800">
+    <div className="flex items-center justify-between p-2 border-b border-zinc-700">
+      <h2 className="text-sm font-semibold text-zinc-300">Console</h2>
+      <Button
+        onClick={onClear}
+        isIconOnly
+        className="text-white bg-transparent"
+      >
+        <Trash2 size={20} />
+      </Button>
     </div>
-    <div className="flex-1 p-4 font-mono text-sm overflow-auto whitespace-pre-wrap text-zinc-200">
+    <div className="flex-1 p-4 overflow-auto font-mono text-sm whitespace-pre-wrap text-zinc-200">
       {output}
     </div>
   </div>
 );
-const ShareLinkModal = ({ isOpen, onOpenChange }) => {
-  const [copied, setCopied] = useState(false);
 
-  const handleCopyLink = useCallback(() => {
-    navigator.clipboard.writeText(window.location.href);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  }, []);
+const AssessmentSidePanel = ({
+  assessments,
+  currentAssessment,
+  completedAssessments,
+  onAssessmentChange,
+}) => {
+  const totalPoints = assessments.reduce(
+    (sum, assessment) => sum + assessment.points,
+    0
+  );
+  const earnedPoints = assessments
+    .filter((assessment) => completedAssessments.includes(assessment.id))
+    .reduce((sum, assessment) => sum + assessment.points, 0);
 
   return (
-    <Modal isOpen={isOpen} onOpenChange={onOpenChange} hideCloseButton>
-      <ModalContent className="bg-zinc-900 text-zinc-100 border border-zinc-800">
-        {(onClose) => (
-          <>
-            <ModalHeader className="flex flex-col gap-1">
-              Share Your Code Link
-            </ModalHeader>
-            <ModalBody>
-              <div className="w-full p-3 bg-zinc-800 border-2 border-zinc-700">
-                <p>{window.location.href}</p>
-              </div>
-            </ModalBody>
-            <ModalFooter>
-              <Button
-                className="bg-blue-600 text-white text-xs font-semibold border-2 border-blue-500"
-                onClick={handleCopyLink}
-              >
-                {copied ? "Copied!" : "Copy Link"}
-              </Button>
-            </ModalFooter>
-          </>
-        )}
-      </ModalContent>
-    </Modal>
+    <div className="h-full flex flex-col w-64 p-5 border-r bg-[#1E1E1E] border-zinc-800">
+      <div className="flex flex-col gap-1 mb-4 font-semibold">
+        <h3 className="text-xs text-zinc-400">JavaScript Assessments</h3>
+        <h3 className="text-lg font-semibold text-zinc-100">
+          Assessments for You
+        </h3>
+      </div>
+      <Progress
+        radius="none"
+        value={(earnedPoints / totalPoints) * 100}
+        className="mb-4"
+        color="success"
+      />
+      <p className="mb-4 text-xs font-semibold text-zinc-200">
+        Points: {earnedPoints} / {totalPoints}
+      </p>
+      <div className="flex flex-col flex-1 w-full overflow-auto font-semibold">
+        {assessments.map((assessment) => (
+          <div
+            key={assessment.id}
+            className={`mb-2 cursor-pointer p-3 text-zinc-200 border rounded transition-colors duration-200 ${
+              assessment.id === currentAssessment.id
+                ? "border-green-700 bg-green-500/10"
+                : "border-zinc-700 hover:border-zinc-600 opacity-30"
+            }`}
+            onClick={() => onAssessmentChange(assessment.id)}
+          >
+            <h3 className={`mb-2 text-sm font-semibold text-zinc-200`}>
+              {assessment.title}
+            </h3>
+            <div className="flex items-center justify-between w-full">
+              <span className="text-[10px] text-amber-200">
+                {assessment.points} points
+              </span>
+              {completedAssessments.includes(assessment.id) && (
+                <span className="text-xs text-green-500">Completed</span>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
-
-export default CodeEditor;

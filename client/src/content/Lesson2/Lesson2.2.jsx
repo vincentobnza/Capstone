@@ -15,7 +15,6 @@ import {
   ChallengeButton,
 } from "../../layout/UILayout";
 import { FaInfoCircle } from "react-icons/fa";
-import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
 import {
   Table,
@@ -25,11 +24,26 @@ import {
   TableRow,
   TableCell,
 } from "@nextui-org/react";
+import { Link } from "react-router-dom";
+import { IoReturnDownBackSharp } from "react-icons/io5";
+import { useSpeech } from "@/context/TextToSpeech";
+import TextToSpeechModal from "@/components/TextToSpeechModal";
 
 export default function Lesson2_Topic2() {
+  const { textRef } = useSpeech();
   return (
     <div className="w-full max-w-screen-lg mx-auto bg-white dark:bg-zinc-900">
-      <div className="flex flex-col gap-2">
+      <header className="flex justify-between w-full mx-auto mb-6">
+        <Link
+          to="/content-map"
+          className="flex items-center gap-2 text-sm font-semibold text-zinc-700 dark:text-zinc-400"
+        >
+          <IoReturnDownBackSharp size={20} /> Content Map
+        </Link>
+
+        <TextToSpeechModal />
+      </header>
+      <div className="flex flex-col gap-2" ref={textRef}>
         <Topic>Operators</Topic>
         <Description>
           JavaScript operators are special symbols that perform operation on one
@@ -290,7 +304,7 @@ console.log( typeof bool);   // output will be:   Boolean
 `}
           />
         </section>
-        <div className="w-full flex items-center gap-3 justify-end">
+        <div className="flex items-center justify-end w-full gap-3">
           <QuizButton text="Operators" link="/quiz/lesson2" />
           <NextButton
             link="/learn-js/comments-code-structure"
