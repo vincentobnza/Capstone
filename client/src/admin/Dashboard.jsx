@@ -1,5 +1,5 @@
 import React from "react";
-import { UserCheck, ShieldCheck, Frown } from "lucide-react";
+import { UserCheck, ShieldCheck, Frown, Container } from "lucide-react";
 import {
   Table,
   TableHeader,
@@ -11,6 +11,8 @@ import {
 import { useUser } from "@/context/UserContext";
 import supabase from "../config/supabaseClient";
 import { useState, useEffect } from "react";
+import useFetchAssessments from "@/api/assessmentsRequest";
+import Loading from "@/components/loading";
 
 export default function Dashboard() {
   return (
@@ -43,6 +45,8 @@ const Header = () => {
 const DataStats = () => {
   const { users } = useUser();
 
+  const { assessments, loading } = useFetchAssessments();
+
   const totalUsers = users.length;
   const activeUsers = users.filter((user) => user.is_active).length;
 
@@ -59,16 +63,25 @@ const DataStats = () => {
       icon: ShieldCheck,
       updateAt: "Currently",
     },
+    {
+      name: "Total Assessments",
+      value: assessments.length,
+      icon: Container,
+      updateAt: "Currently",
+    },
   ];
 
+  if (loading) {
+    return <Loading title="Loading..." text="Preparing your content" />;
+  }
   return (
-    <div className="grid w-full grid-cols-4 gap-2">
+    <div className="grid w-full grid-cols-3 gap-2">
       {data.map((item, idx) => {
         const Icon = item.icon;
         return (
           <div
             key={idx}
-            className="flex flex-col gap-2 p-4 border rounded-lg shadow-md border-zinc-200 shadow-zinc-100"
+            className="flex flex-col gap-2 p-6 border rounded-lg shadow-md border-zinc-200 shadow-zinc-100"
           >
             <div className="flex justify-between w-full">
               <h1 className="text-sm font-semibold">{item.name}</h1>

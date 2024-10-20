@@ -24,6 +24,7 @@ export default {
         Orbitron: ["Orbitron", "sans-serif"],
         DancingScript: ["Dancing Script", "cursive"],
         Ubuntu: ["Ubuntu", "sans-serif"],
+        Inter: ["Inter", "sans-serif"],
       },
     },
   },

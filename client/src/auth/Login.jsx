@@ -27,7 +27,7 @@ export default function Login() {
     >
       <Toaster />
       <div className="flex flex-col items-center justify-center w-full max-w-md gap-4 p-10 text-center">
-        <h1 className="text-4xl font-medium tracking-wide text-white">
+        <h1 className="text-4xl font-bold tracking-wide text-white">
           Welcome Back!
         </h1>
         <p className="text-md">Sign in to your account</p>

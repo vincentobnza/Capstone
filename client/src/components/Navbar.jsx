@@ -21,20 +21,26 @@ import { Search, User } from "lucide-react";
 import NavbarQuickSearch from "./NavbarQuickSearch";
 import { useDisclosure } from "@nextui-org/react";
 import { Swords, Menu } from "lucide-react";
+import { useLocation } from "react-router-dom";
 
 export default function Navbar() {
   const { theme, setTheme } = useTheme();
   const { user, signOut } = useAuth();
-  const { isOpen, onOpen, onOpenChange } = useDisclosure(); // For Quick Search
-  const [mobile, setIsMobile] = useState(false); // State for mobile menu
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [mobile, setIsMobile] = useState(false);
+  const location = useLocation();
 
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
 
   const toggleMobileMenu = () => {
-    setIsMobile(!mobile); // Toggle mobile menu open/close
+    setIsMobile(!mobile);
   };
+
+  useEffect(() => {
+    setIsMobile(false);
+  }, [location]);
 
   return (
     <div className="sticky top-0 z-50 grid w-full border-b bg-white/20 dark:bg-zinc-900/70 backdrop-blur-md text-zinc-900 dark:text-zinc-300 place-items-center border-zinc-100 dark:border-zinc-800">
@@ -121,7 +127,7 @@ export default function Navbar() {
           )}
 
           <div
-            className="hidden transition duration-500 ease-in-out cursor-pointer md:flex"
+            className="transition duration-500 ease-in-out cursor-pointer"
             onClick={toggleTheme}
           >
             {theme === "dark" ? (
@@ -159,7 +165,7 @@ const Navs = () => {
         to="codescript-editor"
         className="text-[12px] hover:text-green-500 duration-300"
       >
-        Code Editor
+        Code Playground
       </NavLink>
       <NavLink
         to="/games"
@@ -208,7 +214,7 @@ const MobileMenu = ({ mobile, setIsMobile }) => {
     <>
       <AnimatePresence>
         {mobile && (
-          <div className="fixed inset-0 z-50 flex md:hidden bg-zinc-900/50">
+          <div className="fixed inset-0 z-10 flex md:hidden bg-zinc-900/50">
             <motion.div
               ref={menuRef}
               className="relative top-0 left-0 z-50 h-screen p-8 border-r w-60 bg-zinc-50 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-700 md:hidden"
@@ -241,7 +247,7 @@ const MobileMenu = ({ mobile, setIsMobile }) => {
                   to="codescript-editor"
                   className="font-semibold duration-300 text-md hover:text-green-500"
                 >
-                  Code Editor
+                  Code Playground
                 </NavLink>
                 <NavLink
                   to="/games"

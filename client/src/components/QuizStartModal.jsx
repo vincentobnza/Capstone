@@ -9,7 +9,7 @@ export default function QuizStartModal({ isOpen, setIsOpen }) {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="bg-slate-900/20 backdrop-blur-lg p-8 fixed inset-0 z-50 grid place-items-center overflow-y-scroll cursor-pointer font-NotoSans">
+        <div className="bg-slate-900/20 backdrop-blur-lg p-8 fixed inset-0 z-50 grid place-items-center overflow-y-scroll cursor-pointer font-Inter">
           <motion.div
             initial={{ scale: 0, rotate: "12.5deg" }}
             animate={{ scale: 1, rotate: "0deg" }}

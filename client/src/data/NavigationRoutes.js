@@ -178,10 +178,60 @@ export const routes = [
   },
   {
     path: "/learn-js/event-listeners-handling-events",
-    lesson: "Lesson 6.2",
+    lesson: "Lesson 6.3",
     title: "Event Listeners and Handling Events",
     sections: [
       { id: "section1", title: "What Are DOM Events and Why Are They Useful?" },
+      {
+        id: "section2",
+        title: "Keyboard Events",
+      },
+      {
+        id: "section3",
+        title: "Mouse Events",
+      },
+      {
+        id: "section4",
+        title: "How to Listen to Events using HTML Attributes",
+      },
+    ],
+  },
+  {
+    path: "/learn-js/event-types",
+    lesson: "Lesson 7.1",
+    title: "Event Listeners and Handling Events",
+    sections: [
+      {
+        id: "section1",
+        title: "Mouse Events",
+      },
+      {
+        id: "section2",
+        title: "Keyboard Events",
+      },
+      {
+        id: "section3",
+        title: "Form Events",
+      },
+      {
+        id: "section4",
+        title: "Window Events",
+      },
+    ],
+  },
+  {
+    path: "/learn-js/event-bubbling-capturing",
+    lesson: "Lesson 7.2",
+    title: "Event Bubbling and Capturing",
+    sections: [
+      {
+        id: "section1",
+        title: "Event Bubbling",
+      },
+      {
+        id: "section2",
+        title: "Event Capturing",
+      },
     ],
   },
 ];

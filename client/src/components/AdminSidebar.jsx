@@ -7,6 +7,7 @@ import {
   TramFront,
   Trophy,
   Loader,
+  Container,
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
@@ -21,28 +22,35 @@ export default function AdminSidebar() {
           CodeScript Admin
         </Link>
       </div>
-      <nav className="w-full p-5 mt-4">
+      <nav className="w-full p-5 ">
         <ul className="flex flex-col items-center justify-center p-1 space-y-1">
           <NavLink
             to="/admin"
-            className="flex flex-col items-center justify-center w-3/4 gap-4 p-4 text-xs font-semibold transition-colors duration-300 rounded-lg hover:text-indigo-300 hover:bg-indigo-900/30"
+            className="flex flex-col items-center justify-center w-3/4 gap-4 p-4 text-xs font-semibold transition-colors duration-300 rounded-lg hover:text-indigo-600 hover:bg-indigo-50"
           >
             <LayoutDashboard size={20} />
             Dashboard
           </NavLink>
           <NavLink
             to="manage-users"
-            className="flex flex-col items-center justify-center w-3/4 gap-4 p-4 text-xs font-semibold transition-colors duration-300 rounded-lg hover:text-green-300 hover:bg-green-900/30"
+            className="flex flex-col items-center justify-center w-3/4 gap-4 p-4 text-xs font-semibold transition-colors duration-300 rounded-lg hover:text-green-600 hover:bg-green-50"
           >
             <Users size={20} />
             Profiles
           </NavLink>
           <NavLink
-            to="leaderboards"
-            className="flex flex-col items-center justify-center w-3/4 gap-4 p-4 text-xs font-semibold transition-colors duration-300 rounded-lg hover:text-amber-300 hover:bg-amber-900/30"
+            to="users-leaderboard"
+            className="flex flex-col items-center justify-center w-3/4 gap-4 p-4 text-xs font-semibold transition-colors duration-300 rounded-lg hover:text-amber-600 hover:bg-amber-50"
           >
             <Trophy size={20} />
             Leaderboard
+          </NavLink>
+          <NavLink
+            to="assessments-admin"
+            className="flex flex-col items-center justify-center w-3/4 gap-4 p-4 text-xs font-semibold transition-colors duration-300 rounded-lg hover:text-zinc-600 hover:bg-zinc-50"
+          >
+            <Container size={20} />
+            Assessments
           </NavLink>
         </ul>
       </nav>

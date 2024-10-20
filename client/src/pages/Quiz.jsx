@@ -541,7 +541,7 @@ const ViewAccuracyModal = ({
       onOpenChange={onOpenChange}
       scrollBehavior="inside"
       className="font-NotoSans"
-      size="2xl"
+      size="lg"
     >
       <ModalContent>
         {(onClose) => (
@@ -593,11 +593,6 @@ const ViewAccuracyModal = ({
                     <span className="text-sm">
                       Your answer: {answer.userAnswer}
                     </span>
-                    {!answer.isCorrect && (
-                      <span className="text-sm text-gray-600 dark:text-zinc-400">
-                        Correct answer: {answer.correctAnswer}
-                      </span>
-                    )}
                   </div>
                 </div>
               ))}

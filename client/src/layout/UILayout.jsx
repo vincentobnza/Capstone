@@ -57,17 +57,6 @@ export const Code = ({
 
   return (
     <div className="w-full my-4 space-y-1">
-      <div className="flex justify-end w-full mb-3">
-        <button
-          onClick={handleNewTab}
-          className={`text-xs font-bold flex items-center gap-2 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 underline transition-colors ${
-            visibleButton ? "flex" : "hidden"
-          }`}
-        >
-          Open Compiler
-          <MoveRight size={15} />
-        </button>
-      </div>
       <div
         className={`w-full relative rounded-md overflow-hidden ${
           theme === "dark"
@@ -75,7 +64,7 @@ export const Code = ({
             : "border border-zinc-200 bg-[#FAFAFA]"
         }`}
       >
-        <div className="overflow-x-auto">
+        <div className="w-full overflow-x-auto">
           <SyntaxHighlighter
             language={language || "javascript"}
             style={theme === "dark" ? vscDarkPlus : oneLight}
@@ -85,7 +74,10 @@ export const Code = ({
               fontSize: "14px",
               fontFamily: '"JetBrains Mono", monospace',
               margin: 0,
+              minWidth: "100%",
+              width: "fit-content",
             }}
+            wrapLongLines={true}
           >
             {code}
           </SyntaxHighlighter>
@@ -96,7 +88,7 @@ export const Code = ({
         {error && (
           <IoCloseCircleSharp
             size={25}
-            className="absolute text-red-500 transition-colors cursor-pointer -left-2 -top-2 hover:text-red-600"
+            className="absolute text-red-500 transition-colors cursor-pointer right-2 top-2 hover:text-red-600"
             onClick={() => setError(false)}
           />
         )}
@@ -251,7 +243,7 @@ export const NextButton = ({ text, link }) => {
       <div className="flex flex-col gap-1">
         <p>Next</p>
         <div className="flex items-center gap-2">
-          <h1 className="font-bold text-green-700 underline text-md dark:text-green-500">
+          <h1 className="font-bold text-green-700 text-md dark:text-green-500">
             {text}
           </h1>
         </div>

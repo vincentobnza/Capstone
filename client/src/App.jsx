@@ -31,7 +31,7 @@ import AdminLayout from "./layout/AdminLayout";
 import Dashboard from "./admin/Dashboard";
 import User_Management from "./admin/User_Management";
 import User_Leaderboard from "./admin/User_Leaderboard";
-import User_Progress from "./admin/User_Progress";
+import Assessments_Admin from "./admin/Assessments_Admin";
 
 // COMPONENTS
 import DebugWarsLevel from "./components/DebugWarsLevel";
@@ -62,6 +62,14 @@ import Lesson5_Topic2 from "./content/Lesson5/Lesson5.2";
 import Lesson6_Topic1 from "./content/Lesson6/Lesson6.1";
 import Lesson6_Topic2 from "./content/Lesson6/Lesson6.2";
 import Lesson6_Topic3 from "./content/Lesson6/Lesson6.3";
+
+import Lesson7_Topic1 from "./content/Lesson7/Lesson7.1";
+import Lesson7_Topic2 from "./content/Lesson7/Lesson7.2";
+
+import Lesson8_Topic1 from "./content/Lesson8/Lesson8.1";
+import Lesson8_Topic2 from "./content/Lesson8/Lesson8.2";
+import Lesson8_Topic3 from "./content/Lesson8/Lesson8.3";
+
 // PROVIDER
 import { AuthProvider } from "./context/AuthContext";
 import { ThemeProvider } from "./components/ThemeProvider";
@@ -202,6 +210,26 @@ const router = createBrowserRouter([
             path: "event-listeners-handling-events",
             element: <Lesson6_Topic3 />,
           },
+          {
+            path: "event-types",
+            element: <Lesson7_Topic1 />,
+          },
+          {
+            path: "event-bubbling-capturing",
+            element: <Lesson7_Topic2 />,
+          },
+          {
+            path: "try-catch-finally",
+            element: <Lesson8_Topic1 />,
+          },
+          {
+            path: "throwing-errors",
+            element: <Lesson8_Topic2 />,
+          },
+          {
+            path: "custom-errors",
+            element: <Lesson8_Topic3 />,
+          },
         ],
       },
     ],
@@ -239,8 +267,8 @@ const router = createBrowserRouter([
         element: <User_Leaderboard />,
       },
       {
-        path: "users-progress",
-        element: <User_Progress />,
+        path: "assessments-admin",
+        element: <Assessments_Admin />,
       },
     ],
   },
@@ -289,7 +317,7 @@ const router = createBrowserRouter([
 
 export default function App() {
   return (
-    <div className="App text-zinc-900 dark:text-zinc-300 font-NotoSans">
+    <div className="App text-zinc-900 dark:text-zinc-300 font-Inter">
       <AuthProvider>
         <UserProvider>
           <RouterProvider router={router} />

@@ -15,6 +15,7 @@ const {
   Lesson8,
 } = require("./api/Quiz");
 const { operator_debug } = require("./api/DebugChallenge");
+const { Assessments } = require("./api/Assessments");
 
 const PORT = process.env.PORT || 9000;
 
@@ -36,6 +37,15 @@ app.get("/", (req, res) => {
 app.get("/api/tasks", (req, res) => {
   try {
     res.json(Task);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
+app.get("/api/assessments", (req, res) => {
+  try {
+    res.json(Assessments);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
@@ -70,7 +80,6 @@ app.get("/api/quiz/:quizType", (req, res) => {
     lesson6: Lesson6,
     lesson8: Lesson8,
   };
-
   const quizData = quizzes[quizType];
 
   if (!quizData) {

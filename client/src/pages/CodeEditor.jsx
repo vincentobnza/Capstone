@@ -1,67 +1,19 @@
 import React, { useState, useCallback, useRef } from "react";
 import MonacoEditor from "@monaco-editor/react";
-import {
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  Progress,
-} from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import { Play, Trash2, ArrowDownToLine, Flame } from "lucide-react";
-
-const assessments = [
-  {
-    id: 1,
-    title: "Assessment 1",
-    description:
-      "Print 'Hello, World!' to the console. Output should be: 'Hello, World!'.",
-    initialCode: "// Your code here\n",
-    expectedOutput: "Hello, World!",
-    points: 10,
-  },
-  {
-    id: 2,
-    title: "Assessment 2",
-    description:
-      "Calculate the sum of numbers from 1 to 10. Output should be: 55.",
-    initialCode: "// Your code here\n",
-    expectedOutput: "55",
-    points: 20,
-  },
-  {
-    id: 3,
-    title: "Assessment 3",
-    description: "Calculate the factorial of 5. Output should be: 120.",
-    initialCode: "// Your code here\n",
-    expectedOutput: "120",
-    points: 25,
-  },
-  {
-    id: 4,
-    title: "Assessment 4",
-    description:
-      "Reverse the string 'JavaScript'. Output should be: 'tpircSavaJ'.",
-    initialCode: "// Your code here\n",
-    expectedOutput: "tpircSavaJ",
-    points: 15,
-  },
-  {
-    id: 5,
-    title: "Assessment 5",
-    description:
-      "Check if the number 121 is a palindrome. Output should be: true.",
-    initialCode: "// Your code here\n",
-    expectedOutput: "true",
-    points: 20,
-  },
-];
+import useFetchAssessments from "@/api/assessmentsRequest";
+import Loading from "@/components/loading";
 
 export default function CodeScript() {
-  const [code, setCode] = useState(assessments[0].initialCode);
-  const [output, setOutput] = useState("");
-  const [currentAssessment, setCurrentAssessment] = useState(assessments[0]);
-  const [completedAssessments, setCompletedAssessments] = useState([]);
+  const { assessments, loading } = useFetchAssessments();
   const editorRef = useRef(null);
+
+  const [code, setCode] = useState("//Click assessments to begin");
+  const [output, setOutput] = useState("");
+  const [currentAssessment, setCurrentAssessment] = useState(null);
+  const [completedAssessments, setCompletedAssessments] = useState([]);
+  const [error, setError] = useState("");
 
   const handleEditorChange = useCallback((value) => {
     if (value !== undefined) {
@@ -88,17 +40,23 @@ export default function CodeScript() {
       );
       runnable.call(null, ...Object.values(sandbox));
       setOutput(outputBuffer.trim());
+      setError(null);
 
-      if (outputBuffer.trim() === currentAssessment.expectedOutput) {
+      // Validate the output against the expected output
+      if (outputBuffer.trim() === currentAssessment?.expectedOutput) {
         if (!completedAssessments.includes(currentAssessment.id)) {
-          setCompletedAssessments([
-            ...completedAssessments,
-            currentAssessment.id,
-          ]);
+          setCompletedAssessments((prev) => [...prev, currentAssessment.id]);
+          setOutput((prevOutput) => `${prevOutput}\n\nAssessment Passed! 🎉`);
         }
+      } else {
+        setOutput(
+          (prevOutput) =>
+            `${prevOutput}\n\nAssessment Failed. Please try again.`
+        );
       }
     } catch (error) {
       setOutput(`Error: ${error.message}`);
+      setError(error);
     }
   }, [code, currentAssessment, completedAssessments]);
 
@@ -144,22 +102,31 @@ export default function CodeScript() {
     clearOutput();
   };
 
+  if (loading) {
+    return (
+      <Loading
+        title="Loading..."
+        text="Please wait while we prepare your assessments."
+      />
+    );
+  }
+
   return (
-    <div className="flex w-full h-screen font-NotoSans bg-zinc-900">
+    <div className="flex w-full h-screen font-Inter bg-zinc-900">
       <AssessmentSidePanel
         assessments={assessments}
         currentAssessment={currentAssessment}
         completedAssessments={completedAssessments}
         onAssessmentChange={handleAssessmentChange}
       />
-      <div className="flex flex-col flex-1">
+      <div className="flex flex-col flex-1 ml-64">
         <Header onSaveFile={handleSaveFile} />
         <div className="flex flex-1">
           <div className="flex flex-col flex-1">
             <ToolBar onRun={runCode} onFormat={handleFormatCode} />
-            <div className="flex-1">
+            <div className="flex-1 overflow-hidden">
               <MonacoEditor
-                className="h-[80vh]"
+                className="w-full h-full"
                 language="javascript"
                 theme="vs-dark"
                 value={code}
@@ -171,11 +138,13 @@ export default function CodeScript() {
                   lineNumbers: "on",
                   scrollBeyondLastLine: false,
                   automaticLayout: true,
+                  wordWrap: "on",
+                  wrappingStrategy: "advanced",
                 }}
               />
             </div>
           </div>
-          <OutputPanel output={output} onClear={clearOutput} />
+          <OutputPanel output={output} onClear={clearOutput} error={error} />
         </div>
       </div>
     </div>
@@ -226,29 +195,33 @@ const ToolBar = ({ onRun, onFormat }) => (
   </div>
 );
 
-const OutputPanel = ({ output, onClear }) => (
-  <div className="h-full flex flex-col w-1/3 border-l bg-[#1E1E1E] border-zinc-800">
-    <div className="flex items-center justify-between p-2 border-b border-zinc-700">
+const OutputPanel = ({ output, onClear, error }) => (
+  <div className="flex flex-col w-1/3 border-l bg-[#1E1E1E] border-zinc-800">
+    <div className="flex items-center justify-between p-1 border-b border-zinc-800">
       <h2 className="text-sm font-semibold text-zinc-300">Console</h2>
       <Button
         onClick={onClear}
         isIconOnly
-        className="text-white bg-transparent"
+        className="bg-transparent text-zinc-400"
       >
         <Trash2 size={20} />
       </Button>
     </div>
-    <div className="flex-1 p-4 overflow-auto font-mono text-sm whitespace-pre-wrap text-zinc-200">
+    <div
+      className={`flex-1 p-4 overflow-auto font-mono text-sm whitespace-pre-wrap ${
+        error ? "text-amber-500" : "text-green-500"
+      } font-semibold`}
+    >
       {output}
     </div>
   </div>
 );
 
 const AssessmentSidePanel = ({
-  assessments,
   currentAssessment,
   completedAssessments,
   onAssessmentChange,
+  assessments,
 }) => {
   const totalPoints = assessments.reduce(
     (sum, assessment) => sum + assessment.points,
@@ -259,47 +232,66 @@ const AssessmentSidePanel = ({
     .reduce((sum, assessment) => sum + assessment.points, 0);
 
   return (
-    <div className="h-full flex flex-col w-64 p-5 border-r bg-[#1E1E1E] border-zinc-800">
-      <div className="flex flex-col gap-1 mb-4 font-semibold">
-        <h3 className="text-xs text-zinc-400">JavaScript Assessments</h3>
-        <h3 className="text-lg font-semibold text-zinc-100">
-          Assessments for You
-        </h3>
+    <div className="flex flex-col w-64 fixed inset-y-0 left-0 top-0 border-r bg-[#1E1E1E] border-zinc-800">
+      <div className="p-5">
+        <div className="flex flex-col gap-1 font-semibold">
+          <h3 className="text-xs text-zinc-400">JavaScript Assessments</h3>
+          <h3 className="text-lg font-semibold text-zinc-100">
+            Assessments for You
+          </h3>
+        </div>
       </div>
-      <Progress
-        radius="none"
-        value={(earnedPoints / totalPoints) * 100}
-        className="mb-4"
-        color="success"
-      />
-      <p className="mb-4 text-xs font-semibold text-zinc-200">
-        Points: {earnedPoints} / {totalPoints}
-      </p>
-      <div className="flex flex-col flex-1 w-full overflow-auto font-semibold">
-        {assessments.map((assessment) => (
-          <div
-            key={assessment.id}
-            className={`mb-2 cursor-pointer p-3 text-zinc-200 border rounded transition-colors duration-200 ${
-              assessment.id === currentAssessment.id
-                ? "border-green-700 bg-green-500/10"
-                : "border-zinc-700 hover:border-zinc-600 opacity-30"
-            }`}
-            onClick={() => onAssessmentChange(assessment.id)}
-          >
-            <h3 className={`mb-2 text-sm font-semibold text-zinc-200`}>
-              {assessment.title}
-            </h3>
-            <div className="flex items-center justify-between w-full">
-              <span className="text-[10px] text-amber-200">
-                {assessment.points} points
-              </span>
-              {completedAssessments.includes(assessment.id) && (
-                <span className="text-xs text-green-500">Completed</span>
-              )}
-            </div>
-          </div>
-        ))}
+      <div className="flex-1 overflow-y-auto">
+        <div
+          className="p-5 h-[450px] overflow-scroll"
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            WebkitOverflowScrolling: "touch",
+          }}
+        >
+          {assessments.map((assessment) => (
+            <AssessmentCard
+              key={assessment.id}
+              assessment={assessment}
+              isActive={currentAssessment?.id === assessment.id}
+              isCompleted={completedAssessments.includes(assessment.id)}
+              onClick={() => onAssessmentChange(assessment.id)}
+            />
+          ))}
+        </div>
+      </div>
+      <div className="flex items-center justify-between p-4 border-t border-zinc-800">
+        <p className="text-sm text-zinc-400">
+          {earnedPoints}/{totalPoints} Points
+        </p>
+        <p className="text-sm text-zinc-400">
+          {completedAssessments.length} Completed
+        </p>
       </div>
     </div>
   );
 };
+
+const AssessmentCard = ({ assessment, isActive, isCompleted, onClick }) => (
+  <div
+    onClick={onClick}
+    className={`cursor-pointer p-4 h-16 transition-colors  relative mb-2 
+      ${isActive ? "bg-green-500/20" : "bg-zinc-800"} 
+      ${isCompleted ? "border-l-4 border-green-600" : ""}
+    `}
+  >
+    {isCompleted && (
+      <p
+        className={`px-3 py-[1px] rounded-full absolute -top-2 -right-2 text-[10px] font-semibold transition ease duration-300 ${
+          isActive
+            ? "bg-white border border-green-800 text-black"
+            : "bg-green-500/20 border border-green-800 text-white"
+        }`}
+      >
+        Completed
+      </p>
+    )}
+    <h4 className="text-sm font-semibold text-zinc-100">{assessment.title}</h4>
+  </div>
+);

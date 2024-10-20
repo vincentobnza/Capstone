@@ -107,12 +107,12 @@ const Header = () => {
 
       <div className="flex items-center gap-2">
         <Link to="/certificate" className="flex">
-          <button className="px-3 py-2 text-xs font-semibold border rounded border-zinc-200 dark:border-zinc-700">
+          <button className="px-3 py-2 text-xs font-semibold border rounded border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-600 hover:text-zinc-800 dark:hover:text-zinc-200 duration-300 transition-all ease-linear">
             My Certificate
           </button>
         </Link>
         <Link to="/leaderboard" className="flex">
-          <button className="px-3 py-2 text-xs font-semibold border rounded border-zinc-200 dark:border-zinc-700">
+          <button className="px-3 py-2 text-xs font-semibold border rounded border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-600 hover:text-zinc-800 dark:hover:text-zinc-200 duration-300 transition-all ease-linear">
             View Progress
           </button>
         </Link>

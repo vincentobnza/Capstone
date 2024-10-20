@@ -102,7 +102,7 @@ export const Lesson6 = [
   {
     id: 3,
     name: "Event Listeners and Handling Events ",
-    link: "event-listeners",
+    link: "event-listeners-handling-events",
   },
 ];
 
