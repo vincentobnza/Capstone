@@ -95,7 +95,7 @@ export default function Navbar() {
           </div>
 
           {user ? (
-            <Dropdown placement="bottom-end" className="text-xs font-NotoSans">
+            <Dropdown placement="bottom-end" className="font-sans text-xs">
               <DropdownTrigger>
                 <div className="items-center gap-4">
                   <div className="grid overflow-hidden rounded-full cursor-pointer size-8 place-items-center">

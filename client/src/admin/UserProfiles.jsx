@@ -20,7 +20,7 @@ import { toast, Toaster } from "react-hot-toast";
 import supabase from "../config/supabaseClient";
 import { LoaderCircle } from "lucide-react";
 
-export default function UserManagement() {
+export default function UserProfiles() {
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -140,7 +140,7 @@ export default function UserManagement() {
   };
 
   return (
-    <div className="space-y-6 relative w-full h-full">
+    <div className="flex flex-col w-full gap-2 space-y-6">
       <Toaster />
       <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <UsersTable users={filteredUsers} handleRowClick={handleRowClick} />
@@ -168,20 +168,19 @@ export default function UserManagement() {
     </div>
   );
 }
-
 const Header = ({ searchTerm, setSearchTerm }) => {
   return (
-    <div className="w-full flex flex-col gap-2">
-      <h1 className="text-2xl font-semibold">Users</h1>
-      <p>View and manage CodeScript Users</p>
-      <div className="mt-8 flex items-center gap-2">
+    <div className="flex flex-col w-full gap-2">
+      <h1 className="font-semibold">Users</h1>
+      <p className="text-xs">View and manage CodeScript Users</p>
+      <div className="flex items-center gap-2 mt-8">
         <div className="relative w-[350px]">
           <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <Search className="size-4 text-gray-400" />
+            <Search className="text-gray-400 size-4" />
           </div>
           <input
             type="text"
-            className="w-full pl-10 pr-4 py-2 bg-white border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-zinc-200 focus:border-transparent shadow hover:border-zinc-300"
+            className="w-full py-2 pl-10 pr-4 bg-white border border-gray-200 rounded-md shadow focus:outline-none focus:ring-2 focus:ring-zinc-200 focus:border-transparent hover:border-zinc-300"
             placeholder="Search"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -243,21 +242,19 @@ const UserDrawer = ({
           animate={{ x: 0 }}
           exit={{ x: "100%" }}
           transition={{ duration: 0.2 }}
-          className="fixed top-5 right-0 h-screen w-80 bg-white border-l border-zinc-300 overflow-y-auto z-10"
+          className="fixed right-0 z-10 h-screen overflow-y-auto bg-white border-l top-9 w-80 border-zinc-100"
         >
           <div className="w-full space-y-4">
-            <div className="w-full h-22 border-b border-zinc-200 p-4 grid place-items-center">
-              <div className="w-full flex justify-between items-center">
+            <div className="grid w-full p-4 border-b h-22 border-zinc-200 place-items-center">
+              <div className="flex items-center justify-between w-full">
                 <div className="flex flex-col gap-2">
-                  <h1 className="text-md font-bold text-zinc-700">
-                    User Details
-                  </h1>
+                  <h1 className=" text-md text-zinc-700">User Details</h1>
                 </div>
-                <div className="size-8 rounded-lg border border-zinc-200 grid place-items-center">
+                <div className="grid border rounded-lg size-8 border-zinc-200 place-items-center">
                   <X
                     size={18}
                     onClick={() => setIsOpen(false)}
-                    className="text-zinc-500 cursor-pointer"
+                    className="cursor-pointer text-zinc-500"
                   />
                 </div>
               </div>
@@ -267,7 +264,7 @@ const UserDrawer = ({
                 <label htmlFor="id" className="text-xs font-bold text-zinc-400">
                   User ID
                 </label>
-                <h1 className="text-sm font-medium">{user.id}</h1>
+                <h1 className="text-sm">{user.id}</h1>
               </div>
               <div className="flex flex-col gap-2">
                 <label
@@ -276,7 +273,7 @@ const UserDrawer = ({
                 >
                   Username
                 </label>
-                <h1 className="text-sm font-medium">{user.username}</h1>
+                <h1 className="text-sm">{user.username}</h1>
               </div>
               <div className="flex flex-col gap-2">
                 <label
@@ -285,13 +282,13 @@ const UserDrawer = ({
                 >
                   Last Signed In At
                 </label>
-                <h1 className="text-sm font-medium">
+                <h1 className="text-sm">
                   {new Date(user.last_sign_in_at).toLocaleString()}
                 </h1>
               </div>
-              <div className="w-full flex justify-end">
+              <div className="flex justify-end w-full">
                 <button
-                  className="px-3 py-2 border border-zinc-200 text-xs font-semibold"
+                  className="px-3 py-2 text-xs font-semibold border border-zinc-200"
                   onClick={() => {
                     setEditedUsername(user.username);
                     setIsEditModalOpen(true);
@@ -301,25 +298,25 @@ const UserDrawer = ({
                 </button>
               </div>
             </div>
-            <div className="w-full border-t border-zinc-200 p-6 space-y-6">
+            <div className="w-full p-6 space-y-6 border-t border-zinc-200">
               <div className="flex flex-col gap-2">
-                <h1 className="text-md font-bold text-amber-600">
+                <h1 className="font-medium text-md text-amber-600">
                   Danger Zone
                 </h1>
-                <p className="text-xs text-zinc-500 font-semibold">
+                <p className="text-xs text-zinc-500">
                   Be cautious with the following features, as they are
                   irreversible.
                 </p>
               </div>
-              <div className="w-full flex flex-col gap-4">
+              <div className="flex flex-col w-full gap-4">
                 <div className="flex flex-col gap-1">
-                  <h1 className="text-sm font-semibold">Delete User</h1>
+                  <h1 className="text-sm">Delete User</h1>
                   <p className="text-xs text-zinc-500">
                     This user will no longer have access to the system
                   </p>
                 </div>
                 <button
-                  className="w-full bg-red-50 text-red-600 flex items-center justify-center border border-red-300 gap-2 text-xs font-bold py-3 px-4"
+                  className="flex items-center justify-center w-full gap-2 px-4 py-3 text-xs font-medium text-red-600 border border-red-300 bg-red-50"
                   onClick={() => setIsDeleteModalOpen(true)}
                 >
                   Delete User
@@ -341,7 +338,7 @@ const DeleteConfirmationModal = ({ isOpen, onClose, onConfirm, loading }) => {
           <h1>Confirm Deletion</h1>
         </ModalHeader>
         <ModalBody>
-          <p className="text-sm  text-zinc-600">
+          <p className="text-sm text-zinc-600">
             Are you sure you want to delete this user? This action cannot be
             undone.
           </p>

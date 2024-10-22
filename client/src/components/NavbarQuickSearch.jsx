@@ -91,7 +91,7 @@ export default function NavbarQuickSearch({ isOpen, onOpen, onOpenChange }) {
       <Modal
         backdrop="blur"
         radius="none"
-        className="font-Inter"
+        className="font-sans"
         size="2xl"
         isOpen={isOpen}
         onOpenChange={onOpenChange}
@@ -119,16 +119,16 @@ export default function NavbarQuickSearch({ isOpen, onOpen, onOpenChange }) {
         <ModalContent>
           {(onClose) => (
             <>
-              <div className="w-full dark:bg-zinc-900 border dark:border-zinc-800 bg-zinc-50 flex justify-center flex-col relative">
-                <div className="w-full h-14 border-b border-zinc-200 dark:border-zinc-800 grid place-items-center px-2">
+              <div className="relative flex flex-col justify-center w-full border dark:bg-zinc-900 dark:border-zinc-800 bg-zinc-50">
+                <div className="grid w-full px-2 border-b h-14 border-zinc-200 dark:border-zinc-800 place-items-center">
                   <div className="relative w-full">
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                      <Search className="size-4 text-gray-400" />
+                      <Search className="text-gray-400 size-4" />
                     </div>
                     <input
                       autoFocus={true}
                       type="text"
-                      className="w-full pl-10 pr-4 py-2 bg-transparent rounded-md outline-none placeholder:text-sm placeholder:font-semibold font-semibold"
+                      className="w-full py-2 pl-10 pr-4 font-semibold bg-transparent rounded-md outline-none placeholder:text-sm placeholder:font-semibold"
                       placeholder="Search"
                       value={searchTerm}
                       onChange={handleSearch}
@@ -137,7 +137,7 @@ export default function NavbarQuickSearch({ isOpen, onOpen, onOpenChange }) {
                 </div>
 
                 <div
-                  className="max-h-64 overflow-y-auto py-2 px-4"
+                  className="px-4 py-2 overflow-y-auto max-h-64"
                   style={{
                     scrollbarWidth: "thin",
                   }}
@@ -156,7 +156,7 @@ export default function NavbarQuickSearch({ isOpen, onOpen, onOpenChange }) {
                         >
                           <Link
                             to={result.link}
-                            className="w-full flex justify-between items-center"
+                            className="flex items-center justify-between w-full"
                             onClick={() => handleResultClick(result)}
                           >
                             <div className="flex flex-col gap-2">
@@ -173,7 +173,7 @@ export default function NavbarQuickSearch({ isOpen, onOpen, onOpenChange }) {
                       ))}
                     </ul>
                   ) : searchTerm ? (
-                    <div className="grid place-items-center p-8">
+                    <div className="grid p-8 place-items-center">
                       <div className="flex flex-col gap-2 text-center">
                         <h1 className="text-lg font-semibold text-zinc-800 dark:text-zinc-200">
                           No results for{" "}
@@ -190,7 +190,7 @@ export default function NavbarQuickSearch({ isOpen, onOpen, onOpenChange }) {
                     <div className="p-4">
                       <div className="flex items-center gap-2">
                         <Clock size={16} />
-                        <h1 className="text-md font-semibold text-zinc-800 dark:text-zinc-300">
+                        <h1 className="font-semibold text-md text-zinc-800 dark:text-zinc-300">
                           Recent Searches
                         </h1>
                       </div>
@@ -198,13 +198,13 @@ export default function NavbarQuickSearch({ isOpen, onOpen, onOpenChange }) {
                         {recentSearches.map((search, index) => (
                           <li
                             key={index}
-                            className="mt-5 flex items-center justify-between p-3 bg-zinc-100 dark:bg-zinc-800 hover:opacity-90 rounded"
+                            className="flex items-center justify-between p-3 mt-5 rounded bg-zinc-100 dark:bg-zinc-800 hover:opacity-90"
                           >
                             <button
                               className="flex flex-col items-start text-sm text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100"
                               onClick={() => setSearchTerm(search.name)}
                             >
-                              <span className="font-medium mb-2">
+                              <span className="mb-2 font-medium">
                                 {search.name}
                               </span>
                               <span className="text-xs text-zinc-500 dark:text-zinc-400">
@@ -222,8 +222,8 @@ export default function NavbarQuickSearch({ isOpen, onOpen, onOpenChange }) {
                       </ul>
                     </div>
                   ) : (
-                    <div className="grid place-items-center p-8">
-                      <p className="text-zinc-600 dark:text-zinc-500 text-sm font-semibold">
+                    <div className="grid p-8 place-items-center">
+                      <p className="text-sm font-semibold text-zinc-600 dark:text-zinc-500">
                         No Recent Searches
                       </p>
                     </div>

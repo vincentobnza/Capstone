@@ -25,7 +25,7 @@ const Hero = () => {
   };
   return (
     <div className="flex flex-col items-center justify-center w-full max-w-screen-md gap-4 mx-auto text-center">
-      <h1 className="text-[48px] dark:bg-gradient-to-br dark:from-white dark:to-zinc-400 dark:bg-clip-text dark:text-transparent text-zinc-700 leading-snug font-bold ">
+      <h1 className="text-[48px] dark:bg-gradient-to-br dark:from-white dark:to-zinc-400 dark:bg-clip-text dark:text-transparent text-zinc-700 leading-snug font-semibold ">
         CodeScript Online Editor
       </h1>
 

@@ -4,6 +4,7 @@ import toast, { Toaster } from "react-hot-toast";
 import supabase from "../config/supabaseClient";
 import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
+import { User } from "lucide-react";
 
 export default function CreateProfile() {
   const [username, setUsername] = useState("");
@@ -74,18 +75,22 @@ export default function CreateProfile() {
       transition={{ duration: 0.5 }}
       className="grid w-full h-screen place-items-center bg-zinc-900"
     >
-      <div className="flex flex-col justify-center w-full max-w-screen-lg py-12 mx-auto bg-zinc-900 sm:px-6 lg:px-8 text-zinc-300">
+      <Toaster />
+      <div className="flex flex-col items-center justify-center w-full max-w-screen-lg py-12 mx-auto bg-zinc-900 sm:px-6 lg:px-8 text-zinc-300">
+        <div className="grid mb-6 text-green-500 border rounded-lg size-12 bg-gradient-to-br from-zinc-800 to-zinc-900 border-zinc-800 place-items-center">
+          <User />
+        </div>
         <div className="text-center">
-          <h2 className="mt-6 text-6xl font-semibold text-center text-white">
+          <h2 className="mt-6 text-4xl font-semibold text-center text-transparent bg-gradient-to-br from-white to-zinc-700 bg-clip-text ">
             Setup Your Username
           </h2>
-          <p className="mt-5 text-lg">
+          <p className="mt-5 text-sm text-zinc-500">
             Please set up your username before starting
           </p>
         </div>
 
-        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-2xl">
-          <div className="px-4 py-8 shadow sm:rounded-lg sm:px-10">
+        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-lg">
+          <div className="px-4 py-4 shadow sm:rounded-lg sm:px-10">
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <div className="mt-1">
@@ -97,7 +102,7 @@ export default function CreateProfile() {
                     autoFocus={true}
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    className="block w-full px-3 py-2 placeholder-gray-400 transition duration-500 ease-in-out border shadow-sm appearance-none h-14 bg-zinc-900 border-zinc-800 focus:outline-none focus:ring-green-500 focus:border-2 focus:border-green-500 sm:text-sm placeholder:text-lg placeholder:text-zinc-500"
+                    className="block w-full h-12 px-3 py-2 placeholder-gray-400 transition duration-500 ease-in-out border shadow-sm appearance-none bg-zinc-900 border-zinc-800 focus:outline-none hover:border-zinc-600 sm:text-sm placeholder:text-sm placeholder:text-zinc-500"
                     placeholder="Enter your username"
                   />
                 </div>
@@ -107,7 +112,7 @@ export default function CreateProfile() {
                 <button
                   type="submit"
                   disabled={loading || !username.trim()}
-                  className="flex items-center justify-center w-full text-sm font-medium text-white bg-green-600 border border-transparent rounded-md shadow-sm h-14 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex items-center justify-center w-full h-12 text-sm font-medium text-white bg-green-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? "Creating..." : "Create Profile"}
                 </button>

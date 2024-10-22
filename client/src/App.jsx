@@ -29,9 +29,11 @@ import AdminLayout from "./layout/AdminLayout";
 
 // ADMIN PAGES
 import Dashboard from "./admin/Dashboard";
-import User_Management from "./admin/User_Management";
-import User_Leaderboard from "./admin/User_Leaderboard";
-import Assessments_Admin from "./admin/Assessments_Admin";
+import AdminLogin from "./admin/AdminLogin";
+import UserProfiles from "./admin/UserProfiles";
+import AdminLeaderboard from "./admin/AdminLeaderboard";
+import AdminAssessments from "./admin/AdminAssessments";
+import { AdminProvider } from "./context/AdminContext";
 
 // COMPONENTS
 import DebugWarsLevel from "./components/DebugWarsLevel";
@@ -134,6 +136,7 @@ const router = createBrowserRouter([
         path: "learn-js",
         element: <Learn />,
       },
+
       {
         path: "learn-js",
         element: <ChaptersLayout />,
@@ -252,25 +255,38 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <AdminLayout />,
+    element: (
+      <AdminProvider>
+        <AdminLayout />
+      </AdminProvider>
+    ),
     children: [
       {
-        path: "",
+        path: "dashboard",
         element: <Dashboard />,
       },
       {
-        path: "manage-users",
-        element: <User_Management />,
+        path: "profiles",
+        element: <UserProfiles />,
       },
       {
-        path: "users-leaderboard",
-        element: <User_Leaderboard />,
+        path: "leaderboard",
+        element: <AdminLeaderboard />,
       },
       {
-        path: "assessments-admin",
-        element: <Assessments_Admin />,
+        path: "assessments",
+        element: <AdminAssessments />,
       },
     ],
+  },
+
+  {
+    path: "admin-login",
+    element: (
+      <AdminProvider>
+        <AdminLogin />
+      </AdminProvider>
+    ),
   },
 
   // QUIZ
@@ -278,9 +294,9 @@ const router = createBrowserRouter([
     path: "/quiz/:quizType",
     element: (
       <ThemeProvider>
-        <ProtectedRoute>
-          <Quiz />
-        </ProtectedRoute>
+        {/* <ProtectedRoute> */}
+        <Quiz />
+        {/* </ProtectedRoute> */}
       </ThemeProvider>
     ),
   },
@@ -317,7 +333,7 @@ const router = createBrowserRouter([
 
 export default function App() {
   return (
-    <div className="font-Inter App text-zinc-900 dark:text-zinc-300">
+    <div className="font-sans App text-zinc-900 dark:text-zinc-300">
       <AuthProvider>
         <UserProvider>
           <RouterProvider router={router} />

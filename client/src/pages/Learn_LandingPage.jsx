@@ -19,7 +19,7 @@ export default function Learn_LandingPage() {
 const Hero = () => {
   return (
     <div className="flex flex-col items-center justify-center w-full gap-4 p-6 text-center mx-lgauto max-w-screen- md:p-8 lg:p-8">
-      <h1 className="text-4xl md:text-[48px] dark:bg-gradient-to-br dark:from-white dark:to-zinc-400 dark:bg-clip-text dark:text-transparent text-zinc-700 leading-snug font-bold ">
+      <h1 className="text-4xl md:text-[48px] dark:bg-gradient-to-br dark:from-white dark:to-zinc-400 dark:bg-clip-text dark:text-transparent text-zinc-700 leading-snug font-semibold ">
         Start Building With JavaScript
       </h1>
 
@@ -62,7 +62,7 @@ const Hero = () => {
 
           <Link
             to="/learn-js"
-            className="flex items-center self-center gap-4 px-4 py-2 mt-10 text-xs font-bold text-white md:text-sm md:py-3 md:px-6 dark:text-black bg-zinc-900 dark:bg-white rounded"
+            className="flex items-center self-center gap-4 px-4 py-2 mt-10 text-xs font-bold text-white rounded md:text-sm md:py-3 md:px-6 dark:text-black bg-zinc-900 dark:bg-white"
           >
             Learn Now
             <MoveRight size={20} />

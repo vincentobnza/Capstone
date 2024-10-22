@@ -353,7 +353,7 @@ export const QuizButton = ({ text, link }) => {
   return (
     <button
       onClick={handleNewTab}
-      className="mt-12 w-[260px] h-[90px] bg-green-800 border border-green-600 self-end text-sm flex justify-end text-right p-4 gap-4 text-white hover:border-zinc-600 duration-500 relative overflow-hidden hover:opacity-80 outline-none"
+      className="mt-12 w-[260px] h-[90px] bg-green-800 border border-green-600 self-end text-sm flex justify-end text-right p-4 gap-4 text-white hover:border-green-600 duration-500 relative overflow-hidden hover:opacity-80 outline-none"
     >
       <img
         src="https://cdn-icons-png.flaticon.com/128/5827/5827057.png"

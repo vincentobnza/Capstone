@@ -277,7 +277,7 @@ const AssessmentSidePanel = ({
 const AssessmentCard = ({ assessment, isActive, isCompleted, onClick }) => (
   <div
     onClick={onClick}
-    className={`cursor-pointer p-4 h-20 transition-colors  relative overflow-hidden mb-1 
+    className={`cursor-pointer p-4 h-16 transition-colors  relative overflow-hidden mb-1 
       ${
         isActive
           ? "bg-green-500/20 border border-green-700"
@@ -292,9 +292,9 @@ const AssessmentCard = ({ assessment, isActive, isCompleted, onClick }) => (
         isActive ? "text-green-400 animate-pulse" : "text-zinc-700"
       } absolute -bottom-2 -right-0`}
     />
-    <h4 className="text-xs font-semibold text-zinc-100">{assessment.title}</h4>
+    <h4 className="text-xs font-medium text-zinc-200">{assessment.title}</h4>
     {isCompleted && (
-      <div className="size-7 absolute top-0 right-0 bg-green-500/10 grid place-items-center text-green-00">
+      <div className="absolute top-0 right-0 grid size-7 bg-green-500/10 place-items-center text-green-00">
         <Check size={15} />
       </div>
     )}

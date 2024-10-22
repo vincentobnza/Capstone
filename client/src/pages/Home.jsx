@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import HeroImage from "../assets/hero_dark.png";
-import HeroImage_Light from "../assets/hero_light.png";
+import HeroImage from "../assets/dark.png";
+import HeroImage_Light from "../assets/light.png";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import MainPicture from "../assets/MainPicture.png";
@@ -60,7 +60,7 @@ const Hero = () => {
       </p>
       <Link
         to="/learn"
-        className="z-10 flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 mt-10 font-medium text-white bg-green-800 border-2 border-green-500 rounded-full text-xs md:text-[16px] animate-pulse"
+        className="z-10 flex items-center gap-2 px-4 py-2 mt-10 text-xs font-semibold text-white bg-green-800 border border-green-500 rounded-full md:px-6 md:py-3 md:text-sm animate-pulse"
       >
         Start Learning
         <IoIosTrendingUp size={20} />

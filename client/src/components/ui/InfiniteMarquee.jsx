@@ -61,19 +61,19 @@ const jsLessons = [
 export default function InfiniteMarquee() {
   return (
     <div className="w-full max-w-screen-lg mx-auto overflow-hidden">
-      <div className="mt-8 w-full max-w-xl mx-auto justify-center items-center text-center mb-8">
-        <h1 className="text-4xl md:text-5xl dark:bg-gradient-to-br dark:from-white dark:to-zinc-600 dark:bg-clip-text dark:text-transparent text-zinc-700 leading-relaxed font-semibold mb-3">
+      <div className="items-center justify-center w-full max-w-xl mx-auto mt-8 mb-8 text-center">
+        <h1 className="mb-3 text-4xl font-semibold leading-relaxed md:text-5xl dark:bg-gradient-to-br dark:from-white dark:to-zinc-600 dark:bg-clip-text dark:text-transparent text-zinc-700">
           Lessons Just For You
         </h1>
-        <p className="text-zinc-500 text-sm font-semibold">
+        <p className="text-sm font-semibold text-zinc-500">
           Unlock your full potential
         </p>
       </div>
       <div className="relative w-full">
         {/* Left gradient */}
-        <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-white dark:from-zinc-900 to-transparent z-10"></div>
+        <div className="absolute top-0 left-0 z-10 w-32 h-full bg-gradient-to-r from-white dark:from-zinc-900 to-transparent"></div>
         {/* Right gradient */}
-        <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-white dark:from-zinc-900 to-transparent z-10"></div>
+        <div className="absolute top-0 right-0 z-10 w-32 h-full bg-gradient-to-l from-white dark:from-zinc-900 to-transparent"></div>
 
         <motion.div
           className="flex items-center h-full py-4"
@@ -94,11 +94,13 @@ export default function InfiniteMarquee() {
               <Card className="p-3">
                 <CardHeader>
                   <div className="flex items-center space-x-4">
-                    <div className="size-12 grid place-items-center rounded-lg bg-white dark:bg-gradient-to-br dark:from-zinc-800 dark:to-zinc-900 border border-zinc-200 dark:border-zinc-800">
+                    <div className="grid bg-white border rounded-lg size-12 place-items-center dark:bg-gradient-to-br dark:from-zinc-800 dark:to-zinc-900 border-zinc-200 dark:border-zinc-800">
                       <lesson.icon size={20} className="text-green-500" />
                     </div>
                     <div className="w-[250px] p-2 flex flex-col gap-2">
-                      <div className="font-bold">{lesson.title}</div>
+                      <div className="text-zinc-700 dark:text-zinc-300">
+                        {lesson.title}
+                      </div>
                       <div className="text-xs text-zinc-500">
                         {lesson.description}
                       </div>
