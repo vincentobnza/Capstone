@@ -1030,6 +1030,176 @@ const Lesson6 = [
   },
 ];
 
+const Lesson7 = [
+  {
+    id: 1,
+    question: "what is an event in javascript?",
+    options: {
+      a: "a function that returns a value",
+      b: "a change in the state of an object",
+      c: "a type of variable",
+      d: "a method to manipulate the dom",
+    },
+    answer: "b", // correct answer: a change in the state of an object
+  },
+  {
+    id: 2,
+    question: "what is the purpose of event handling in javascript?",
+    options: {
+      a: "to create new html elements",
+      b: "to store user data",
+      c: "to respond to user interactions and execute code",
+      d: "to enhance the styling of web pages",
+    },
+    answer: "c", // correct answer: to respond to user interactions and execute code
+  },
+  {
+    id: 3,
+    question: "which of the following is a mouse event?",
+    options: {
+      a: "keypress",
+      b: "change",
+      c: "onclick",
+      d: "submit",
+    },
+    answer: "c", // correct answer: onclick
+  },
+  {
+    id: 4,
+    question: "what does the `onmouseover` event do?",
+    options: {
+      a: "triggers when the mouse is clicked",
+      b: "triggers when the mouse moves over an element",
+      c: "triggers when the mouse is released",
+      d: "triggers when the keyboard is pressed",
+    },
+    answer: "b", // correct answer: triggers when the mouse moves over an element
+  },
+  {
+    id: 5,
+    question: "which keyboard event occurs when a key is pressed down?",
+    options: {
+      a: "keypress",
+      b: "keyup",
+      c: "keydown",
+      d: "keyhit",
+    },
+    answer: "c", // correct answer: keydown
+  },
+  {
+    id: 6,
+    question: "what happens during the `keyup` event?",
+    options: {
+      a: "a key is pressed down",
+      b: "a key is released",
+      c: "a key is held down",
+      d: "a key is typed",
+    },
+    answer: "b", // correct answer: a key is released
+  },
+  {
+    id: 7,
+    question: "what type of event occurs when a user submits a form?",
+    options: {
+      a: "change",
+      b: "input",
+      c: "submit",
+      d: "focus",
+    },
+    answer: "c", // correct answer: submit
+  },
+  {
+    id: 8,
+    question: "in event bubbling, where does the event begin?",
+    options: {
+      a: "at the root element",
+      b: "at the target element",
+      c: "at the child elements",
+      d: "at the event handler",
+    },
+    answer: "b", // correct answer: at the target element
+  },
+  {
+    id: 9,
+    question: "which statement describes event capturing?",
+    options: {
+      a: "it is the same as event bubbling",
+      b: "it starts at the target and moves up the dom",
+      c: "it starts at the root and moves down to the target",
+      d: "it does not propagate events",
+    },
+    answer: "c", // correct answer: it starts at the root and moves down to the target
+  },
+  {
+    id: 10,
+    question: "what is the default phase of event propagation?",
+    options: {
+      a: "capturing phase",
+      b: "target phase",
+      c: "bubbling phase",
+      d: "stopping phase",
+    },
+    answer: "c", // correct answer: bubbling phase
+  },
+  {
+    id: 11,
+    question:
+      "how can you specify that an event listener should use capturing?",
+    options: {
+      a: "elem.addEventListener(..., true)",
+      b: "elem.addEventListener(..., false)",
+      c: "elem.addEventListener(..., capture: false)",
+      d: "elem.addEventListener(..., capture: true)",
+    },
+    answer: "a", // correct answer: elem.addEventListener(..., true)
+  },
+  {
+    id: 12,
+    question: "what does the `onload` event do?",
+    options: {
+      a: "it executes code when an element is clicked",
+      b: "it executes code when the page is resized",
+      c: "it executes code when the page is fully loaded",
+      d: "it executes code when a key is pressed",
+    },
+    answer: "c", // correct answer: it executes code when the page is fully loaded
+  },
+  {
+    id: 13,
+    question:
+      "which event is triggered when a user moves focus to an input element?",
+    options: {
+      a: "onblur",
+      b: "onfocus",
+      c: "onload",
+      d: "onchange",
+    },
+    answer: "b", // correct answer: onfocus
+  },
+  {
+    id: 14,
+    question: "what type of event is the `change` event?",
+    options: {
+      a: "a mouse event",
+      b: "a keyboard event",
+      c: "a form event",
+      d: "a window event",
+    },
+    answer: "c", // correct answer: a form event
+  },
+  {
+    id: 15,
+    question: "what is the main advantage of using events in javascript?",
+    options: {
+      a: "to improve the performance of web applications",
+      b: "to allow user interaction and create dynamic pages",
+      c: "to reduce the size of the html document",
+      d: "to automate tasks without user input",
+    },
+    answer: "b", // correct answer: to allow user interaction and create dynamic pages
+  },
+];
+
 const Lesson8 = [
   {
     id: 1,
@@ -1261,5 +1431,6 @@ module.exports = {
   Lesson4,
   Lesson5,
   Lesson6,
+  Lesson7,
   Lesson8,
 };

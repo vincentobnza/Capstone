@@ -119,8 +119,8 @@ export default function NavbarQuickSearch({ isOpen, onOpen, onOpenChange }) {
         <ModalContent>
           {(onClose) => (
             <>
-              <div className="w-full dark:bg-zinc-900 border dark:border-zinc-700 bg-zinc-50 flex justify-center flex-col relative">
-                <div className="w-full h-14 border-b border-zinc-200 dark:border-zinc-700 grid place-items-center px-2">
+              <div className="w-full dark:bg-zinc-900 border dark:border-zinc-800 bg-zinc-50 flex justify-center flex-col relative">
+                <div className="w-full h-14 border-b border-zinc-200 dark:border-zinc-800 grid place-items-center px-2">
                   <div className="relative w-full">
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                       <Search className="size-4 text-gray-400" />
@@ -128,7 +128,7 @@ export default function NavbarQuickSearch({ isOpen, onOpen, onOpenChange }) {
                     <input
                       autoFocus={true}
                       type="text"
-                      className="w-full pl-10 pr-4 py-2 bg-transparent rounded-md outline-none"
+                      className="w-full pl-10 pr-4 py-2 bg-transparent rounded-md outline-none placeholder:text-sm placeholder:font-semibold font-semibold"
                       placeholder="Search"
                       value={searchTerm}
                       onChange={handleSearch}
@@ -223,7 +223,7 @@ export default function NavbarQuickSearch({ isOpen, onOpen, onOpenChange }) {
                     </div>
                   ) : (
                     <div className="grid place-items-center p-8">
-                      <p className="text-zinc-600 dark:text-zinc-400">
+                      <p className="text-zinc-600 dark:text-zinc-500 text-sm font-semibold">
                         No Recent Searches
                       </p>
                     </div>

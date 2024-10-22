@@ -4,6 +4,7 @@ import { Button } from "@nextui-org/react";
 import { Play, Trash2, ArrowDownToLine, Flame } from "lucide-react";
 import useFetchAssessments from "@/api/assessmentsRequest";
 import Loading from "@/components/loading";
+import { Container, Check } from "lucide-react";
 
 export default function CodeScript() {
   const { assessments, loading } = useFetchAssessments();
@@ -112,7 +113,7 @@ export default function CodeScript() {
   }
 
   return (
-    <div className="flex w-full h-screen font-Inter bg-zinc-900">
+    <div className="flex w-full h-screen font-NotoSans bg-zinc-900">
       <AssessmentSidePanel
         assessments={assessments}
         currentAssessment={currentAssessment}
@@ -276,22 +277,26 @@ const AssessmentSidePanel = ({
 const AssessmentCard = ({ assessment, isActive, isCompleted, onClick }) => (
   <div
     onClick={onClick}
-    className={`cursor-pointer p-4 h-16 transition-colors  relative mb-2 
-      ${isActive ? "bg-green-500/20" : "bg-zinc-800"} 
-      ${isCompleted ? "border-l-4 border-green-600" : ""}
+    className={`cursor-pointer p-4 h-20 transition-colors  relative overflow-hidden mb-1 
+      ${
+        isActive
+          ? "bg-green-500/20 border border-green-700"
+          : "bg-zinc-800 border border-zinc-700"
+      } 
+  
     `}
   >
+    <Container
+      size={40}
+      className={`${
+        isActive ? "text-green-400 animate-pulse" : "text-zinc-700"
+      } absolute -bottom-2 -right-0`}
+    />
+    <h4 className="text-xs font-semibold text-zinc-100">{assessment.title}</h4>
     {isCompleted && (
-      <p
-        className={`px-3 py-[1px] rounded-full absolute -top-2 -right-2 text-[10px] font-semibold transition ease duration-300 ${
-          isActive
-            ? "bg-white border border-green-800 text-black"
-            : "bg-green-500/20 border border-green-800 text-white"
-        }`}
-      >
-        Completed
-      </p>
+      <div className="size-7 absolute top-0 right-0 bg-green-500/10 grid place-items-center text-green-00">
+        <Check size={15} />
+      </div>
     )}
-    <h4 className="text-sm font-semibold text-zinc-100">{assessment.title}</h4>
   </div>
 );

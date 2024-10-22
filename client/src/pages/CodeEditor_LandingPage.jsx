@@ -72,7 +72,7 @@ const Video = () => {
       <div className="w-full">
         <video
           src={VideoHero}
-          className="object-cover" // Added border for visibility
+          className="object-cover opacity-60" // Added border for visibility
           autoPlay
           loop
           muted

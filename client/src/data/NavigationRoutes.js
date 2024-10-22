@@ -234,4 +234,53 @@ export const routes = [
       },
     ],
   },
+  {
+    path: "/learn-js/try-catch-finally",
+    lesson: "Lesson 8.1",
+    title: "try, catch, finally",
+    sections: [
+      {
+        id: "section1",
+        title: "JavaScript Try Catch Statement",
+      },
+      {
+        id: "section2",
+        title: "JavaScript try, catch, finally",
+      },
+      {
+        id: "section3",
+        title: "JavaScript try...catch in setTimeout",
+      },
+    ],
+  },
+  {
+    path: "/learn-js/throwing-errors",
+    lesson: "Lesson 8.2",
+    title: "try, catch, finally",
+    sections: [
+      {
+        id: "section1",
+        title: "JavaScript throw statement",
+      },
+      {
+        id: "section2",
+        title: "JavaScript throw with try...catch",
+      },
+    ],
+  },
+  {
+    path: "/learn-js/custom-errors",
+    lesson: "Lesson 8.2",
+    title: "Custom Errors",
+    sections: [
+      {
+        id: "section1",
+        title: "Handling Custom Errors",
+      },
+      {
+        id: "section2",
+        title: "Typical Errors",
+      },
+    ],
+  },
 ];

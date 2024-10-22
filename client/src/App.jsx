@@ -317,7 +317,7 @@ const router = createBrowserRouter([
 
 export default function App() {
   return (
-    <div className="App text-zinc-900 dark:text-zinc-300 font-Inter">
+    <div className="font-Inter App text-zinc-900 dark:text-zinc-300">
       <AuthProvider>
         <UserProvider>
           <RouterProvider router={router} />

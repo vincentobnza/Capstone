@@ -139,10 +139,14 @@ elem.addEventListener(..., true)
             phase.
           </Description>
         </section>
-        <NextButton
-          link="/learn-js/try-catch-finally"
-          text="try, catch, finally"
-        />
+
+        <div className="w-full flex items-center gap-3 justify-end">
+          <QuizButton text="Lesson 7" link="/quiz/lesson7" />
+          <NextButton
+            link="/learn-js/try-catch-finally"
+            text="try, catch, finally"
+          />
+        </div>
       </div>
     </div>
   );

@@ -120,11 +120,11 @@ export default function PointsCoin() {
   return (
     <div className="fixed z-50 flex items-center gap-5 bottom-4 right-4">
       {points === 100 && (
-        <p className="mb-12 text-xs font-semibold text-amber-300 animate-pulse">
+        <p className="mb-6 text-xs font-semibold text-amber-300 animate-pulse">
           Click to gain points
         </p>
       )}
-      <div className="flex flex-col items-center gap-3">
+      <div className="flex flex-col items-center gap-1">
         <motion.div
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}

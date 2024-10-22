@@ -7,7 +7,7 @@ export default function PrivacyPolicy() {
     <div className="w-full max-w-screen-lg mx-auto space-y-8 pb-10">
       <div className="flex flex-col gap-2">
         <div className="flex w-full">
-          <div className="basis-3/4">
+          <div className="basis-full md:basis-3/4 p-4 md:p-0">
             <h1 className="text-4xl font-semibold text-zinc-800 dark:text-zinc-50">
               Privacy Policy
             </h1>
@@ -89,7 +89,7 @@ export default function PrivacyPolicy() {
             </div>
           </div>
 
-          <div className="basis-1/2 h-[350px] bg-zinc-100 dark:bg-gradient-to-b dark:from-zinc-900 dark:to-[#272727] rounded-[50px] border border-zinc-300 dark:border-zinc-700 grid place-items-center">
+          <div className="hidden basis-1/2 h-[350px] bg-zinc-100 dark:bg-gradient-to-b dark:from-zinc-900 dark:to-[#272727] rounded-[50px] border border-zinc-300 dark:border-zinc-700 md:grid place-items-center">
             <EarthLock
               size={200}
               className="text-zinc-300 dark:text-green-700"

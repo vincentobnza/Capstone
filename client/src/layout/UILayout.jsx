@@ -15,7 +15,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { motion, AnimatePresence } from "framer-motion";
 export const Topic = ({ children }) => {
   return (
-    <h1 className="mb-5 text-4xl font-medium text-zinc-800 dark:text-zinc-100 ">
+    <h1 className="mt-5 mb-5 text-2xl font-medium md:mt-0 md:text-4xl text-zinc-800 dark:text-zinc-100 ">
       {children}
     </h1>
   );

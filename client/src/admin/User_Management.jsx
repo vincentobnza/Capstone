@@ -18,6 +18,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { toast, Toaster } from "react-hot-toast";
 import supabase from "../config/supabaseClient";
+import { LoaderCircle } from "lucide-react";
 
 export default function UserManagement() {
   const [users, setUsers] = useState([]);
@@ -28,6 +29,7 @@ export default function UserManagement() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editedUsername, setEditedUsername] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetchUsers();
@@ -86,24 +88,31 @@ export default function UserManagement() {
   };
 
   const handleDelete = async () => {
+    setLoading(true);
+
     const { error } = await supabase
       .from("profiles")
       .delete()
       .eq("id", selectedUser.id);
 
     if (error) {
+      setLoading(false);
       toast.error("Failed to delete user");
     } else {
-      toast.success("User deleted successfully", {
-        style: {
-          borderRadius: "5px",
-          background: "#fff",
-          color: "#121212",
-          fontSize: "12px",
-        },
-      });
-      setIsOpen(false);
-      setIsDeleteModalOpen(false);
+      setTimeout(() => {
+        fetchUsers();
+        setLoading(false);
+        toast.success("User deleted successfully", {
+          style: {
+            borderRadius: "5px",
+            background: "#fff",
+            color: "#121212",
+            fontSize: "12px",
+          },
+        });
+        setIsOpen(false);
+        setIsDeleteModalOpen(false);
+      }, 1000);
     }
   };
 
@@ -124,6 +133,7 @@ export default function UserManagement() {
           fontSize: "12px",
         },
       });
+      setIsOpen(false);
       setIsEditModalOpen(false);
       setSelectedUser({ ...selectedUser, username: editedUsername });
     }
@@ -143,6 +153,7 @@ export default function UserManagement() {
         setEditedUsername={setEditedUsername}
       />
       <DeleteConfirmationModal
+        loading={loading}
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
         onConfirm={handleDelete}
@@ -232,16 +243,15 @@ const UserDrawer = ({
           animate={{ x: 0 }}
           exit={{ x: "100%" }}
           transition={{ duration: 0.2 }}
-          className="fixed top-0 right-0 h-screen w-80 bg-white border-l border-zinc-300 overflow-y-auto z-40"
+          className="fixed top-5 right-0 h-screen w-80 bg-white border-l border-zinc-300 overflow-y-auto z-10"
         >
           <div className="w-full space-y-4">
-            <div className="w-full h-22 border-b border-zinc-200 p-6 grid place-items-center">
+            <div className="w-full h-22 border-b border-zinc-200 p-4 grid place-items-center">
               <div className="w-full flex justify-between items-center">
                 <div className="flex flex-col gap-2">
-                  <h1 className="text-md font-bold">User Details</h1>
-                  <p className="text-xs text-zinc-500 font-semibold">
-                    View the user's information
-                  </p>
+                  <h1 className="text-md font-bold text-zinc-700">
+                    User Details
+                  </h1>
                 </div>
                 <div className="size-8 rounded-lg border border-zinc-200 grid place-items-center">
                   <X
@@ -252,7 +262,7 @@ const UserDrawer = ({
                 </div>
               </div>
             </div>
-            <div className="p-6 space-y-4">
+            <div className="p-4 space-y-4">
               <div className="flex flex-col gap-2">
                 <label htmlFor="id" className="text-xs font-bold text-zinc-400">
                   User ID
@@ -293,7 +303,9 @@ const UserDrawer = ({
             </div>
             <div className="w-full border-t border-zinc-200 p-6 space-y-6">
               <div className="flex flex-col gap-2">
-                <h1 className="text-md font-bold">Danger Zone</h1>
+                <h1 className="text-md font-bold text-amber-600">
+                  Danger Zone
+                </h1>
                 <p className="text-xs text-zinc-500 font-semibold">
                   Be cautious with the following features, as they are
                   irreversible.
@@ -306,14 +318,12 @@ const UserDrawer = ({
                     This user will no longer have access to the system
                   </p>
                 </div>
-                <div className="grid place-items-center bg-red-100 border border-red-300 text-red-600">
-                  <button
-                    className="flex items-center gap-2 text-xs font-bold py-2 px-4"
-                    onClick={() => setIsDeleteModalOpen(true)}
-                  >
-                    Delete User
-                  </button>
-                </div>
+                <button
+                  className="w-full bg-red-50 text-red-600 flex items-center justify-center border border-red-300 gap-2 text-xs font-bold py-3 px-4"
+                  onClick={() => setIsDeleteModalOpen(true)}
+                >
+                  Delete User
+                </button>
               </div>
             </div>
           </div>
@@ -323,27 +333,35 @@ const UserDrawer = ({
   );
 };
 
-const DeleteConfirmationModal = ({ isOpen, onClose, onConfirm }) => {
+const DeleteConfirmationModal = ({ isOpen, onClose, onConfirm, loading }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} radius="none">
       <ModalContent>
-        <ModalHeader>Confirm Deletion</ModalHeader>
+        <ModalHeader className="border-b border-zinc-200">
+          <h1>Confirm Deletion</h1>
+        </ModalHeader>
         <ModalBody>
-          Are you sure you want to delete this user? This action cannot be
-          undone.
+          <p className="text-sm  text-zinc-600">
+            Are you sure you want to delete this user? This action cannot be
+            undone.
+          </p>
         </ModalBody>
-        <ModalFooter>
-          <Button color="default" onClick={onClose} radius="sm">
-            Cancel
-          </Button>
-          <Button
-            color="danger"
-            onClick={onConfirm}
-            radius="sm"
-            className="bg-red-600"
-          >
-            Delete
-          </Button>
+        <ModalFooter className="border-t border-zinc-200">
+          <div className="flex items-center gap-1">
+            <button
+              onClick={onClose}
+              className="py-2 px-4 rounded  bg-zinc-200 text-[13px] font-medium"
+            >
+              No, Cancel
+            </button>
+            <button
+              onClick={onConfirm}
+              className="flex items-center gap-2 py-2 px-4 rounded  bg-red-500 text-[13px] font-medium text-white"
+            >
+              Delete User
+              {loading && <LoaderCircle className="animate-spin" size={15} />}
+            </button>
+          </div>
         </ModalFooter>
       </ModalContent>
     </Modal>

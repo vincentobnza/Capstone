@@ -21,6 +21,7 @@ import { useDisclosure } from "@nextui-org/react";
 import { motion } from "framer-motion";
 import { RiJavascriptLine } from "react-icons/ri";
 import ScrollUp from "@/components/ScrollUp";
+import NavbarQuickSearch from "@/components/NavbarQuickSearch";
 export default function Learn() {
   return (
     <motion.div
@@ -66,10 +67,17 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="flex items-start justify-between w-full max-w-screen-lg gap-4 mx-auto">
+    <div className="flex items-start justify-between w-full max-w-screen-lg gap-4 mx-auto p-3 md:p-0">
+      <NavbarQuickSearch
+        isOpen={isOpen}
+        onOpen={onOpen}
+        onOpenChange={onOpenChange}
+      />
       <div className="flex flex-col gap-4">
-        <h3 className="font-semibold">{"#JavaScript | #Learn"}</h3>
-        <h1 className="text-4xl font-semibold text-zinc-700 dark:text-zinc-50">
+        <h3 className="text-xs md:text-md font-bold">
+          {"#JavaScript | #Learn"}
+        </h3>
+        <h1 className="text-2xl md:text-4xl font-semibold text-zinc-700 dark:text-zinc-50">
           Learn the Fundamentals of JavaScript
         </h1>
         <p>Master the core concepts of JavaScript for web development.</p>
@@ -98,14 +106,7 @@ const Header = () => {
         </div>
       </div>
 
-      {/* search lessons */}
-      <SearchModal
-        isOpen={isOpen}
-        onOpen={onOpen}
-        onOpenChange={onOpenChange}
-      />
-
-      <div className="flex items-center gap-2">
+      <div className="hidden md:flex items-center gap-2">
         <Link to="/certificate" className="flex">
           <button className="px-3 py-2 text-xs font-semibold border rounded border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-600 hover:text-zinc-800 dark:hover:text-zinc-200 duration-300 transition-all ease-linear">
             My Certificate
@@ -123,10 +124,12 @@ const Header = () => {
 
 const Content = () => {
   return (
-    <div className="flex flex-col w-full max-w-screen-lg gap-4 mx-auto">
+    <div className="flex flex-col w-full max-w-screen-lg gap-4 mx-auto p-3 md:p-0">
       <div className="flex flex-col gap-3">
         <div className="flex items-center gap-4">
-          <h1 className="text-xl text-zinc-700 dark:text-zinc-50">Roadmaps</h1>
+          <h1 className="text-md md:text-xl text-zinc-700 dark:text-zinc-50 font-semibold">
+            Roadmaps
+          </h1>
           <RiRoadMapLine size={20} />
         </div>
 
@@ -158,7 +161,7 @@ const Content = () => {
 
 const Lessons = () => {
   return (
-    <div className="flex flex-col w-full max-w-screen-lg mx-auto space-y-10">
+    <div className="flex flex-col w-full max-w-screen-lg mx-auto space-y-10 p-3 md:p-0">
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-1">
           <h3 className="font-semibold text-yellow-600 text-md">
@@ -211,7 +214,7 @@ const Lesson1Data = () => {
               className="absolute duration-300 ease-in-out -bottom-3 -right-3 dark:text-zinc-700 text-zinc-200 group:hover:text-zinc-300 dark:group-hover:text-zinc-500"
             />
             <div className="flex justify-between w-full">
-              <h1 className="z-10 flex items-center text-sm font-semibold text-zinc-700 dark:text-zinc-300 duration underline-offset-2 dark:group:hover:text-yellow-200">
+              <h1 className="z-10 flex items-center text-xs md:text-sm font-semibold text-zinc-700 dark:text-zinc-300 duration underline-offset-2 dark:group:hover:text-yellow-200">
                 {item.name}
               </h1>
               <GoArrowRight className=" text-zinc-400 group:hover:text-zinc-300 dark:group-hover:text-zinc-200" />
@@ -249,7 +252,7 @@ const Lesson2Data = () => {
             />
 
             <div className="flex justify-between w-full">
-              <h1 className="z-10 flex items-center text-sm font-semibold text-zinc-700 dark:text-zinc-300 duration underline-offset-2 dark:group:hover:text-yellow-200">
+              <h1 className="z-10 flex items-center text-xs md:text-sm font-semibold text-zinc-700 dark:text-zinc-300 duration underline-offset-2 dark:group:hover:text-yellow-200">
                 {item.name}
               </h1>
               <GoArrowRight className=" text-zinc-400 group:hover:text-zinc-300 dark:group-hover:text-zinc-200" />
@@ -287,7 +290,7 @@ const Lesson3Data = () => {
             />
 
             <div className="flex justify-between w-full">
-              <h1 className="z-10 flex items-center text-sm font-semibold text-zinc-700 dark:text-zinc-300 duration underline-offset-2 dark:group:hover:text-yellow-200">
+              <h1 className="z-10 flex items-center text-xs md:text-sm font-semibold text-zinc-700 dark:text-zinc-300 duration underline-offset-2 dark:group:hover:text-yellow-200">
                 {item.name}
               </h1>
               <GoArrowRight className=" text-zinc-400 group:hover:text-zinc-300 dark:group-hover:text-zinc-200" />
@@ -325,7 +328,7 @@ const Lesson4Data = () => {
             />
 
             <div className="flex justify-between w-full">
-              <h1 className="z-10 flex items-center text-sm font-semibold text-zinc-700 dark:text-zinc-300 duration underline-offset-2 dark:group:hover:text-yellow-200">
+              <h1 className="z-10 flex items-center text-xs md:text-sm font-semibold text-zinc-700 dark:text-zinc-300 duration underline-offset-2 dark:group:hover:text-yellow-200">
                 {item.name}
               </h1>
               <GoArrowRight className=" text-zinc-400 group:hover:text-zinc-300 dark:group-hover:text-zinc-200" />
@@ -363,7 +366,7 @@ const Lesson5Data = () => {
             />
 
             <div className="flex justify-between w-full">
-              <h1 className="z-10 flex items-center text-sm font-semibold text-zinc-700 dark:text-zinc-300 duration underline-offset-2 dark:group:hover:text-yellow-200">
+              <h1 className="z-10 flex items-center text-xs md:text-sm font-semibold text-zinc-700 dark:text-zinc-300 duration underline-offset-2 dark:group:hover:text-yellow-200">
                 {item.name}
               </h1>
               <GoArrowRight className=" text-zinc-400 group:hover:text-zinc-300 dark:group-hover:text-zinc-200" />
@@ -400,7 +403,7 @@ const Lesson6Data = () => {
             />
 
             <div className="flex justify-between w-full">
-              <h1 className="z-10 flex items-center text-sm font-semibold text-zinc-700 dark:text-zinc-300 duration underline-offset-2 dark:group:hover:text-yellow-200">
+              <h1 className="z-10 flex items-center text-xs md:text-sm font-semibold text-zinc-700 dark:text-zinc-300 duration underline-offset-2 dark:group:hover:text-yellow-200">
                 {item.name}
               </h1>
               <GoArrowRight className=" text-zinc-400 group:hover:text-zinc-300 dark:group-hover:text-zinc-200" />
@@ -438,7 +441,7 @@ const Lesson7Data = () => {
             />
 
             <div className="flex justify-between w-full">
-              <h1 className="z-10 flex items-center text-sm font-semibold text-zinc-700 dark:text-zinc-300 duration underline-offset-2 dark:group:hover:text-yellow-200">
+              <h1 className="z-10 flex items-center text-xs md:text-sm font-semibold text-zinc-700 dark:text-zinc-300 duration underline-offset-2 dark:group:hover:text-yellow-200">
                 {item.name}
               </h1>
               <GoArrowRight className=" text-zinc-400 group:hover:text-zinc-300 dark:group-hover:text-zinc-200" />
@@ -476,7 +479,7 @@ const Lesson8Data = () => {
             />
 
             <div className="flex justify-between w-full">
-              <h1 className="z-10 flex items-center text-sm font-semibold text-zinc-700 dark:text-zinc-300 duration underline-offset-2 dark:group:hover:text-yellow-200">
+              <h1 className="z-10 flex items-center text-xs md:text-sm font-semibold text-zinc-700 dark:text-zinc-300 duration underline-offset-2 dark:group:hover:text-yellow-200">
                 {item.name}
               </h1>
               <GoArrowRight className=" text-zinc-400 group:hover:text-zinc-300 dark:group-hover:text-zinc-200" />

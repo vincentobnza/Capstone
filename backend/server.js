@@ -12,6 +12,7 @@ const {
   Lesson4,
   Lesson5,
   Lesson6,
+  Lesson7,
   Lesson8,
 } = require("./api/Quiz");
 const { operator_debug } = require("./api/DebugChallenge");
@@ -52,6 +53,18 @@ app.get("/api/assessments", (req, res) => {
   }
 });
 
+app.post("/api/assessments", (req, res) => {
+  try {
+    const newAssessment = req.body;
+    newAssessment.id = Assessments.length + 1; // Simple ID assignment
+    Assessments.push(newAssessment);
+    res.status(201).json(newAssessment);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
 app.get("/api/challenges/:challenge", (req, res) => {
   const { challenge } = req.params;
 
@@ -78,6 +91,7 @@ app.get("/api/quiz/:quizType", (req, res) => {
     lesson4: Lesson4,
     lesson5: Lesson5,
     lesson6: Lesson6,
+    lesson7: Lesson7,
     lesson8: Lesson8,
   };
   const quizData = quizzes[quizType];

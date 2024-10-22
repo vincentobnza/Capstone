@@ -90,4 +90,78 @@ Write and run JavaScript code online effortlessly.`,
     link: "/learn-js/loops",
     description: "do while in JavaScript",
   },
+  {
+    name: "functions",
+    link: "/learn-js/functions",
+    description: "Functions in JavaScript",
+  },
+  {
+    name: "Function Declaration",
+    link: "/learn-js/functions",
+    description: "Function Declaration in JavaScript",
+  },
+  {
+    name: "Function Expressions",
+    link: "/learn-js/functions",
+    description: "Function Expressions in JavaScript",
+  },
+  {
+    name: "Objects",
+    link: "/learn-js/objects-properties-methods",
+    description: "Object in JavaScript",
+  },
+  {
+    name: "Arrays",
+    link: "/learn-js/array-array-methods",
+    description: "Arrays in JavaScript",
+  },
+  {
+    name: "DOM",
+    link: "/learn-js/dom",
+    description: "What is DOM in JavaScript",
+  },
+  {
+    name: "DOM Elements",
+    link: "/learn-js/dom-elements",
+    description: "DOM Elements in JavaScript",
+  },
+  {
+    name: "Event Listeners",
+    link: "/learn-js/event-listeners-handling-events",
+    description: "Event Listener in JavaScript",
+  },
+  {
+    name: "Event Listeners and Handling Events",
+    link: "/learn-js/event-listeners-handling-events",
+    description: "Event Listeners and Handling Events in JavaScript",
+  },
+  {
+    name: "Event Types",
+    link: "/learn-js/event-types",
+    description: "Types of Events in JavaScript",
+  },
+  {
+    name: "Event Bubbling and Capturing",
+    link: "/learn-js/event-bubbling-capturing",
+    description:
+      "The techniques that control the order in which events spread throughout the DOM hierarchy are event bubbling and capturing. ",
+  },
+  {
+    name: "try, catch, finally",
+    link: "/learn-js/try-catch-finally",
+    description:
+      "Exceptions are a specific kind of error that are handled by the try, catch, and finally blocks. Prior to studying them, you should be aware of the different kinds of programming errors.",
+  },
+  {
+    name: "Throwing Errors",
+    link: "/learn-js/throwing-errors",
+    description:
+      "JavaScript provides a standard method for handling exceptions in the try and catch statements. On the other hand, user-defined exceptions can be passed using the throw statement.",
+  },
+  {
+    name: "Custom Errors",
+    link: "/learn-js/custom-errors",
+    description:
+      "Custom errors allow you to create more specific and informative error messages that can help you debug and troubleshoot your code more effectively.",
+  },
 ];
